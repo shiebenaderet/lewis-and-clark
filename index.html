@@ -1,0 +1,2041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Lost Expedition - Retracing Lewis &amp; Clark</title>
+<style>
+/* ============================================================
+   CSS: The Lost Expedition
+   Oregon Trail-inspired theme with parchment/frontier aesthetic
+   ============================================================ */
+
+/* --- Reset & Base --- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --parchment: #f4e8c1;
+  --parchment-dark: #e6d5a0;
+  --ink: #2c1810;
+  --ink-light: #5c4033;
+  --leather: #8b4513;
+  --leather-dark: #5c2e0a;
+  --forest: #2d5016;
+  --forest-light: #4a7c2e;
+  --river: #3a6b8c;
+  --river-light: #5a9bbc;
+  --campfire: #d4760a;
+  --campfire-glow: #f5a623;
+  --danger: #8b1a1a;
+  --trail-brown: #6b4423;
+  --font-heading: 'Georgia', 'Times New Roman', serif;
+  --font-body: 'Georgia', serif;
+  --font-journal: 'Georgia', italic, serif;
+  --font-ui: system-ui, -apple-system, sans-serif;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.2);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.25);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.3);
+}
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: #1a0f08;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* --- Screen containers --- */
+.screen {
+  display: none;
+  min-height: 100vh;
+  animation: fadeIn 0.6s ease;
+}
+.screen.active { display: block; }
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   TITLE SCREEN
+   ============================================================ */
+#title-screen {
+  background: linear-gradient(180deg, #0d0805 0%, #1a0f08 30%, #2c1810 60%, #1a0f08 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+#title-screen::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 50% 80%, rgba(212, 118, 10, 0.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.title-stars {
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 40%;
+  background: radial-gradient(1px 1px at 20% 15%, #fff 50%, transparent 100%),
+              radial-gradient(1px 1px at 60% 25%, #fff 50%, transparent 100%),
+              radial-gradient(1px 1px at 80% 10%, #fff 50%, transparent 100%),
+              radial-gradient(1px 1px at 40% 30%, #ccc 50%, transparent 100%),
+              radial-gradient(1px 1px at 10% 20%, #ccc 50%, transparent 100%),
+              radial-gradient(1px 1px at 90% 35%, #fff 50%, transparent 100%),
+              radial-gradient(1px 1px at 30% 8%, #fff 50%, transparent 100%),
+              radial-gradient(1px 1px at 70% 18%, #ccc 50%, transparent 100%),
+              radial-gradient(1px 1px at 50% 5%, #fff 50%, transparent 100%),
+              radial-gradient(1px 1px at 15% 32%, #fff 50%, transparent 100%);
+  opacity: 0.6;
+}
+
+.title-content {
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+}
+
+.title-year {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  color: var(--campfire-glow);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.title-main {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  color: var(--parchment);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+
+.title-subtitle {
+  font-family: var(--font-heading);
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  color: var(--campfire);
+  font-style: italic;
+  margin-bottom: 2rem;
+}
+
+.title-intro {
+  color: var(--parchment-dark);
+  font-size: 1rem;
+  max-width: 550px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.7;
+}
+
+.title-divider {
+  width: 120px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--campfire), transparent);
+  margin: 0 auto 2rem;
+}
+
+/* Level selector on title screen */
+.level-select {
+  margin-bottom: 2rem;
+}
+
+.level-select-label {
+  display: block;
+  color: var(--parchment-dark);
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+.level-buttons {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.level-btn {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  padding: 0.5rem 1.2rem;
+  border: 1px solid var(--leather);
+  background: transparent;
+  color: var(--parchment-dark);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.level-btn:hover {
+  background: rgba(139, 69, 19, 0.3);
+  color: var(--parchment);
+}
+
+.level-btn.active {
+  background: var(--leather);
+  color: var(--parchment);
+  border-color: var(--campfire);
+}
+
+/* Start button */
+.btn-start {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  padding: 0.85rem 3rem;
+  background: linear-gradient(180deg, var(--leather) 0%, var(--leather-dark) 100%);
+  color: var(--parchment);
+  border: 2px solid var(--campfire);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  box-shadow: var(--shadow-md), 0 0 20px rgba(212, 118, 10, 0.2);
+}
+
+.btn-start:hover {
+  background: linear-gradient(180deg, var(--campfire) 0%, var(--leather) 100%);
+  box-shadow: var(--shadow-lg), 0 0 30px rgba(212, 118, 10, 0.4);
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   TOP NAV BAR (in-game)
+   ============================================================ */
+.top-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: linear-gradient(180deg, #1a0f08, #2c1810);
+  border-bottom: 2px solid var(--leather);
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.top-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.game-title-small {
+  font-family: var(--font-heading);
+  color: var(--parchment);
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+.station-indicator {
+  font-family: var(--font-ui);
+  color: var(--campfire-glow);
+  font-size: 0.8rem;
+  background: rgba(212, 118, 10, 0.15);
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  border: 1px solid rgba(212, 118, 10, 0.3);
+}
+
+.top-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.nav-btn {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  padding: 0.35rem 0.85rem;
+  background: rgba(255,255,255,0.08);
+  color: var(--parchment-dark);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.nav-btn:hover {
+  background: rgba(255,255,255,0.15);
+  color: var(--parchment);
+}
+
+.nav-btn.active-tab {
+  background: var(--leather);
+  color: var(--parchment);
+  border-color: var(--leather);
+}
+
+/* Level toggle in top bar */
+.level-toggle {
+  display: flex;
+  border: 1px solid var(--leather);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.level-toggle button {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  padding: 0.25rem 0.6rem;
+  background: transparent;
+  color: var(--parchment-dark);
+  border: none;
+  border-right: 1px solid var(--leather);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.level-toggle button:last-child { border-right: none; }
+
+.level-toggle button:hover { background: rgba(139, 69, 19, 0.3); }
+
+.level-toggle button.active {
+  background: var(--leather);
+  color: var(--parchment);
+}
+
+/* ============================================================
+   MAIN GAME AREA
+   ============================================================ */
+#game-screen {
+  background: #1a0f08;
+}
+
+.game-body {
+  display: none;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+  animation: slideUp 0.4s ease;
+}
+
+.game-body.active { display: block; }
+
+/* ============================================================
+   TRAIL MAP VIEW
+   ============================================================ */
+.map-container {
+  background: var(--parchment);
+  border: 3px solid var(--leather);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+}
+
+.map-title {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  color: var(--ink);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.map-svg-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.map-svg-wrap svg {
+  width: 100%;
+  height: auto;
+  min-width: 600px;
+}
+
+.map-station {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.map-station:hover { transform: scale(1.15); }
+
+.map-station-dot {
+  fill: var(--trail-brown);
+  stroke: var(--leather-dark);
+  stroke-width: 1.5;
+  transition: all 0.3s;
+}
+
+.map-station.visited .map-station-dot {
+  fill: var(--campfire-glow);
+  stroke: var(--campfire);
+}
+
+.map-station.current .map-station-dot {
+  fill: var(--danger);
+  stroke: #fff;
+  stroke-width: 2;
+}
+
+.map-legend {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  color: var(--ink-light);
+  flex-wrap: wrap;
+}
+
+.map-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.map-legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1.5px solid;
+}
+
+/* ============================================================
+   STATION VIEW
+   ============================================================ */
+.station-card {
+  background: var(--parchment);
+  border: 3px solid var(--leather);
+  border-radius: 8px;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+
+.station-header {
+  background: linear-gradient(135deg, var(--leather-dark), var(--leather));
+  padding: 1.25rem 1.5rem;
+  color: var(--parchment);
+}
+
+.station-number {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  opacity: 0.8;
+  margin-bottom: 0.25rem;
+}
+
+.station-title {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  line-height: 1.3;
+}
+
+.station-date {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  margin-top: 0.25rem;
+  font-style: italic;
+}
+
+.station-body {
+  padding: 1.5rem;
+}
+
+.station-context {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  color: var(--ink);
+}
+
+.station-context p { margin-bottom: 0.75rem; }
+
+.vocab-word {
+  border-bottom: 1px dashed var(--campfire);
+  cursor: help;
+  position: relative;
+  color: var(--leather-dark);
+  font-weight: 600;
+}
+
+.vocab-tooltip {
+  display: none;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ink);
+  color: var(--parchment);
+  padding: 0.4rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: normal;
+  white-space: nowrap;
+  z-index: 10;
+  box-shadow: var(--shadow-sm);
+}
+
+.vocab-word:hover .vocab-tooltip,
+.vocab-word:focus .vocab-tooltip {
+  display: block;
+}
+
+/* Journal entry styling */
+.journal-entry {
+  background: linear-gradient(135deg, #fdf6e3, #f5eed5);
+  border-left: 4px solid var(--leather);
+  padding: 1.25rem 1.5rem;
+  margin: 1.25rem 0;
+  border-radius: 0 6px 6px 0;
+  position: relative;
+}
+
+.journal-entry::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  border-radius: 0 6px 6px 0;
+}
+
+.journal-date {
+  font-family: var(--font-heading);
+  font-weight: bold;
+  color: var(--leather-dark);
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+}
+
+.journal-text {
+  font-family: var(--font-body);
+  font-style: italic;
+  line-height: 1.8;
+  color: var(--ink-light);
+  font-size: 0.95rem;
+}
+
+.journal-text p { margin-bottom: 0.5rem; }
+
+.journal-author {
+  font-family: var(--font-heading);
+  font-weight: bold;
+  color: var(--leather);
+  margin-top: 0.75rem;
+  font-style: normal;
+  text-align: right;
+}
+
+/* Question / reflection area */
+.station-reflection {
+  background: rgba(45, 80, 22, 0.08);
+  border: 1px solid rgba(45, 80, 22, 0.2);
+  border-radius: 6px;
+  padding: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.reflection-label {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--forest);
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.reflection-question {
+  font-size: 1rem;
+  color: var(--ink);
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
+}
+
+.reflection-textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 0.75rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  border: 1px solid var(--parchment-dark);
+  border-radius: 4px;
+  background: #fff;
+  color: var(--ink);
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.reflection-textarea:focus {
+  outline: none;
+  border-color: var(--forest-light);
+  box-shadow: 0 0 0 2px rgba(45, 80, 22, 0.15);
+}
+
+/* Station navigation */
+.station-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--parchment-dark);
+}
+
+.btn-station-nav {
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  padding: 0.6rem 1.5rem;
+  background: var(--leather);
+  color: var(--parchment);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-station-nav:hover {
+  background: var(--leather-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-station-nav:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-station-nav.primary {
+  background: var(--forest);
+}
+
+.btn-station-nav.primary:hover {
+  background: var(--forest-light);
+}
+
+/* ============================================================
+   JOURNAL / TRACKER VIEW
+   ============================================================ */
+.journal-tracker {
+  background: var(--parchment);
+  border: 3px solid var(--leather);
+  border-radius: 8px;
+  box-shadow: var(--shadow-lg);
+  padding: 1.5rem;
+}
+
+.journal-tracker-title {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  color: var(--ink);
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.journal-tracker-subtitle {
+  text-align: center;
+  color: var(--ink-light);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.tracker-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.tracker-table th {
+  background: var(--leather);
+  color: var(--parchment);
+  padding: 0.6rem 0.5rem;
+  text-align: left;
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tracker-table td {
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--parchment-dark);
+  vertical-align: top;
+}
+
+.tracker-table tr:nth-child(even) {
+  background: rgba(0,0,0,0.03);
+}
+
+.tracker-table input,
+.tracker-table textarea {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  border: 1px solid transparent;
+  background: transparent;
+  padding: 0.25rem;
+  border-radius: 3px;
+  color: var(--ink);
+}
+
+.tracker-table input:focus,
+.tracker-table textarea:focus {
+  outline: none;
+  border-color: var(--leather);
+  background: #fff;
+}
+
+.tracker-table textarea {
+  min-height: 50px;
+  resize: vertical;
+}
+
+.tracker-station-num {
+  font-weight: bold;
+  color: var(--leather);
+  text-align: center;
+  font-size: 1rem;
+}
+
+.tracker-station-num.visited {
+  color: var(--forest);
+}
+
+.tracker-station-num.visited::after {
+  content: ' \2605';
+  color: var(--campfire-glow);
+}
+
+/* ============================================================
+   TRAIL EVENT OVERLAY
+   ============================================================ */
+.trail-event-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 200;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.trail-event-overlay.active {
+  display: flex;
+}
+
+.trail-event-box {
+  background: var(--parchment);
+  border: 3px solid var(--leather);
+  border-radius: 8px;
+  max-width: 500px;
+  width: 100%;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  animation: slideUp 0.4s ease;
+}
+
+.trail-event-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.trail-event-title {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  color: var(--ink);
+  margin-bottom: 0.75rem;
+}
+
+.trail-event-text {
+  color: var(--ink-light);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.trail-event-btn {
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  padding: 0.6rem 2rem;
+  background: var(--leather);
+  color: var(--parchment);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.trail-event-btn:hover {
+  background: var(--leather-dark);
+}
+
+/* ============================================================
+   COMPLETION SCREEN
+   ============================================================ */
+#completion-screen {
+  background: linear-gradient(180deg, #0d0805, #1a0f08 40%, #2c1810);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+.completion-content {
+  max-width: 600px;
+}
+
+.completion-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: var(--parchment);
+  margin-bottom: 1rem;
+}
+
+.completion-text {
+  color: var(--parchment-dark);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+.btn-restart {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  padding: 0.75rem 2rem;
+  background: var(--leather);
+  color: var(--parchment);
+  border: 2px solid var(--campfire);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin: 0.5rem;
+}
+
+.btn-restart:hover {
+  background: var(--campfire);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+  .top-bar { padding: 0.4rem 0.75rem; }
+  .game-title-small { display: none; }
+  .station-body { padding: 1rem; }
+  .station-header { padding: 1rem; }
+  .station-title { font-size: 1.2rem; }
+  .journal-entry { padding: 1rem; }
+  .tracker-table { font-size: 0.75rem; }
+  .level-toggle button { font-size: 0.65rem; padding: 0.2rem 0.4rem; }
+}
+
+@media (max-width: 480px) {
+  .top-bar-right { width: 100%; justify-content: space-between; }
+  .station-nav { flex-direction: column; gap: 0.5rem; }
+  .btn-station-nav { width: 100%; text-align: center; }
+}
+
+/* Print styles for journal */
+@media print {
+  .top-bar, .station-nav, .nav-btn, .level-toggle { display: none !important; }
+  .screen { display: block !important; min-height: auto !important; }
+  .game-body { display: block !important; }
+  body { background: #fff; }
+  .station-card, .journal-tracker { box-shadow: none; border: 1px solid #ccc; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     TITLE SCREEN
+     ============================================================ -->
+<div id="title-screen" class="screen active">
+  <div class="title-stars"></div>
+  <div class="title-content">
+    <div class="title-year">1804 &ndash; 1806</div>
+    <h1 class="title-main">The Lost Expedition</h1>
+    <p class="title-subtitle">Retracing the Journey of Lewis &amp; Clark</p>
+    <div class="title-divider"></div>
+    <p class="title-intro">
+      A tattered journal has been found in an old St. Louis library. Its pages tell the story of the Corps of Discovery &mdash; but many entries are missing. Your mission: retrace the expedition's path across the continent, recover the lost journal entries at each station, and piece together the full story of America's greatest exploration.
+    </p>
+    <div class="level-select">
+      <span class="level-select-label">Choose your reading level:</span>
+      <div class="level-buttons">
+        <button class="level-btn" data-level="beginner" onclick="setLevel('beginner')">Easier Vocabulary</button>
+        <button class="level-btn active" data-level="standard" onclick="setLevel('standard')">Standard</button>
+        <button class="level-btn" data-level="advanced" onclick="setLevel('advanced')">Advanced</button>
+      </div>
+    </div>
+    <button class="btn-start" onclick="startGame()">Begin the Expedition</button>
+  </div>
+</div>
+
+<!-- ============================================================
+     GAME SCREEN
+     ============================================================ -->
+<div id="game-screen" class="screen">
+  <!-- Top navigation bar -->
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <span class="game-title-small">The Lost Expedition</span>
+      <span class="station-indicator" id="station-indicator">Station 1 of 10</span>
+    </div>
+    <div class="top-bar-right">
+      <div class="level-toggle" id="level-toggle">
+        <button data-level="beginner" onclick="setLevel('beginner')">Easier</button>
+        <button data-level="standard" onclick="setLevel('standard')">Standard</button>
+        <button data-level="advanced" onclick="setLevel('advanced')">Advanced</button>
+      </div>
+      <button class="nav-btn active-tab" onclick="showView('station')" id="btn-view-station">Station</button>
+      <button class="nav-btn" onclick="showView('map')" id="btn-view-map">Map</button>
+      <button class="nav-btn" onclick="showView('journal')" id="btn-view-journal">Journal</button>
+    </div>
+  </div>
+
+  <!-- Station View -->
+  <div class="game-body active" id="view-station">
+    <div id="station-content">
+      <!-- Filled by JS -->
+    </div>
+  </div>
+
+  <!-- Map View -->
+  <div class="game-body" id="view-map">
+    <div class="map-container">
+      <h2 class="map-title">The Trail of the Corps of Discovery</h2>
+      <div class="map-svg-wrap" id="map-svg-wrap">
+        <!-- SVG map inserted by JS -->
+      </div>
+      <div class="map-legend">
+        <div class="map-legend-item">
+          <div class="map-legend-dot" style="background: #6b4423; border-color: #5c2e0a;"></div>
+          <span>Not yet visited</span>
+        </div>
+        <div class="map-legend-item">
+          <div class="map-legend-dot" style="background: #f5a623; border-color: #d4760a;"></div>
+          <span>Visited</span>
+        </div>
+        <div class="map-legend-item">
+          <div class="map-legend-dot" style="background: #8b1a1a; border-color: #fff;"></div>
+          <span>Current station</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Journal Tracker View -->
+  <div class="game-body" id="view-journal">
+    <div class="journal-tracker">
+      <h2 class="journal-tracker-title">Expedition Journal</h2>
+      <p class="journal-tracker-subtitle">Record your findings as you travel from station to station.</p>
+      <div style="overflow-x:auto;">
+        <table class="tracker-table">
+          <thead>
+            <tr>
+              <th style="width:50px;">Stn</th>
+              <th style="width:120px;">Date(s)</th>
+              <th style="width:140px;">Journal Author(s)</th>
+              <th>Summary of Events</th>
+            </tr>
+          </thead>
+          <tbody id="tracker-body">
+            <!-- Filled by JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     TRAIL EVENT OVERLAY
+     ============================================================ -->
+<div class="trail-event-overlay" id="trail-event-overlay">
+  <div class="trail-event-box">
+    <div class="trail-event-icon" id="trail-event-icon"></div>
+    <h3 class="trail-event-title" id="trail-event-title"></h3>
+    <p class="trail-event-text" id="trail-event-text"></p>
+    <button class="trail-event-btn" onclick="closeTrailEvent()">Continue on the Trail</button>
+  </div>
+</div>
+
+<!-- ============================================================
+     COMPLETION SCREEN
+     ============================================================ -->
+<div id="completion-screen" class="screen">
+  <div class="completion-content">
+    <h1 class="completion-title">Journey Complete!</h1>
+    <p class="completion-text" id="completion-text"></p>
+    <button class="btn-restart" onclick="showView('journal'); showScreen('game-screen');">Review Your Journal</button>
+    <button class="btn-restart" onclick="restartGame()">Start a New Expedition</button>
+  </div>
+</div>
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+<script>
+// ============================================================
+// STATION DATA: All 10 stations x 3 levels
+// ============================================================
+
+const STATIONS = [
+
+// ---- STATION 1 ----
+{
+  beginner: {
+    title: "Setting Off from Camp Dubois",
+    dates: "May 14, 1804",
+    context: [
+      "The Corps of Discovery was a group of explorers sent by President Jefferson to explore the western part of North America. They started their trip near St. Louis, Missouri.",
+      "About 45 men joined the group. They came from many different backgrounds. Some were soldiers, some were hunters, and some were carpenters. Clark brought along York, a man he had enslaved since childhood. Three men had both French-Canadian and Native American parents.",
+      "They traveled in a big boat called a <span class='vocab-word' tabindex='0'>keelboat<span class='vocab-tooltip'>A large, flat-bottomed boat used on rivers</span></span> (55 feet long!) and two smaller boats called <span class='vocab-word' tabindex='0'>pirogues<span class='vocab-tooltip'>Long, narrow boats, like big canoes</span></span>. Moving up the river was hard work \u2014 they had to row, use poles, sail, and sometimes even get out and pull the boats with ropes!"
+    ],
+    journals: [{
+      date: "Monday, May 14, 1804",
+      text: [
+        "It rained in the morning. I decided to go to St. Charles, a small French town up the Missouri River, and wait there for Captain Lewis to finish his work in St. Louis.",
+        "I left at 4 o\u2019clock while many neighbors watched. We sailed up the Missouri River with a gentle wind and set up camp on an island."
+      ],
+      author: "Captain Clark"
+    }],
+    reflection: "Why do you think so many different kinds of people joined this expedition? What skills would each person bring?"
+  },
+  standard: {
+    title: "The Corps of Discovery Sets Off",
+    dates: "May 14, 1804",
+    context: [
+      "The Corps of Discovery sets off from Camp Dubois outside St. Louis and sails up the Missouri River. Nearly four dozen men are involved from every corner of the nation. Three are sons of French-Canadian fathers and Indian mothers. Clark brings along York, a man he had enslaved since childhood. Others include soldiers, carpenters, and hunters.",
+      "They travel in a large keelboat (55 feet long and 8 feet wide) and two smaller boats called pirogues. Proceeding up the Missouri River involves sailing, rowing, using setting poles, and sometimes wading along the bank to pull the boats with ropes."
+    ],
+    journals: [{
+      date: "Monday, May 14, 1804",
+      text: [
+        "Rained the forepart of the day. I determined to go as far as St. Charles, a French village 7 leagues up the Missouri and wait at that place until Capt. Lewis could finish the business in which he was obliged to attend to at St. Louis and join me by land.",
+        "I set out at 4 o\u2019clock in the presence of many of the neighboring inhabitants and proceeded on under a gentle breeze up the Missouri and camped on the island."
+      ],
+      author: "Captain Clark"
+    }],
+    reflection: "The Corps of Discovery included people from very different backgrounds. What does this tell you about what was needed for such an expedition?"
+  },
+  advanced: {
+    title: "The Corps of Discovery Embarks from Camp Dubois",
+    dates: "May 14, 1804",
+    context: [
+      "The Corps of Discovery sets off from Camp Dubois (Camp Wood) outside St. Louis and begins its ascent of the Missouri River. The expedition, commissioned by President Thomas Jefferson following the Louisiana Purchase of 1803, was tasked with finding a practical route to the Pacific Ocean, establishing diplomatic relations with Native American nations, and documenting the geography, flora, and fauna of the western territory.",
+      "Nearly four dozen men compose the initial party, drawn from diverse backgrounds reflecting the American frontier. Three members are sons of French-Canadian fathers and Native American mothers, representing the existing mixed communities along the frontier. Clark brings York, a man he had enslaved since childhood, who would play a significant role throughout the journey. The rest include Army volunteers, skilled hunters, carpenters, and French boatmen (engag\u00e9s).",
+      "Their fleet consists of a 55-foot keelboat capable of carrying 12 tons of supplies and two smaller pirogues. Navigating upstream against the Missouri\u2019s powerful current requires every technique available: sailing when wind permits, rowing, pushing with setting poles, and cordelling \u2014 wading along the bank and hauling the boats forward with tow ropes."
+    ],
+    journals: [{
+      date: "Monday, May 14, 1804",
+      text: [
+        "Rained the forepart of the day. I determined to go as far as St. Charles, a French village 7 leagues up the Missouri and wait at that place until Capt. Lewis could finish the business in which he was obliged to attend to at St. Louis and join me by land.",
+        "I set out at 4 o\u2019clock in the presence of many of the neighboring inhabitants and proceeded on under a gentle breeze up the Missouri and camped on the island."
+      ],
+      author: "Captain Clark"
+    }],
+    reflection: "Consider the composition of the Corps \u2014 soldiers, frontiersmen, enslaved individuals, and men of mixed heritage. What does this reveal about American society on the frontier in 1804? How might each person\u2019s background have contributed differently to the expedition\u2019s success?"
+  }
+},
+
+// ---- STATION 2 ----
+{
+  beginner: {
+    title: "Reaching the Great Plains",
+    dates: "July 20, 1804",
+    context: [
+      "The group reached the Platte River and the flat, open grasslands called the Great Plains. This area would later become a very important path west for many groups of people.",
+      "Years later, the <span class='vocab-word' tabindex='0'>Oregon Trail<span class='vocab-tooltip'>A famous path settlers followed to get to the western United States</span></span>, the Mormon Trail, and the California Trail all followed the Platte River. So did the Pony Express mail service, the first railroad across the country, and the first paved highway!"
+    ],
+    journals: [{
+      date: "Friday, July 20, 1804",
+      text: [
+        "A cool morning. I walked through the plains most of the day. The land had patches of trees here and there. I hunted and caught a very large yellow wolf. The soil looks rich, but it is dried out from many fires.",
+        "We started up the Platte River, which moves faster than the Missouri. We camped near a creek. Many wolves were around us all night. The Indians cross this river in flat boats made of animal skins that don\u2019t tip over."
+      ],
+      author: "Captain Lewis"
+    },{
+      date: "Friday, July 20, 1804",
+      text: [
+        "Our group has been healthier on this trip than most groups this size would be anywhere else. From where we camped, a person could walk to a Pawnee village in 2 days. But the Indians are out on the plains hunting buffalo, so we probably won\u2019t see them."
+      ],
+      author: "Captain Clark"
+    }],
+    reflection: "Lewis describes wolves, rich soil, and fires on the plains. What do these details tell you about what the Great Plains were like in 1804?"
+  },
+  standard: {
+    title: "The Platte River and the Great Plains",
+    dates: "July 20, 1804",
+    context: [
+      "The Corps of Discovery reaches the Platte River and the Great Plains. The Platte River became an important east-west route for Americans.",
+      "The Oregon, Mormon, and California Trails all followed it, along with the Pony Express, and later the first Transcontinental Railroad and first paved transcontinental highway."
+    ],
+    journals: [{
+      date: "Friday, July 20, 1804",
+      text: [
+        "A cool morning. I went out above the mouth of this creek and walked the greater part of the day through plains interspersed with small groves of timber. I killed a very large yellow wolf. The soil of these prairies appears rich but much parched with frequent fires.",
+        "Commenced up the great River Platt, which is much more rapid than the Missouri. Proceeded on past the mouth of Papillion or Butterfly Creek 3 miles and camped. A great number of wolves about us all night. The Indians pass this river in skin boats which are flat and will not turn over."
+      ],
+      author: "Captain Lewis"
+    },{
+      date: "Friday, July 20, 1804",
+      text: [
+        "It is worthy of observation to mention that our party has been much healthier on the voyage than parties of the same number in any other situation. From this evening\u2019s encampment, a man may walk to the Pawnee village on the bank of the Platt River in 2 days and to the Oto in one day. As those Indians are now out in the prairies hunting buffalo, I fear we will not see them."
+      ],
+      author: "Captain Clark"
+    }],
+    reflection: "Both Lewis and Clark write about the landscape, wildlife, and Native Americans. What picture of the Great Plains do their entries paint?"
+  },
+  advanced: {
+    title: "The Platte River and the Great Plains",
+    dates: "July 20, 1804",
+    context: [
+      "The Corps of Discovery reaches the confluence of the Platte River and the Missouri, marking their entry into the Great Plains. The Platte, a wide and shallow river, would become one of the most significant transportation corridors in American history.",
+      "Over the following decades, the Oregon Trail, Mormon Trail, and California Trail would all follow the Platte River valley. The Pony Express, the first Transcontinental Railroad (Union Pacific), and the first paved transcontinental highway (the Lincoln Highway) traced the same route \u2014 a testament to the geographic logic of the corridor Lewis and Clark were now entering.",
+      "The journals from this period reveal the expedition\u2019s dual scientific and diplomatic mission: careful observation of terrain, wildlife, and soil conditions alongside constant awareness of the Native American nations whose territory they were traversing."
+    ],
+    journals: [{
+      date: "Friday, July 20, 1804",
+      text: [
+        "A cool morning. I went out above the mouth of this creek and walked the greater part of the day through plains interspersed with small groves of timber. I killed a very large yellow wolf. The soil of these prairies appears rich but much parched with frequent fires.",
+        "Commenced up the great River Platt, which is much more rapid than the Missouri. Proceeded on past the mouth of Papillion or Butterfly Creek 3 miles and camped. A great number of wolves about us all night. The Indians pass this river in skin boats which are flat and will not turn over."
+      ],
+      author: "Captain Lewis"
+    },{
+      date: "Friday, July 20, 1804",
+      text: [
+        "It is worthy of observation to mention that our party has been much healthier on the voyage than parties of the same number in any other situation. From this evening\u2019s encampment, a man may walk to the Pawnee village on the bank of the Platt River in 2 days and to the Oto in one day. As those Indians are now out in the prairies hunting buffalo, I fear we will not see them."
+      ],
+      author: "Captain Clark"
+    }],
+    reflection: "Lewis notes that prairie fires have \u201cparched\u201d the soil, and Clark observes that the Indians are away hunting buffalo. What do these details suggest about how Native Americans managed and interacted with the Great Plains ecosystem? Research the concept of \u201ccontrolled burns\u201d \u2014 why might Native Americans have set deliberate fires?"
+  }
+},
+
+// ---- STATION 3 ----
+{
+  beginner: {
+    title: "Meeting the Oto and Missouri Indians",
+    dates: "August 2\u20133, 1804",
+    context: [
+      "This was the first official meeting between the United States government and Native Americans in the West. The Corps met a small group of Oto and Missouri Indians near where Omaha, Nebraska is today.",
+      "Lewis and Clark had a <span class='vocab-word' tabindex='0'>routine<span class='vocab-tooltip'>A set way of doing things each time</span></span> for meeting with Indians: They gave out peace medals, flags, and gifts. They showed off cool technology like magnets, compasses, telescopes, and guns. They gave a speech saying the Indians had a new \u201cgreat father\u201d (the President) and promised peace if the tribes didn\u2019t fight each other."
+    ],
+    journals: [{
+      date: "Thursday, August 2, 1804",
+      text: [
+        "At sunset, a group of Oto and Missouri Indians came to our camp. Six of them were chiefs. Captain Lewis and I met them and told them we were happy to see them. We said we would talk more tomorrow. We gave them roasted meat, pork, flour, and meal. They gave us watermelons. Every man stayed on guard and ready."
+      ],
+      author: "Captain Clark"
+    },{
+      date: "Friday, August 3, 1804",
+      text: [
+        "We gave the Indians small gifts based on how important they were. After breakfast, we gathered them under a shade made from our sail and gave a long speech about our journey and what our government wanted. We also gave advice about how they should act.",
+        "The chiefs all gave speeches back, saying they agreed and were happy to have leaders they could trust. After Captain Lewis fired the gun a few times, we packed up and moved on."
+      ],
+      author: "Captain Clark"
+    }],
+    reflection: "Lewis and Clark gave speeches telling Native Americans they had a new \u201cgreat father.\u201d How do you think the Native Americans felt about this? Why?"
+  },
+  standard: {
+    title: "First Council with Western Indians",
+    dates: "August 2\u20133, 1804",
+    context: [
+      "The first official council between representatives of the United States and western Indians occurs north of present-day Omaha, when the Corps of Discovery meets with a small delegation of Oto and Missouri Indians.",
+      "Lewis & Clark establish a routine for later Indian councils: they hand out peace medals, flags, and gifts, show off their technology (magnets, compasses, telescopes, guns); give a speech saying Indians have a new \u201cgreat father\u201d far to the east and promise them peace and prosperity if the tribes don\u2019t make war."
+    ],
+    journals: [{
+      date: "Thursday, August 2, 1804",
+      text: [
+        "At Sunset a party of the Oto and Missouri Nation came to camp. Among those Indians, 6 were Chiefs. Captain Lewis and myself met those Indians and informed them that we were glad to see them and would speak to them tomorrow. Sent them some roasted meat, pork, flour, and meal. In return they sent us watermelons. Every man on his guard and ready for anything."
+      ],
+      author: "Captain Clark"
+    },{
+      date: "Friday, August 3, 1804",
+      text: [
+        "Made a small present for those people in proportion to their consequence, also a package with a medal to accompany a speech for the Grand Chief. After breakfast, we collected those Indians under an awning of our mainsail and delivered a long speech to them expressive of our journey, the wishes of our government, some advice to them, and directions how they were to conduct themselves.",
+        "Those Chiefs all delivered a speech acknowledging their approbation to the speech and promising to pursue the advice and directions given to them, that they were happy to find that they had fathers might be depended on. After Captain Lewis shot the gun a few shots, we set out and proceeded on."
+      ],
+      author: "Captain Clark"
+    }],
+    reflection: "Lewis and Clark claimed to represent a new \u201cgreat father\u201d for these tribes. How might the Oto and Missouri leaders have interpreted this message? What power dynamics are at play in this encounter?"
+  },
+  advanced: {
+    title: "First Diplomatic Council with Western Nations",
+    dates: "August 2\u20133, 1804",
+    context: [
+      "The first official council between representatives of the United States and western Indigenous nations occurs at a site north of present-day Omaha, Nebraska. The Corps of Discovery meets with a small delegation of Oto and Missouri Indians \u2014 two nations that had been significantly weakened by smallpox epidemics in recent decades.",
+      "Lewis and Clark establish what would become their standard diplomatic protocol for subsequent councils: distribution of peace medals (bearing Jefferson\u2019s likeness), American flags, and trade goods; demonstration of technological superiority through magnets, compasses, telescopes, and firearms; and delivery of a formulaic speech asserting American sovereignty, declaring that the tribes now had a new \u201cgreat father\u201d in Washington, and promising peace and trade prosperity conditional on intertribal peace.",
+      "This protocol reveals the expedition\u2019s role as an instrument of American imperial expansion. The medals and speeches were designed to insert the United States into existing trade and diplomatic networks that had long been dominated by France, Spain, and Britain."
+    ],
+    journals: [{
+      date: "Thursday, August 2, 1804",
+      text: [
+        "At Sunset a party of the Oto and Missouri Nation came to camp. Among those Indians, 6 were Chiefs. Captain Lewis and myself met those Indians and informed them that we were glad to see them and would speak to them tomorrow. Sent them some roasted meat, pork, flour, and meal. In return they sent us watermelons. Every man on his guard and ready for anything."
+      ],
+      author: "Captain Clark"
+    },{
+      date: "Friday, August 3, 1804",
+      text: [
+        "Made a small present for those people in proportion to their consequence, also a package with a medal to accompany a speech for the Grand Chief. After breakfast, we collected those Indians under an awning of our mainsail and delivered a long speech to them expressive of our journey, the wishes of our government, some advice to them, and directions how they were to conduct themselves.",
+        "Those Chiefs all delivered a speech acknowledging their approbation to the speech and promising to pursue the advice and directions given to them, that they were happy to find that they had fathers might be depended on. After Captain Lewis shot the gun a few shots, we set out and proceeded on."
+      ],
+      author: "Captain Clark"
+    }],
+    reflection: "Clark records that gifts were given \u201cin proportion to their consequence\u201d (importance). Analyze the power dynamics of this diplomatic encounter. How did Lewis and Clark use ceremony, technology, and gift-giving as tools of diplomacy? How might the Oto and Missouri chiefs have had their own strategic reasons for engaging with the Americans?"
+  }
+},
+
+// ---- STATION 4 ----
+{
+  beginner: {
+    title: "Arriving at the Mandan Villages",
+    dates: "October 28, 1804",
+    context: [
+      "The group reached the Mandan Indian villages near the Knife River in what is now North Dakota. The Mandan and Hidatsa people already knew white people because French traders had been visiting since 1738.",
+      "The explorers started building <span class='vocab-word' tabindex='0'>Fort Mandan<span class='vocab-tooltip'>A wooden fort the explorers built to stay in during the cold winter</span></span>, where they would spend the whole winter. It took almost 4 weeks to build. By the time it was finished, there were already 6 inches of snow on the ground!"
+    ],
+    journals: [{
+      date: "Sunday, October 28, 1804",
+      text: [
+        "We came to a village up on a hill about 50 feet above the water in a nice, flat area. We smoked a pipe with the village chief. They really wanted me to stay and eat with them.",
+        "We met a Frenchman named Jessome and hired him to help us talk to the Mandan people. The chief, called Black Cat, Captain Lewis, and I walked along the river to find a good spot to build a fort. We found a good location, but there weren\u2019t many trees to use for building."
+      ],
+      author: "Captain Clark"
+    }],
+    reflection: "Why do you think Lewis and Clark decided to build a fort and stay for the winter instead of continuing their journey?"
+  },
+  standard: {
+    title: "The Mandan Villages and Fort Mandan",
+    dates: "October 28, 1804",
+    context: [
+      "The group reached the Mandan Villages at the mouth of the Knife River. The Mandan and Hidatsa Indians in the vicinity were familiar with white men, since their first contact with French traders in 1738.",
+      "They start building Fort Mandan, where they will spend the winter. The fort took nearly 4 weeks to complete, at which time there was over 6 inches of snow on the ground."
+    ],
+    journals: [{
+      date: "Sunday, October 28, 1804",
+      text: [
+        "We came to a village situated about 50 feet above the water in a handsome plain. We smoked a pipe with the chief of the village. They were anxious that I would stay and eat with them. We met a Frenchman by the name of Jessome which we employed as an interpreter.",
+        "The Black Cat Grand Chief of the Mandans, Captain Lewis, and myself with the interpreter walked up the river to examine the situation and timber for a fort. We found the situation good, but the timber scarce."
+      ],
+      author: "Captain Clark"
+    }],
+    reflection: "The Mandan had been trading with Europeans since 1738 \u2014 over 65 years before Lewis and Clark arrived. How might this prior contact have shaped the encounter?"
+  },
+  advanced: {
+    title: "The Mandan-Hidatsa Villages and Construction of Fort Mandan",
+    dates: "October 28, 1804",
+    context: [
+      "The expedition reaches the large, semi-permanent Mandan and Hidatsa villages near the confluence of the Knife and Missouri Rivers in present-day North Dakota. These villages were a major hub of the Northern Plains trade network, connecting peoples from the Rocky Mountains to the Great Lakes. The Mandan and Hidatsa had maintained contact with European traders since the French explorer La V\u00e9rendrye arrived in 1738.",
+      "Lewis and Clark begin constructing Fort Mandan, a triangular wooden fortification where the Corps will overwinter from November 1804 through April 1805. The fort took nearly four weeks to complete, with temperatures already plunging well below zero and over six inches of snow accumulating. This winter encampment proved crucial: it was here that the captains gathered extensive geographic intelligence from Hidatsa traders who knew the upper Missouri and the route to the Rocky Mountains."
+    ],
+    journals: [{
+      date: "Sunday, October 28, 1804",
+      text: [
+        "We came to a village situated about 50 feet above the water in a handsome plain. We smoked a pipe with the chief of the village. They were anxious that I would stay and eat with them. We met a Frenchman by the name of Jessome which we employed as an interpreter.",
+        "The Black Cat Grand Chief of the Mandans, Captain Lewis, and myself with the interpreter walked up the river to examine the situation and timber for a fort. We found the situation good, but the timber scarce."
+      ],
+      author: "Captain Clark"
+    }],
+    reflection: "The Mandan-Hidatsa villages functioned as a major trade hub of the Northern Plains, connecting peoples from the Rockies to the Great Lakes. How does understanding this existing network change the narrative that Lewis and Clark were exploring \u201cunknown\u201d territory? What does Clark\u2019s hiring of a French interpreter tell us about who was already present in this region?"
+  }
+},
+
+// ---- STATION 5 ----
+{
+  beginner: {
+    title: "Meeting Sacagawea",
+    dates: "February 11, 1805",
+    context: [
+      "During the cold winter at Fort Mandan, Lewis and Clark met a French trader named Charbonneau and his young wife, <span class='vocab-word' tabindex='0'>Sacagawea<span class='vocab-tooltip'>A Shoshone woman who became one of the most important members of the expedition</span></span>. She was a Shoshone Indian who had been taken from her people when she was young.",
+      "They hired Charbonneau as a guide and translator. But it turned out that Sacagawea would be the most helpful addition to the group!",
+      "On February 11, 1805, Sacagawea had a baby boy named Baptiste. The men in the group gave him the nickname \u201cPomp\u201d because he was such a lively little dancer!"
+    ],
+    journals: [{
+      date: "Saturday, February 11, 1805",
+      text: [
+        "Around 5 this evening, Sacagawea had a baby boy. This was her first child, and she was in a lot of pain for a long time.",
+        "Our interpreter Jessome told me that giving her a small piece of a rattlesnake\u2019s rattle mixed with water would help speed up the birth. I had a rattle with me, so I gave it to him. He broke two rings of it into small pieces and mixed it with water for her. Whether this actually helped or not, I\u2019m not sure, but she had the baby within 10 minutes of drinking it."
+      ],
+      author: "Captain Lewis"
+    }],
+    reflection: "Why do you think Sacagawea became so important to the expedition? What skills or knowledge might she have had that the other members didn\u2019t?"
+  },
+  standard: {
+    title: "Sacagawea Joins the Expedition",
+    dates: "February 11, 1805",
+    context: [
+      "During the winter of 1804\u20131805, Lewis and Clark met the French trader Charbonneau and his young Shoshone wife Sacagawea. They hired Charbonneau as a guide and interpreter. However, it was Sacagawea who would prove to be the most valuable addition to the Corps of Discovery.",
+      "On February 11, 1805, she gave birth to a baby boy named Baptiste. The members of the Corps would go on to nickname him Pomp, for his \u201cpompous, little dancing boy personality.\u201d"
+    ],
+    journals: [{
+      date: "Saturday, February 11, 1805",
+      text: [
+        "At about 5 this evening, one of the wives of Charbonneau (Sacajawea) delivered a fine boy. It is worthy of remark that this was the first child this woman had borne, and as is common in such cases, her labor was tedious and the pain violent.",
+        "Jessome informed me that he had administered a small portion of the rattle of a rattlesnake which he assured me never failed to produce the desired effect \u2014 the hastening of the birth of a child. Having the rattle of a snake by me, I gave it to him and he administered two rings of it to the woman broken in small pieces and added to a small quantity of water. Whether this medicine was truly the cause or not, I shall not undertake to determine, but I was informed that she had not taken it more than 10 minutes before she brought forth."
+      ],
+      author: "Captain Lewis"
+    }],
+    reflection: "Lewis records the use of rattlesnake rattle as medicine during childbirth. What does this tell us about medical knowledge and folk remedies on the frontier? Why might Lewis have been careful to say he couldn\u2019t determine if it truly worked?"
+  },
+  advanced: {
+    title: "Sacagawea, Charbonneau, and the Birth of Baptiste",
+    dates: "February 11, 1805",
+    context: [
+      "During the winter encampment at Fort Mandan, Lewis and Clark engaged the services of Toussaint Charbonneau, a French-Canadian fur trader living among the Hidatsa, and his young Lemhi Shoshone wife, Sacagawea. Charbonneau was hired nominally as an interpreter, but it was Sacagawea \u2014 approximately sixteen years old at the time \u2014 who would prove indispensable.",
+      "Sacagawea had been captured by a Hidatsa raiding party around age twelve and subsequently acquired by Charbonneau. Her knowledge of Shoshone language and territory would prove critical when the expedition needed horses to cross the Rocky Mountains. Beyond her linguistic skills, her very presence \u2014 a young woman with an infant \u2014 signaled peaceful intentions to every nation they encountered.",
+      "On February 11, 1805, Sacagawea gave birth to Jean Baptiste Charbonneau. Lewis\u2019s journal entry on the birth reveals the blend of frontier folk medicine and Enlightenment skepticism that characterized his scientific observations throughout the journey."
+    ],
+    journals: [{
+      date: "Saturday, February 11, 1805",
+      text: [
+        "At about 5 this evening, one of the wives of Charbonneau (Sacajawea) delivered a fine boy. It is worthy of remark that this was the first child this woman had borne, and as is common in such cases, her labor was tedious and the pain violent.",
+        "Jessome informed me that he had administered a small portion of the rattle of a rattlesnake which he assured me never failed to produce the desired effect \u2014 the hastening of the birth of a child. Having the rattle of a snake by me, I gave it to him and he administered two rings of it to the woman broken in small pieces and added to a small quantity of water. Whether this medicine was truly the cause or not, I shall not undertake to determine, but I was informed that she had not taken it more than 10 minutes before she brought forth."
+      ],
+      author: "Captain Lewis"
+    }],
+    reflection: "Lewis carefully avoids claiming the rattlesnake remedy actually worked, saying he \u201cshall not undertake to determine\u201d its effectiveness. Analyze this passage as a primary source: What does Lewis\u2019s language reveal about Enlightenment-era attitudes toward scientific observation versus folk knowledge? How does Sacagawea\u2019s story complicate the narrative of the expedition as a purely voluntary, heroic enterprise?"
+  }
+},
+
+// ---- STATION 6 ----
+{
+  beginner: {
+    title: "Heading West Again",
+    dates: "April 7, 1805",
+    context: [
+      "In April 1805, the expedition split up. Eleven men took the big keelboat back to St. Louis. They carried plant and animal <span class='vocab-word' tabindex='0'>specimens<span class='vocab-tooltip'>Samples collected to show to scientists</span></span> and journal entries to send to President Jefferson. They also brought several Indian chiefs to meet the President.",
+      "The remaining 33 people continued west along the Missouri River in six small canoes and two pirogues. Lewis was very excited \u2014 this had been his dream for 10 years!"
+    ],
+    journals: [{
+      date: "Thursday, April 7, 1805",
+      text: [
+        "At the same time that the big boat left Fort Mandan, Captain Clark and our group headed up the river. Since I hadn\u2019t gotten any exercise in weeks, I decided to walk along the shore.",
+        "Our little fleet of boats isn\u2019t as fancy as Columbus\u2019s or Captain Cook\u2019s ships, but we were just as proud of ours! We were about to explore a land 2,000 miles wide where no American had ever been. These little boats held everything we needed to survive and protect ourselves.",
+        "I have been dreaming about this trip for 10 years. Leaving Fort Mandan was one of the happiest moments of my life. Everyone in the group is healthy, excited, and ready to go. No one is complaining \u2014 everyone is working together."
+      ],
+      author: "Captain Lewis"
+    }],
+    reflection: "Lewis compares their little boats to the ships of Columbus and Captain Cook. Why do you think he made this comparison? How was he feeling at this moment?"
+  },
+  standard: {
+    title: "Departing Fort Mandan \u2014 Into the Unknown",
+    dates: "April 7, 1805",
+    context: [
+      "In April 1805, 33 members of the expedition continued the journey west along the Missouri River. Eleven men returned to St. Louis on the keelboat with collected specimens and journal entries, and to escort several Indian chiefs who were to meet with President Jefferson.",
+      "This moment marks a turning point: the Corps now heads into territory no American had mapped. Their vessels consist of six small canoes and two large pirogues."
+    ],
+    journals: [{
+      date: "Thursday, April 7, 1805",
+      text: [
+        "At the same moment that the barge departed from Fort Mandan, Captain Clark embarked with our party and proceeded up the river. As I had used no exercise for several weeks, I determined to walk on shore as far as our encampment of this evening.",
+        "Our vessels consisted of 6 small canoes and two large pirogues. This little fleet, although not quite so respectable as that of Columbus or Captain Cook, was still viewed by us with as much pleasure as those deservedly famed adventurers ever beheld theirs. And I daresay with quite as much anxiety for their safety and preservation.",
+        "We were now about to penetrate a country at least 2,000 miles in width, on which the foot of civilized man had never trod. The good or evil it had in store for us was experiment yet to determine, and these little vessels contained every article by which we were to expect to subsist or defend ourselves.",
+        "Entertaining as I do the most confident hope of succeeding, a voyage which has formed a darling project of mine for the last 10 years. I could but esteem this moment of departure as among the most happy of my life. The party are in excellent health and spirits, zealously attached to the enterprise and anxious to proceed. Not a whisper or murmur of discontent to be heard among them, but all act in unison and with the most perfect harmony."
+      ],
+      author: "Captain Lewis"
+    }],
+    reflection: "Lewis calls this \u201camong the most happy\u201d moments of his life. What emotions come through in his writing? How does his comparison to Columbus and Captain Cook reveal his sense of the expedition\u2019s importance?"
+  },
+  advanced: {
+    title: "Departure from Fort Mandan \u2014 Into Uncharted Territory",
+    dates: "April 7, 1805",
+    context: [
+      "April 7, 1805 marks a pivotal transition in the expedition. The keelboat departs downstream for St. Louis carrying biological specimens, ethnographic artifacts, maps, and journal entries \u2014 effectively the expedition\u2019s first \u201cprogress report\u201d to Jefferson. Several Mandan and Arikara chiefs travel with this party to visit Washington.",
+      "The remaining 33 members, now including Sacagawea, infant Baptiste, and Charbonneau, push west into territory no American or European had mapped. Lewis\u2019s journal entry from this day is among the most celebrated passages in American exploration literature, revealing both his Enlightenment-era ambition and his awareness that the expedition has crossed a threshold into genuine uncertainty."
+    ],
+    journals: [{
+      date: "Thursday, April 7, 1805",
+      text: [
+        "At the same moment that the barge departed from Fort Mandan, Captain Clark embarked with our party and proceeded up the river. As I had used no exercise for several weeks, I determined to walk on shore as far as our encampment of this evening.",
+        "Our vessels consisted of 6 small canoes and two large pirogues. This little fleet, although not quite so respectable as that of Columbus or Captain Cook, was still viewed by us with as much pleasure as those deservedly famed adventurers ever beheld theirs. And I daresay with quite as much anxiety for their safety and preservation.",
+        "We were now about to penetrate a country at least 2,000 miles in width, on which the foot of civilized man had never trod. The good or evil it had in store for us was experiment yet to determine, and these little vessels contained every article by which we were to expect to subsist or defend ourselves.",
+        "Entertaining as I do the most confident hope of succeeding, a voyage which has formed a darling project of mine for the last 10 years. I could but esteem this moment of departure as among the most happy of my life. The party are in excellent health and spirits, zealously attached to the enterprise and anxious to proceed. Not a whisper or murmur of discontent to be heard among them, but all act in unison and with the most perfect harmony."
+      ],
+      author: "Captain Lewis"
+    }],
+    reflection: "Lewis writes that they are entering a country \u201con which the foot of civilized man had never trod.\u201d Critically examine this phrase. What assumptions does it reveal about Lewis\u2019s worldview? How does this language erase the Indigenous peoples who had lived in, traveled through, and shaped this landscape for thousands of years? Compare this to how Lewis describes Native Americans elsewhere in the journals."
+  }
+},
+
+// ---- STATION 7 ----
+{
+  beginner: {
+    title: "The Great Falls",
+    dates: "June 13, 1805",
+    context: [
+      "The Corps of Discovery found the Great Falls of the Missouri River \u2014 a series of huge waterfalls! They couldn\u2019t take their boats over the falls, so they had to carry everything overland for 16 miles. This took almost a whole month!",
+      "During this time, they had lots of problems: <span class='vocab-word' tabindex='0'>grizzly bears<span class='vocab-tooltip'>Very large, dangerous bears found in western North America</span></span> kept bothering them, sharp cactus poked through their shoes, and clouds of mosquitoes swarmed them constantly."
+    ],
+    journals: [{
+      date: "Thursday, June 13, 1805",
+      text: [
+        "I heard the wonderful sound of a waterfall! I walked a little further and saw spray shooting up above the flat ground like a column of smoke. The wind kept blowing it away and then it would come back.",
+        "I hurried down a steep hill, about 200 feet high, to see this amazing sight. The river was about 300 yards wide at the falls. The water crashed against the rocks and turned into white foam that shot up 15 or 20 feet in the air!",
+        "The sun shining on the mist from the falls made a beautiful rainbow, which made the whole scene even more spectacular."
+      ],
+      author: "Captain Lewis"
+    }],
+    reflection: "Lewis uses very descriptive words to tell us about the Great Falls. What words or phrases help you picture what the falls looked like?"
+  },
+  standard: {
+    title: "The Great Falls of the Missouri",
+    dates: "June 13, 1805",
+    context: [
+      "The Corps of Discovery reaches the Great Falls of the Missouri River. They must travel overland for 16 miles before continuing, an arduous task that took nearly a month. During that time, grizzly bears bothered the men, prickly pear cactus pierced their moccasins, and mosquitoes swarmed them constantly."
+    ],
+    journals: [{
+      date: "Thursday, June 13, 1805",
+      text: [
+        "My ears were saluted with the agreeable sound of a fall of water and advancing a little further I saw the spray arise above the plain like a column of smoke which would frequently disappear again in an instant caused I presume by the wind which blew pretty hard from the S.W. I did not however lose my direction to this point which soon began to make a roaring too tremendous to be mistaken for any cause short of the great falls of the Missouri.",
+        "I hurried down the hill which was about 200 feet high and difficult of access, to gaze on this sublimely grand spectacle. \u2026 Immediately at the cascade the river is about 300 yards wide. About 200 yards on my right forms the grandest sight I ever beheld, the height of the fall is the same of the other but the irregular and somewhat projecting rocks below receives the water in its passage down and brakes it into a perfect white foam which assumes a thousand forms in a moment sometimes flying up in jets of sparkling foam to the height of 15 or 20 feet.",
+        "From the reflection of the sun on the spray or mist which arises from these falls there is a beautiful rainbow produced which adds not a little to the beauty of this majestically grand scenery."
+      ],
+      author: "Captain Lewis"
+    }],
+    reflection: "Lewis calls the Great Falls \u201cthe grandest sight I ever beheld.\u201d His writing becomes unusually poetic here. Why might this natural wonder have affected him so strongly? What literary techniques does he use to convey the experience?"
+  },
+  advanced: {
+    title: "The Great Falls \u2014 Sublime Spectacle and Brutal Portage",
+    dates: "June 13, 1805",
+    context: [
+      "The Corps reaches the Great Falls of the Missouri River, confirming they are on the correct branch. What follows is one of the expedition\u2019s most grueling ordeals: an 18-mile overland portage around the series of five cascades that took nearly a month to complete (June 16 to July 15). The men constructed crude wagons from cottonwood rounds to haul the heavy canoes and supplies.",
+      "During the portage, the party endured extreme hardship: grizzly bear encounters, prickly pear cactus that shredded their moccasins, swarming mosquitoes, violent hailstorms, and temperatures exceeding 100\u00b0F. Lewis\u2019s entry from the day he first sighted the falls stands in remarkable contrast to this suffering \u2014 it is among the most literary passages in the entire journal, revealing his struggle to capture sublime natural beauty in words."
+    ],
+    journals: [{
+      date: "Thursday, June 13, 1805",
+      text: [
+        "My ears were saluted with the agreeable sound of a fall of water and advancing a little further I saw the spray arise above the plain like a column of smoke which would frequently disappear again in an instant caused I presume by the wind which blew pretty hard from the S.W. I did not however lose my direction to this point which soon began to make a roaring too tremendous to be mistaken for any cause short of the great falls of the Missouri.",
+        "I hurried down the hill which was about 200 feet high and difficult of access, to gaze on this sublimely grand spectacle. \u2026 Immediately at the cascade the river is about 300 yards wide. About 200 yards on my right forms the grandest sight I ever beheld, the height of the fall is the same of the other but the irregular and somewhat projecting rocks below receives the water in its passage down and brakes it into a perfect white foam which assumes a thousand forms in a moment sometimes flying up in jets of sparkling foam to the height of 15 or 20 feet.",
+        "This abutment of rock defends a handsome little bottom of about three acres which is agreeably shaded with some cottonwood trees; in the lower extremity of the bottom there is a very thick grove of the same kind of trees which are small, in this wood there are several Indian lodges formed of sticks.",
+        "From the reflection of the sun on the spray or mist which arises from these falls there is a beautiful rainbow produced which adds not a little to the beauty of this majestically grand scenery."
+      ],
+      author: "Captain Lewis"
+    }],
+    reflection: "Lewis\u2019s description of the Great Falls is often cited as an example of the \u201csublime\u201d in early American nature writing \u2014 the Romantic-era concept that nature\u2019s overwhelming grandeur inspires both awe and terror. Analyze Lewis\u2019s literary techniques: his use of sensory details, metaphor, and scale. Note also the detail about \u201cseveral Indian lodges\u201d \u2014 even at this \u201cundiscovered\u201d wonder, there is evidence of prior human presence. What does this suggest?"
+  }
+},
+
+// ---- STATION 8 ----
+{
+  beginner: {
+    title: "Reunited! Sacagawea Finds Her Family",
+    dates: "August 17, 1805",
+    context: [
+      "The group needed horses to cross the tall Rocky Mountains, and the <span class='vocab-word' tabindex='0'>Shoshone<span class='vocab-tooltip'>A Native American tribe that lived near the Rocky Mountains</span></span> tribe had them. Sacagawea was Shoshone, but she had been kidnapped by another tribe years ago.",
+      "When they finally met the Shoshone on August 17, something amazing happened: the tribe\u2019s chief, Cameahwait, turned out to be Sacagawea\u2019s brother! Lewis and Clark named this meeting place \u201cCamp Fortunate\u201d because of this lucky coincidence. Now they could get the horses they needed!"
+    ],
+    journals: [{
+      date: "Saturday, August 17, 1805",
+      text: [
+        "I hadn\u2019t walked a mile before I saw several Indians on horseback coming toward me. Sacagawea, who was walking ahead of me, started dancing with joy! She made signs to me that these were her people."
+      ],
+      author: "Captain Clark"
+    },{
+      date: "Saturday, August 17, 1805",
+      text: [
+        "When Captain Clark arrived with Sacagawea, she turned out to be the sister of Chief Cameahwait! The reunion between Sacagawea and an Indian woman who had been captured at the same time as her \u2014 but had escaped and returned home \u2014 was very emotional.",
+        "The Shoshone are very poor, but they are cheerful and honest. They love colorful clothing and fun. They are fair, generous with what little they have, and very honest. Each person makes their own decisions."
+      ],
+      author: "Captain Lewis"
+    }],
+    reflection: "Imagine you were Sacagawea, seeing your brother and your people again after years of being away. How would you feel? How might this moment have changed the rest of the expedition?"
+  },
+  standard: {
+    title: "Camp Fortunate \u2014 The Shoshone Reunion",
+    dates: "August 17, 1805",
+    context: [
+      "In August 1805, the Corps was looking for the Shoshone tribe. The group would need horses to cross the Rocky Mountains and the Shoshone had them. Sacagawea was Shoshone, but had been kidnapped by another tribe many years before.",
+      "When they met on August 17, they discovered that the tribe\u2019s chief, Cameahwait, was Sacagawea\u2019s brother. Lewis & Clark named the meeting place Camp Fortunate in honor of the lucky coincidence. The group could now continue west with Shoshone horses."
+    ],
+    journals: [{
+      date: "Saturday, August 17, 1805",
+      text: [
+        "I have not proceeded 1 mile before I saw at a distance several Indians on horseback coming towards me. The Interpreter and squaw who were before me at some distance danced for the joyful sight, and she made signs to me that they were her Nation."
+      ],
+      author: "Captain Clark"
+    },{
+      date: "Saturday, August 17, 1805",
+      text: [
+        "Shortly after Capt. Clark arrived with the Interpreter Charbono, and the Indian woman, who proved to be a sister of the Chief Cameahwait. The meeting of those people was really affecting, particularly between Sacagawea and an Indian woman, who had been taken prisoner at the same time with her, and who had afterwards escaped from the Minnetares and rejoined her nation.",
+        "The Shoshones live in a wretched state of poverty. Yet, they are cheerful, fond of gaudy dress and amusements. They are frank, communicative, fair in their dealing, generous with the little they possess, extremely honest, and by no means beggarly. Each individual is his own sovereign master and acts from the dictates of his own mind."
+      ],
+      author: "Captain Lewis"
+    }],
+    reflection: "Lewis describes the Shoshone as living in poverty yet being cheerful, generous, and honest. What values does Lewis seem to admire? What biases might be shaping his observations?"
+  },
+  advanced: {
+    title: "Camp Fortunate \u2014 The Shoshone Reunion and Its Strategic Implications",
+    dates: "August 17, 1805",
+    context: [
+      "By August 1805, the expedition\u2019s success hinged on acquiring horses to cross the formidable Rocky Mountains. The Lemhi Shoshone possessed these horses, and Sacagawea\u2019s identity as a Shoshone woman was now the expedition\u2019s most valuable diplomatic asset.",
+      "The reunion on August 17 produced one of the expedition\u2019s most dramatic coincidences: Chief Cameahwait proved to be Sacagawea\u2019s brother. The captains named the site Camp Fortunate, recognizing that this personal connection likely secured the horses and guides essential for the mountain crossing. Without this stroke of fortune, the expedition might well have failed.",
+      "Lewis\u2019s ethnographic observations of the Shoshone reveal the complex lens through which he viewed Indigenous peoples \u2014 simultaneously admiring their character while framing their material condition through Euro-American standards of wealth and civilization."
+    ],
+    journals: [{
+      date: "Saturday, August 17, 1805",
+      text: [
+        "I have not proceeded 1 mile before I saw at a distance several Indians on horseback coming towards me. The Interpreter and squaw who were before me at some distance danced for the joyful sight, and she made signs to me that they were her Nation."
+      ],
+      author: "Captain Clark"
+    },{
+      date: "Saturday, August 17, 1805",
+      text: [
+        "Shortly after Capt. Clark arrived with the Interpreter Charbono, and the Indian woman, who proved to be a sister of the Chief Cameahwait. The meeting of those people was really affecting, particularly between Sacagawea and an Indian woman, who had been taken prisoner at the same time with her, and who had afterwards escaped from the Minnetares and rejoined her nation.",
+        "The Shoshones live in a wretched state of poverty. Yet, they are cheerful, fond of gaudy dress and amusements. They are frank, communicative, fair in their dealing, generous with the little they possess, extremely honest, and by no means beggarly. Each individual is his own sovereign master and acts from the dictates of his own mind."
+      ],
+      author: "Captain Lewis"
+    }],
+    reflection: "Lewis writes that each Shoshone individual \u201cis his own sovereign master and acts from the dictates of his own mind.\u201d This description of individual liberty resonates with Enlightenment political philosophy. Yet Lewis simultaneously characterizes the Shoshone as living in \u201ca wretched state of poverty.\u201d Analyze the tension between Lewis\u2019s admiration for Shoshone character and his judgment of their material condition. What cultural assumptions underlie his definition of \u201cpoverty\u201d? How might the Shoshone have assessed their own circumstances differently?"
+  }
+},
+
+// ---- STATION 9 ----
+{
+  beginner: {
+    title: "Crossing the Rocky Mountains",
+    dates: "September\u2013October 1805",
+    context: [
+      "Lewis and Clark traded with the Shoshone for horses and supplies. They also hired a Shoshone guide they nicknamed \u201cOld Toby.\u201d He and Sacagawea helped them cross the <span class='vocab-word' tabindex='0'>Continental Divide<span class='vocab-tooltip'>The line of mountain peaks that separates rivers flowing east from rivers flowing west</span></span>.",
+      "Crossing the Rocky Mountains was terrible. It started on September 11 and took 11 days. They were so hungry that they had to eat some of their horses and even candles made from animal fat!",
+      "When they finally made it through, friendly <span class='vocab-word' tabindex='0'>Nez Perce<span class='vocab-tooltip'>A Native American tribe from the Pacific Northwest</span></span> Indians gave them food and taught them how to make canoes by burning out the inside of logs. Then they sped down the Snake River to the Columbia River."
+    ],
+    journals: [{
+      date: "October 17, 1805",
+      text: [
+        "After getting safely past the rapids and eating dinner, we traveled 7 miles to where the Snake River meets the Columbia River. The land in every direction is flat, low, and rises gently from the water.",
+        "We stopped and smoked with the Indians who had gathered in large numbers to look at us. We spoke to their chief, told him we came in peace, and gave the main chief a large medal, a shirt, and a handkerchief."
+      ],
+      author: "Captain Clark"
+    }],
+    reflection: "The group almost starved crossing the mountains and were saved by the Nez Perce. How many times has the expedition been helped by Native Americans so far? What does that tell you?"
+  },
+  standard: {
+    title: "Over the Rockies to the Columbia River",
+    dates: "September\u2013October 1805",
+    context: [
+      "Lewis and Clark successfully negotiated with the Shoshone for horses and supplies to help their passage over the Rocky Mountains. They also hired a Shoshone guide Pikee Queenah (Swooping Eagle), who they nicknamed \u201cOld Toby.\u201d He and Sacagawea helped them cross the Continental Divide at Lemhi Pass, at which point they left the Louisiana Purchase territory into disputed Oregon Country.",
+      "The Corps started climbing the Rocky Mountains on September 11 and it took them 11 days to get across. To stay alive, they ate a few of their horses and candles made of animal fat. Nez Perce Indians gave them new supplies and taught them how to hollow out logs with fire to make new canoes. The Corps then sped down the Snake River to the Columbia River."
+    ],
+    journals: [{
+      date: "October 17, 1805",
+      text: [
+        "After getting safely over the rapids and having taken dinner, we set out and proceeded on 7 miles to the junction of this river (the Snake) and the Columbia which joins from Northwest. In every direction from the junction of those Rivers the country is 1 continued plain, low and rises from the water gradually.",
+        "We halted and smoked with the Indians who had collected there in great numbers to view us. We spoke to their Chief informing them of our friendly disposition and gave the principal chief a large medal, a shirt, and a handkerchief."
+      ],
+      author: "Captain Clark"
+    }],
+    reflection: "At Lemhi Pass, the Corps crossed from the Louisiana Purchase into Oregon Country \u2014 territory the U.S. did not own. What does this tell you about the expedition\u2019s true purpose beyond just \u201cexploring\u201d?"
+  },
+  advanced: {
+    title: "The Rocky Mountain Crossing and Descent to the Columbia",
+    dates: "September\u2013October 1805",
+    context: [
+      "The expedition\u2019s most physically punishing phase began with the crossing of the Bitterroot Range of the Rocky Mountains via the Lolo Trail, guided by the Shoshone guide Pikee Queenah (\u201cOld Toby\u201d). At Lemhi Pass on the Continental Divide, the Corps crossed out of the Louisiana Purchase \u2014 the territory the United States had legal claim to \u2014 and into the disputed Oregon Country, claimed by both the U.S. and Britain.",
+      "The 11-day mountain crossing (September 11\u201322) brought the expedition to the brink of starvation. Deep snow, fallen timber, and treacherous mountain paths killed several horses. The men resorted to eating horsemeat and candles made of animal tallow. Clark, who scouted ahead, reached a Nez Perce village and secured food that likely saved the party.",
+      "The Nez Perce (Nimiipuu) not only provided food but taught the Corps to construct dugout canoes using controlled fire \u2014 a technique far more efficient than European methods. From here, the expedition launched onto the Clearwater River, then the Snake, and finally the Columbia, racing westward toward the Pacific with the current for the first time in the journey."
+    ],
+    journals: [{
+      date: "October 17, 1805",
+      text: [
+        "After getting safely over the rapids and having taken dinner, we set out and proceeded on 7 miles to the junction of this river (the Snake) and the Columbia which joins from Northwest. In every direction from the junction of those Rivers the country is 1 continued plain, low and rises from the water gradually.",
+        "We halted and smoked with the Indians who had collected there in great numbers to view us. We spoke to their Chief informing them of our friendly disposition and gave the principal chief a large medal, a shirt, and a handkerchief."
+      ],
+      author: "Captain Clark"
+    }],
+    reflection: "At Lemhi Pass, the expedition crossed from U.S. territory (the Louisiana Purchase) into Oregon Country, which was claimed by multiple nations. Analyze the expedition as an instrument of territorial expansion: How does the act of distributing medals, giving speeches about a \u201cgreat father,\u201d and mapping the territory serve as a form of sovereignty claim, even in territory the U.S. did not legally possess? How do the Nez Perce\u2019s actions \u2014 feeding the starving explorers and teaching them canoe-building \u2014 complicate the narrative of American self-reliance?"
+  }
+},
+
+// ---- STATION 10 ----
+{
+  beginner: {
+    title: "The Pacific Ocean at Last!",
+    dates: "November 1805 \u2013 March 1806",
+    context: [
+      "On November 7, 1805, Clark saw the ocean and wrote excitedly in his journal: <em>\u201cOcian in view! O! the joy.\u201d</em> (He wasn\u2019t a great speller!) They reached the Pacific Ocean on November 20.",
+      "Then something very special happened. Lewis and Clark let everyone in the group <span class='vocab-word' tabindex='0'>vote<span class='vocab-tooltip'>To make a choice about a decision</span></span> on where to spend the winter. Everyone got a vote \u2014 including York (the enslaved man) and Sacagawea (a Native American woman). This was very unusual for that time in history!",
+      "They built Fort Clatsop on the south side of the Columbia River and spent a rainy, uncomfortable winter there. They had to deal with fleas in their blankets and very little good food."
+    ],
+    journals: [{
+      date: "December 26, 1805",
+      text: [
+        "We dry our wet things and get the fleas out of our blankets. There are so many fleas that we have to pick them out of our blankets every day, or we can\u2019t sleep at all."
+      ],
+      author: "Captain Clark"
+    },{
+      date: "February 7, 1806",
+      text: [
+        "Tonight we had what I call an excellent supper: a marrowbone and a piece of boiled elk that looked like it had a little bit of fat on it. For Fort Clatsop, this is fancy eating!"
+      ],
+      author: "Captain Clark"
+    },{
+      date: "March 23, 1806",
+      text: [
+        "The wind is pretty strong, but everyone thinks we can make it past Point William. We loaded up the canoes and got ready to leave. At 1 in the afternoon, we said goodbye to Fort Clatsop for the last time."
+      ],
+      author: "Captain Lewis"
+    }],
+    reflection: "York and Sacagawea both got to vote on where to camp. Why is this surprising for the year 1805? What does it tell you about life on the expedition compared to life in the rest of America?"
+  },
+  standard: {
+    title: "Ocean in View! Fort Clatsop and the Pacific",
+    dates: "November 1805 \u2013 March 1806",
+    context: [
+      "After first spotting the ocean on November 7, Clark famously wrote in his journal, \u201cOcian in view! O! the joy.\u201d They take the Columbia River and reach the Pacific on November 20th.",
+      "That week, Lewis & Clark assembled the Corps to discuss where to spend the winter. The Captains recorded each person\u2019s vote, notably giving full votes to both York and Sacagawea. It was decided to camp on the south side of the Columbia River, which is where they built Fort Clatsop and remained for the winter."
+    ],
+    journals: [{
+      date: "December 26, 1805",
+      text: [
+        "We dry our wet articles and have our blankets de-flea-ed \u2026 They are so abundant that we have them killed out of our blankets every day or get no sleep."
+      ],
+      author: "Captain Clark"
+    },{
+      date: "February 7, 1806",
+      text: [
+        "This evening we had what I call an excellent supper. It consisted of a marrowbone, a piece of brisket of boiled elk that had the appearance of a little fat on it. This for Fort Clatsop is living in high style, and in fact feasting."
+      ],
+      author: "Captain Clark"
+    },{
+      date: "March 23, 1806",
+      text: [
+        "The wind is pretty high, but it seems to be the common opinion that we can pass Point William. We accordingly distributed the baggage and directed the canoes to be launched and loaded for our departure. At 1pm, we bid a final adieu to Fort Clatsop."
+      ],
+      author: "Captain Lewis"
+    }],
+    reflection: "The vote at the Columbia included York (an enslaved man) and Sacagawea (a Native American woman). Neither could legally vote anywhere in America at this time. What does this tell us about how the expedition\u2019s experience differed from mainstream American society?"
+  },
+  advanced: {
+    title: "\u201cOcian in View!\u201d \u2014 The Pacific, Fort Clatsop, and the Democratic Vote",
+    dates: "November 1805 \u2013 March 1806",
+    context: [
+      "Clark\u2019s famous journal entry of November 7, 1805 \u2014 \u201cOcian in view! O! the joy\u201d \u2014 captures the expedition\u2019s emotional climax, though scholars note he was likely seeing the broad Columbia estuary rather than the Pacific itself. They officially reached the coast on November 20.",
+      "What followed was a remarkable democratic exercise. Lewis and Clark assembled the entire Corps to vote on their winter campsite location. Significantly, every member\u2019s vote was recorded equally, including York\u2019s (Clark\u2019s enslaved companion) and Sacagawea\u2019s. This occurred decades before the abolition of slavery and over a century before women or Native Americans gained suffrage. The vote reflects the pragmatic egalitarianism that extreme conditions can produce \u2014 a temporary suspension of the social hierarchies that would reassert themselves upon the expedition\u2019s return.",
+      "The winter at Fort Clatsop was miserable. It rained all but twelve of the 106 days they spent there. The journals shift from grand descriptions to grim accounts of rotting elk meat, pervasive fleas, and the tedium of waiting for spring. On March 23, 1806, they departed for the long journey home."
+    ],
+    journals: [{
+      date: "December 26, 1805",
+      text: [
+        "We dry our wet articles and have our blankets de-flea-ed \u2026 They are so abundant that we have them killed out of our blankets every day or get no sleep."
+      ],
+      author: "Captain Clark"
+    },{
+      date: "February 7, 1806",
+      text: [
+        "This evening we had what I call an excellent supper. It consisted of a marrowbone, a piece of brisket of boiled elk that had the appearance of a little fat on it. This for Fort Clatsop is living in high style, and in fact feasting."
+      ],
+      author: "Captain Clark"
+    },{
+      date: "March 23, 1806",
+      text: [
+        "The wind is pretty high, but it seems to be the common opinion that we can pass Point William. We accordingly distributed the baggage and directed the canoes to be launched and loaded for our departure. At 1pm, we bid a final adieu to Fort Clatsop."
+      ],
+      author: "Captain Lewis"
+    }],
+    reflection: "The vote at the Columbia \u2014 in which York and Sacagawea participated equally \u2014 is often cited as a remarkable moment in American democratic history. Evaluate this claim critically: Was this genuine democratic principle, or practical necessity born of extreme circumstances? Consider that upon returning to St. Louis, York remained enslaved and Sacagawea received no compensation. What does the contrast between the expedition\u2019s egalitarianism and the society it returned to reveal about the limits of frontier democracy?"
+  }
+}
+
+]; // End of STATIONS
+
+// ============================================================
+// TRAIL EVENTS: Random encounters between stations
+// ============================================================
+const TRAIL_EVENTS = [
+  {
+    icon: "\ud83d\udc3b",
+    title: "Grizzly Bear Sighting!",
+    text: "Your party spots a massive grizzly bear along the riverbank. The Corps encountered grizzlies frequently \u2014 Lewis once described one chasing him into the river. You wait quietly until it moves on."
+  },
+  {
+    icon: "\ud83c\udf0a",
+    title: "River Rapids Ahead!",
+    text: "The Missouri\u2019s current grows fierce. Your boats are tossed by rapids, and everyone grabs their poles to push through. Several items get soaked, but nothing is lost. The Corps faced dangerous rapids throughout the journey."
+  },
+  {
+    icon: "\ud83c\udf29\ufe0f",
+    title: "Thunderstorm on the Plains!",
+    text: "A sudden thunderstorm rolls across the open prairie. Lightning cracks across the sky and rain pounds your camp. The Corps often endured violent weather with little shelter. You hunker down and wait it out."
+  },
+  {
+    icon: "\ud83e\uddac",
+    title: "Mosquito Swarm!",
+    text: "Clouds of mosquitoes descend on your camp. Clark once wrote that they were \u2018so numerous that I could not keep them off my gun long enough to take aim.\u2019 You press on despite the pests."
+  },
+  {
+    icon: "\ud83e\udd8c",
+    title: "Elk Herd Spotted!",
+    text: "A large herd of elk grazes nearby. The hunters in your party bring down two, providing much-needed fresh meat. The Corps depended on hunting throughout the journey \u2014 they consumed up to 9 pounds of meat per person per day!"
+  },
+  {
+    icon: "\ud83c\udf35",
+    title: "Prickly Pear Cactus!",
+    text: "The trail is covered in prickly pear cactus. Sharp spines pierce through your moccasins with every step. Lewis wrote that the cactus was \u2018one of the beauties as well as the greatest pests of the plains.\u2019"
+  },
+  {
+    icon: "\u26fa",
+    title: "A Friendly Camp",
+    text: "You encounter a small group of Native Americans who offer to share their fire and food. Throughout the expedition, the Corps relied on the generosity and knowledge of Indigenous peoples at critical moments."
+  },
+  {
+    icon: "\ud83c\udf0d",
+    title: "Uncharted Territory",
+    text: "Your maps show nothing but blank space ahead. The captains take out their compasses and sextants to chart the route. Lewis and Clark mapped thousands of miles of previously uncharted (by Europeans) territory."
+  },
+  {
+    icon: "\ud83d\udc3a",
+    title: "Wolves Howling at Night!",
+    text: "As darkness falls, the sound of wolves fills the air. Clark noted \u2018a great number of wolves about us all night.\u2019 The sentries keep watch while the rest of the party tries to sleep."
+  },
+  {
+    icon: "\u2744\ufe0f",
+    title: "Bitter Cold!",
+    text: "Temperatures plummet well below freezing. During the winter at Fort Mandan, temperatures dropped to -45\u00b0F! The men huddle around fires and struggle to keep warm in their leather clothing."
+  }
+];
+
+// === GAME STATE ===
+let state = {
+  level: 'standard',
+  currentStation: 0,
+  visitedStations: new Set(),
+  journalEntries: {},
+  currentView: 'station'
+};
+
+// === SCREEN MANAGEMENT ===
+function showScreen(screenId) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(screenId).classList.add('active');
+}
+
+// === LEVEL MANAGEMENT ===
+function setLevel(level) {
+  state.level = level;
+  // Update all level buttons
+  document.querySelectorAll('.level-btn, .level-toggle button').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.level === level);
+  });
+  // Re-render current station if in game
+  if (document.getElementById('game-screen').classList.contains('active')) {
+    renderStation(state.currentStation);
+  }
+}
+
+// === VIEW SWITCHING ===
+function showView(view) {
+  state.currentView = view;
+  document.querySelectorAll('.game-body').forEach(v => v.classList.remove('active'));
+  document.getElementById('view-' + view).classList.add('active');
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active-tab'));
+  document.getElementById('btn-view-' + view).classList.add('active-tab');
+
+  if (view === 'map') renderMap();
+  if (view === 'journal') renderJournalTracker();
+}
+
+// === START GAME ===
+function startGame() {
+  state.currentStation = 0;
+  state.visitedStations = new Set();
+  state.journalEntries = {};
+  showScreen('game-screen');
+  renderStation(0);
+  updateStationIndicator();
+}
+
+// === STATION RENDERING ===
+function renderStation(index) {
+  if (index < 0 || index >= STATIONS.length) return;
+  state.currentStation = index;
+  state.visitedStations.add(index);
+  updateStationIndicator();
+
+  const station = STATIONS[index];
+  const level = state.level;
+  const data = station[level] || station.standard;
+
+  let html = '<div class="station-card">';
+
+  // Header
+  html += '<div class="station-header">';
+  html += `<div class="station-number">Station ${index + 1} of ${STATIONS.length}</div>`;
+  html += `<h2 class="station-title">${data.title}</h2>`;
+  html += `<div class="station-date">${data.dates}</div>`;
+  html += '</div>';
+
+  // Body
+  html += '<div class="station-body">';
+
+  // Context paragraphs
+  html += '<div class="station-context">';
+  data.context.forEach(p => {
+    html += `<p>${p}</p>`;
+  });
+  html += '</div>';
+
+  // Journal entries
+  if (data.journals && data.journals.length > 0) {
+    data.journals.forEach(j => {
+      html += '<div class="journal-entry">';
+      html += `<div class="journal-date">${j.date}</div>`;
+      html += '<div class="journal-text">';
+      j.text.forEach(p => {
+        html += `<p>${p}</p>`;
+      });
+      html += '</div>';
+      html += `<div class="journal-author">&mdash; ${j.author}</div>`;
+      html += '</div>';
+    });
+  }
+
+  // Reflection question
+  if (data.reflection) {
+    const savedReflection = state.journalEntries[`reflection_${index}`] || '';
+    html += '<div class="station-reflection">';
+    html += '<div class="reflection-label">Historian\'s Reflection</div>';
+    html += `<p class="reflection-question">${data.reflection}</p>`;
+    html += `<textarea class="reflection-textarea" placeholder="Write your thoughts here..." onchange="saveReflection(${index}, this.value)">${savedReflection}</textarea>`;
+    html += '</div>';
+  }
+
+  // Navigation
+  html += '<div class="station-nav">';
+  html += `<button class="btn-station-nav" onclick="goToStation(${index - 1})" ${index === 0 ? 'disabled' : ''}>&larr; Previous Station</button>`;
+  if (index < STATIONS.length - 1) {
+    html += `<button class="btn-station-nav primary" onclick="travelToStation(${index + 1})">Continue West &rarr;</button>`;
+  } else {
+    html += `<button class="btn-station-nav primary" onclick="completeExpedition()">Complete the Expedition &rarr;</button>`;
+  }
+  html += '</div>';
+
+  html += '</div>'; // station-body
+  html += '</div>'; // station-card
+
+  document.getElementById('station-content').innerHTML = html;
+  window.scrollTo(0, 0);
+}
+
+function goToStation(index) {
+  if (index >= 0 && index < STATIONS.length) {
+    renderStation(index);
+  }
+}
+
+function travelToStation(index) {
+  // Maybe show a trail event
+  if (TRAIL_EVENTS.length > 0 && Math.random() < 0.45) {
+    const evt = TRAIL_EVENTS[Math.floor(Math.random() * TRAIL_EVENTS.length)];
+    showTrailEvent(evt, () => renderStation(index));
+  } else {
+    renderStation(index);
+  }
+}
+
+function updateStationIndicator() {
+  document.getElementById('station-indicator').textContent =
+    `Station ${state.currentStation + 1} of ${STATIONS.length}`;
+}
+
+// === REFLECTIONS ===
+function saveReflection(stationIndex, value) {
+  state.journalEntries[`reflection_${stationIndex}`] = value;
+}
+
+// === TRAIL EVENTS ===
+function showTrailEvent(evt, callback) {
+  document.getElementById('trail-event-icon').textContent = evt.icon;
+  document.getElementById('trail-event-title').textContent = evt.title;
+  document.getElementById('trail-event-text').textContent = evt.text;
+  document.getElementById('trail-event-overlay').classList.add('active');
+  window._trailEventCallback = callback;
+}
+
+function closeTrailEvent() {
+  document.getElementById('trail-event-overlay').classList.remove('active');
+  if (window._trailEventCallback) {
+    window._trailEventCallback();
+    window._trailEventCallback = null;
+  }
+}
+
+// === MAP ===
+function renderMap() {
+  const wrap = document.getElementById('map-svg-wrap');
+
+  // Station positions on the map (approximate geographic placement)
+  const positions = [
+    { x: 480, y: 280, label: "Camp Dubois,\nSt. Louis" },
+    { x: 400, y: 250, label: "Platte River,\nGreat Plains" },
+    { x: 380, y: 210, label: "Council Bluff,\nOmaha" },
+    { x: 340, y: 170, label: "Fort Mandan,\nKnife River" },
+    { x: 320, y: 160, label: "Fort Mandan\n(Winter)" },
+    { x: 280, y: 150, label: "Depart\nFort Mandan" },
+    { x: 210, y: 170, label: "Great Falls,\nMissouri" },
+    { x: 160, y: 145, label: "Camp Fortunate,\nShoshone" },
+    { x: 110, y: 160, label: "Rocky Mountains\nto Columbia R." },
+    { x: 50,  y: 175, label: "Fort Clatsop,\nPacific Ocean" }
+  ];
+
+  let svg = `<svg viewBox="0 0 560 350" xmlns="http://www.w3.org/2000/svg">`;
+
+  // Background
+  svg += `<rect width="560" height="350" fill="#f4e8c1"/>`;
+
+  // Simple terrain hints
+  // Grass/plains
+  svg += `<rect x="350" y="180" width="200" height="170" rx="20" fill="#d4c98a" opacity="0.4"/>`;
+  // Mountains
+  svg += `<polygon points="100,140 130,80 160,130 190,70 220,140 250,90 280,145" fill="#b8a88a" opacity="0.35"/>`;
+  // River (Missouri then Columbia)
+  svg += `<path d="M 490 290 Q 460 275 420 260 Q 380 240 350 210 Q 320 185 300 165 Q 260 150 220 165 Q 180 155 140 160 Q 100 170 60 180" fill="none" stroke="#5a9bbc" stroke-width="3" stroke-dasharray="6,3" opacity="0.6"/>`;
+
+  // Labels
+  svg += `<text x="490" y="310" font-size="9" fill="#8b7355" font-family="Georgia" text-anchor="middle">Missouri River</text>`;
+  svg += `<text x="80" y="200" font-size="9" fill="#8b7355" font-family="Georgia" text-anchor="middle">Columbia River</text>`;
+  svg += `<text x="200" y="95" font-size="9" fill="#8b7355" font-family="Georgia" text-anchor="middle">Rocky Mountains</text>`;
+  svg += `<text x="420" y="310" font-size="9" fill="#8b7355" font-family="Georgia" text-anchor="middle">Great Plains</text>`;
+  svg += `<text x="30" y="190" font-size="8" fill="#5a9bbc" font-family="Georgia">Pacific</text>`;
+
+  // Trail path connecting stations
+  let pathD = `M ${positions[0].x} ${positions[0].y}`;
+  for (let i = 1; i < positions.length; i++) {
+    pathD += ` L ${positions[i].x} ${positions[i].y}`;
+  }
+  svg += `<path d="${pathD}" fill="none" stroke="#6b4423" stroke-width="2" stroke-dasharray="5,3" opacity="0.5"/>`;
+
+  // Visited trail (solid)
+  if (state.visitedStations.size > 1) {
+    const visited = Array.from(state.visitedStations).sort((a,b) => a - b);
+    let visitedPath = `M ${positions[visited[0]].x} ${positions[visited[0]].y}`;
+    for (let i = 1; i < visited.length; i++) {
+      if (visited[i] === visited[i-1] + 1) {
+        visitedPath += ` L ${positions[visited[i]].x} ${positions[visited[i]].y}`;
+      }
+    }
+    svg += `<path d="${visitedPath}" fill="none" stroke="#d4760a" stroke-width="2.5"/>`;
+  }
+
+  // Station dots and labels
+  positions.forEach((pos, i) => {
+    const visited = state.visitedStations.has(i);
+    const current = state.currentStation === i;
+
+    let fill = '#6b4423';
+    let stroke = '#5c2e0a';
+    let r = 7;
+    if (visited) { fill = '#f5a623'; stroke = '#d4760a'; }
+    if (current) { fill = '#8b1a1a'; stroke = '#ffffff'; r = 9; }
+
+    svg += `<g class="map-station ${visited ? 'visited' : ''} ${current ? 'current' : ''}" onclick="goToStation(${i}); showView('station');" style="cursor:pointer;">`;
+    svg += `<circle cx="${pos.x}" cy="${pos.y}" r="${r}" fill="${fill}" stroke="${stroke}" stroke-width="1.5"/>`;
+    svg += `<text x="${pos.x}" y="${pos.y - r - 4}" font-size="8" fill="#2c1810" font-family="sans-serif" text-anchor="middle" font-weight="bold">${i + 1}</text>`;
+
+    // Label below
+    const lines = pos.label.split('\n');
+    lines.forEach((line, li) => {
+      svg += `<text x="${pos.x}" y="${pos.y + r + 10 + li * 10}" font-size="7" fill="#5c4033" font-family="Georgia" text-anchor="middle">${line}</text>`;
+    });
+
+    svg += '</g>';
+  });
+
+  // Compass rose
+  svg += `<g transform="translate(520,40)">`;
+  svg += `<circle cx="0" cy="0" r="18" fill="none" stroke="#8b7355" stroke-width="0.5"/>`;
+  svg += `<line x1="0" y1="-16" x2="0" y2="16" stroke="#8b7355" stroke-width="0.5"/>`;
+  svg += `<line x1="-16" y1="0" x2="16" y2="0" stroke="#8b7355" stroke-width="0.5"/>`;
+  svg += `<text x="0" y="-20" font-size="9" fill="#5c4033" font-family="Georgia" text-anchor="middle" font-weight="bold">N</text>`;
+  svg += `<text x="0" y="28" font-size="8" fill="#8b7355" font-family="Georgia" text-anchor="middle">S</text>`;
+  svg += `<text x="22" y="3" font-size="8" fill="#8b7355" font-family="Georgia" text-anchor="middle">E</text>`;
+  svg += `<text x="-22" y="3" font-size="8" fill="#8b7355" font-family="Georgia" text-anchor="middle">W</text>`;
+  svg += `</g>`;
+
+  svg += '</svg>';
+  wrap.innerHTML = svg;
+}
+
+// === JOURNAL TRACKER ===
+function renderJournalTracker() {
+  const tbody = document.getElementById('tracker-body');
+  let html = '';
+
+  for (let i = 0; i < STATIONS.length; i++) {
+    const visited = state.visitedStations.has(i);
+    const station = STATIONS[i];
+    const data = station ? (station[state.level] || station.standard) : null;
+
+    const savedDate = state.journalEntries[`date_${i}`] || '';
+    const savedAuthor = state.journalEntries[`author_${i}`] || '';
+    const savedSummary = state.journalEntries[`summary_${i}`] || '';
+
+    html += '<tr>';
+    html += `<td class="tracker-station-num ${visited ? 'visited' : ''}">${i + 1}</td>`;
+    html += `<td><input type="text" value="${escapeHtml(savedDate)}" placeholder="${visited ? 'Enter date(s)...' : '???'}" onchange="saveJournalField(${i}, 'date', this.value)" ${!visited ? 'disabled' : ''}/></td>`;
+    html += `<td><input type="text" value="${escapeHtml(savedAuthor)}" placeholder="${visited ? 'Enter author(s)...' : '???'}" onchange="saveJournalField(${i}, 'author', this.value)" ${!visited ? 'disabled' : ''}/></td>`;
+    html += `<td><textarea placeholder="${visited ? 'Summarize what happened...' : '???'}" onchange="saveJournalField(${i}, 'summary', this.value)" ${!visited ? 'disabled' : ''}>${escapeHtml(savedSummary)}</textarea></td>`;
+    html += '</tr>';
+  }
+
+  tbody.innerHTML = html;
+}
+
+function saveJournalField(stationIndex, field, value) {
+  state.journalEntries[`${field}_${stationIndex}`] = value;
+}
+
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+// === COMPLETION ===
+function completeExpedition() {
+  const completionText = document.getElementById('completion-text');
+  const visited = state.visitedStations.size;
+  completionText.innerHTML = `
+    You've retraced the entire journey of the Corps of Discovery, from Camp Dubois to the Pacific Ocean and back through history!
+    <br><br>
+    You visited <strong>${visited} of ${STATIONS.length}</strong> stations and recovered the lost journal entries of Lewis &amp; Clark.
+    <br><br>
+    The expedition covered over 8,000 miles in 2 years, 4 months, and 10 days. They documented 178 plants and 122 animals previously unknown to science, established relations with dozens of Native American nations, and proved that an overland route to the Pacific was possible.
+    <br><br>
+    <em>"We were now about to penetrate a country at least 2,000 miles in width, on which the foot of civilized man had never trod."</em> &mdash; Captain Meriwether Lewis
+  `;
+  showScreen('completion-screen');
+}
+
+function restartGame() {
+  state = {
+    level: state.level,
+    currentStation: 0,
+    visitedStations: new Set(),
+    journalEntries: {},
+    currentView: 'station'
+  };
+  showScreen('title-screen');
+}
+
+</script>
+
+</body>
+</html>
