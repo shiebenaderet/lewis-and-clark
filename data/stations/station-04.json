@@ -16,7 +16,25 @@
         "author": "Captain Clark"
       }
     ],
-    "reflection": "Why do you think Lewis and Clark decided to build a fort and stay for the winter instead of continuing their journey?"
+    "reflection": "Why do you think Lewis and Clark decided to build a fort and stay for the winter instead of continuing their journey?",
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Karl_Bodmer_Travels_in_America_%2847%29.jpg/800px-Karl_Bodmer_Travels_in_America_%2847%29.jpg",
+      "alt": "Mandan village on the Missouri, painting by Karl Bodmer",
+      "caption": "Mandan Village, Karl Bodmer, 1833-1834 — Wikimedia Commons"
+    },
+    "challenge": {
+      "type": "multiple_choice",
+      "question": "The Mandan had been trading with Europeans since 1738. That's how many years before Lewis and Clark arrived?",
+      "options": [
+        "About 30 years",
+        "About 50 years",
+        "About 66 years",
+        "About 100 years"
+      ],
+      "correct": 2,
+      "feedback_correct": "Correct! 1804 minus 1738 equals 66 years. The Mandan were experienced traders with Europeans long before Lewis and Clark showed up.",
+      "feedback_incorrect": "Let's do the math: 1804 - 1738 = 66 years. The Mandan had been trading with Europeans for generations!"
+    }
   },
   "standard": {
     "title": "The Mandan Villages and Fort Mandan",
@@ -35,7 +53,25 @@
         "author": "Captain Clark"
       }
     ],
-    "reflection": "The Mandan had been trading with Europeans since 1738 — over 65 years before Lewis and Clark arrived. How might this prior contact have shaped the encounter?"
+    "reflection": "The Mandan had been trading with Europeans since 1738 — over 65 years before Lewis and Clark arrived. How might this prior contact have shaped the encounter?",
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Karl_Bodmer_Travels_in_America_%2847%29.jpg/800px-Karl_Bodmer_Travels_in_America_%2847%29.jpg",
+      "alt": "Mandan village on the Missouri, painting by Karl Bodmer",
+      "caption": "Mandan Village, Karl Bodmer, 1833-1834 — Wikimedia Commons"
+    },
+    "challenge": {
+      "type": "multiple_choice",
+      "question": "The Mandan had been trading with Europeans since 1738. That's how many years before Lewis and Clark arrived?",
+      "options": [
+        "About 30 years",
+        "About 50 years",
+        "About 66 years",
+        "About 100 years"
+      ],
+      "correct": 2,
+      "feedback_correct": "Correct! 1804 minus 1738 equals 66 years. The Mandan were experienced traders with Europeans long before Lewis and Clark showed up.",
+      "feedback_incorrect": "Let's do the math: 1804 - 1738 = 66 years. The Mandan had been trading with Europeans for generations!"
+    }
   },
   "advanced": {
     "title": "The Mandan-Hidatsa Villages and Construction of Fort Mandan",
@@ -54,6 +90,24 @@
         "author": "Captain Clark"
       }
     ],
-    "reflection": "The Mandan-Hidatsa villages functioned as a major trade hub of the Northern Plains, connecting peoples from the Rockies to the Great Lakes. How does understanding this existing network change the narrative that Lewis and Clark were exploring “unknown” territory? What does Clark’s hiring of a French interpreter tell us about who was already present in this region?"
+    "reflection": "The Mandan-Hidatsa villages functioned as a major trade hub of the Northern Plains, connecting peoples from the Rockies to the Great Lakes. How does understanding this existing network change the narrative that Lewis and Clark were exploring “unknown” territory? What does Clark’s hiring of a French interpreter tell us about who was already present in this region?",
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Karl_Bodmer_Travels_in_America_%2847%29.jpg/800px-Karl_Bodmer_Travels_in_America_%2847%29.jpg",
+      "alt": "Mandan village on the Missouri, painting by Karl Bodmer",
+      "caption": "Mandan Village, Karl Bodmer, 1833-1834 — Wikimedia Commons"
+    },
+    "challenge": {
+      "type": "multiple_choice",
+      "question": "The Mandan had been trading with Europeans since 1738. That's how many years before Lewis and Clark arrived?",
+      "options": [
+        "About 30 years",
+        "About 50 years",
+        "About 66 years",
+        "About 100 years"
+      ],
+      "correct": 2,
+      "feedback_correct": "Correct! 1804 minus 1738 equals 66 years. The Mandan were experienced traders with Europeans long before Lewis and Clark showed up.",
+      "feedback_incorrect": "Let's do the math: 1804 - 1738 = 66 years. The Mandan had been trading with Europeans for generations!"
+    }
   }
 }

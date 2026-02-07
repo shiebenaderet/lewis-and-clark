@@ -42,11 +42,13 @@ body {
 
 /* --- Screen containers --- */
 .screen {
-  display: none;
+  display: none !important;
   min-height: 100vh;
   animation: fadeIn 0.6s ease;
 }
-.screen.active { display: block; }
+.screen.active { display: block !important; }
+#title-screen.active { display: flex !important; }
+#completion-screen.active { display: flex !important; }
 
 @keyframes fadeIn {
   from { opacity: 0; }
@@ -821,6 +823,286 @@ body {
 
 .btn-restart:hover {
   background: var(--campfire);
+}
+
+/* ============================================================
+   STATION HERO IMAGE
+   ============================================================ */
+.station-hero {
+  width: 100%;
+  max-height: 300px;
+  overflow: hidden;
+  position: relative;
+}
+
+.station-hero img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  display: block;
+}
+
+.station-hero-caption {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: rgba(0,0,0,0.6);
+  color: var(--parchment-dark);
+  font-size: 0.65rem;
+  padding: 0.2rem 0.5rem;
+  font-family: var(--font-ui);
+}
+
+/* ============================================================
+   INTERACTIVE CHALLENGES
+   ============================================================ */
+.challenge-box {
+  background: linear-gradient(135deg, #2c1810, #3d2518);
+  border: 2px solid var(--campfire);
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin: 1.5rem 0;
+  color: var(--parchment);
+}
+
+.challenge-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.challenge-icon {
+  font-size: 1.3rem;
+}
+
+.challenge-label {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--campfire-glow);
+  font-weight: 700;
+}
+
+.challenge-question {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  color: var(--parchment);
+}
+
+.challenge-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.challenge-option {
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  padding: 0.65rem 1rem;
+  background: rgba(255,255,255,0.08);
+  color: var(--parchment-dark);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+}
+
+.challenge-option:hover {
+  background: rgba(255,255,255,0.15);
+  border-color: var(--campfire);
+  color: var(--parchment);
+}
+
+.challenge-option.correct {
+  background: rgba(45, 80, 22, 0.4);
+  border-color: var(--forest-light);
+  color: #b5e8a0;
+  cursor: default;
+}
+
+.challenge-option.incorrect {
+  background: rgba(139, 26, 26, 0.3);
+  border-color: var(--danger);
+  color: #e8a0a0;
+  cursor: default;
+}
+
+.challenge-option:disabled {
+  cursor: default;
+  opacity: 0.7;
+}
+
+.challenge-feedback {
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  display: none;
+}
+
+.challenge-feedback.show { display: block; }
+
+.challenge-feedback.correct {
+  background: rgba(45, 80, 22, 0.25);
+  border: 1px solid rgba(74, 124, 46, 0.4);
+  color: #b5e8a0;
+}
+
+.challenge-feedback.incorrect {
+  background: rgba(139, 26, 26, 0.2);
+  border: 1px solid rgba(139, 26, 26, 0.4);
+  color: #e8a0a0;
+}
+
+/* ============================================================
+   SCORE DISPLAY
+   ============================================================ */
+.score-display {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  color: var(--campfire-glow);
+  background: rgba(212, 118, 10, 0.15);
+  padding: 0.2rem 0.6rem;
+  border-radius: 10px;
+  border: 1px solid rgba(212, 118, 10, 0.25);
+}
+
+/* ============================================================
+   TRAVEL TRANSITION SCREEN
+   ============================================================ */
+.travel-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(180deg, #0d0805, #1a0f08 40%, #2c1810 70%, #1a0f08);
+  z-index: 200;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+.travel-overlay.active { display: flex; }
+
+.travel-scene {
+  max-width: 500px;
+  width: 100%;
+}
+
+.travel-title {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  color: var(--parchment);
+  margin-bottom: 0.75rem;
+}
+
+.travel-text {
+  color: var(--parchment-dark);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.travel-progress {
+  width: 100%;
+  height: 8px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+.travel-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--campfire), var(--campfire-glow));
+  border-radius: 4px;
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+.travel-distance {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  color: var(--campfire);
+  margin-bottom: 1.5rem;
+}
+
+.travel-event {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  animation: slideUp 0.4s ease;
+}
+
+.travel-event-emoji {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.travel-event-msg {
+  color: var(--parchment-dark);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.btn-travel-continue {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  padding: 0.7rem 2.5rem;
+  background: var(--leather);
+  color: var(--parchment);
+  border: 2px solid var(--campfire);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 1rem;
+}
+
+.btn-travel-continue:hover {
+  background: var(--campfire);
+}
+
+.btn-travel-continue:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ============================================================
+   CONTINUE / SAVE INDICATOR ON TITLE
+   ============================================================ */
+.title-continue {
+  margin-top: 1rem;
+}
+
+.btn-continue {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  padding: 0.7rem 2.5rem;
+  background: transparent;
+  color: var(--campfire-glow);
+  border: 1px solid var(--campfire);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-continue:hover {
+  background: rgba(212, 118, 10, 0.2);
+}
+
+.save-info {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  color: rgba(244,232,193,0.4);
+  margin-top: 0.5rem;
 }
 
 /* ============================================================

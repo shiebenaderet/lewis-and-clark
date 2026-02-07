@@ -17,7 +17,25 @@
         "author": "Captain Lewis"
       }
     ],
-    "reflection": "Lewis compares their little boats to the ships of Columbus and Captain Cook. Why do you think he made this comparison? How was he feeling at this moment?"
+    "reflection": "Lewis compares their little boats to the ships of Columbus and Captain Cook. Why do you think he made this comparison? How was he feeling at this moment?",
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Lewis_and_Clark_Expedition.jpg/800px-Lewis_and_Clark_Expedition.jpg",
+      "alt": "Lewis and Clark expedition on the Missouri River",
+      "caption": "Lewis and Clark on the Lower Columbia, C.M. Russell, 1905 — Wikimedia Commons"
+    },
+    "challenge": {
+      "type": "multiple_choice",
+      "question": "Lewis compared their little fleet to the ships of which famous explorers?",
+      "options": [
+        "Marco Polo and Magellan",
+        "Columbus and Captain Cook",
+        "Drake and Raleigh",
+        "Hudson and Cabot"
+      ],
+      "correct": 1,
+      "feedback_correct": "That's right! Lewis wrote their boats were 'not quite so respectable as that of Columbus or Captain Cook' but viewed 'with as much pleasure.' He saw their mission as equally historic.",
+      "feedback_incorrect": "Lewis specifically compared their fleet to those of Columbus and Captain Cook. He saw their expedition as equally important to history."
+    }
   },
   "standard": {
     "title": "Departing Fort Mandan — Into the Unknown",
@@ -38,7 +56,25 @@
         "author": "Captain Lewis"
       }
     ],
-    "reflection": "Lewis calls this “among the most happy” moments of his life. What emotions come through in his writing? How does his comparison to Columbus and Captain Cook reveal his sense of the expedition’s importance?"
+    "reflection": "Lewis calls this “among the most happy” moments of his life. What emotions come through in his writing? How does his comparison to Columbus and Captain Cook reveal his sense of the expedition’s importance?",
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Lewis_and_Clark_Expedition.jpg/800px-Lewis_and_Clark_Expedition.jpg",
+      "alt": "Lewis and Clark expedition on the Missouri River",
+      "caption": "Lewis and Clark on the Lower Columbia, C.M. Russell, 1905 — Wikimedia Commons"
+    },
+    "challenge": {
+      "type": "multiple_choice",
+      "question": "Lewis compared their little fleet to the ships of which famous explorers?",
+      "options": [
+        "Marco Polo and Magellan",
+        "Columbus and Captain Cook",
+        "Drake and Raleigh",
+        "Hudson and Cabot"
+      ],
+      "correct": 1,
+      "feedback_correct": "That's right! Lewis wrote their boats were 'not quite so respectable as that of Columbus or Captain Cook' but viewed 'with as much pleasure.' He saw their mission as equally historic.",
+      "feedback_incorrect": "Lewis specifically compared their fleet to those of Columbus and Captain Cook. He saw their expedition as equally important to history."
+    }
   },
   "advanced": {
     "title": "Departure from Fort Mandan — Into Uncharted Territory",
@@ -59,6 +95,24 @@
         "author": "Captain Lewis"
       }
     ],
-    "reflection": "Lewis writes that they are entering a country “on which the foot of civilized man had never trod.” Critically examine this phrase. What assumptions does it reveal about Lewis’s worldview? How does this language erase the Indigenous peoples who had lived in, traveled through, and shaped this landscape for thousands of years? Compare this to how Lewis describes Native Americans elsewhere in the journals."
+    "reflection": "Lewis writes that they are entering a country “on which the foot of civilized man had never trod.” Critically examine this phrase. What assumptions does it reveal about Lewis’s worldview? How does this language erase the Indigenous peoples who had lived in, traveled through, and shaped this landscape for thousands of years? Compare this to how Lewis describes Native Americans elsewhere in the journals.",
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Lewis_and_Clark_Expedition.jpg/800px-Lewis_and_Clark_Expedition.jpg",
+      "alt": "Lewis and Clark expedition on the Missouri River",
+      "caption": "Lewis and Clark on the Lower Columbia, C.M. Russell, 1905 — Wikimedia Commons"
+    },
+    "challenge": {
+      "type": "multiple_choice",
+      "question": "Lewis compared their little fleet to the ships of which famous explorers?",
+      "options": [
+        "Marco Polo and Magellan",
+        "Columbus and Captain Cook",
+        "Drake and Raleigh",
+        "Hudson and Cabot"
+      ],
+      "correct": 1,
+      "feedback_correct": "That's right! Lewis wrote their boats were 'not quite so respectable as that of Columbus or Captain Cook' but viewed 'with as much pleasure.' He saw their mission as equally historic.",
+      "feedback_incorrect": "Lewis specifically compared their fleet to those of Columbus and Captain Cook. He saw their expedition as equally important to history."
+    }
   }
 }
