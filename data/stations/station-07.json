@@ -17,7 +17,25 @@
         "author": "Captain Lewis"
       }
     ],
-    "reflection": "Lewis uses very descriptive words to tell us about the Great Falls. What words or phrases help you picture what the falls looked like?"
+    "reflection": "Lewis uses very descriptive words to tell us about the Great Falls. What words or phrases help you picture what the falls looked like?",
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Great_Falls_of_the_Missouri.jpg/800px-Great_Falls_of_the_Missouri.jpg",
+      "alt": "Great Falls of the Missouri River",
+      "caption": "Great Falls of the Missouri River — Wikimedia Commons"
+    },
+    "challenge": {
+      "type": "multiple_choice",
+      "question": "How long did it take the Corps to portage (carry everything overland) around the Great Falls?",
+      "options": [
+        "About 3 days",
+        "About 1 week",
+        "About 2 weeks",
+        "Nearly a month"
+      ],
+      "correct": 3,
+      "feedback_correct": "Correct! The portage took nearly a month — from mid-June to mid-July. They had to carry heavy boats and supplies 16 miles overland while dealing with grizzly bears, cactus, and mosquitoes.",
+      "feedback_incorrect": "It actually took nearly a month! The 16-mile portage was one of the most grueling parts of the entire expedition."
+    }
   },
   "standard": {
     "title": "The Great Falls of the Missouri",
@@ -36,7 +54,25 @@
         "author": "Captain Lewis"
       }
     ],
-    "reflection": "Lewis calls the Great Falls “the grandest sight I ever beheld.” His writing becomes unusually poetic here. Why might this natural wonder have affected him so strongly? What literary techniques does he use to convey the experience?"
+    "reflection": "Lewis calls the Great Falls “the grandest sight I ever beheld.” His writing becomes unusually poetic here. Why might this natural wonder have affected him so strongly? What literary techniques does he use to convey the experience?",
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Great_Falls_of_the_Missouri.jpg/800px-Great_Falls_of_the_Missouri.jpg",
+      "alt": "Great Falls of the Missouri River",
+      "caption": "Great Falls of the Missouri River — Wikimedia Commons"
+    },
+    "challenge": {
+      "type": "multiple_choice",
+      "question": "How long did it take the Corps to portage (carry everything overland) around the Great Falls?",
+      "options": [
+        "About 3 days",
+        "About 1 week",
+        "About 2 weeks",
+        "Nearly a month"
+      ],
+      "correct": 3,
+      "feedback_correct": "Correct! The portage took nearly a month — from mid-June to mid-July. They had to carry heavy boats and supplies 16 miles overland while dealing with grizzly bears, cactus, and mosquitoes.",
+      "feedback_incorrect": "It actually took nearly a month! The 16-mile portage was one of the most grueling parts of the entire expedition."
+    }
   },
   "advanced": {
     "title": "The Great Falls — Sublime Spectacle and Brutal Portage",
@@ -57,6 +93,24 @@
         "author": "Captain Lewis"
       }
     ],
-    "reflection": "Lewis’s description of the Great Falls is often cited as an example of the “sublime” in early American nature writing — the Romantic-era concept that nature’s overwhelming grandeur inspires both awe and terror. Analyze Lewis’s literary techniques: his use of sensory details, metaphor, and scale. Note also the detail about “several Indian lodges” — even at this “undiscovered” wonder, there is evidence of prior human presence. What does this suggest?"
+    "reflection": "Lewis’s description of the Great Falls is often cited as an example of the “sublime” in early American nature writing — the Romantic-era concept that nature’s overwhelming grandeur inspires both awe and terror. Analyze Lewis’s literary techniques: his use of sensory details, metaphor, and scale. Note also the detail about “several Indian lodges” — even at this “undiscovered” wonder, there is evidence of prior human presence. What does this suggest?",
+    "image": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Great_Falls_of_the_Missouri.jpg/800px-Great_Falls_of_the_Missouri.jpg",
+      "alt": "Great Falls of the Missouri River",
+      "caption": "Great Falls of the Missouri River — Wikimedia Commons"
+    },
+    "challenge": {
+      "type": "multiple_choice",
+      "question": "How long did it take the Corps to portage (carry everything overland) around the Great Falls?",
+      "options": [
+        "About 3 days",
+        "About 1 week",
+        "About 2 weeks",
+        "Nearly a month"
+      ],
+      "correct": 3,
+      "feedback_correct": "Correct! The portage took nearly a month — from mid-June to mid-July. They had to carry heavy boats and supplies 16 miles overland while dealing with grizzly bears, cactus, and mosquitoes.",
+      "feedback_incorrect": "It actually took nearly a month! The 16-mile portage was one of the most grueling parts of the entire expedition."
+    }
   }
 }

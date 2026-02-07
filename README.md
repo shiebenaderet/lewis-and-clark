@@ -2,9 +2,13 @@
 
 An interactive website that turns 10 classroom stations on the Lewis & Clark expedition into an immersive Oregon Trail-inspired experience for students.
 
+## Live Demo
+
+**[Play The Lost Expedition](https://shiebenaderet.github.io/lewis-and-clark/)**
+
 ## Version
 
-**v0.2.0** — Modular file structure
+**v0.3.0** — Images, challenges, travel transitions, save/resume
 
 ## What This Is
 
@@ -21,6 +25,10 @@ This project replaces a paper-based station activity (where students walk around
   - *Advanced* — 10th grade level, deeper analysis, fewer scaffolds
 - **Interactive trail map** (SVG) with progress tracking
 - **Digital journal tracker** — replaces the paper handout (date, author, summary fields)
+- **Historical images** at each station from Wikimedia Commons (paintings by Bierstadt, Russell, Bodmer, NPS photos)
+- **Knowledge checks** — multiple-choice challenges at each station with feedback and scoring
+- **Travel transitions** — animated journey between stations with random trail encounters and progress bar
+- **Save/resume** — localStorage persistence so students can pick up where they left off
 - **Random trail events** between stations (grizzly bears, storms, mosquitoes, etc.)
 - **Reflection questions** at each station
 - **No build step** — pure static files, no dependencies
@@ -52,7 +60,7 @@ lewis-and-clark/
 
 ### Editing Content
 
-**To update station text:** Edit the JSON files in `data/stations/`. Each file has three objects (`beginner`, `standard`, `advanced`) with `title`, `dates`, `context`, `journals`, and `reflection` fields.
+**To update station text:** Edit the JSON files in `data/stations/`. Each file has three objects (`beginner`, `standard`, `advanced`) with `title`, `dates`, `context`, `journals`, `reflection`, `image`, and `challenge` fields.
 
 **To add trail events:** Edit `data/trail-events.json`. Each event has `icon`, `title`, and `text`.
 
@@ -71,6 +79,16 @@ Then open `http://localhost:8000` in your browser.
 **Note:** Opening `index.html` directly as a file (`file://`) will not work because browsers block `fetch()` requests from local files. You need a web server.
 
 ## Changelog
+
+### v0.3.0
+- Fixed splash screen bug ("Begin the Expedition" button now works)
+- Added historical images at each station (Wikimedia Commons, public domain)
+- Added multiple-choice knowledge checks with correct/incorrect feedback and scoring
+- Added animated travel transitions between stations with progress bar and random trail encounters
+- Added localStorage save/resume — students can close and come back without losing progress
+- Added "Continue Expedition" button on title screen when a save exists
+- Added score tracking in top navigation bar and completion screen
+- Added GitHub Pages deployment link to README
 
 ### v0.2.0
 - Refactored from single HTML file into modular project structure
