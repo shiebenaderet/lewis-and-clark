@@ -1,0 +1,81 @@
+{
+  "beginner": {
+    "title": "Reunited! Sacagawea Finds Her Family",
+    "dates": "August 17, 1805",
+    "context": [
+      "The group needed horses to cross the tall Rocky Mountains, and the <span class='vocab-word' tabindex='0'>Shoshone<span class='vocab-tooltip'>A Native American tribe that lived near the Rocky Mountains</span></span> tribe had them. Sacagawea was Shoshone, but she had been kidnapped by another tribe years ago.",
+      "When they finally met the Shoshone on August 17, something amazing happened: the tribe’s chief, Cameahwait, turned out to be Sacagawea’s brother! Lewis and Clark named this meeting place “Camp Fortunate” because of this lucky coincidence. Now they could get the horses they needed!"
+    ],
+    "journals": [
+      {
+        "date": "Saturday, August 17, 1805",
+        "text": [
+          "I hadn’t walked a mile before I saw several Indians on horseback coming toward me. Sacagawea, who was walking ahead of me, started dancing with joy! She made signs to me that these were her people."
+        ],
+        "author": "Captain Clark"
+      },
+      {
+        "date": "Saturday, August 17, 1805",
+        "text": [
+          "When Captain Clark arrived with Sacagawea, she turned out to be the sister of Chief Cameahwait! The reunion between Sacagawea and an Indian woman who had been captured at the same time as her — but had escaped and returned home — was very emotional.",
+          "The Shoshone are very poor, but they are cheerful and honest. They love colorful clothing and fun. They are fair, generous with what little they have, and very honest. Each person makes their own decisions."
+        ],
+        "author": "Captain Lewis"
+      }
+    ],
+    "reflection": "Imagine you were Sacagawea, seeing your brother and your people again after years of being away. How would you feel? How might this moment have changed the rest of the expedition?"
+  },
+  "standard": {
+    "title": "Camp Fortunate — The Shoshone Reunion",
+    "dates": "August 17, 1805",
+    "context": [
+      "In August 1805, the Corps was looking for the Shoshone tribe. The group would need horses to cross the Rocky Mountains and the Shoshone had them. Sacagawea was Shoshone, but had been kidnapped by another tribe many years before.",
+      "When they met on August 17, they discovered that the tribe’s chief, Cameahwait, was Sacagawea’s brother. Lewis & Clark named the meeting place Camp Fortunate in honor of the lucky coincidence. The group could now continue west with Shoshone horses."
+    ],
+    "journals": [
+      {
+        "date": "Saturday, August 17, 1805",
+        "text": [
+          "I have not proceeded 1 mile before I saw at a distance several Indians on horseback coming towards me. The Interpreter and squaw who were before me at some distance danced for the joyful sight, and she made signs to me that they were her Nation."
+        ],
+        "author": "Captain Clark"
+      },
+      {
+        "date": "Saturday, August 17, 1805",
+        "text": [
+          "Shortly after Capt. Clark arrived with the Interpreter Charbono, and the Indian woman, who proved to be a sister of the Chief Cameahwait. The meeting of those people was really affecting, particularly between Sacagawea and an Indian woman, who had been taken prisoner at the same time with her, and who had afterwards escaped from the Minnetares and rejoined her nation.",
+          "The Shoshones live in a wretched state of poverty. Yet, they are cheerful, fond of gaudy dress and amusements. They are frank, communicative, fair in their dealing, generous with the little they possess, extremely honest, and by no means beggarly. Each individual is his own sovereign master and acts from the dictates of his own mind."
+        ],
+        "author": "Captain Lewis"
+      }
+    ],
+    "reflection": "Lewis describes the Shoshone as living in poverty yet being cheerful, generous, and honest. What values does Lewis seem to admire? What biases might be shaping his observations?"
+  },
+  "advanced": {
+    "title": "Camp Fortunate — The Shoshone Reunion and Its Strategic Implications",
+    "dates": "August 17, 1805",
+    "context": [
+      "By August 1805, the expedition’s success hinged on acquiring horses to cross the formidable Rocky Mountains. The Lemhi Shoshone possessed these horses, and Sacagawea’s identity as a Shoshone woman was now the expedition’s most valuable diplomatic asset.",
+      "The reunion on August 17 produced one of the expedition’s most dramatic coincidences: Chief Cameahwait proved to be Sacagawea’s brother. The captains named the site Camp Fortunate, recognizing that this personal connection likely secured the horses and guides essential for the mountain crossing. Without this stroke of fortune, the expedition might well have failed.",
+      "Lewis’s ethnographic observations of the Shoshone reveal the complex lens through which he viewed Indigenous peoples — simultaneously admiring their character while framing their material condition through Euro-American standards of wealth and civilization."
+    ],
+    "journals": [
+      {
+        "date": "Saturday, August 17, 1805",
+        "text": [
+          "I have not proceeded 1 mile before I saw at a distance several Indians on horseback coming towards me. The Interpreter and squaw who were before me at some distance danced for the joyful sight, and she made signs to me that they were her Nation."
+        ],
+        "author": "Captain Clark"
+      },
+      {
+        "date": "Saturday, August 17, 1805",
+        "text": [
+          "Shortly after Capt. Clark arrived with the Interpreter Charbono, and the Indian woman, who proved to be a sister of the Chief Cameahwait. The meeting of those people was really affecting, particularly between Sacagawea and an Indian woman, who had been taken prisoner at the same time with her, and who had afterwards escaped from the Minnetares and rejoined her nation.",
+          "The Shoshones live in a wretched state of poverty. Yet, they are cheerful, fond of gaudy dress and amusements. They are frank, communicative, fair in their dealing, generous with the little they possess, extremely honest, and by no means beggarly. Each individual is his own sovereign master and acts from the dictates of his own mind."
+        ],
+        "author": "Captain Lewis"
+      }
+    ],
+    "reflection": "Lewis writes that each Shoshone individual “is his own sovereign master and acts from the dictates of his own mind.” This description of individual liberty resonates with Enlightenment political philosophy. Yet Lewis simultaneously characterizes the Shoshone as living in “a wretched state of poverty.” Analyze the tension between Lewis’s admiration for Shoshone character and his judgment of their material condition. What cultural assumptions underlie his definition of “poverty”? How might the Shoshone have assessed their own circumstances differently?"
+  }
+}

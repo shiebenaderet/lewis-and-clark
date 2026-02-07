@@ -1,0 +1,59 @@
+{
+  "beginner": {
+    "title": "Arriving at the Mandan Villages",
+    "dates": "October 28, 1804",
+    "context": [
+      "The group reached the Mandan Indian villages near the Knife River in what is now North Dakota. The Mandan and Hidatsa people already knew white people because French traders had been visiting since 1738.",
+      "The explorers started building <span class='vocab-word' tabindex='0'>Fort Mandan<span class='vocab-tooltip'>A wooden fort the explorers built to stay in during the cold winter</span></span>, where they would spend the whole winter. It took almost 4 weeks to build. By the time it was finished, there were already 6 inches of snow on the ground!"
+    ],
+    "journals": [
+      {
+        "date": "Sunday, October 28, 1804",
+        "text": [
+          "We came to a village up on a hill about 50 feet above the water in a nice, flat area. We smoked a pipe with the village chief. They really wanted me to stay and eat with them.",
+          "We met a Frenchman named Jessome and hired him to help us talk to the Mandan people. The chief, called Black Cat, Captain Lewis, and I walked along the river to find a good spot to build a fort. We found a good location, but there weren’t many trees to use for building."
+        ],
+        "author": "Captain Clark"
+      }
+    ],
+    "reflection": "Why do you think Lewis and Clark decided to build a fort and stay for the winter instead of continuing their journey?"
+  },
+  "standard": {
+    "title": "The Mandan Villages and Fort Mandan",
+    "dates": "October 28, 1804",
+    "context": [
+      "The group reached the Mandan Villages at the mouth of the Knife River. The Mandan and Hidatsa Indians in the vicinity were familiar with white men, since their first contact with French traders in 1738.",
+      "They start building Fort Mandan, where they will spend the winter. The fort took nearly 4 weeks to complete, at which time there was over 6 inches of snow on the ground."
+    ],
+    "journals": [
+      {
+        "date": "Sunday, October 28, 1804",
+        "text": [
+          "We came to a village situated about 50 feet above the water in a handsome plain. We smoked a pipe with the chief of the village. They were anxious that I would stay and eat with them. We met a Frenchman by the name of Jessome which we employed as an interpreter.",
+          "The Black Cat Grand Chief of the Mandans, Captain Lewis, and myself with the interpreter walked up the river to examine the situation and timber for a fort. We found the situation good, but the timber scarce."
+        ],
+        "author": "Captain Clark"
+      }
+    ],
+    "reflection": "The Mandan had been trading with Europeans since 1738 — over 65 years before Lewis and Clark arrived. How might this prior contact have shaped the encounter?"
+  },
+  "advanced": {
+    "title": "The Mandan-Hidatsa Villages and Construction of Fort Mandan",
+    "dates": "October 28, 1804",
+    "context": [
+      "The expedition reaches the large, semi-permanent Mandan and Hidatsa villages near the confluence of the Knife and Missouri Rivers in present-day North Dakota. These villages were a major hub of the Northern Plains trade network, connecting peoples from the Rocky Mountains to the Great Lakes. The Mandan and Hidatsa had maintained contact with European traders since the French explorer La Vérendrye arrived in 1738.",
+      "Lewis and Clark begin constructing Fort Mandan, a triangular wooden fortification where the Corps will overwinter from November 1804 through April 1805. The fort took nearly four weeks to complete, with temperatures already plunging well below zero and over six inches of snow accumulating. This winter encampment proved crucial: it was here that the captains gathered extensive geographic intelligence from Hidatsa traders who knew the upper Missouri and the route to the Rocky Mountains."
+    ],
+    "journals": [
+      {
+        "date": "Sunday, October 28, 1804",
+        "text": [
+          "We came to a village situated about 50 feet above the water in a handsome plain. We smoked a pipe with the chief of the village. They were anxious that I would stay and eat with them. We met a Frenchman by the name of Jessome which we employed as an interpreter.",
+          "The Black Cat Grand Chief of the Mandans, Captain Lewis, and myself with the interpreter walked up the river to examine the situation and timber for a fort. We found the situation good, but the timber scarce."
+        ],
+        "author": "Captain Clark"
+      }
+    ],
+    "reflection": "The Mandan-Hidatsa villages functioned as a major trade hub of the Northern Plains, connecting peoples from the Rockies to the Great Lakes. How does understanding this existing network change the narrative that Lewis and Clark were exploring “unknown” territory? What does Clark’s hiring of a French interpreter tell us about who was already present in this region?"
+  }
+}

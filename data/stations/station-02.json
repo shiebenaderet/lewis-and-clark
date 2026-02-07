@@ -1,0 +1,81 @@
+{
+  "beginner": {
+    "title": "Reaching the Great Plains",
+    "dates": "July 20, 1804",
+    "context": [
+      "The group reached the Platte River and the flat, open grasslands called the Great Plains. This area would later become a very important path west for many groups of people.",
+      "Years later, the <span class='vocab-word' tabindex='0'>Oregon Trail<span class='vocab-tooltip'>A famous path settlers followed to get to the western United States</span></span>, the Mormon Trail, and the California Trail all followed the Platte River. So did the Pony Express mail service, the first railroad across the country, and the first paved highway!"
+    ],
+    "journals": [
+      {
+        "date": "Friday, July 20, 1804",
+        "text": [
+          "A cool morning. I walked through the plains most of the day. The land had patches of trees here and there. I hunted and caught a very large yellow wolf. The soil looks rich, but it is dried out from many fires.",
+          "We started up the Platte River, which moves faster than the Missouri. We camped near a creek. Many wolves were around us all night. The Indians cross this river in flat boats made of animal skins that don’t tip over."
+        ],
+        "author": "Captain Lewis"
+      },
+      {
+        "date": "Friday, July 20, 1804",
+        "text": [
+          "Our group has been healthier on this trip than most groups this size would be anywhere else. From where we camped, a person could walk to a Pawnee village in 2 days. But the Indians are out on the plains hunting buffalo, so we probably won’t see them."
+        ],
+        "author": "Captain Clark"
+      }
+    ],
+    "reflection": "Lewis describes wolves, rich soil, and fires on the plains. What do these details tell you about what the Great Plains were like in 1804?"
+  },
+  "standard": {
+    "title": "The Platte River and the Great Plains",
+    "dates": "July 20, 1804",
+    "context": [
+      "The Corps of Discovery reaches the Platte River and the Great Plains. The Platte River became an important east-west route for Americans.",
+      "The Oregon, Mormon, and California Trails all followed it, along with the Pony Express, and later the first Transcontinental Railroad and first paved transcontinental highway."
+    ],
+    "journals": [
+      {
+        "date": "Friday, July 20, 1804",
+        "text": [
+          "A cool morning. I went out above the mouth of this creek and walked the greater part of the day through plains interspersed with small groves of timber. I killed a very large yellow wolf. The soil of these prairies appears rich but much parched with frequent fires.",
+          "Commenced up the great River Platt, which is much more rapid than the Missouri. Proceeded on past the mouth of Papillion or Butterfly Creek 3 miles and camped. A great number of wolves about us all night. The Indians pass this river in skin boats which are flat and will not turn over."
+        ],
+        "author": "Captain Lewis"
+      },
+      {
+        "date": "Friday, July 20, 1804",
+        "text": [
+          "It is worthy of observation to mention that our party has been much healthier on the voyage than parties of the same number in any other situation. From this evening’s encampment, a man may walk to the Pawnee village on the bank of the Platt River in 2 days and to the Oto in one day. As those Indians are now out in the prairies hunting buffalo, I fear we will not see them."
+        ],
+        "author": "Captain Clark"
+      }
+    ],
+    "reflection": "Both Lewis and Clark write about the landscape, wildlife, and Native Americans. What picture of the Great Plains do their entries paint?"
+  },
+  "advanced": {
+    "title": "The Platte River and the Great Plains",
+    "dates": "July 20, 1804",
+    "context": [
+      "The Corps of Discovery reaches the confluence of the Platte River and the Missouri, marking their entry into the Great Plains. The Platte, a wide and shallow river, would become one of the most significant transportation corridors in American history.",
+      "Over the following decades, the Oregon Trail, Mormon Trail, and California Trail would all follow the Platte River valley. The Pony Express, the first Transcontinental Railroad (Union Pacific), and the first paved transcontinental highway (the Lincoln Highway) traced the same route — a testament to the geographic logic of the corridor Lewis and Clark were now entering.",
+      "The journals from this period reveal the expedition’s dual scientific and diplomatic mission: careful observation of terrain, wildlife, and soil conditions alongside constant awareness of the Native American nations whose territory they were traversing."
+    ],
+    "journals": [
+      {
+        "date": "Friday, July 20, 1804",
+        "text": [
+          "A cool morning. I went out above the mouth of this creek and walked the greater part of the day through plains interspersed with small groves of timber. I killed a very large yellow wolf. The soil of these prairies appears rich but much parched with frequent fires.",
+          "Commenced up the great River Platt, which is much more rapid than the Missouri. Proceeded on past the mouth of Papillion or Butterfly Creek 3 miles and camped. A great number of wolves about us all night. The Indians pass this river in skin boats which are flat and will not turn over."
+        ],
+        "author": "Captain Lewis"
+      },
+      {
+        "date": "Friday, July 20, 1804",
+        "text": [
+          "It is worthy of observation to mention that our party has been much healthier on the voyage than parties of the same number in any other situation. From this evening’s encampment, a man may walk to the Pawnee village on the bank of the Platt River in 2 days and to the Oto in one day. As those Indians are now out in the prairies hunting buffalo, I fear we will not see them."
+        ],
+        "author": "Captain Clark"
+      }
+    ],
+    "reflection": "Lewis notes that prairie fires have “parched” the soil, and Clark observes that the Indians are away hunting buffalo. What do these details suggest about how Native Americans managed and interacted with the Great Plains ecosystem? Research the concept of “controlled burns” — why might Native Americans have set deliberate fires?"
+  }
+}

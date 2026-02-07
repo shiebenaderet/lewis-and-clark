@@ -1,0 +1,62 @@
+{
+  "beginner": {
+    "title": "The Great Falls",
+    "dates": "June 13, 1805",
+    "context": [
+      "The Corps of Discovery found the Great Falls of the Missouri River — a series of huge waterfalls! They couldn’t take their boats over the falls, so they had to carry everything overland for 16 miles. This took almost a whole month!",
+      "During this time, they had lots of problems: <span class='vocab-word' tabindex='0'>grizzly bears<span class='vocab-tooltip'>Very large, dangerous bears found in western North America</span></span> kept bothering them, sharp cactus poked through their shoes, and clouds of mosquitoes swarmed them constantly."
+    ],
+    "journals": [
+      {
+        "date": "Thursday, June 13, 1805",
+        "text": [
+          "I heard the wonderful sound of a waterfall! I walked a little further and saw spray shooting up above the flat ground like a column of smoke. The wind kept blowing it away and then it would come back.",
+          "I hurried down a steep hill, about 200 feet high, to see this amazing sight. The river was about 300 yards wide at the falls. The water crashed against the rocks and turned into white foam that shot up 15 or 20 feet in the air!",
+          "The sun shining on the mist from the falls made a beautiful rainbow, which made the whole scene even more spectacular."
+        ],
+        "author": "Captain Lewis"
+      }
+    ],
+    "reflection": "Lewis uses very descriptive words to tell us about the Great Falls. What words or phrases help you picture what the falls looked like?"
+  },
+  "standard": {
+    "title": "The Great Falls of the Missouri",
+    "dates": "June 13, 1805",
+    "context": [
+      "The Corps of Discovery reaches the Great Falls of the Missouri River. They must travel overland for 16 miles before continuing, an arduous task that took nearly a month. During that time, grizzly bears bothered the men, prickly pear cactus pierced their moccasins, and mosquitoes swarmed them constantly."
+    ],
+    "journals": [
+      {
+        "date": "Thursday, June 13, 1805",
+        "text": [
+          "My ears were saluted with the agreeable sound of a fall of water and advancing a little further I saw the spray arise above the plain like a column of smoke which would frequently disappear again in an instant caused I presume by the wind which blew pretty hard from the S.W. I did not however lose my direction to this point which soon began to make a roaring too tremendous to be mistaken for any cause short of the great falls of the Missouri.",
+          "I hurried down the hill which was about 200 feet high and difficult of access, to gaze on this sublimely grand spectacle. … Immediately at the cascade the river is about 300 yards wide. About 200 yards on my right forms the grandest sight I ever beheld, the height of the fall is the same of the other but the irregular and somewhat projecting rocks below receives the water in its passage down and brakes it into a perfect white foam which assumes a thousand forms in a moment sometimes flying up in jets of sparkling foam to the height of 15 or 20 feet.",
+          "From the reflection of the sun on the spray or mist which arises from these falls there is a beautiful rainbow produced which adds not a little to the beauty of this majestically grand scenery."
+        ],
+        "author": "Captain Lewis"
+      }
+    ],
+    "reflection": "Lewis calls the Great Falls “the grandest sight I ever beheld.” His writing becomes unusually poetic here. Why might this natural wonder have affected him so strongly? What literary techniques does he use to convey the experience?"
+  },
+  "advanced": {
+    "title": "The Great Falls — Sublime Spectacle and Brutal Portage",
+    "dates": "June 13, 1805",
+    "context": [
+      "The Corps reaches the Great Falls of the Missouri River, confirming they are on the correct branch. What follows is one of the expedition’s most grueling ordeals: an 18-mile overland portage around the series of five cascades that took nearly a month to complete (June 16 to July 15). The men constructed crude wagons from cottonwood rounds to haul the heavy canoes and supplies.",
+      "During the portage, the party endured extreme hardship: grizzly bear encounters, prickly pear cactus that shredded their moccasins, swarming mosquitoes, violent hailstorms, and temperatures exceeding 100°F. Lewis’s entry from the day he first sighted the falls stands in remarkable contrast to this suffering — it is among the most literary passages in the entire journal, revealing his struggle to capture sublime natural beauty in words."
+    ],
+    "journals": [
+      {
+        "date": "Thursday, June 13, 1805",
+        "text": [
+          "My ears were saluted with the agreeable sound of a fall of water and advancing a little further I saw the spray arise above the plain like a column of smoke which would frequently disappear again in an instant caused I presume by the wind which blew pretty hard from the S.W. I did not however lose my direction to this point which soon began to make a roaring too tremendous to be mistaken for any cause short of the great falls of the Missouri.",
+          "I hurried down the hill which was about 200 feet high and difficult of access, to gaze on this sublimely grand spectacle. … Immediately at the cascade the river is about 300 yards wide. About 200 yards on my right forms the grandest sight I ever beheld, the height of the fall is the same of the other but the irregular and somewhat projecting rocks below receives the water in its passage down and brakes it into a perfect white foam which assumes a thousand forms in a moment sometimes flying up in jets of sparkling foam to the height of 15 or 20 feet.",
+          "This abutment of rock defends a handsome little bottom of about three acres which is agreeably shaded with some cottonwood trees; in the lower extremity of the bottom there is a very thick grove of the same kind of trees which are small, in this wood there are several Indian lodges formed of sticks.",
+          "From the reflection of the sun on the spray or mist which arises from these falls there is a beautiful rainbow produced which adds not a little to the beauty of this majestically grand scenery."
+        ],
+        "author": "Captain Lewis"
+      }
+    ],
+    "reflection": "Lewis’s description of the Great Falls is often cited as an example of the “sublime” in early American nature writing — the Romantic-era concept that nature’s overwhelming grandeur inspires both awe and terror. Analyze Lewis’s literary techniques: his use of sensory details, metaphor, and scale. Note also the detail about “several Indian lodges” — even at this “undiscovered” wonder, there is evidence of prior human presence. What does this suggest?"
+  }
+}

@@ -1,0 +1,52 @@
+[
+  {
+    "icon": "🐻",
+    "title": "Grizzly Bear Sighting!",
+    "text": "Your party spots a massive grizzly bear along the riverbank. The Corps encountered grizzlies frequently — Lewis once described one chasing him into the river. You wait quietly until it moves on."
+  },
+  {
+    "icon": "🌊",
+    "title": "River Rapids Ahead!",
+    "text": "The Missouri’s current grows fierce. Your boats are tossed by rapids, and everyone grabs their poles to push through. Several items get soaked, but nothing is lost. The Corps faced dangerous rapids throughout the journey."
+  },
+  {
+    "icon": "🌩️",
+    "title": "Thunderstorm on the Plains!",
+    "text": "A sudden thunderstorm rolls across the open prairie. Lightning cracks across the sky and rain pounds your camp. The Corps often endured violent weather with little shelter. You hunker down and wait it out."
+  },
+  {
+    "icon": "🦬",
+    "title": "Mosquito Swarm!",
+    "text": "Clouds of mosquitoes descend on your camp. Clark once wrote that they were ‘so numerous that I could not keep them off my gun long enough to take aim.’ You press on despite the pests."
+  },
+  {
+    "icon": "🦌",
+    "title": "Elk Herd Spotted!",
+    "text": "A large herd of elk grazes nearby. The hunters in your party bring down two, providing much-needed fresh meat. The Corps depended on hunting throughout the journey — they consumed up to 9 pounds of meat per person per day!"
+  },
+  {
+    "icon": "🌵",
+    "title": "Prickly Pear Cactus!",
+    "text": "The trail is covered in prickly pear cactus. Sharp spines pierce through your moccasins with every step. Lewis wrote that the cactus was ‘one of the beauties as well as the greatest pests of the plains.’"
+  },
+  {
+    "icon": "⛺",
+    "title": "A Friendly Camp",
+    "text": "You encounter a small group of Native Americans who offer to share their fire and food. Throughout the expedition, the Corps relied on the generosity and knowledge of Indigenous peoples at critical moments."
+  },
+  {
+    "icon": "🌍",
+    "title": "Uncharted Territory",
+    "text": "Your maps show nothing but blank space ahead. The captains take out their compasses and sextants to chart the route. Lewis and Clark mapped thousands of miles of previously uncharted (by Europeans) territory."
+  },
+  {
+    "icon": "🐺",
+    "title": "Wolves Howling at Night!",
+    "text": "As darkness falls, the sound of wolves fills the air. Clark noted ‘a great number of wolves about us all night.’ The sentries keep watch while the rest of the party tries to sleep."
+  },
+  {
+    "icon": "❄️",
+    "title": "Bitter Cold!",
+    "text": "Temperatures plummet well below freezing. During the winter at Fort Mandan, temperatures dropped to -45°F! The men huddle around fires and struggle to keep warm in their leather clothing."
+  }
+]

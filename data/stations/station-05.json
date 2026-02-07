@@ -1,0 +1,61 @@
+{
+  "beginner": {
+    "title": "Meeting Sacagawea",
+    "dates": "February 11, 1805",
+    "context": [
+      "During the cold winter at Fort Mandan, Lewis and Clark met a French trader named Charbonneau and his young wife, <span class='vocab-word' tabindex='0'>Sacagawea<span class='vocab-tooltip'>A Shoshone woman who became one of the most important members of the expedition</span></span>. She was a Shoshone Indian who had been taken from her people when she was young.",
+      "They hired Charbonneau as a guide and translator. But it turned out that Sacagawea would be the most helpful addition to the group!",
+      "On February 11, 1805, Sacagawea had a baby boy named Baptiste. The men in the group gave him the nickname “Pomp” because he was such a lively little dancer!"
+    ],
+    "journals": [
+      {
+        "date": "Saturday, February 11, 1805",
+        "text": [
+          "Around 5 this evening, Sacagawea had a baby boy. This was her first child, and she was in a lot of pain for a long time.",
+          "Our interpreter Jessome told me that giving her a small piece of a rattlesnake’s rattle mixed with water would help speed up the birth. I had a rattle with me, so I gave it to him. He broke two rings of it into small pieces and mixed it with water for her. Whether this actually helped or not, I’m not sure, but she had the baby within 10 minutes of drinking it."
+        ],
+        "author": "Captain Lewis"
+      }
+    ],
+    "reflection": "Why do you think Sacagawea became so important to the expedition? What skills or knowledge might she have had that the other members didn’t?"
+  },
+  "standard": {
+    "title": "Sacagawea Joins the Expedition",
+    "dates": "February 11, 1805",
+    "context": [
+      "During the winter of 1804–1805, Lewis and Clark met the French trader Charbonneau and his young Shoshone wife Sacagawea. They hired Charbonneau as a guide and interpreter. However, it was Sacagawea who would prove to be the most valuable addition to the Corps of Discovery.",
+      "On February 11, 1805, she gave birth to a baby boy named Baptiste. The members of the Corps would go on to nickname him Pomp, for his “pompous, little dancing boy personality.”"
+    ],
+    "journals": [
+      {
+        "date": "Saturday, February 11, 1805",
+        "text": [
+          "At about 5 this evening, one of the wives of Charbonneau (Sacajawea) delivered a fine boy. It is worthy of remark that this was the first child this woman had borne, and as is common in such cases, her labor was tedious and the pain violent.",
+          "Jessome informed me that he had administered a small portion of the rattle of a rattlesnake which he assured me never failed to produce the desired effect — the hastening of the birth of a child. Having the rattle of a snake by me, I gave it to him and he administered two rings of it to the woman broken in small pieces and added to a small quantity of water. Whether this medicine was truly the cause or not, I shall not undertake to determine, but I was informed that she had not taken it more than 10 minutes before she brought forth."
+        ],
+        "author": "Captain Lewis"
+      }
+    ],
+    "reflection": "Lewis records the use of rattlesnake rattle as medicine during childbirth. What does this tell us about medical knowledge and folk remedies on the frontier? Why might Lewis have been careful to say he couldn’t determine if it truly worked?"
+  },
+  "advanced": {
+    "title": "Sacagawea, Charbonneau, and the Birth of Baptiste",
+    "dates": "February 11, 1805",
+    "context": [
+      "During the winter encampment at Fort Mandan, Lewis and Clark engaged the services of Toussaint Charbonneau, a French-Canadian fur trader living among the Hidatsa, and his young Lemhi Shoshone wife, Sacagawea. Charbonneau was hired nominally as an interpreter, but it was Sacagawea — approximately sixteen years old at the time — who would prove indispensable.",
+      "Sacagawea had been captured by a Hidatsa raiding party around age twelve and subsequently acquired by Charbonneau. Her knowledge of Shoshone language and territory would prove critical when the expedition needed horses to cross the Rocky Mountains. Beyond her linguistic skills, her very presence — a young woman with an infant — signaled peaceful intentions to every nation they encountered.",
+      "On February 11, 1805, Sacagawea gave birth to Jean Baptiste Charbonneau. Lewis’s journal entry on the birth reveals the blend of frontier folk medicine and Enlightenment skepticism that characterized his scientific observations throughout the journey."
+    ],
+    "journals": [
+      {
+        "date": "Saturday, February 11, 1805",
+        "text": [
+          "At about 5 this evening, one of the wives of Charbonneau (Sacajawea) delivered a fine boy. It is worthy of remark that this was the first child this woman had borne, and as is common in such cases, her labor was tedious and the pain violent.",
+          "Jessome informed me that he had administered a small portion of the rattle of a rattlesnake which he assured me never failed to produce the desired effect — the hastening of the birth of a child. Having the rattle of a snake by me, I gave it to him and he administered two rings of it to the woman broken in small pieces and added to a small quantity of water. Whether this medicine was truly the cause or not, I shall not undertake to determine, but I was informed that she had not taken it more than 10 minutes before she brought forth."
+        ],
+        "author": "Captain Lewis"
+      }
+    ],
+    "reflection": "Lewis carefully avoids claiming the rattlesnake remedy actually worked, saying he “shall not undertake to determine” its effectiveness. Analyze this passage as a primary source: What does Lewis’s language reveal about Enlightenment-era attitudes toward scientific observation versus folk knowledge? How does Sacagawea’s story complicate the narrative of the expedition as a purely voluntary, heroic enterprise?"
+  }
+}

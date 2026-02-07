@@ -1,0 +1,61 @@
+{
+  "beginner": {
+    "title": "Crossing the Rocky Mountains",
+    "dates": "September–October 1805",
+    "context": [
+      "Lewis and Clark traded with the Shoshone for horses and supplies. They also hired a Shoshone guide they nicknamed “Old Toby.” He and Sacagawea helped them cross the <span class='vocab-word' tabindex='0'>Continental Divide<span class='vocab-tooltip'>The line of mountain peaks that separates rivers flowing east from rivers flowing west</span></span>.",
+      "Crossing the Rocky Mountains was terrible. It started on September 11 and took 11 days. They were so hungry that they had to eat some of their horses and even candles made from animal fat!",
+      "When they finally made it through, friendly <span class='vocab-word' tabindex='0'>Nez Perce<span class='vocab-tooltip'>A Native American tribe from the Pacific Northwest</span></span> Indians gave them food and taught them how to make canoes by burning out the inside of logs. Then they sped down the Snake River to the Columbia River."
+    ],
+    "journals": [
+      {
+        "date": "October 17, 1805",
+        "text": [
+          "After getting safely past the rapids and eating dinner, we traveled 7 miles to where the Snake River meets the Columbia River. The land in every direction is flat, low, and rises gently from the water.",
+          "We stopped and smoked with the Indians who had gathered in large numbers to look at us. We spoke to their chief, told him we came in peace, and gave the main chief a large medal, a shirt, and a handkerchief."
+        ],
+        "author": "Captain Clark"
+      }
+    ],
+    "reflection": "The group almost starved crossing the mountains and were saved by the Nez Perce. How many times has the expedition been helped by Native Americans so far? What does that tell you?"
+  },
+  "standard": {
+    "title": "Over the Rockies to the Columbia River",
+    "dates": "September–October 1805",
+    "context": [
+      "Lewis and Clark successfully negotiated with the Shoshone for horses and supplies to help their passage over the Rocky Mountains. They also hired a Shoshone guide Pikee Queenah (Swooping Eagle), who they nicknamed “Old Toby.” He and Sacagawea helped them cross the Continental Divide at Lemhi Pass, at which point they left the Louisiana Purchase territory into disputed Oregon Country.",
+      "The Corps started climbing the Rocky Mountains on September 11 and it took them 11 days to get across. To stay alive, they ate a few of their horses and candles made of animal fat. Nez Perce Indians gave them new supplies and taught them how to hollow out logs with fire to make new canoes. The Corps then sped down the Snake River to the Columbia River."
+    ],
+    "journals": [
+      {
+        "date": "October 17, 1805",
+        "text": [
+          "After getting safely over the rapids and having taken dinner, we set out and proceeded on 7 miles to the junction of this river (the Snake) and the Columbia which joins from Northwest. In every direction from the junction of those Rivers the country is 1 continued plain, low and rises from the water gradually.",
+          "We halted and smoked with the Indians who had collected there in great numbers to view us. We spoke to their Chief informing them of our friendly disposition and gave the principal chief a large medal, a shirt, and a handkerchief."
+        ],
+        "author": "Captain Clark"
+      }
+    ],
+    "reflection": "At Lemhi Pass, the Corps crossed from the Louisiana Purchase into Oregon Country — territory the U.S. did not own. What does this tell you about the expedition’s true purpose beyond just “exploring”?"
+  },
+  "advanced": {
+    "title": "The Rocky Mountain Crossing and Descent to the Columbia",
+    "dates": "September–October 1805",
+    "context": [
+      "The expedition’s most physically punishing phase began with the crossing of the Bitterroot Range of the Rocky Mountains via the Lolo Trail, guided by the Shoshone guide Pikee Queenah (“Old Toby”). At Lemhi Pass on the Continental Divide, the Corps crossed out of the Louisiana Purchase — the territory the United States had legal claim to — and into the disputed Oregon Country, claimed by both the U.S. and Britain.",
+      "The 11-day mountain crossing (September 11–22) brought the expedition to the brink of starvation. Deep snow, fallen timber, and treacherous mountain paths killed several horses. The men resorted to eating horsemeat and candles made of animal tallow. Clark, who scouted ahead, reached a Nez Perce village and secured food that likely saved the party.",
+      "The Nez Perce (Nimiipuu) not only provided food but taught the Corps to construct dugout canoes using controlled fire — a technique far more efficient than European methods. From here, the expedition launched onto the Clearwater River, then the Snake, and finally the Columbia, racing westward toward the Pacific with the current for the first time in the journey."
+    ],
+    "journals": [
+      {
+        "date": "October 17, 1805",
+        "text": [
+          "After getting safely over the rapids and having taken dinner, we set out and proceeded on 7 miles to the junction of this river (the Snake) and the Columbia which joins from Northwest. In every direction from the junction of those Rivers the country is 1 continued plain, low and rises from the water gradually.",
+          "We halted and smoked with the Indians who had collected there in great numbers to view us. We spoke to their Chief informing them of our friendly disposition and gave the principal chief a large medal, a shirt, and a handkerchief."
+        ],
+        "author": "Captain Clark"
+      }
+    ],
+    "reflection": "At Lemhi Pass, the expedition crossed from U.S. territory (the Louisiana Purchase) into Oregon Country, which was claimed by multiple nations. Analyze the expedition as an instrument of territorial expansion: How does the act of distributing medals, giving speeches about a “great father,” and mapping the territory serve as a form of sovereignty claim, even in territory the U.S. did not legally possess? How do the Nez Perce’s actions — feeding the starving explorers and teaching them canoe-building — complicate the narrative of American self-reliance?"
+  }
+}
