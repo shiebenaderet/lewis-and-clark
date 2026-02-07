@@ -1,0 +1,64 @@
+{
+  "beginner": {
+    "title": "Heading West Again",
+    "dates": "April 7, 1805",
+    "context": [
+      "In April 1805, the expedition split up. Eleven men took the big keelboat back to St. Louis. They carried plant and animal <span class='vocab-word' tabindex='0'>specimens<span class='vocab-tooltip'>Samples collected to show to scientists</span></span> and journal entries to send to President Jefferson. They also brought several Indian chiefs to meet the President.",
+      "The remaining 33 people continued west along the Missouri River in six small canoes and two pirogues. Lewis was very excited — this had been his dream for 10 years!"
+    ],
+    "journals": [
+      {
+        "date": "Thursday, April 7, 1805",
+        "text": [
+          "At the same time that the big boat left Fort Mandan, Captain Clark and our group headed up the river. Since I hadn’t gotten any exercise in weeks, I decided to walk along the shore.",
+          "Our little fleet of boats isn’t as fancy as Columbus’s or Captain Cook’s ships, but we were just as proud of ours! We were about to explore a land 2,000 miles wide where no American had ever been. These little boats held everything we needed to survive and protect ourselves.",
+          "I have been dreaming about this trip for 10 years. Leaving Fort Mandan was one of the happiest moments of my life. Everyone in the group is healthy, excited, and ready to go. No one is complaining — everyone is working together."
+        ],
+        "author": "Captain Lewis"
+      }
+    ],
+    "reflection": "Lewis compares their little boats to the ships of Columbus and Captain Cook. Why do you think he made this comparison? How was he feeling at this moment?"
+  },
+  "standard": {
+    "title": "Departing Fort Mandan — Into the Unknown",
+    "dates": "April 7, 1805",
+    "context": [
+      "In April 1805, 33 members of the expedition continued the journey west along the Missouri River. Eleven men returned to St. Louis on the keelboat with collected specimens and journal entries, and to escort several Indian chiefs who were to meet with President Jefferson.",
+      "This moment marks a turning point: the Corps now heads into territory no American had mapped. Their vessels consist of six small canoes and two large pirogues."
+    ],
+    "journals": [
+      {
+        "date": "Thursday, April 7, 1805",
+        "text": [
+          "At the same moment that the barge departed from Fort Mandan, Captain Clark embarked with our party and proceeded up the river. As I had used no exercise for several weeks, I determined to walk on shore as far as our encampment of this evening.",
+          "Our vessels consisted of 6 small canoes and two large pirogues. This little fleet, although not quite so respectable as that of Columbus or Captain Cook, was still viewed by us with as much pleasure as those deservedly famed adventurers ever beheld theirs. And I daresay with quite as much anxiety for their safety and preservation.",
+          "We were now about to penetrate a country at least 2,000 miles in width, on which the foot of civilized man had never trod. The good or evil it had in store for us was experiment yet to determine, and these little vessels contained every article by which we were to expect to subsist or defend ourselves.",
+          "Entertaining as I do the most confident hope of succeeding, a voyage which has formed a darling project of mine for the last 10 years. I could but esteem this moment of departure as among the most happy of my life. The party are in excellent health and spirits, zealously attached to the enterprise and anxious to proceed. Not a whisper or murmur of discontent to be heard among them, but all act in unison and with the most perfect harmony."
+        ],
+        "author": "Captain Lewis"
+      }
+    ],
+    "reflection": "Lewis calls this “among the most happy” moments of his life. What emotions come through in his writing? How does his comparison to Columbus and Captain Cook reveal his sense of the expedition’s importance?"
+  },
+  "advanced": {
+    "title": "Departure from Fort Mandan — Into Uncharted Territory",
+    "dates": "April 7, 1805",
+    "context": [
+      "April 7, 1805 marks a pivotal transition in the expedition. The keelboat departs downstream for St. Louis carrying biological specimens, ethnographic artifacts, maps, and journal entries — effectively the expedition’s first “progress report” to Jefferson. Several Mandan and Arikara chiefs travel with this party to visit Washington.",
+      "The remaining 33 members, now including Sacagawea, infant Baptiste, and Charbonneau, push west into territory no American or European had mapped. Lewis’s journal entry from this day is among the most celebrated passages in American exploration literature, revealing both his Enlightenment-era ambition and his awareness that the expedition has crossed a threshold into genuine uncertainty."
+    ],
+    "journals": [
+      {
+        "date": "Thursday, April 7, 1805",
+        "text": [
+          "At the same moment that the barge departed from Fort Mandan, Captain Clark embarked with our party and proceeded up the river. As I had used no exercise for several weeks, I determined to walk on shore as far as our encampment of this evening.",
+          "Our vessels consisted of 6 small canoes and two large pirogues. This little fleet, although not quite so respectable as that of Columbus or Captain Cook, was still viewed by us with as much pleasure as those deservedly famed adventurers ever beheld theirs. And I daresay with quite as much anxiety for their safety and preservation.",
+          "We were now about to penetrate a country at least 2,000 miles in width, on which the foot of civilized man had never trod. The good or evil it had in store for us was experiment yet to determine, and these little vessels contained every article by which we were to expect to subsist or defend ourselves.",
+          "Entertaining as I do the most confident hope of succeeding, a voyage which has formed a darling project of mine for the last 10 years. I could but esteem this moment of departure as among the most happy of my life. The party are in excellent health and spirits, zealously attached to the enterprise and anxious to proceed. Not a whisper or murmur of discontent to be heard among them, but all act in unison and with the most perfect harmony."
+        ],
+        "author": "Captain Lewis"
+      }
+    ],
+    "reflection": "Lewis writes that they are entering a country “on which the foot of civilized man had never trod.” Critically examine this phrase. What assumptions does it reveal about Lewis’s worldview? How does this language erase the Indigenous peoples who had lived in, traveled through, and shaped this landscape for thousands of years? Compare this to how Lewis describes Native Americans elsewhere in the journals."
+  }
+}

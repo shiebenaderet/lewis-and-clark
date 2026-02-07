@@ -1,0 +1,100 @@
+{
+  "beginner": {
+    "title": "The Pacific Ocean at Last!",
+    "dates": "November 1805 – March 1806",
+    "context": [
+      "On November 7, 1805, Clark saw the ocean and wrote excitedly in his journal: <em>“Ocian in view! O! the joy.”</em> (He wasn’t a great speller!) They reached the Pacific Ocean on November 20.",
+      "Then something very special happened. Lewis and Clark let everyone in the group <span class='vocab-word' tabindex='0'>vote<span class='vocab-tooltip'>To make a choice about a decision</span></span> on where to spend the winter. Everyone got a vote — including York (the enslaved man) and Sacagawea (a Native American woman). This was very unusual for that time in history!",
+      "They built Fort Clatsop on the south side of the Columbia River and spent a rainy, uncomfortable winter there. They had to deal with fleas in their blankets and very little good food."
+    ],
+    "journals": [
+      {
+        "date": "December 26, 1805",
+        "text": [
+          "We dry our wet things and get the fleas out of our blankets. There are so many fleas that we have to pick them out of our blankets every day, or we can’t sleep at all."
+        ],
+        "author": "Captain Clark"
+      },
+      {
+        "date": "February 7, 1806",
+        "text": [
+          "Tonight we had what I call an excellent supper: a marrowbone and a piece of boiled elk that looked like it had a little bit of fat on it. For Fort Clatsop, this is fancy eating!"
+        ],
+        "author": "Captain Clark"
+      },
+      {
+        "date": "March 23, 1806",
+        "text": [
+          "The wind is pretty strong, but everyone thinks we can make it past Point William. We loaded up the canoes and got ready to leave. At 1 in the afternoon, we said goodbye to Fort Clatsop for the last time."
+        ],
+        "author": "Captain Lewis"
+      }
+    ],
+    "reflection": "York and Sacagawea both got to vote on where to camp. Why is this surprising for the year 1805? What does it tell you about life on the expedition compared to life in the rest of America?"
+  },
+  "standard": {
+    "title": "Ocean in View! Fort Clatsop and the Pacific",
+    "dates": "November 1805 – March 1806",
+    "context": [
+      "After first spotting the ocean on November 7, Clark famously wrote in his journal, “Ocian in view! O! the joy.” They take the Columbia River and reach the Pacific on November 20th.",
+      "That week, Lewis & Clark assembled the Corps to discuss where to spend the winter. The Captains recorded each person’s vote, notably giving full votes to both York and Sacagawea. It was decided to camp on the south side of the Columbia River, which is where they built Fort Clatsop and remained for the winter."
+    ],
+    "journals": [
+      {
+        "date": "December 26, 1805",
+        "text": [
+          "We dry our wet articles and have our blankets de-flea-ed … They are so abundant that we have them killed out of our blankets every day or get no sleep."
+        ],
+        "author": "Captain Clark"
+      },
+      {
+        "date": "February 7, 1806",
+        "text": [
+          "This evening we had what I call an excellent supper. It consisted of a marrowbone, a piece of brisket of boiled elk that had the appearance of a little fat on it. This for Fort Clatsop is living in high style, and in fact feasting."
+        ],
+        "author": "Captain Clark"
+      },
+      {
+        "date": "March 23, 1806",
+        "text": [
+          "The wind is pretty high, but it seems to be the common opinion that we can pass Point William. We accordingly distributed the baggage and directed the canoes to be launched and loaded for our departure. At 1pm, we bid a final adieu to Fort Clatsop."
+        ],
+        "author": "Captain Lewis"
+      }
+    ],
+    "reflection": "The vote at the Columbia included York (an enslaved man) and Sacagawea (a Native American woman). Neither could legally vote anywhere in America at this time. What does this tell us about how the expedition’s experience differed from mainstream American society?"
+  },
+  "advanced": {
+    "title": "“Ocian in View!” — The Pacific, Fort Clatsop, and the Democratic Vote",
+    "dates": "November 1805 – March 1806",
+    "context": [
+      "Clark’s famous journal entry of November 7, 1805 — “Ocian in view! O! the joy” — captures the expedition’s emotional climax, though scholars note he was likely seeing the broad Columbia estuary rather than the Pacific itself. They officially reached the coast on November 20.",
+      "What followed was a remarkable democratic exercise. Lewis and Clark assembled the entire Corps to vote on their winter campsite location. Significantly, every member’s vote was recorded equally, including York’s (Clark’s enslaved companion) and Sacagawea’s. This occurred decades before the abolition of slavery and over a century before women or Native Americans gained suffrage. The vote reflects the pragmatic egalitarianism that extreme conditions can produce — a temporary suspension of the social hierarchies that would reassert themselves upon the expedition’s return.",
+      "The winter at Fort Clatsop was miserable. It rained all but twelve of the 106 days they spent there. The journals shift from grand descriptions to grim accounts of rotting elk meat, pervasive fleas, and the tedium of waiting for spring. On March 23, 1806, they departed for the long journey home."
+    ],
+    "journals": [
+      {
+        "date": "December 26, 1805",
+        "text": [
+          "We dry our wet articles and have our blankets de-flea-ed … They are so abundant that we have them killed out of our blankets every day or get no sleep."
+        ],
+        "author": "Captain Clark"
+      },
+      {
+        "date": "February 7, 1806",
+        "text": [
+          "This evening we had what I call an excellent supper. It consisted of a marrowbone, a piece of brisket of boiled elk that had the appearance of a little fat on it. This for Fort Clatsop is living in high style, and in fact feasting."
+        ],
+        "author": "Captain Clark"
+      },
+      {
+        "date": "March 23, 1806",
+        "text": [
+          "The wind is pretty high, but it seems to be the common opinion that we can pass Point William. We accordingly distributed the baggage and directed the canoes to be launched and loaded for our departure. At 1pm, we bid a final adieu to Fort Clatsop."
+        ],
+        "author": "Captain Lewis"
+      }
+    ],
+    "reflection": "The vote at the Columbia — in which York and Sacagawea participated equally — is often cited as a remarkable moment in American democratic history. Evaluate this claim critically: Was this genuine democratic principle, or practical necessity born of extreme circumstances? Consider that upon returning to St. Louis, York remained enslaved and Sacagawea received no compensation. What does the contrast between the expedition’s egalitarianism and the society it returned to reveal about the limits of frontier democracy?"
+  }
+}

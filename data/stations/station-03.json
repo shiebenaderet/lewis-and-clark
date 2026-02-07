@@ -1,0 +1,81 @@
+{
+  "beginner": {
+    "title": "Meeting the Oto and Missouri Indians",
+    "dates": "August 2–3, 1804",
+    "context": [
+      "This was the first official meeting between the United States government and Native Americans in the West. The Corps met a small group of Oto and Missouri Indians near where Omaha, Nebraska is today.",
+      "Lewis and Clark had a <span class='vocab-word' tabindex='0'>routine<span class='vocab-tooltip'>A set way of doing things each time</span></span> for meeting with Indians: They gave out peace medals, flags, and gifts. They showed off cool technology like magnets, compasses, telescopes, and guns. They gave a speech saying the Indians had a new “great father” (the President) and promised peace if the tribes didn’t fight each other."
+    ],
+    "journals": [
+      {
+        "date": "Thursday, August 2, 1804",
+        "text": [
+          "At sunset, a group of Oto and Missouri Indians came to our camp. Six of them were chiefs. Captain Lewis and I met them and told them we were happy to see them. We said we would talk more tomorrow. We gave them roasted meat, pork, flour, and meal. They gave us watermelons. Every man stayed on guard and ready."
+        ],
+        "author": "Captain Clark"
+      },
+      {
+        "date": "Friday, August 3, 1804",
+        "text": [
+          "We gave the Indians small gifts based on how important they were. After breakfast, we gathered them under a shade made from our sail and gave a long speech about our journey and what our government wanted. We also gave advice about how they should act.",
+          "The chiefs all gave speeches back, saying they agreed and were happy to have leaders they could trust. After Captain Lewis fired the gun a few times, we packed up and moved on."
+        ],
+        "author": "Captain Clark"
+      }
+    ],
+    "reflection": "Lewis and Clark gave speeches telling Native Americans they had a new “great father.” How do you think the Native Americans felt about this? Why?"
+  },
+  "standard": {
+    "title": "First Council with Western Indians",
+    "dates": "August 2–3, 1804",
+    "context": [
+      "The first official council between representatives of the United States and western Indians occurs north of present-day Omaha, when the Corps of Discovery meets with a small delegation of Oto and Missouri Indians.",
+      "Lewis & Clark establish a routine for later Indian councils: they hand out peace medals, flags, and gifts, show off their technology (magnets, compasses, telescopes, guns); give a speech saying Indians have a new “great father” far to the east and promise them peace and prosperity if the tribes don’t make war."
+    ],
+    "journals": [
+      {
+        "date": "Thursday, August 2, 1804",
+        "text": [
+          "At Sunset a party of the Oto and Missouri Nation came to camp. Among those Indians, 6 were Chiefs. Captain Lewis and myself met those Indians and informed them that we were glad to see them and would speak to them tomorrow. Sent them some roasted meat, pork, flour, and meal. In return they sent us watermelons. Every man on his guard and ready for anything."
+        ],
+        "author": "Captain Clark"
+      },
+      {
+        "date": "Friday, August 3, 1804",
+        "text": [
+          "Made a small present for those people in proportion to their consequence, also a package with a medal to accompany a speech for the Grand Chief. After breakfast, we collected those Indians under an awning of our mainsail and delivered a long speech to them expressive of our journey, the wishes of our government, some advice to them, and directions how they were to conduct themselves.",
+          "Those Chiefs all delivered a speech acknowledging their approbation to the speech and promising to pursue the advice and directions given to them, that they were happy to find that they had fathers might be depended on. After Captain Lewis shot the gun a few shots, we set out and proceeded on."
+        ],
+        "author": "Captain Clark"
+      }
+    ],
+    "reflection": "Lewis and Clark claimed to represent a new “great father” for these tribes. How might the Oto and Missouri leaders have interpreted this message? What power dynamics are at play in this encounter?"
+  },
+  "advanced": {
+    "title": "First Diplomatic Council with Western Nations",
+    "dates": "August 2–3, 1804",
+    "context": [
+      "The first official council between representatives of the United States and western Indigenous nations occurs at a site north of present-day Omaha, Nebraska. The Corps of Discovery meets with a small delegation of Oto and Missouri Indians — two nations that had been significantly weakened by smallpox epidemics in recent decades.",
+      "Lewis and Clark establish what would become their standard diplomatic protocol for subsequent councils: distribution of peace medals (bearing Jefferson’s likeness), American flags, and trade goods; demonstration of technological superiority through magnets, compasses, telescopes, and firearms; and delivery of a formulaic speech asserting American sovereignty, declaring that the tribes now had a new “great father” in Washington, and promising peace and trade prosperity conditional on intertribal peace.",
+      "This protocol reveals the expedition’s role as an instrument of American imperial expansion. The medals and speeches were designed to insert the United States into existing trade and diplomatic networks that had long been dominated by France, Spain, and Britain."
+    ],
+    "journals": [
+      {
+        "date": "Thursday, August 2, 1804",
+        "text": [
+          "At Sunset a party of the Oto and Missouri Nation came to camp. Among those Indians, 6 were Chiefs. Captain Lewis and myself met those Indians and informed them that we were glad to see them and would speak to them tomorrow. Sent them some roasted meat, pork, flour, and meal. In return they sent us watermelons. Every man on his guard and ready for anything."
+        ],
+        "author": "Captain Clark"
+      },
+      {
+        "date": "Friday, August 3, 1804",
+        "text": [
+          "Made a small present for those people in proportion to their consequence, also a package with a medal to accompany a speech for the Grand Chief. After breakfast, we collected those Indians under an awning of our mainsail and delivered a long speech to them expressive of our journey, the wishes of our government, some advice to them, and directions how they were to conduct themselves.",
+          "Those Chiefs all delivered a speech acknowledging their approbation to the speech and promising to pursue the advice and directions given to them, that they were happy to find that they had fathers might be depended on. After Captain Lewis shot the gun a few shots, we set out and proceeded on."
+        ],
+        "author": "Captain Clark"
+      }
+    ],
+    "reflection": "Clark records that gifts were given “in proportion to their consequence” (importance). Analyze the power dynamics of this diplomatic encounter. How did Lewis and Clark use ceremony, technology, and gift-giving as tools of diplomacy? How might the Oto and Missouri chiefs have had their own strategic reasons for engaging with the Americans?"
+  }
+}

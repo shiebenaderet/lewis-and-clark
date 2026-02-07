@@ -1,0 +1,61 @@
+{
+  "beginner": {
+    "title": "Setting Off from Camp Dubois",
+    "dates": "May 14, 1804",
+    "context": [
+      "The Corps of Discovery was a group of explorers sent by President Jefferson to explore the western part of North America. They started their trip near St. Louis, Missouri.",
+      "About 45 men joined the group. They came from many different backgrounds. Some were soldiers, some were hunters, and some were carpenters. Clark brought along York, a man he had enslaved since childhood. Three men had both French-Canadian and Native American parents.",
+      "They traveled in a big boat called a <span class='vocab-word' tabindex='0'>keelboat<span class='vocab-tooltip'>A large, flat-bottomed boat used on rivers</span></span> (55 feet long!) and two smaller boats called <span class='vocab-word' tabindex='0'>pirogues<span class='vocab-tooltip'>Long, narrow boats, like big canoes</span></span>. Moving up the river was hard work — they had to row, use poles, sail, and sometimes even get out and pull the boats with ropes!"
+    ],
+    "journals": [
+      {
+        "date": "Monday, May 14, 1804",
+        "text": [
+          "It rained in the morning. I decided to go to St. Charles, a small French town up the Missouri River, and wait there for Captain Lewis to finish his work in St. Louis.",
+          "I left at 4 o’clock while many neighbors watched. We sailed up the Missouri River with a gentle wind and set up camp on an island."
+        ],
+        "author": "Captain Clark"
+      }
+    ],
+    "reflection": "Why do you think so many different kinds of people joined this expedition? What skills would each person bring?"
+  },
+  "standard": {
+    "title": "The Corps of Discovery Sets Off",
+    "dates": "May 14, 1804",
+    "context": [
+      "The Corps of Discovery sets off from Camp Dubois outside St. Louis and sails up the Missouri River. Nearly four dozen men are involved from every corner of the nation. Three are sons of French-Canadian fathers and Indian mothers. Clark brings along York, a man he had enslaved since childhood. Others include soldiers, carpenters, and hunters.",
+      "They travel in a large keelboat (55 feet long and 8 feet wide) and two smaller boats called pirogues. Proceeding up the Missouri River involves sailing, rowing, using setting poles, and sometimes wading along the bank to pull the boats with ropes."
+    ],
+    "journals": [
+      {
+        "date": "Monday, May 14, 1804",
+        "text": [
+          "Rained the forepart of the day. I determined to go as far as St. Charles, a French village 7 leagues up the Missouri and wait at that place until Capt. Lewis could finish the business in which he was obliged to attend to at St. Louis and join me by land.",
+          "I set out at 4 o’clock in the presence of many of the neighboring inhabitants and proceeded on under a gentle breeze up the Missouri and camped on the island."
+        ],
+        "author": "Captain Clark"
+      }
+    ],
+    "reflection": "The Corps of Discovery included people from very different backgrounds. What does this tell you about what was needed for such an expedition?"
+  },
+  "advanced": {
+    "title": "The Corps of Discovery Embarks from Camp Dubois",
+    "dates": "May 14, 1804",
+    "context": [
+      "The Corps of Discovery sets off from Camp Dubois (Camp Wood) outside St. Louis and begins its ascent of the Missouri River. The expedition, commissioned by President Thomas Jefferson following the Louisiana Purchase of 1803, was tasked with finding a practical route to the Pacific Ocean, establishing diplomatic relations with Native American nations, and documenting the geography, flora, and fauna of the western territory.",
+      "Nearly four dozen men compose the initial party, drawn from diverse backgrounds reflecting the American frontier. Three members are sons of French-Canadian fathers and Native American mothers, representing the existing mixed communities along the frontier. Clark brings York, a man he had enslaved since childhood, who would play a significant role throughout the journey. The rest include Army volunteers, skilled hunters, carpenters, and French boatmen (engagés).",
+      "Their fleet consists of a 55-foot keelboat capable of carrying 12 tons of supplies and two smaller pirogues. Navigating upstream against the Missouri’s powerful current requires every technique available: sailing when wind permits, rowing, pushing with setting poles, and cordelling — wading along the bank and hauling the boats forward with tow ropes."
+    ],
+    "journals": [
+      {
+        "date": "Monday, May 14, 1804",
+        "text": [
+          "Rained the forepart of the day. I determined to go as far as St. Charles, a French village 7 leagues up the Missouri and wait at that place until Capt. Lewis could finish the business in which he was obliged to attend to at St. Louis and join me by land.",
+          "I set out at 4 o’clock in the presence of many of the neighboring inhabitants and proceeded on under a gentle breeze up the Missouri and camped on the island."
+        ],
+        "author": "Captain Clark"
+      }
+    ],
+    "reflection": "Consider the composition of the Corps — soldiers, frontiersmen, enslaved individuals, and men of mixed heritage. What does this reveal about American society on the frontier in 1804? How might each person’s background have contributed differently to the expedition’s success?"
+  }
+}

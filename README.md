@@ -1,10 +1,10 @@
 # The Lost Expedition — Retracing Lewis & Clark
 
-An interactive, single-page website that turns 10 classroom stations on the Lewis & Clark expedition into an immersive Oregon Trail-inspired experience for students.
+An interactive website that turns 10 classroom stations on the Lewis & Clark expedition into an immersive Oregon Trail-inspired experience for students.
 
 ## Version
 
-**v0.1.0** — Initial build
+**v0.2.0** — Modular file structure
 
 ## What This Is
 
@@ -23,15 +23,63 @@ This project replaces a paper-based station activity (where students walk around
 - **Digital journal tracker** — replaces the paper handout (date, author, summary fields)
 - **Random trail events** between stations (grizzly bears, storms, mosquitoes, etc.)
 - **Reflection questions** at each station
-- **Single HTML file** — no build step, no dependencies, works offline
+- **No build step** — pure static files, no dependencies
+
+## Project Structure
+
+```
+lewis-and-clark/
+├── index.html                  # Main page (HTML structure only)
+├── css/
+│   └── styles.css              # All styles (theme, layout, responsive)
+├── js/
+│   ├── data-loader.js          # Fetches station & event JSON data
+│   ├── game-state.js           # State management (level, progress, journal)
+│   ├── renderers.js            # DOM rendering (stations, map, tracker)
+│   ├── trail-events.js         # Trail event overlay logic
+│   └── game-engine.js          # Core game logic, navigation, init
+├── data/
+│   ├── stations/
+│   │   ├── station-01.json     # Station 1 content (all 3 levels)
+│   │   ├── station-02.json     # Station 2 content
+│   │   ├── ...                 # Stations 3–9
+│   │   └── station-10.json     # Station 10 content
+│   └── trail-events.json       # Random encounter events
+├── .nojekyll                   # GitHub Pages config (skip Jekyll)
+├── README.md
+└── LICENSE
+```
+
+### Editing Content
+
+**To update station text:** Edit the JSON files in `data/stations/`. Each file has three objects (`beginner`, `standard`, `advanced`) with `title`, `dates`, `context`, `journals`, and `reflection` fields.
+
+**To add trail events:** Edit `data/trail-events.json`. Each event has `icon`, `title`, and `text`.
+
+**To change styles:** Edit `css/styles.css`. Color variables are at the top in `:root`.
 
 ## How to Use
 
-Open `index.html` in any browser. That's it.
+**GitHub Pages (recommended):** Enable Pages in repo settings, set source to the main branch root. The site will be live at `https://your-username.github.io/lewis-and-clark/`.
 
-Works on Chromebooks, iPads, phones, and desktops. Can be hosted on any web server, shared via Google Classroom, or emailed as an attachment.
+**Local testing:** Run a local web server (required for JSON fetching):
+```
+python3 -m http.server
+```
+Then open `http://localhost:8000` in your browser.
+
+**Note:** Opening `index.html` directly as a file (`file://`) will not work because browsers block `fetch()` requests from local files. You need a web server.
 
 ## Changelog
+
+### v0.2.0
+- Refactored from single HTML file into modular project structure
+- CSS extracted to `css/styles.css`
+- JavaScript split into 5 focused modules
+- Station content moved to individual JSON files (easy to edit)
+- Trail events moved to separate JSON file
+- Added `.nojekyll` for GitHub Pages compatibility
+- Added data-loader with error handling for missing files
 
 ### v0.1.0
 - Initial build of all 10 stations with 3 reading levels each
