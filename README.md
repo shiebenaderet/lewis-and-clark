@@ -8,7 +8,7 @@ An interactive website that turns 10 classroom stations on the Lewis & Clark exp
 
 ## Version
 
-**v0.6.0** — External resource integration (LC Atlas, UNL Journals, NPS)
+**v0.6.1** — Fixed broken gallery images, improved error handling
 
 ## What This Is
 
@@ -82,6 +82,12 @@ Then open `http://localhost:8000` in your browser.
 **Note:** Opening `index.html` directly as a file (`file://`) will not work because browsers block `fetch()` requests from local files. You need a web server.
 
 ## Changelog
+
+### v0.6.1
+- Fixed broken gallery images: recomputed MD5 hash paths for all Wikimedia Commons URLs
+- Replaced unverified image filenames with confirmed ones (Library of Congress illustrations, Peale portraits, Russell/Paxson/Bierstadt paintings)
+- Improved gallery error handling: failed images skip to next working slide; gallery hides entirely if all images fail
+- Gallery navigation now skips failed slides when using arrows
 
 ### v0.6.0
 - Integrated [Corps of Discovery Online Atlas](http://lcatlas.lclark.edu/) (Lewis & Clark College):
