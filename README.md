@@ -8,7 +8,7 @@ An interactive website that turns 10 classroom stations on the Lewis & Clark exp
 
 ## Version
 
-**v0.5.0** — Image galleries, interactive travel events, map fixes
+**v0.6.0** — External resource integration (LC Atlas, UNL Journals, NPS)
 
 ## What This Is
 
@@ -32,6 +32,8 @@ This project replaces a paper-based station activity (where students walk around
 - **Save/resume** — localStorage persistence so students can pick up where they left off
 - **Random trail events** between stations (grizzly bears, storms, mosquitoes, etc.)
 - **Reflection questions** at each station
+- **Primary source links** at each station to real digitized journal entries (University of Nebraska) and the Corps of Discovery Online Atlas (Lewis & Clark College)
+- **Teacher & Student Resources** panel on the title screen linking to external educational sites
 - **No build step** — pure static files, no dependencies
 
 ## Project Structure
@@ -80,6 +82,18 @@ Then open `http://localhost:8000` in your browser.
 **Note:** Opening `index.html` directly as a file (`file://`) will not work because browsers block `fetch()` requests from local files. You need a web server.
 
 ## Changelog
+
+### v0.6.0
+- Integrated [Corps of Discovery Online Atlas](http://lcatlas.lclark.edu/) (Lewis & Clark College):
+  - "Explore the Atlas" button on the map view linking to the interactive GIS trail map
+  - Per-station link to explore locations in the atlas
+- Integrated [Journals of Lewis & Clark](https://lewisandclarkjournals.unl.edu/) (University of Nebraska):
+  - "Read the Real Journal" links at each station to the digitized primary source for that date
+  - Deep links use the date-based URL pattern (e.g., `lc.jrn.1805-11-07` for "Ocean in view!")
+- Added "Explore Primary Sources" section on every station page with journal, atlas, and NPS links
+- Added collapsible "Teacher & Student Resources" panel on the title screen with links to:
+  - UNL Journals, LC Atlas, NPS Trail Maps, Gilder Lehrman Interactive Map, Lewis & Clark Trail Alliance
+- Added atlas link below the trail map with description
 
 ### v0.5.0
 - Image galleries at each station: 2–3 curated images per station (paintings, portraits, NPS photos) with carousel navigation (arrows + dots)
