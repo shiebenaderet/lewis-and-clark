@@ -30,7 +30,7 @@ function renderStation(index) {
     images.forEach((img, imgIdx) => {
       html += `<div class="gallery-slide ${imgIdx === 0 ? 'active' : ''}" data-slide="${imgIdx}">`;
       html += `<div class="gallery-img-wrap">`;
-      html += `<img src="${img.url}" alt="${escapeHtml(img.alt)}" loading="${imgIdx === 0 ? 'eager' : 'lazy'}" onerror="this.closest('.gallery-slide').style.display='none'">`;
+      html += `<img src="${img.url}" alt="${escapeHtml(img.alt)}" loading="${imgIdx === 0 ? 'eager' : 'lazy'}" onerror="galleryImgError(this, ${index})">`;
       html += `</div>`;
       if (img.caption) {
         html += `<div class="gallery-caption">${escapeHtml(img.caption)}</div>`;
@@ -350,17 +350,56 @@ const STATION_RESOURCES = [
   }
 ];
 
+// === GALLERY IMAGE ERROR HANDLING ===
+function galleryImgError(img, stationIndex) {
+  const slide = img.closest('.gallery-slide');
+  if (!slide) return;
+  slide.style.display = 'none';
+  slide.dataset.failed = 'true';
+
+  const gallery = document.getElementById('gallery-' + stationIndex);
+  if (!gallery) return;
+
+  const slides = gallery.querySelectorAll('.gallery-slide');
+  const allFailed = Array.from(slides).every(s => s.dataset.failed === 'true');
+
+  if (allFailed) {
+    // Hide entire gallery if no images loaded
+    gallery.style.display = 'none';
+    return;
+  }
+
+  // If the active slide failed, show the next working one
+  if (slide.classList.contains('active')) {
+    slide.classList.remove('active');
+    for (const s of slides) {
+      if (s.dataset.failed !== 'true') {
+        s.classList.add('active');
+        // Update dot
+        const dots = gallery.querySelectorAll('.gallery-dot');
+        dots.forEach(d => d.classList.remove('active'));
+        const idx = parseInt(s.dataset.slide);
+        if (dots[idx]) dots[idx].classList.add('active');
+        break;
+      }
+    }
+  }
+}
+
 // === GALLERY NAVIGATION ===
 function galleryNav(stationIndex, direction) {
   const gallery = document.getElementById('gallery-' + stationIndex);
   if (!gallery) return;
   const slides = gallery.querySelectorAll('.gallery-slide');
-  const dots = gallery.querySelectorAll('.gallery-dot');
   const current = gallery.querySelector('.gallery-slide.active');
   const currentIdx = parseInt(current.dataset.slide);
-  let next = currentIdx + direction;
-  if (next < 0) next = slides.length - 1;
-  if (next >= slides.length) next = 0;
+  let next = currentIdx;
+  for (let i = 0; i < slides.length; i++) {
+    next = next + direction;
+    if (next < 0) next = slides.length - 1;
+    if (next >= slides.length) next = 0;
+    if (slides[next].dataset.failed !== 'true') break;
+  }
   galleryGo(stationIndex, next);
 }
 
