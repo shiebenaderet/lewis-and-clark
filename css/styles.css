@@ -363,10 +363,15 @@ body {
 
 .map-station {
   cursor: pointer;
-  transition: transform 0.2s;
 }
 
-.map-station:hover { transform: scale(1.15); }
+.map-station:hover circle {
+  filter: brightness(1.3);
+}
+
+.map-station:hover text {
+  fill: #000;
+}
 
 .map-station-dot {
   fill: var(--trail-brown);
@@ -831,31 +836,105 @@ body {
 }
 
 /* ============================================================
-   STATION HERO IMAGE
+   STATION IMAGE GALLERY
    ============================================================ */
-.station-hero {
-  width: 100%;
-  max-height: 300px;
-  overflow: hidden;
+.station-gallery {
+  position: relative;
+  background: #1a0f08;
+}
+
+.gallery-slide {
+  display: none;
   position: relative;
 }
 
-.station-hero img {
+.gallery-slide.active {
+  display: block;
+  animation: fadeIn 0.4s ease;
+}
+
+.gallery-img-wrap {
   width: 100%;
-  height: 250px;
+  max-height: 320px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0d0805;
+}
+
+.gallery-img-wrap img {
+  width: 100%;
+  height: 300px;
   object-fit: cover;
   display: block;
 }
 
-.station-hero-caption {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  background: rgba(0,0,0,0.6);
+.gallery-caption {
+  background: rgba(0,0,0,0.7);
   color: var(--parchment-dark);
-  font-size: 0.65rem;
-  padding: 0.2rem 0.5rem;
+  font-size: 0.72rem;
+  padding: 0.35rem 0.75rem;
   font-family: var(--font-ui);
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* Gallery navigation */
+.gallery-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  background: rgba(0,0,0,0.5);
+}
+
+.gallery-arrow {
+  font-size: 1.5rem;
+  background: rgba(255,255,255,0.1);
+  color: var(--parchment);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  padding: 0;
+}
+
+.gallery-arrow:hover {
+  background: rgba(255,255,255,0.25);
+  border-color: var(--campfire);
+}
+
+.gallery-dots {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.gallery-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+  border: 1px solid rgba(255,255,255,0.3);
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s;
+}
+
+.gallery-dot.active {
+  background: var(--campfire-glow);
+  border-color: var(--campfire);
+}
+
+.gallery-dot:hover {
+  background: rgba(255,255,255,0.5);
 }
 
 /* ============================================================
@@ -1040,28 +1119,192 @@ body {
 
 .travel-event {
   background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 8px;
-  padding: 1rem;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  padding: 1.25rem;
   margin-bottom: 1rem;
   animation: slideUp 0.4s ease;
 }
 
 .travel-event-emoji {
-  font-size: 2rem;
+  font-size: 2.5rem;
   margin-bottom: 0.5rem;
 }
 
 .travel-event-msg {
-  color: var(--parchment-dark);
-  font-size: 0.9rem;
+  color: var(--parchment);
+  font-size: 1.1rem;
   line-height: 1.5;
+  margin-bottom: 0.25rem;
 }
 
+.travel-event-desc {
+  color: var(--parchment-dark);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.travel-arrival {
+  border-color: var(--campfire);
+  background: rgba(212, 118, 10, 0.1);
+}
+
+.travel-score-line {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  color: var(--campfire-glow);
+  margin-bottom: 1rem;
+  min-height: 1.2em;
+}
+
+/* --- Travel choice buttons --- */
+.travel-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.travel-choice-btn {
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  padding: 0.7rem 1rem;
+  background: rgba(255,255,255,0.08);
+  color: var(--parchment-dark);
+  border: 1.5px solid rgba(255,255,255,0.2);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+}
+
+.travel-choice-btn:hover {
+  background: rgba(255,255,255,0.15);
+  border-color: var(--campfire);
+  color: var(--parchment);
+  transform: translateX(4px);
+}
+
+.travel-choice-btn:disabled {
+  cursor: default;
+  opacity: 0.6;
+  transform: none;
+}
+
+.travel-choice-btn.choice-good {
+  background: rgba(45, 80, 22, 0.35);
+  border-color: var(--forest-light);
+  color: #b5e8a0;
+  opacity: 1;
+}
+
+.travel-choice-btn.choice-bad {
+  background: rgba(139, 26, 26, 0.3);
+  border-color: var(--danger);
+  color: #e8a0a0;
+  opacity: 1;
+}
+
+/* --- Travel result feedback --- */
+.travel-result {
+  margin-top: 0.75rem;
+  padding: 0.7rem 0.9rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  animation: slideUp 0.3s ease;
+}
+
+.result-good {
+  background: rgba(45, 80, 22, 0.2);
+  border: 1px solid rgba(74, 124, 46, 0.4);
+  color: #b5e8a0;
+}
+
+.result-bad {
+  background: rgba(139, 26, 26, 0.15);
+  border: 1px solid rgba(139, 26, 26, 0.4);
+  color: #e8a0a0;
+}
+
+.result-points {
+  font-weight: bold;
+  font-family: var(--font-ui);
+  margin-right: 0.3rem;
+}
+
+/* --- Tap/swat mini-game --- */
+.swat-arena {
+  margin-top: 0.75rem;
+}
+
+.swat-timer {
+  font-family: var(--font-ui);
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--campfire-glow);
+  text-align: center;
+}
+
+.swat-counter {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  color: var(--parchment-dark);
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.swat-field {
+  position: relative;
+  width: 100%;
+  height: 160px;
+  background: rgba(255,255,255,0.03);
+  border: 1px dashed rgba(255,255,255,0.15);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.swat-target {
+  position: absolute;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  animation: swatPop 0.3s ease;
+  transition: transform 0.1s;
+  padding: 0.2rem;
+  line-height: 1;
+}
+
+.swat-target:hover {
+  transform: scale(1.3);
+}
+
+.swat-target:active {
+  transform: scale(0.8);
+}
+
+.swat-hit {
+  transform: scale(0) !important;
+  opacity: 0;
+  transition: all 0.2s;
+}
+
+.swat-miss {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+@keyframes swatPop {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* --- Continue button --- */
 .btn-travel-continue {
   font-family: var(--font-heading);
-  font-size: 1rem;
-  padding: 0.7rem 2.5rem;
+  font-size: 1.1rem;
+  padding: 0.8rem 2.5rem;
   background: var(--leather);
   color: var(--parchment);
   border: 2px solid var(--campfire);
@@ -1073,11 +1316,8 @@ body {
 
 .btn-travel-continue:hover {
   background: var(--campfire);
-}
-
-.btn-travel-continue:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(212, 118, 10, 0.3);
 }
 
 /* ============================================================

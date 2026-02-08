@@ -18,11 +18,6 @@
       }
     ],
     "reflection": "Why do you think so many different kinds of people joined this expedition? What skills would each person bring?",
-    "image": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Lewis_and_clark-expedition.jpg/800px-Lewis_and_clark-expedition.jpg",
-      "alt": "Map of the Lewis and Clark expedition route",
-      "caption": "Map of the Lewis and Clark Expedition route, 1804-1806 — Wikimedia Commons"
-    },
     "challenge": {
       "type": "multiple_choice",
       "question": "Based on what you just read, how many men were in the Corps of Discovery when they set off?",
@@ -35,7 +30,24 @@
       "correct": 1,
       "feedback_correct": "That's right! Nearly four dozen men — from soldiers to carpenters to hunters — set off from Camp Dubois.",
       "feedback_incorrect": "Not quite. Clark wrote that nearly four dozen men (about 48) were involved at the start of the expedition."
-    }
+    },
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Lewis_and_clark-expedition.jpg/800px-Lewis_and_clark-expedition.jpg",
+        "alt": "Map of the Lewis and Clark expedition route",
+        "caption": "Map of the Lewis and Clark Expedition, 1804–1806 — Wikimedia Commons"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Meriwether_Lewis-Charles_Willson_Peale.jpg/800px-Meriwether_Lewis-Charles_Willson_Peale.jpg",
+        "alt": "Portrait of Meriwether Lewis by Charles Willson Peale, 1807",
+        "caption": "Captain Meriwether Lewis, painted by Charles Willson Peale, 1807 — Independence National Historical Park"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/William_Clark-Charles_Willson_Peale.jpg/800px-William_Clark-Charles_Willson_Peale.jpg",
+        "alt": "Portrait of William Clark by Charles Willson Peale",
+        "caption": "Captain William Clark, painted by Charles Willson Peale, c. 1810 — Independence National Historical Park"
+      }
+    ]
   },
   "standard": {
     "title": "The Corps of Discovery Sets Off",
@@ -55,11 +67,6 @@
       }
     ],
     "reflection": "The Corps of Discovery included people from very different backgrounds. What does this tell you about what was needed for such an expedition?",
-    "image": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Lewis_and_clark-expedition.jpg/800px-Lewis_and_clark-expedition.jpg",
-      "alt": "Map of the Lewis and Clark expedition route",
-      "caption": "Map of the Lewis and Clark Expedition route, 1804-1806 — Wikimedia Commons"
-    },
     "challenge": {
       "type": "multiple_choice",
       "question": "Based on what you just read, how many men were in the Corps of Discovery when they set off?",
@@ -72,7 +79,24 @@
       "correct": 1,
       "feedback_correct": "That's right! Nearly four dozen men — from soldiers to carpenters to hunters — set off from Camp Dubois.",
       "feedback_incorrect": "Not quite. Clark wrote that nearly four dozen men (about 48) were involved at the start of the expedition."
-    }
+    },
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Lewis_and_clark-expedition.jpg/800px-Lewis_and_clark-expedition.jpg",
+        "alt": "Map of the Lewis and Clark expedition route",
+        "caption": "Map of the Lewis and Clark Expedition, 1804–1806 — Wikimedia Commons"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Meriwether_Lewis-Charles_Willson_Peale.jpg/800px-Meriwether_Lewis-Charles_Willson_Peale.jpg",
+        "alt": "Portrait of Meriwether Lewis by Charles Willson Peale, 1807",
+        "caption": "Captain Meriwether Lewis, painted by Charles Willson Peale, 1807 — Independence National Historical Park"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/William_Clark-Charles_Willson_Peale.jpg/800px-William_Clark-Charles_Willson_Peale.jpg",
+        "alt": "Portrait of William Clark by Charles Willson Peale",
+        "caption": "Captain William Clark, painted by Charles Willson Peale, c. 1810 — Independence National Historical Park"
+      }
+    ]
   },
   "advanced": {
     "title": "The Corps of Discovery Embarks from Camp Dubois",
@@ -93,11 +117,6 @@
       }
     ],
     "reflection": "Consider the composition of the Corps — soldiers, frontiersmen, enslaved individuals, and men of mixed heritage. What does this reveal about American society on the frontier in 1804? How might each person’s background have contributed differently to the expedition’s success?",
-    "image": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Lewis_and_clark-expedition.jpg/800px-Lewis_and_clark-expedition.jpg",
-      "alt": "Map of the Lewis and Clark expedition route",
-      "caption": "Map of the Lewis and Clark Expedition route, 1804-1806 — Wikimedia Commons"
-    },
     "challenge": {
       "type": "multiple_choice",
       "question": "Based on what you just read, how many men were in the Corps of Discovery when they set off?",
@@ -110,6 +129,23 @@
       "correct": 1,
       "feedback_correct": "That's right! Nearly four dozen men — from soldiers to carpenters to hunters — set off from Camp Dubois.",
       "feedback_incorrect": "Not quite. Clark wrote that nearly four dozen men (about 48) were involved at the start of the expedition."
-    }
+    },
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Lewis_and_clark-expedition.jpg/800px-Lewis_and_clark-expedition.jpg",
+        "alt": "Map of the Lewis and Clark expedition route",
+        "caption": "Map of the Lewis and Clark Expedition, 1804–1806 — Wikimedia Commons"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Meriwether_Lewis-Charles_Willson_Peale.jpg/800px-Meriwether_Lewis-Charles_Willson_Peale.jpg",
+        "alt": "Portrait of Meriwether Lewis by Charles Willson Peale, 1807",
+        "caption": "Captain Meriwether Lewis, painted by Charles Willson Peale, 1807 — Independence National Historical Park"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/William_Clark-Charles_Willson_Peale.jpg/800px-William_Clark-Charles_Willson_Peale.jpg",
+        "alt": "Portrait of William Clark by Charles Willson Peale",
+        "caption": "Captain William Clark, painted by Charles Willson Peale, c. 1810 — Independence National Historical Park"
+      }
+    ]
   }
 }

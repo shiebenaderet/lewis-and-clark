@@ -31,11 +31,6 @@
       }
     ],
     "reflection": "York and Sacagawea both got to vote on where to camp. Why is this surprising for the year 1805? What does it tell you about life on the expedition compared to life in the rest of America?",
-    "image": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Fort_Clatsop_replica2.jpg/800px-Fort_Clatsop_replica2.jpg",
-      "alt": "Replica of Fort Clatsop, Lewis and Clark National Historical Park",
-      "caption": "Fort Clatsop replica, Lewis and Clark National Historical Park — Wikimedia Commons (NPS)"
-    },
     "challenge": {
       "type": "multiple_choice",
       "question": "When the Corps voted on where to camp for the winter, who got to vote?",
@@ -48,7 +43,19 @@
       "correct": 2,
       "feedback_correct": "That's right! Everyone voted equally — including York and Sacagawea. This was decades before abolition and over a century before women or Native Americans gained voting rights in the rest of America.",
       "feedback_incorrect": "Everyone voted — including York (enslaved by Clark) and Sacagawea. This was remarkable for 1805: neither could legally vote anywhere in America at that time."
-    }
+    },
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Fort_Clatsop_replica2.jpg/800px-Fort_Clatsop_replica2.jpg",
+        "alt": "Fort Clatsop replica at Lewis and Clark National Historical Park",
+        "caption": "Fort Clatsop replica, Lewis and Clark National Historical Park — NPS"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Lewis_and_clark-expedition.jpg/800px-Lewis_and_clark-expedition.jpg",
+        "alt": "Complete map of the Lewis and Clark expedition route",
+        "caption": "The complete expedition route — over 8,000 miles from St. Louis to the Pacific and back"
+      }
+    ]
   },
   "standard": {
     "title": "Ocean in View! Fort Clatsop and the Pacific",
@@ -81,11 +88,6 @@
       }
     ],
     "reflection": "The vote at the Columbia included York (an enslaved man) and Sacagawea (a Native American woman). Neither could legally vote anywhere in America at this time. What does this tell us about how the expedition’s experience differed from mainstream American society?",
-    "image": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Fort_Clatsop_replica2.jpg/800px-Fort_Clatsop_replica2.jpg",
-      "alt": "Replica of Fort Clatsop, Lewis and Clark National Historical Park",
-      "caption": "Fort Clatsop replica, Lewis and Clark National Historical Park — Wikimedia Commons (NPS)"
-    },
     "challenge": {
       "type": "multiple_choice",
       "question": "When the Corps voted on where to camp for the winter, who got to vote?",
@@ -98,7 +100,19 @@
       "correct": 2,
       "feedback_correct": "That's right! Everyone voted equally — including York and Sacagawea. This was decades before abolition and over a century before women or Native Americans gained voting rights in the rest of America.",
       "feedback_incorrect": "Everyone voted — including York (enslaved by Clark) and Sacagawea. This was remarkable for 1805: neither could legally vote anywhere in America at that time."
-    }
+    },
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Fort_Clatsop_replica2.jpg/800px-Fort_Clatsop_replica2.jpg",
+        "alt": "Fort Clatsop replica at Lewis and Clark National Historical Park",
+        "caption": "Fort Clatsop replica, Lewis and Clark National Historical Park — NPS"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Lewis_and_clark-expedition.jpg/800px-Lewis_and_clark-expedition.jpg",
+        "alt": "Complete map of the Lewis and Clark expedition route",
+        "caption": "The complete expedition route — over 8,000 miles from St. Louis to the Pacific and back"
+      }
+    ]
   },
   "advanced": {
     "title": "“Ocian in View!” — The Pacific, Fort Clatsop, and the Democratic Vote",
@@ -132,11 +146,6 @@
       }
     ],
     "reflection": "The vote at the Columbia — in which York and Sacagawea participated equally — is often cited as a remarkable moment in American democratic history. Evaluate this claim critically: Was this genuine democratic principle, or practical necessity born of extreme circumstances? Consider that upon returning to St. Louis, York remained enslaved and Sacagawea received no compensation. What does the contrast between the expedition’s egalitarianism and the society it returned to reveal about the limits of frontier democracy?",
-    "image": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Fort_Clatsop_replica2.jpg/800px-Fort_Clatsop_replica2.jpg",
-      "alt": "Replica of Fort Clatsop, Lewis and Clark National Historical Park",
-      "caption": "Fort Clatsop replica, Lewis and Clark National Historical Park — Wikimedia Commons (NPS)"
-    },
     "challenge": {
       "type": "multiple_choice",
       "question": "When the Corps voted on where to camp for the winter, who got to vote?",
@@ -149,6 +158,18 @@
       "correct": 2,
       "feedback_correct": "That's right! Everyone voted equally — including York and Sacagawea. This was decades before abolition and over a century before women or Native Americans gained voting rights in the rest of America.",
       "feedback_incorrect": "Everyone voted — including York (enslaved by Clark) and Sacagawea. This was remarkable for 1805: neither could legally vote anywhere in America at that time."
-    }
+    },
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Fort_Clatsop_replica2.jpg/800px-Fort_Clatsop_replica2.jpg",
+        "alt": "Fort Clatsop replica at Lewis and Clark National Historical Park",
+        "caption": "Fort Clatsop replica, Lewis and Clark National Historical Park — NPS"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Lewis_and_clark-expedition.jpg/800px-Lewis_and_clark-expedition.jpg",
+        "alt": "Complete map of the Lewis and Clark expedition route",
+        "caption": "The complete expedition route — over 8,000 miles from St. Louis to the Pacific and back"
+      }
+    ]
   }
 }

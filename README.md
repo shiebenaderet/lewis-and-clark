@@ -8,7 +8,7 @@ An interactive website that turns 10 classroom stations on the Lewis & Clark exp
 
 ## Version
 
-**v0.4.0** — Geographically accurate trail map
+**v0.5.0** — Image galleries, interactive travel events, map fixes
 
 ## What This Is
 
@@ -26,9 +26,9 @@ This project replaces a paper-based station activity (where students walk around
 - **Geographically accurate trail map** (SVG) with real lat/long projection, terrain features, rivers, mountains, coastline, and progress tracking
 - **Journey segment details** — hover between stations to see distance, travel time, health toll, and supply status for each leg
 - **Digital journal tracker** — replaces the paper handout (date, author, summary fields)
-- **Historical images** at each station from Wikimedia Commons (paintings by Bierstadt, Russell, Bodmer, NPS photos)
+- **Image galleries** at each station with 2–3 images (scene paintings, portraits, artifacts) from Wikimedia Commons, with carousel navigation
 - **Knowledge checks** — multiple-choice challenges at each station with feedback and scoring
-- **Travel transitions** — animated journey between stations with random trail encounters and progress bar
+- **Interactive travel events** — choice-based encounters (grizzly bears, river forks, friendly camps) and tap/swat mini-games (mosquitoes, wolves, cactus fields) between stations
 - **Save/resume** — localStorage persistence so students can pick up where they left off
 - **Random trail events** between stations (grizzly bears, storms, mosquitoes, etc.)
 - **Reflection questions** at each station
@@ -61,9 +61,9 @@ lewis-and-clark/
 
 ### Editing Content
 
-**To update station text:** Edit the JSON files in `data/stations/`. Each file has three objects (`beginner`, `standard`, `advanced`) with `title`, `dates`, `context`, `journals`, `reflection`, `image`, and `challenge` fields.
+**To update station text:** Edit the JSON files in `data/stations/`. Each file has three objects (`beginner`, `standard`, `advanced`) with `title`, `dates`, `context`, `journals`, `reflection`, `images` (array), and `challenge` fields.
 
-**To add trail events:** Edit `data/trail-events.json`. Each event has `icon`, `title`, and `text`.
+**To add trail events:** Edit `data/trail-events.json`. Each event has `icon`, `title`, `text`, `action` (`quick_choice` or `tap_swat`), and type-specific fields (`choices` array or `swat_target`/`swat_count`/`swat_time`).
 
 **To change styles:** Edit `css/styles.css`. Color variables are at the top in `:root`.
 
@@ -80,6 +80,18 @@ Then open `http://localhost:8000` in your browser.
 **Note:** Opening `index.html` directly as a file (`file://`) will not work because browsers block `fetch()` requests from local files. You need a web server.
 
 ## Changelog
+
+### v0.5.0
+- Image galleries at each station: 2–3 curated images per station (paintings, portraits, NPS photos) with carousel navigation (arrows + dots)
+- Interactive travel events between stations replacing auto-advancing transitions:
+  - Choice-based encounters (3 options with good/bad outcomes, historical context in feedback)
+  - Tap/swat mini-games (timed target-tapping challenges: mosquitoes, wolves, cactus)
+  - Points awarded for each event (+5 good choices, +1 poor choices; +5 successful swats, +2 partial)
+  - 2–3 random events per journey leg, with arrival summary and point tally
+- Fixed map station hover "bounce" bug (SVG transform scaling from origin)
+- Fixed map tooltip text too small and pulsing (separated glow animation layer, increased tooltip size and font sizes)
+- All 10 station JSON files updated with `images` arrays (backward-compatible with single `image`)
+- Trail events JSON rewritten with 10 interactive events (6 choice-based, 4 tap/swat)
 
 ### v0.4.0
 - Replaced abstract map with geographically accurate SVG trail map using equirectangular projection
