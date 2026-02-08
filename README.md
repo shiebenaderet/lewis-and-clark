@@ -8,7 +8,7 @@ An interactive website that turns 10 classroom stations on the Lewis & Clark exp
 
 ## Version
 
-**v0.3.0** — Images, challenges, travel transitions, save/resume
+**v0.4.0** — Geographically accurate trail map
 
 ## What This Is
 
@@ -23,7 +23,8 @@ This project replaces a paper-based station activity (where students walk around
   - *Easier Vocabulary* — 4th grade reading level, simplified text, vocabulary tooltips
   - *Standard* — 8th grade level (default)
   - *Advanced* — 10th grade level, deeper analysis, fewer scaffolds
-- **Interactive trail map** (SVG) with progress tracking
+- **Geographically accurate trail map** (SVG) with real lat/long projection, terrain features, rivers, mountains, coastline, and progress tracking
+- **Journey segment details** — hover between stations to see distance, travel time, health toll, and supply status for each leg
 - **Digital journal tracker** — replaces the paper handout (date, author, summary fields)
 - **Historical images** at each station from Wikimedia Commons (paintings by Bierstadt, Russell, Bodmer, NPS photos)
 - **Knowledge checks** — multiple-choice challenges at each station with feedback and scoring
@@ -79,6 +80,16 @@ Then open `http://localhost:8000` in your browser.
 **Note:** Opening `index.html` directly as a file (`file://`) will not work because browsers block `fetch()` requests from local files. You need a web server.
 
 ## Changelog
+
+### v0.4.0
+- Replaced abstract map with geographically accurate SVG trail map using equirectangular projection
+- Station markers placed at real lat/long coordinates (Camp Dubois to Fort Clatsop)
+- Terrain features: Rocky Mountains, Great Plains, Pacific coastline, Missouri/Columbia/Mississippi rivers
+- Journey segment tooltips: hover trail between stations to see miles, days, health, and supply data
+- Fort Mandan cluster handling (stations 4-6 at same location with visual offsets)
+- Compass rose, 200-mile scale bar, cumulative journey statistics
+- Pulsing glow animation on current station marker
+- "Hover for journey details" hint in map legend
 
 ### v0.3.0
 - Fixed splash screen bug ("Begin the Expedition" button now works)
