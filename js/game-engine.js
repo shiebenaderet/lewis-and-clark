@@ -137,11 +137,146 @@ function updateTitleContinueButton() {
   }
 }
 
+// === JOURNAL PDF EXPORT ===
+function exportJournalPDF() {
+  const stationNames = [];
+  for (let i = 0; i < STATIONS.length; i++) {
+    const s = STATIONS[i];
+    const d = s[state.level] || s.standard;
+    stationNames.push(d.title);
+  }
+
+  let entries = '';
+  for (let i = 0; i < STATIONS.length; i++) {
+    const date = state.journalEntries[`date_${i}`] || '';
+    const author = state.journalEntries[`author_${i}`] || '';
+    const summary = state.journalEntries[`summary_${i}`] || '';
+    const reflection = state.journalEntries[`reflection_${i}`] || '';
+    const visited = state.visitedStations.has(i);
+
+    if (!visited) continue;
+
+    entries += `
+      <div class="entry ${i > 0 ? 'page-break' : ''}">
+        <div class="entry-header">
+          <div class="entry-station">Station ${i + 1}</div>
+          <h2 class="entry-title">${stationNames[i]}</h2>
+          ${date ? `<div class="entry-date">${date}</div>` : ''}
+        </div>
+        ${author ? `<div class="entry-field"><span class="field-label">Journal Author(s):</span> ${author}</div>` : ''}
+        ${summary ? `
+          <div class="entry-section">
+            <div class="section-label">Summary of Events</div>
+            <p>${summary}</p>
+          </div>
+        ` : '<div class="entry-section"><div class="section-label">Summary of Events</div><p class="empty-field">[No entry recorded]</p></div>'}
+        ${reflection ? `
+          <div class="entry-section">
+            <div class="section-label">Historian&rsquo;s Analysis</div>
+            <p>${reflection}</p>
+          </div>
+        ` : ''}
+        <div class="entry-ornament">&mdash; &#x2736; &mdash;</div>
+      </div>
+    `;
+  }
+
+  const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Expedition Journal - The Lost Expedition</title>
+<style>
+  @page { size: letter; margin: 0.75in 1in; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    color: #2c1810;
+    background: #f4e8c1;
+    line-height: 1.7;
+    font-size: 12pt;
+  }
+  .cover {
+    text-align: center;
+    padding: 2.5in 0.5in 1in;
+    page-break-after: always;
+  }
+  .cover-border {
+    border: 3px double #8b4513;
+    padding: 2rem;
+  }
+  .cover-year { font-size: 14pt; color: #8b4513; letter-spacing: 0.3em; margin-bottom: 0.5rem; }
+  .cover h1 { font-size: 28pt; color: #2c1810; margin-bottom: 0.3rem; }
+  .cover-sub { font-size: 14pt; font-style: italic; color: #5c4033; margin-bottom: 1.5rem; }
+  .cover-divider { width: 120px; height: 2px; background: #8b4513; margin: 1rem auto; }
+  .cover-by { font-size: 11pt; color: #5c4033; margin-top: 1rem; }
+  .cover-name { font-size: 16pt; font-weight: bold; color: #2c1810; margin-top: 0.25rem; border-bottom: 1px solid #8b4513; display: inline-block; min-width: 250px; padding-bottom: 2px; }
+  .cover-stats { font-size: 10pt; color: #8b4513; margin-top: 2rem; }
+  .page-break { page-break-before: always; }
+  .entry { margin-bottom: 2rem; }
+  .entry-header {
+    border-bottom: 2px solid #8b4513;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  .entry-station {
+    font-size: 9pt;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #8b4513;
+  }
+  .entry-title { font-size: 18pt; color: #2c1810; margin: 0.2rem 0; }
+  .entry-date { font-style: italic; color: #5c4033; font-size: 11pt; }
+  .entry-field { font-size: 11pt; color: #5c4033; margin-bottom: 0.75rem; }
+  .field-label { font-weight: bold; color: #2c1810; }
+  .entry-section { margin-bottom: 1rem; }
+  .section-label {
+    font-size: 9pt;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #8b4513;
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+  }
+  .entry-section p {
+    text-indent: 1.5em;
+    text-align: justify;
+  }
+  .empty-field { color: #999; font-style: italic; }
+  .entry-ornament {
+    text-align: center;
+    color: #8b4513;
+    font-size: 14pt;
+    margin-top: 1rem;
+    letter-spacing: 0.5em;
+  }
+  @media print {
+    body { background: white; }
+  }
+</style></head><body>
+  <div class="cover">
+    <div class="cover-border">
+      <div class="cover-year">1804 &ndash; 1806</div>
+      <h1>Expedition Journal</h1>
+      <div class="cover-sub">Retracing the Journey of Lewis &amp; Clark</div>
+      <div class="cover-divider"></div>
+      <div class="cover-by">Recorded by</div>
+      <div class="cover-name">&nbsp;</div>
+      <div class="cover-stats">${state.visitedStations.size} stations visited &bull; ${state.challengesCompleted.size} knowledge checks completed &bull; ${state.score} points earned</div>
+    </div>
+  </div>
+  ${entries}
+</body></html>`;
+
+  const win = window.open('', '_blank');
+  if (win) {
+    win.document.write(html);
+    win.document.close();
+    setTimeout(() => win.print(), 500);
+  }
+}
+
 // === INITIALIZATION ===
 document.addEventListener('DOMContentLoaded', async () => {
   const loaded = await loadAllData();
   if (loaded) {
     updateTitleContinueButton();
-    console.log('The Lost Expedition v0.6.1: Ready');
+    console.log('The Lost Expedition v0.7.0: Ready');
   }
 });

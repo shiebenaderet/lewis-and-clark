@@ -31,17 +31,16 @@
     </div>
     <button class="btn-start" onclick="startGame()">Begin the Expedition</button>
     <div id="title-continue" class="title-continue"></div>
-    <div class="teacher-resources">
-      <button class="teacher-toggle" onclick="this.parentElement.classList.toggle('open')">Teacher &amp; Student Resources &#x25BC;</button>
+    <details class="teacher-resources">
+      <summary class="teacher-toggle">Teacher &amp; Student Resources</summary>
       <div class="teacher-links">
-        <a href="https://lewisandclarkjournals.unl.edu/" target="_blank" rel="noopener">&#x1F4DC; The Journals of Lewis &amp; Clark <span>Full digitized journals &mdash; University of Nebraska</span></a>
-        <a href="http://lcatlas.lclark.edu/" target="_blank" rel="noopener">&#x1F5FA; Corps of Discovery Online Atlas <span>Interactive GIS trail map &mdash; Lewis &amp; Clark College</span></a>
-        <a href="https://www.nps.gov/lecl/planyourvisit/maps.htm" target="_blank" rel="noopener">&#x1F3DE; NPS Lewis &amp; Clark Trail Maps <span>Official trail maps &mdash; National Park Service</span></a>
-        <a href="https://www.gilderlehrman.org/history-resources/online-exhibitions/lewis-and-clark-expedition-interactive-map" target="_blank" rel="noopener">&#x1F30E; Interactive Expedition Map <span>Timeline &amp; route explorer &mdash; Gilder Lehrman Institute</span></a>
-        <a href="https://lewisandclark.org/" target="_blank" rel="noopener">&#x26FA; Lewis &amp; Clark Trail Alliance <span>Preservation, education &amp; trail stewardship</span></a>
+        <a href="https://lewisandclarkjournals.unl.edu/" target="_blank" rel="noopener">The Journals of Lewis &amp; Clark <span>Full digitized journals &mdash; University of Nebraska</span></a>
+        <a href="http://lcatlas.lclark.edu/" target="_blank" rel="noopener">Corps of Discovery Online Atlas <span>Interactive GIS trail map &mdash; Lewis &amp; Clark College</span></a>
+        <a href="https://www.nps.gov/lecl/planyourvisit/maps.htm" target="_blank" rel="noopener">NPS Lewis &amp; Clark Trail Maps <span>Official trail maps &mdash; National Park Service</span></a>
+        <a href="https://www.gilderlehrman.org/history-resources/online-exhibitions/lewis-and-clark-expedition-interactive-map" target="_blank" rel="noopener">Interactive Expedition Map <span>Timeline &amp; route explorer &mdash; Gilder Lehrman Institute</span></a>
       </div>
-    </div>
-    <div style="margin-top:2rem;font-size:0.7rem;color:rgba(244,232,193,0.3);font-family:var(--font-ui);">v0.6.1</div>
+    </details>
+    <div style="margin-top:2rem;font-size:0.7rem;color:rgba(244,232,193,0.3);font-family:var(--font-ui);">v0.7.0</div>
   </div>
 </div>
 
@@ -109,15 +108,17 @@
   <div class="game-body" id="view-journal">
     <div class="journal-tracker">
       <h2 class="journal-tracker-title">Expedition Journal</h2>
-      <p class="journal-tracker-subtitle">Record your findings as you travel from station to station.</p>
+      <p class="journal-tracker-subtitle">Record your findings as you travel from station to station. Fill in entries at each station or edit them here.</p>
+      <div style="text-align:center; margin-bottom:1rem;"><button class="btn-station-nav" style="font-size:0.8rem; padding:0.4rem 1rem;" onclick="exportJournalPDF()">Export Journal as PDF</button></div>
       <div style="overflow-x:auto;">
         <table class="tracker-table">
           <thead>
             <tr>
-              <th style="width:50px;">Stn</th>
-              <th style="width:120px;">Date(s)</th>
-              <th style="width:140px;">Journal Author(s)</th>
-              <th>Summary of Events</th>
+              <th style="width:40px;">Stn</th>
+              <th style="width:100px;">Date(s)</th>
+              <th style="width:110px;">Author(s)</th>
+              <th>Summary</th>
+              <th>Analysis</th>
             </tr>
           </thead>
           <tbody id="tracker-body">
@@ -156,7 +157,8 @@
     <h1 class="completion-title">Journey Complete!</h1>
     <p class="completion-text" id="completion-text"></p>
     <button class="btn-restart" onclick="showView('journal'); showScreen('game-screen');">Review Your Journal</button>
-    <button class="btn-restart" onclick="restartGame()">Start a New Expedition</button>
+    <button class="btn-restart btn-export" onclick="exportJournalPDF()">Export Journal as PDF</button>
+    <button class="btn-restart btn-secondary" onclick="restartGame()">Start a New Expedition</button>
   </div>
 </div>
 

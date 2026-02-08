@@ -8,7 +8,7 @@ An interactive website that turns 10 classroom stations on the Lewis & Clark exp
 
 ## Version
 
-**v0.6.1** — Fixed broken gallery images, improved error handling
+**v0.7.0** — Guided journal prompts, PDF export, 29 trail events, UI cleanup
 
 ## What This Is
 
@@ -25,10 +25,11 @@ This project replaces a paper-based station activity (where students walk around
   - *Advanced* — 10th grade level, deeper analysis, fewer scaffolds
 - **Geographically accurate trail map** (SVG) with real lat/long projection, terrain features, rivers, mountains, coastline, and progress tracking
 - **Journey segment details** — hover between stations to see distance, travel time, health toll, and supply status for each leg
-- **Digital journal tracker** — replaces the paper handout (date, author, summary fields)
+- **Guided journal entry prompts** at each station (date, author, summary, analysis) that auto-populate the journal tracker
+- **PDF journal export** — antique-styled journal with cover page, printable/saveable for Canvas submission
 - **Image galleries** at each station with 2–3 images (scene paintings, portraits, artifacts) from Wikimedia Commons, with carousel navigation
 - **Knowledge checks** — multiple-choice challenges at each station with feedback and scoring
-- **Interactive travel events** — choice-based encounters (grizzly bears, river forks, friendly camps) and tap/swat mini-games (mosquitoes, wolves, cactus fields) between stations
+- **Interactive travel events** — 29 diverse encounters between stations: choice-based decisions and tap/swat mini-games covering weather, wildlife, navigation, health, Native encounters, and camp life
 - **Save/resume** — localStorage persistence so students can pick up where they left off
 - **Random trail events** between stations (grizzly bears, storms, mosquitoes, etc.)
 - **Reflection questions** at each station
@@ -82,6 +83,26 @@ Then open `http://localhost:8000` in your browser.
 **Note:** Opening `index.html` directly as a file (`file://`) will not work because browsers block `fetch()` requests from local files. You need a web server.
 
 ## Changelog
+
+### v0.7.0
+- Replaced "Historian's Reflection" textarea with guided journal entry prompts:
+  - Date, journal author, summary, and analysis fields at each station
+  - Entries auto-populate the Journal tracker tab and PDF export
+- Added antique-styled PDF journal export:
+  - Parchment-themed cover page with student name line, score stats
+  - Each station entry with date, author, summary, and analysis
+  - Opens in new window for Print-to-PDF (Canvas submission ready)
+  - Export button on both completion screen and journal tracker tab
+- Expanded trail events from 10 to 29 diverse encounters:
+  - Wildlife: grizzly bears, buffalo herds, rattlesnakes, eagles, prairie dogs, wolves
+  - Weather: thunderstorms, hailstorms, bitter cold, scorching heat
+  - Navigation: river forks, rapids, portage, getting lost
+  - Health: sickness, mosquitoes, prickly pear, hunting accidents
+  - Encounters: Shoshone, Nez Perce, Mandan forge
+  - Camp life: stargazing for position, journal writing, equipment repair
+- Cleaned up title screen: Teacher Resources now uses native `<details>`/`<summary>` (no JS needed), removed emojis from links, more compact layout
+- Primary Sources section at stations now collapsible (less visual clutter)
+- Recommended image size for gallery: **800 x 450px (16:9 landscape)**
 
 ### v0.6.1
 - Fixed broken gallery images: recomputed MD5 hash paths for all Wikimedia Commons URLs
