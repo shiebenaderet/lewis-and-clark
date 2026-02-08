@@ -31,7 +31,7 @@
     </div>
     <button class="btn-start" onclick="startGame()">Begin the Expedition</button>
     <div id="title-continue" class="title-continue"></div>
-    <div style="margin-top:2rem;font-size:0.7rem;color:rgba(244,232,193,0.3);font-family:var(--font-ui);">v0.3.0</div>
+    <div style="margin-top:2rem;font-size:0.7rem;color:rgba(244,232,193,0.3);font-family:var(--font-ui);">v0.4.0</div>
   </div>
 </div>
 
@@ -68,7 +68,6 @@
   <!-- Map View -->
   <div class="game-body" id="view-map">
     <div class="map-container">
-      <h2 class="map-title">The Trail of the Corps of Discovery</h2>
       <div class="map-svg-wrap" id="map-svg-wrap">
         <!-- SVG map inserted by JS -->
       </div>
@@ -84,6 +83,9 @@
         <div class="map-legend-item">
           <div class="map-legend-dot" style="background: #8b1a1a; border-color: #fff;"></div>
           <span>Current station</span>
+        </div>
+        <div class="map-legend-item" style="margin-left: 1rem; opacity: 0.7;">
+          <span style="font-style: italic;">Hover trail between stations for journey details</span>
         </div>
       </div>
     </div>

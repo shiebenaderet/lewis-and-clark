@@ -353,7 +353,12 @@ body {
 .map-svg-wrap svg {
   width: 100%;
   height: auto;
-  min-width: 600px;
+  min-width: 700px;
+}
+
+#segment-tooltip {
+  pointer-events: none;
+  transition: opacity 0.15s ease;
 }
 
 .map-station {
