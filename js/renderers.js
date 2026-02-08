@@ -100,6 +100,32 @@ function renderStation(index) {
     html += '</div>';
   }
 
+  // Explore Primary Sources
+  const resources = STATION_RESOURCES[index];
+  if (resources) {
+    html += '<div class="primary-sources">';
+    html += '<div class="primary-sources-label">Explore Primary Sources</div>';
+    html += '<div class="primary-sources-links">';
+    resources.journals.forEach(j => {
+      html += `<a href="${j.url}" target="_blank" rel="noopener" class="source-link source-journal">`;
+      html += `<span class="source-icon">&#x1F4DC;</span>`;
+      html += `<span class="source-text">Read the real journal &mdash; ${j.date}</span>`;
+      html += `<span class="source-host">lewisandclarkjournals.unl.edu</span>`;
+      html += `</a>`;
+    });
+    html += `<a href="${resources.atlas}" target="_blank" rel="noopener" class="source-link source-atlas">`;
+    html += `<span class="source-icon">&#x1F5FA;</span>`;
+    html += `<span class="source-text">Explore this location on the LC Atlas</span>`;
+    html += `<span class="source-host">lcatlas.lclark.edu</span>`;
+    html += `</a>`;
+    html += `<a href="${resources.nps}" target="_blank" rel="noopener" class="source-link source-nps">`;
+    html += `<span class="source-icon">&#x1F3DE;</span>`;
+    html += `<span class="source-text">National Park Service trail maps</span>`;
+    html += `<span class="source-host">nps.gov</span>`;
+    html += `</a>`;
+    html += '</div></div>';
+  }
+
   // Navigation
   html += '<div class="station-nav">';
   html += `<button class="btn-station-nav" onclick="goToStation(${index - 1})" ${index === 0 ? 'disabled' : ''}>&larr; Previous Station</button>`;
@@ -246,6 +272,82 @@ const SEGMENT_DATA = [
     health: "Dysentery from diet change to salmon and roots",
     supplies: "Built new canoes, running dangerous rapids",
     toll: "Fleas, rain, spoiled food. But on Nov 7: 'Ocean in view! O! the joy!'" }
+];
+
+// === EXTERNAL RESOURCES PER STATION ===
+const STATION_RESOURCES = [
+  { // Station 1: May 14, 1804
+    journals: [
+      { date: "May 14, 1804", url: "https://lewisandclarkjournals.unl.edu/item/lc.jrn.1804-05-14" }
+    ],
+    atlas: "http://lcatlas.lclark.edu/",
+    nps: "https://www.nps.gov/lecl/planyourvisit/maps.htm"
+  },
+  { // Station 2: July 20, 1804
+    journals: [
+      { date: "July 20, 1804", url: "https://lewisandclarkjournals.unl.edu/item/lc.jrn.1804-07-20" }
+    ],
+    atlas: "http://lcatlas.lclark.edu/",
+    nps: "https://www.nps.gov/lecl/planyourvisit/maps.htm"
+  },
+  { // Station 3: August 2-3, 1804
+    journals: [
+      { date: "August 2, 1804", url: "https://lewisandclarkjournals.unl.edu/item/lc.jrn.1804-08-02" },
+      { date: "August 3, 1804", url: "https://lewisandclarkjournals.unl.edu/item/lc.jrn.1804-08-03" }
+    ],
+    atlas: "http://lcatlas.lclark.edu/",
+    nps: "https://www.nps.gov/lecl/planyourvisit/maps.htm"
+  },
+  { // Station 4: October 28, 1804
+    journals: [
+      { date: "October 28, 1804", url: "https://lewisandclarkjournals.unl.edu/item/lc.jrn.1804-10-28" }
+    ],
+    atlas: "http://lcatlas.lclark.edu/",
+    nps: "https://www.nps.gov/lecl/planyourvisit/maps.htm"
+  },
+  { // Station 5: February 11, 1805
+    journals: [
+      { date: "February 11, 1805", url: "https://lewisandclarkjournals.unl.edu/item/lc.jrn.1805-02-11" }
+    ],
+    atlas: "http://lcatlas.lclark.edu/",
+    nps: "https://www.nps.gov/lecl/planyourvisit/maps.htm"
+  },
+  { // Station 6: April 7, 1805
+    journals: [
+      { date: "April 7, 1805", url: "https://lewisandclarkjournals.unl.edu/item/lc.jrn.1805-04-07" }
+    ],
+    atlas: "http://lcatlas.lclark.edu/",
+    nps: "https://www.nps.gov/lecl/planyourvisit/maps.htm"
+  },
+  { // Station 7: June 13, 1805
+    journals: [
+      { date: "June 13, 1805", url: "https://lewisandclarkjournals.unl.edu/item/lc.jrn.1805-06-13" }
+    ],
+    atlas: "http://lcatlas.lclark.edu/",
+    nps: "https://www.nps.gov/lecl/planyourvisit/maps.htm"
+  },
+  { // Station 8: August 17, 1805
+    journals: [
+      { date: "August 17, 1805", url: "https://lewisandclarkjournals.unl.edu/item/lc.jrn.1805-08-17" }
+    ],
+    atlas: "http://lcatlas.lclark.edu/",
+    nps: "https://www.nps.gov/lecl/planyourvisit/maps.htm"
+  },
+  { // Station 9: September-October 1805
+    journals: [
+      { date: "September 16, 1805", url: "https://lewisandclarkjournals.unl.edu/item/lc.jrn.1805-09-16" },
+      { date: "October 1, 1805", url: "https://lewisandclarkjournals.unl.edu/item/lc.jrn.1805-10-01" }
+    ],
+    atlas: "http://lcatlas.lclark.edu/",
+    nps: "https://www.nps.gov/lecl/planyourvisit/maps.htm"
+  },
+  { // Station 10: November 1805
+    journals: [
+      { date: "November 7, 1805", url: "https://lewisandclarkjournals.unl.edu/item/lc.jrn.1805-11-07" }
+    ],
+    atlas: "http://lcatlas.lclark.edu/",
+    nps: "https://www.nps.gov/lecl/planyourvisit/maps.htm"
+  }
 ];
 
 // === GALLERY NAVIGATION ===

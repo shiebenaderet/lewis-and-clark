@@ -31,7 +31,17 @@
     </div>
     <button class="btn-start" onclick="startGame()">Begin the Expedition</button>
     <div id="title-continue" class="title-continue"></div>
-    <div style="margin-top:2rem;font-size:0.7rem;color:rgba(244,232,193,0.3);font-family:var(--font-ui);">v0.5.0</div>
+    <div class="teacher-resources">
+      <button class="teacher-toggle" onclick="this.parentElement.classList.toggle('open')">Teacher &amp; Student Resources &#x25BC;</button>
+      <div class="teacher-links">
+        <a href="https://lewisandclarkjournals.unl.edu/" target="_blank" rel="noopener">&#x1F4DC; The Journals of Lewis &amp; Clark <span>Full digitized journals &mdash; University of Nebraska</span></a>
+        <a href="http://lcatlas.lclark.edu/" target="_blank" rel="noopener">&#x1F5FA; Corps of Discovery Online Atlas <span>Interactive GIS trail map &mdash; Lewis &amp; Clark College</span></a>
+        <a href="https://www.nps.gov/lecl/planyourvisit/maps.htm" target="_blank" rel="noopener">&#x1F3DE; NPS Lewis &amp; Clark Trail Maps <span>Official trail maps &mdash; National Park Service</span></a>
+        <a href="https://www.gilderlehrman.org/history-resources/online-exhibitions/lewis-and-clark-expedition-interactive-map" target="_blank" rel="noopener">&#x1F30E; Interactive Expedition Map <span>Timeline &amp; route explorer &mdash; Gilder Lehrman Institute</span></a>
+        <a href="https://lewisandclark.org/" target="_blank" rel="noopener">&#x26FA; Lewis &amp; Clark Trail Alliance <span>Preservation, education &amp; trail stewardship</span></a>
+      </div>
+    </div>
+    <div style="margin-top:2rem;font-size:0.7rem;color:rgba(244,232,193,0.3);font-family:var(--font-ui);">v0.6.0</div>
   </div>
 </div>
 
@@ -87,6 +97,10 @@
         <div class="map-legend-item" style="margin-left: 1rem; opacity: 0.7;">
           <span style="font-style: italic;">Hover trail between stations for journey details</span>
         </div>
+      </div>
+      <div class="map-atlas-link">
+        <a href="http://lcatlas.lclark.edu/" target="_blank" rel="noopener" class="atlas-btn">&#x1F5FA; Explore the Corps of Discovery Online Atlas</a>
+        <span class="atlas-credit">Lewis &amp; Clark College &mdash; interactive GIS map with detailed route layers</span>
       </div>
     </div>
   </div>
