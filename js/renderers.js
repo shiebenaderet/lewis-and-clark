@@ -90,40 +90,52 @@ function renderStation(index) {
     html += renderChallenge(data.challenge, index, completed);
   }
 
-  // Reflection question
+  // Journal entry prompts (populate the Expedition Journal)
+  const savedDate = state.journalEntries[`date_${index}`] || '';
+  const savedAuthor = state.journalEntries[`author_${index}`] || '';
+  const savedSummary = state.journalEntries[`summary_${index}`] || '';
+  const savedReflection = state.journalEntries[`reflection_${index}`] || '';
+
+  html += '<div class="journal-prompts">';
+  html += '<div class="journal-prompts-label">Your Expedition Journal Entry</div>';
+  html += '<p class="journal-prompts-hint">Fill in these fields to complete your journal for this station. Your entries appear in the Journal tab.</p>';
+
+  html += '<div class="journal-field">';
+  html += `<label class="journal-field-label" for="jf-date-${index}">Date(s) covered at this station</label>`;
+  html += `<input type="text" id="jf-date-${index}" class="journal-field-input" placeholder="e.g. ${data.dates || 'May 14, 1804'}" value="${escapeHtml(savedDate)}" onchange="saveJournalField(${index}, 'date', this.value)">`;
+  html += '</div>';
+
+  html += '<div class="journal-field">';
+  html += `<label class="journal-field-label" for="jf-author-${index}">Who wrote the journal entries you read?</label>`;
+  html += `<input type="text" id="jf-author-${index}" class="journal-field-input" placeholder="e.g. Captain Clark, Captain Lewis" value="${escapeHtml(savedAuthor)}" onchange="saveJournalField(${index}, 'author', this.value)">`;
+  html += '</div>';
+
+  html += '<div class="journal-field">';
+  html += `<label class="journal-field-label" for="jf-summary-${index}">Summarize what happened at this station</label>`;
+  html += `<textarea id="jf-summary-${index}" class="journal-field-textarea" placeholder="In your own words, describe the key events..." onchange="saveJournalField(${index}, 'summary', this.value)">${escapeHtml(savedSummary)}</textarea>`;
+  html += '</div>';
+
   if (data.reflection) {
-    const savedReflection = state.journalEntries[`reflection_${index}`] || '';
-    html += '<div class="station-reflection">';
-    html += '<div class="reflection-label">Historian\'s Reflection</div>';
-    html += `<p class="reflection-question">${data.reflection}</p>`;
-    html += `<textarea class="reflection-textarea" placeholder="Write your thoughts here..." onchange="saveReflection(${index}, this.value)">${savedReflection}</textarea>`;
+    html += '<div class="journal-field">';
+    html += `<label class="journal-field-label" for="jf-reflection-${index}">Historian's Analysis: ${data.reflection}</label>`;
+    html += `<textarea id="jf-reflection-${index}" class="journal-field-textarea" placeholder="Think critically and write your analysis..." onchange="saveReflection(${index}, this.value)">${escapeHtml(savedReflection)}</textarea>`;
     html += '</div>';
   }
 
-  // Explore Primary Sources
+  html += '</div>';
+
+  // Explore Primary Sources (collapsible)
   const resources = STATION_RESOURCES[index];
   if (resources) {
-    html += '<div class="primary-sources">';
-    html += '<div class="primary-sources-label">Explore Primary Sources</div>';
+    html += '<details class="primary-sources">';
+    html += '<summary class="primary-sources-label">Explore Primary Sources</summary>';
     html += '<div class="primary-sources-links">';
     resources.journals.forEach(j => {
-      html += `<a href="${j.url}" target="_blank" rel="noopener" class="source-link source-journal">`;
-      html += `<span class="source-icon">&#x1F4DC;</span>`;
-      html += `<span class="source-text">Read the real journal &mdash; ${j.date}</span>`;
-      html += `<span class="source-host">lewisandclarkjournals.unl.edu</span>`;
-      html += `</a>`;
+      html += `<a href="${j.url}" target="_blank" rel="noopener" class="source-link">Read the real journal &mdash; ${j.date} <span class="source-host">lewisandclarkjournals.unl.edu</span></a>`;
     });
-    html += `<a href="${resources.atlas}" target="_blank" rel="noopener" class="source-link source-atlas">`;
-    html += `<span class="source-icon">&#x1F5FA;</span>`;
-    html += `<span class="source-text">Explore this location on the LC Atlas</span>`;
-    html += `<span class="source-host">lcatlas.lclark.edu</span>`;
-    html += `</a>`;
-    html += `<a href="${resources.nps}" target="_blank" rel="noopener" class="source-link source-nps">`;
-    html += `<span class="source-icon">&#x1F3DE;</span>`;
-    html += `<span class="source-text">National Park Service trail maps</span>`;
-    html += `<span class="source-host">nps.gov</span>`;
-    html += `</a>`;
-    html += '</div></div>';
+    html += `<a href="${resources.atlas}" target="_blank" rel="noopener" class="source-link">Explore this location on the LC Atlas <span class="source-host">lcatlas.lclark.edu</span></a>`;
+    html += `<a href="${resources.nps}" target="_blank" rel="noopener" class="source-link">NPS Lewis &amp; Clark Trail Maps <span class="source-host">nps.gov</span></a>`;
+    html += '</div></details>';
   }
 
   // Navigation
@@ -749,12 +761,14 @@ function renderJournalTracker() {
     const savedDate = state.journalEntries[`date_${i}`] || '';
     const savedAuthor = state.journalEntries[`author_${i}`] || '';
     const savedSummary = state.journalEntries[`summary_${i}`] || '';
+    const savedReflection = state.journalEntries[`reflection_${i}`] || '';
 
     html += '<tr>';
     html += `<td class="tracker-station-num ${visited ? 'visited' : ''}">${i + 1}</td>`;
-    html += `<td><input type="text" value="${escapeHtml(savedDate)}" placeholder="${visited ? 'Enter date(s)...' : '???'}" onchange="saveJournalField(${i}, 'date', this.value)" ${!visited ? 'disabled' : ''}/></td>`;
-    html += `<td><input type="text" value="${escapeHtml(savedAuthor)}" placeholder="${visited ? 'Enter author(s)...' : '???'}" onchange="saveJournalField(${i}, 'author', this.value)" ${!visited ? 'disabled' : ''}/></td>`;
-    html += `<td><textarea placeholder="${visited ? 'Summarize what happened...' : '???'}" onchange="saveJournalField(${i}, 'summary', this.value)" ${!visited ? 'disabled' : ''}>${escapeHtml(savedSummary)}</textarea></td>`;
+    html += `<td><input type="text" value="${escapeHtml(savedDate)}" placeholder="${visited ? 'Date(s)...' : '???'}" onchange="saveJournalField(${i}, 'date', this.value)" ${!visited ? 'disabled' : ''}/></td>`;
+    html += `<td><input type="text" value="${escapeHtml(savedAuthor)}" placeholder="${visited ? 'Author(s)...' : '???'}" onchange="saveJournalField(${i}, 'author', this.value)" ${!visited ? 'disabled' : ''}/></td>`;
+    html += `<td><textarea placeholder="${visited ? 'Summary...' : '???'}" onchange="saveJournalField(${i}, 'summary', this.value)" ${!visited ? 'disabled' : ''}>${escapeHtml(savedSummary)}</textarea></td>`;
+    html += `<td><textarea placeholder="${visited ? 'Analysis...' : '???'}" onchange="saveReflection(${i}, this.value)" ${!visited ? 'disabled' : ''}>${escapeHtml(savedReflection)}</textarea></td>`;
     html += '</tr>';
   }
 

@@ -1,112 +1,321 @@
 [
   {
-    "icon": "\ud83d\udc3b",
+    "icon": "🐻",
     "title": "Grizzly Bear!",
-    "text": "A massive grizzly charges toward the riverbank! Lewis once described one chasing him into the river. What do you do?",
+    "text": "A massive grizzly rears up on its hind legs just 30 yards away! Lewis described grizzlies as 'a most tremendous looking animal.' What do you do?",
     "action": "quick_choice",
     "choices": [
-      { "text": "\ud83c\udfcb Stand tall and shout!", "result": "The bear stops, studies your group, and lumbers away. Bold move \u2014 Lewis would approve!", "good": true },
-      { "text": "\ud83c\udf0a Back slowly toward the river", "result": "The bear loses interest and wanders off. Smart \u2014 the Corps often used the river as an escape route!", "good": true },
-      { "text": "\ud83c\udfc3 Run for the trees!", "result": "Running triggers the bear's chase instinct! It follows for 50 yards before giving up. Never run from a grizzly!", "good": false }
+      { "text": "🏋 Stand tall and shout together!", "result": "The bear studies your noisy group, snorts, and lumbers away. Grizzlies often back down from groups — Lewis learned this after being chased into the Missouri River alone!", "good": true },
+      { "text": "🌊 Back slowly toward the river", "result": "The bear loses interest and wanders off. Smart — the Corps used the river as an escape route more than once.", "good": true },
+      { "text": "🏃 Run for the trees!", "result": "Running triggers the bear's chase instinct! It pursues you for 50 yards before giving up. Never run from a grizzly — they can sprint 35 mph!", "good": false }
     ]
   },
   {
-    "icon": "\ud83c\udf0a",
-    "title": "River Rapids Ahead!",
-    "text": "The Missouri's current is fierce \u2014 your boats are tossed sideways! Everyone grabs their poles. How do you navigate?",
+    "icon": "🦬",
+    "title": "Buffalo Herd Crossing!",
+    "text": "Thousands of buffalo are swimming across the Missouri directly in your path. The massive herd stretches a mile wide! Clark wrote the herds were 'so numerous they darkened the plains.'",
     "action": "quick_choice",
     "choices": [
-      { "text": "\u2693 Rope the boat to shore and portage", "result": "Safe but slow. You lose half a day hauling gear around the rapids. The Corps portaged around falls for nearly a month!", "good": true },
-      { "text": "\ud83d\udea3 Paddle hard and push through!", "result": "Your crew powers through! Some supplies get soaked but nothing is lost. The men cheer as you clear the rapids!", "good": true },
-      { "text": "\u23f8\ufe0f Wait for calmer waters", "result": "The river doesn't calm down. After wasting a full day, you portage anyway. Lewis noted the river 'never rests.'", "good": false }
+      { "text": "⏸️ Pull ashore and wait them out", "result": "You wait two hours as the herd passes. The men use the time to hunt a straggler for 400 pounds of meat. Patience pays off!", "good": true },
+      { "text": "🚣 Paddle straight through the herd!", "result": "A panicked bull clips your pirogue! Water pours in and you lose a bag of flour. Buffalo weigh up to 2,000 pounds — never challenge them in the water.", "good": false },
+      { "text": "🎯 Hunters out — fresh meat!", "result": "Drouillard drops two bulls from the bank. That's over 1,600 pounds of meat! The Corps often took advantage of crossing herds to stock up.", "good": true }
     ]
   },
   {
-    "icon": "\u26c8\ufe0f",
-    "title": "Thunderstorm on the Plains!",
-    "text": "A violent thunderstorm rolls in fast. Lightning cracks across the open prairie with no shelter in sight!",
-    "action": "quick_choice",
-    "choices": [
-      { "text": "\u26fa Set up camp in a low spot", "result": "Good thinking! Clark once barely escaped a flash flood in a ravine, but your low ground stays dry. You wait out the storm safely.", "good": true },
-      { "text": "\ud83c\udf33 Shelter under the tallest tree", "result": "Lightning strikes a tree nearby! Never shelter under tall trees in a storm. The Corps learned this the hard way.", "good": false },
-      { "text": "\ud83e\udded Press on through the storm", "result": "Soaked to the bone but still moving. The Corps often had no choice but to march through rain for days.", "good": true }
-    ]
-  },
-  {
-    "icon": "\ud83e\udd9f",
-    "title": "Mosquito Swarm!",
-    "text": "Clouds of mosquitoes descend on your camp! Clark wrote he 'could not keep them off my gun long enough to take aim.' Fight back!",
+    "icon": "🐍",
+    "title": "Rattlesnake Nest!",
+    "text": "You've stumbled onto a rocky ledge alive with prairie rattlesnakes! Their buzzing rattles fill the air. Clark counted 'no fewer than 10 snakes in a single afternoon.' Clear a safe path!",
     "action": "tap_swat",
-    "swat_target": "\ud83e\udd9f",
-    "swat_count": 8,
+    "swat_target": "🐍",
+    "swat_count": 7,
     "swat_time": 5,
-    "success_text": "You swatted enough mosquitoes to get some relief! The Corps burned green wood to create smoke \u2014 it was the only thing that helped.",
-    "fail_text": "The mosquitoes win this round! Your arms are covered in welts. The Corps endured this torment every single night on the plains."
+    "success_text": "You drove the rattlers back with sticks and stones! The Corps used long poles to sweep snakes off rocky trails. Lewis carefully preserved several specimens to send back to Jefferson.",
+    "fail_text": "One snake strikes at a moccasin! Luckily it hits leather, not skin. The men of the Corps were bitten several times — they treated bites with bark poultices."
   },
   {
-    "icon": "\ud83e\udd8c",
-    "title": "Elk Herd Spotted!",
-    "text": "A large herd of elk grazes nearby. The hunters need to bring down meat \u2014 the Corps ate up to 9 pounds per person per day!",
+    "icon": "🦅",
+    "title": "Bald Eagle on the Bluff!",
+    "text": "A magnificent bald eagle circles overhead, then lands on a cottonwood snag near camp. Lewis, a devoted naturalist, is eager to document it. What do you do?",
     "action": "quick_choice",
     "choices": [
-      { "text": "\ud83c\udff9 Send the best hunters downwind", "result": "Two elk brought down cleanly! That's over 800 pounds of meat. Drouillard would be proud \u2014 he was the expedition's best hunter.", "good": true },
-      { "text": "\ud83d\udca8 Rush the herd!", "result": "The herd scatters before you get close. No meat today. Patience and skill were essential for frontier hunting.", "good": false },
-      { "text": "\ud83e\uddee Set snares along the trail", "result": "You catch one small elk. Not a feast, but it will keep the party fed for a couple of days.", "good": true }
+      { "text": "📝 Sketch it and note its markings", "result": "You record its wingspan, coloring, and diet — just as Lewis did. His detailed scientific notes described over 170 new species for American science!", "good": true },
+      { "text": "🔫 Shoot it for a specimen", "result": "You collect the specimen. Lewis did shoot birds for study — it was standard practice for naturalists in 1805. Science was different then.", "good": true },
+      { "text": "🫢 Ignore it — we have miles to cover", "result": "Lewis would never pass up a new specimen! Jefferson personally instructed him to document all wildlife. Science was half the mission's purpose.", "good": false }
     ]
   },
   {
-    "icon": "\ud83c\udf35",
-    "title": "Prickly Pear Cactus Field!",
-    "text": "The trail is carpeted with prickly pear cactus. Sharp spines pierce through your moccasins with every step!",
+    "icon": "🐕",
+    "title": "Prairie Dog Town!",
+    "text": "You've discovered a vast prairie dog colony stretching across five acres! The little animals bark and dive into their burrows. Lewis wants to send a live one back to President Jefferson.",
+    "action": "quick_choice",
+    "choices": [
+      { "text": "💧 Pour water down a burrow to flush one out", "result": "After hauling five barrels of water, one soggy prairie dog emerges! This is exactly what the Corps did — they sent it alive all the way to Jefferson in Washington!", "good": true },
+      { "text": "🪤 Set a small snare at the burrow entrance", "result": "The prairie dog avoids the trap easily. Their burrows have multiple exits. The Corps tried digging them out first — it took hours and failed.", "good": false },
+      { "text": "🥄 Dig one out by hand", "result": "You dig six feet down and the burrow keeps going! The Corps dug for hours before giving up. These burrows can run 15 feet deep with multiple chambers.", "good": false }
+    ]
+  },
+  {
+    "icon": "⛈️",
+    "title": "Thunderstorm on the Plains!",
+    "text": "A violent storm rolls in fast. Black clouds pile up and lightning forks across the open prairie. There is no shelter for miles in any direction!",
+    "action": "quick_choice",
+    "choices": [
+      { "text": "⛺ Make camp in a low, flat area", "result": "Good call. You stay low, away from high ground and lone trees. The Corps weathered dozens of prairie storms by staying low and spreading out.", "good": true },
+      { "text": "🌳 Shelter under the tallest tree", "result": "Lightning strikes the tree with a deafening crack! Never shelter under tall isolated trees in a storm — they attract lightning.", "good": false },
+      { "text": "🧭 Push forward through the storm", "result": "Soaked and miserable, but still moving. The Corps often had no choice but to march through storms for days on end. Clark called it 'disagreeable beyond description.'", "good": true }
+    ]
+  },
+  {
+    "icon": "🌨️",
+    "title": "Hailstorm at the Great Falls!",
+    "text": "Enormous hailstones the size of apples crash down from the sky! Clark's actual journal entry describes hail 'seven inches in circumference' that knocked men to the ground. Take cover!",
     "action": "tap_swat",
-    "swat_target": "\ud83c\udf35",
+    "swat_target": "🧊",
+    "swat_count": 10,
+    "swat_time": 6,
+    "success_text": "You deflected the worst of it with packs and buffalo hides! Clark's group sheltered under a rock ledge during the real storm, nearly drowning in the flash flood that followed.",
+    "fail_text": "The hail batters the party badly — bruises everywhere and one man is nearly knocked unconscious. Clark wrote that the hailstones left 'the men bleeding and their bodies much battered.'"
+  },
+  {
+    "icon": "❄️",
+    "title": "Bitter Cold at Fort Mandan!",
+    "text": "It is January 1805 at Fort Mandan. Temperatures plunge to minus 45 degrees Fahrenheit. Sentinel duty could mean death by frostbite. How does the party survive?",
+    "action": "quick_choice",
+    "choices": [
+      { "text": "🔥 Keep roaring fires day and night", "result": "The fires burn through enormous amounts of wood, but everyone survives. At Fort Mandan, the men chopped firewood constantly for five straight months.", "good": true },
+      { "text": "🧥 Double up in shared bedrolls", "result": "Body heat plus buffalo robes does the trick. The Mandan people taught the Corps to use layered buffalo hides, which trapped warmth far better than wool blankets.", "good": true },
+      { "text": "🏃 Keep marching to stay warm", "result": "Marching in minus 45 wastes energy dangerously fast. Several men get frostbite on their toes and fingers. Lewis noted that exposed skin 'froze in minutes.'", "good": false }
+    ]
+  },
+  {
+    "icon": "🥵",
+    "title": "Scorching Heat on the Plains!",
+    "text": "It is midsummer and the treeless plains offer no shade. The temperature soars past 100 degrees. Men are stumbling from heat exhaustion and the water supply is low.",
+    "action": "quick_choice",
+    "choices": [
+      { "text": "🌅 March at dawn and dusk, rest at midday", "result": "Wise. You cover the same distance with half the suffering. Plains tribes had traveled this way for generations — the Corps learned to adapt.", "good": true },
+      { "text": "💪 Push through — we're behind schedule", "result": "Private Whitehouse collapses from heatstroke. You lose more time caring for him than you would have lost resting. Lewis learned this lesson the hard way.", "good": false },
+      { "text": "🏕️ Find a creek bottom and camp early", "result": "You find a shaded bend with cool water. The men recover their strength and make excellent time the next morning. Sometimes resting is the fastest way forward.", "good": true }
+    ]
+  },
+  {
+    "icon": "🦟",
+    "title": "Mosquito Swarm!",
+    "text": "Clouds of mosquitoes descend on camp at dusk! Clark wrote he 'could not keep them off my gun long enough to take aim.' The buzzing is maddening. Fight them off!",
+    "action": "tap_swat",
+    "swat_target": "🦟",
+    "swat_count": 9,
+    "swat_time": 5,
+    "success_text": "You swatted enough to get some relief! The Corps burned green wood to create smoke screens — it was the only thing that helped against the relentless swarms.",
+    "fail_text": "The mosquitoes win this round. Your arms are covered in welts. The Corps endured this torment every single night on the plains. Clark called them 'the most tormenting insect.'"
+  },
+  {
+    "icon": "🌵",
+    "title": "Prickly Pear Cactus Field!",
+    "text": "The portage trail is carpeted with prickly pear cactus for miles. Needle-sharp spines punch clean through double-soled moccasins! The men are limping and cursing. Clear the way!",
+    "action": "tap_swat",
+    "swat_target": "🌵",
     "swat_count": 6,
     "swat_time": 5,
-    "success_text": "You dodged most of the cactus! Lewis called prickly pear 'one of the beauties as well as the greatest pests of the plains.'",
-    "fail_text": "Ouch! Your moccasins are shredded and your feet are bleeding. The men had to stop constantly to pull out spines during the Great Falls portage."
+    "success_text": "You kicked aside the worst patches! Lewis called prickly pear 'one of the beauties as well as the greatest pests of the plains.' The men went through dozens of moccasins during the portage.",
+    "fail_text": "Your moccasins are shredded and your feet are bleeding. The Great Falls portage was 18 miles of cactus, sharp rocks, and rattlesnakes — the men called it the worst stretch of the entire journey."
   },
   {
-    "icon": "\u26fa",
-    "title": "A Friendly Camp",
-    "text": "You encounter a group of Native Americans who offer to trade. What do you bring to the meeting?",
+    "icon": "🤒",
+    "title": "Sickness in Camp!",
+    "text": "Several men are down with violent stomach cramps and fever. It might be bad water or spoiled meat. Lewis acts as the expedition's doctor — he has a medicine chest but no medical degree.",
     "action": "quick_choice",
     "choices": [
-      { "text": "\ud83c\udfa8 Trade beads and mirrors", "result": "They appreciate the colorful beads! Lewis and Clark carried 33 pounds of beads specifically for trade and diplomacy.", "good": true },
-      { "text": "\ud83c\udf96\ufe0f Offer a Jefferson peace medal", "result": "The chief accepts the medal with ceremony. Peace medals were the most important diplomatic gifts Lewis carried.", "good": true },
-      { "text": "\ud83d\udd2b Show your weapons to impress them", "result": "The display creates tension, not friendship. Clark learned that gifts and respect worked better than shows of force.", "good": false }
+      { "text": "💊 Administer Dr. Rush's pills", "result": "The powerful mercury-laced 'Thunderbolts' purge the illness violently. Harsh, but it works. Lewis used Rush's pills throughout the journey — archaeologists have found traces of mercury at their campsites!", "good": true },
+      { "text": "🍵 Brew willow bark tea and rest", "result": "The natural remedy eases the fever slowly. Willow bark contains salicin, similar to aspirin. Native healers had used it for centuries — sometimes the old ways work best.", "good": true },
+      { "text": "🚶 March on — they'll walk it off", "result": "The sick men collapse on the trail and the whole party is delayed for two days. Lewis learned that ignoring illness always made things worse.", "good": false }
     ]
   },
   {
-    "icon": "\ud83c\udf0d",
+    "icon": "🩸",
+    "title": "Hunting Accident!",
+    "text": "While hunting in thick willows, one man accidentally shoots another in the hip! This actually happened — Private Cruzatte shot Lewis in the buttock, mistaking him for an elk.",
+    "action": "quick_choice",
+    "choices": [
+      { "text": "🩹 Clean the wound and pack it with linen", "result": "You clean the wound, apply a poultice, and bandage it tight. Lewis treated his own gunshot wound this same way and was walking again in three weeks.", "good": true },
+      { "text": "🔥 Cauterize the wound immediately", "result": "Brutal but it stops the bleeding. Frontier medicine was harsh. The wounded man screams but survives. Infection was the real danger on the trail.", "good": true },
+      { "text": "🤷 It's just a scratch — let him rest", "result": "The wound becomes infected within days. Without proper treatment, even minor injuries could become fatal on the frontier. Always treat wounds immediately.", "good": false }
+    ]
+  },
+  {
+    "icon": "🌊",
+    "title": "Dangerous Rapids Ahead!",
+    "text": "The river narrows into a roaring chute of white water! Rocks jut from the foam and the canoes are tossing wildly. The men look to you for a decision.",
+    "action": "quick_choice",
+    "choices": [
+      { "text": "⚓ Rope the boats and portage around", "result": "Safe but exhausting. You lose half a day hauling 8,000 pounds of gear overland. The Corps portaged around the Great Falls for nearly a month — covering just 18 miles!", "good": true },
+      { "text": "🚣 Send the best steersman through first", "result": "Your lead canoe threads the rapids perfectly and signals the route! The others follow safely. River experience saved the Corps many times.", "good": true },
+      { "text": "🚣 Charge through all at once!", "result": "Two canoes collide in the chaos! Gunpowder, medicine, and journals nearly lost to the river. The Corps almost lost everything this way at the Marias River.", "good": false }
+    ]
+  },
+  {
+    "icon": "🔀",
     "title": "Fork in the River!",
-    "text": "The river splits into two branches. Which fork is the true Missouri? Choose wrong and you could lose weeks!",
+    "text": "The Missouri splits into two equal branches. Your maps show nothing. The north fork looks muddier like the Missouri; the south fork runs clear. Every man in the party votes north. Which way?",
     "action": "quick_choice",
     "choices": [
-      { "text": "\u2b05\ufe0f Take the left (south) fork", "result": "Correct! This happened at the Marias River. The men all voted for the north fork, but Lewis and Clark chose the south \u2014 and they were right!", "good": true },
-      { "text": "\u27a1\ufe0f Take the right (north) fork", "result": "That's the Marias River \u2014 a dead end! The Corps would have lost weeks. Lewis trusted his scientific observations over the popular vote.", "good": false },
-      { "text": "\ud83d\udd2d Send scouts up both forks", "result": "Smart! Lewis did exactly this \u2014 he scouted the south fork for days before committing. Scientific caution saved the expedition.", "good": true }
+      { "text": "⬅️ Take the south fork — trust the captains", "result": "Correct! This happened at the Marias River in June 1805. Every man voted north, but Lewis and Clark chose south — reasoning that a mountain-fed river would run clear. They were right!", "good": true },
+      { "text": "➡️ Take the north fork — trust the vote", "result": "That's the Marias River — a dead end! You'd lose weeks. Lewis trusted his scientific observations over the popular vote. Leaders must sometimes overrule the majority.", "good": false },
+      { "text": "🔭 Scout both forks before deciding", "result": "Smart and cautious! Lewis did exactly this — he scouted the south fork for days before committing. Careful observation saved the expedition from a costly mistake.", "good": true }
     ]
   },
   {
-    "icon": "\ud83d\udc3a",
-    "title": "Wolves at Night!",
-    "text": "As darkness falls, wolves howl all around your camp. Clark noted 'a great number of wolves about us all night.' Guard the camp!",
+    "icon": "⛰️",
+    "title": "Lost on the Lolo Trail!",
+    "text": "You are crossing the Bitterroot Mountains and the trail has vanished under deep snow. The horses are starving and the men are eating candle tallow to survive. This was the expedition's darkest hour.",
+    "action": "quick_choice",
+    "choices": [
+      { "text": "🏔️ Follow the ridgeline west", "result": "Old Toby, your Shoshone guide, finds the Nez Perce trail along the ridge. The high ground is brutal but passable. The Corps nearly starved crossing these mountains — it took 11 days.", "good": true },
+      { "text": "⬇️ Drop into the valley for shelter", "result": "The valleys are choked with fallen timber and deadfall. You waste two days and have to climb back up. The ridgeline was the only way — the Nez Perce knew this for generations.", "good": false },
+      { "text": "🐴 Kill a horse for emergency food", "result": "Grim but necessary. The Corps did kill and eat colts to survive the Bitterroots. Clark named one camp 'Killed Colt Creek.' Survival sometimes demands hard choices.", "good": true }
+    ]
+  },
+  {
+    "icon": "🌊",
+    "title": "Flash Flood in the Ravine!",
+    "text": "While sheltering from rain in a narrow ravine, a wall of brown water suddenly roars down the gully! This nearly killed Clark, Sacagawea, and her baby at the Great Falls!",
+    "action": "quick_choice",
+    "choices": [
+      { "text": "⬆️ Scramble up the bluff immediately!", "result": "You claw your way up the muddy slope just as the water surges past. Clark saved Sacagawea and baby Jean Baptiste by pushing them up a cliff face as water rose to his waist!", "good": true },
+      { "text": "🌳 Grab a tree and hold on", "result": "The tree holds but you are battered by debris for 20 terrifying minutes. You survive, but with cuts and bruises. Flash floods carry logs, boulders, and everything in their path.", "good": false },
+      { "text": "🏃 Run downstream to outpace it", "result": "You cannot outrun a flash flood — the water moves at 15 mph through narrow ravines. Clark wrote that the water rose 15 feet in minutes. Always go UP.", "good": false }
+    ]
+  },
+  {
+    "icon": "🪵",
+    "title": "Fallen Timber Everywhere!",
+    "text": "A massive blowdown of tangled dead trees blocks the mountain trail for hundreds of yards. The horses cannot pass and axes are dull. Hack through the deadfall!",
     "action": "tap_swat",
-    "swat_target": "\ud83d\udc3a",
+    "swat_target": "🪵",
+    "swat_count": 8,
+    "swat_time": 7,
+    "success_text": "You hacked and hauled enough timber to clear a narrow path! The Bitterroot crossing was choked with deadfall. Clark wrote they made 'only 12 miles in a full day' through the fallen trees.",
+    "fail_text": "The deadfall wins. You have to backtrack and find another route, losing a full day. The men's hands are blistered and bleeding from swinging dull axes on frozen wood."
+  },
+  {
+    "icon": "🏜️",
+    "title": "Quicksand on the River!",
+    "text": "While pulling the keelboat upstream, three men sink into sucking quicksand along the Missouri's bank! The sandy riverbed is swallowing them to their knees. Pull them free!",
+    "action": "tap_swat",
+    "swat_target": "🏜️",
     "swat_count": 5,
     "swat_time": 6,
-    "success_text": "You kept the wolves at bay! The sentries earned their rest. The Corps always posted guards through the night.",
-    "fail_text": "The wolves got into the provisions! You lost some dried meat. The Corps learned to hang food high and keep watch."
+    "success_text": "You hauled them out with ropes and poles! The Missouri's shifting sandbars were a constant hazard. Lewis noted the men were 'frequently up to their armpits in quicksand and water.'",
+    "fail_text": "One man sinks to his waist before being dragged free. He loses both moccasins in the muck. The Missouri's quicksand trapped men, horses, and boats throughout the journey upstream."
   },
   {
-    "icon": "\u2744\ufe0f",
-    "title": "Bitter Cold!",
-    "text": "Temperatures plummet to -20\u00b0F! At Fort Mandan it dropped to -45\u00b0F. How does your party survive the night?",
+    "icon": "🤝",
+    "title": "Meeting the Shoshone!",
+    "text": "After months of searching, you finally encounter the Shoshone people in the Rocky Mountains. You desperately need horses to cross the Bitterroots. Sacagawea steps forward — their chief is her brother Cameahwait!",
     "action": "quick_choice",
     "choices": [
-      { "text": "\ud83d\udd25 Build a big fire and huddle close", "result": "The fire keeps everyone warm enough to survive. At Fort Mandan, the men kept fires burning constantly for five months.", "good": true },
-      { "text": "\ud83e\udde5 Double up the leather bedrolls", "result": "Body heat plus leather \u2014 it works! The men often slept two to a bed during the coldest nights.", "good": true },
-      { "text": "\ud83c\udfc3 Keep marching to stay warm", "result": "Marching in -20\u00b0F wastes energy fast. Several men get frostbite. Lewis noted that exposed skin 'froze in minutes.'", "good": false }
+      { "text": "🐴 Trade goods for horses — be generous", "result": "You offer rifles, blankets, and tools for 29 horses. The Shoshone agree! Without these horses, the expedition would have been stranded. Sacagawea's reunion with her brother made it all possible.", "good": true },
+      { "text": "🎖️ Present medals and flags with ceremony", "result": "The formal diplomacy impresses Cameahwait. He agrees to trade horses AND provide a guide. Lewis's diplomatic training paid off — ceremony and respect opened doors that force never could.", "good": true },
+      { "text": "💪 Demand horses — we represent the President!", "result": "Cameahwait is offended by the arrogance. He refuses to trade. Without Sacagawea smoothing things over, the expedition might have ended right here in the Rockies.", "good": false }
+    ]
+  },
+  {
+    "icon": "🏕️",
+    "title": "Welcome at the Nez Perce Village!",
+    "text": "Starving and exhausted after crossing the Bitterroots, you stumble into a Nez Perce village. Chief Twisted Hair offers food, but the men gorge themselves on unfamiliar camas root and dried fish.",
+    "action": "quick_choice",
+    "choices": [
+      { "text": "🍽️ Eat small portions slowly", "result": "Smart! The men who ate slowly stayed healthy. Starved bodies cannot handle sudden large meals. Modern survival training teaches the same lesson.", "good": true },
+      { "text": "🤤 Feast — the men are starving!", "result": "Nearly the entire Corps becomes violently ill for days! This actually happened — the sudden switch to camas root and salmon made almost everyone sick. Lewis could barely stand for a week.", "good": false },
+      { "text": "🍖 Hunt for familiar game meat first", "result": "You bag a few deer before eating the unfamiliar food. Mixing familiar and new foods helps the stomach adjust. The men who ate game first fared better than those who binged on camas.", "good": true }
+    ]
+  },
+  {
+    "icon": "🏪",
+    "title": "Mandan Winter: The Forge!",
+    "text": "It is winter at Fort Mandan. The Mandan and Hidatsa people need metal tools and your blacksmith John Shields can make them. What should you forge to build good relations and resupply?",
+    "action": "quick_choice",
+    "choices": [
+      { "text": "🪓 War hatchets from an old stove", "result": "The Mandan eagerly trade corn and dried meat for your hatchets! The Corps cut up their iron stove and forged it into trade goods — one of the cleverest moves of the expedition.", "good": true },
+      { "text": "⚔️ Weapons to show strength", "result": "The Mandan don't need more weapons and the display makes them wary. Trade goods, not threats, built the alliances that kept the Corps alive through winter.", "good": false },
+      { "text": "🔧 Repair tools for their canoes and travois", "result": "Excellent diplomacy! Practical help built genuine friendship. The Mandan shared invaluable knowledge about the river ahead, including warnings about the Great Falls.", "good": true }
+    ]
+  },
+  {
+    "icon": "🎣",
+    "title": "Salmon Run on the Columbia!",
+    "text": "You've reached the Columbia River and salmon are running thick — thousands of fish choke the shallows. The local Chinook people are expert fishers. How do you resupply?",
+    "action": "quick_choice",
+    "choices": [
+      { "text": "🐟 Trade with the Chinook for dried salmon", "result": "The Chinook trade generously. Their dried salmon kept the Corps fed for weeks. Lewis admired their fishing weirs and preservation techniques, noting methods far superior to anything he knew.", "good": true },
+      { "text": "🪤 Build your own fish traps", "result": "Your crude traps catch a few fish, but the Chinook's engineered weirs catch hundreds. Sometimes the wise choice is to learn from the experts rather than reinvent the wheel.", "good": false },
+      { "text": "🏹 Spear fish from the shallows", "result": "You land a few good salmon! The men are thrilled. But trading with the Chinook would have yielded ten times the food. Still, fresh salmon over a campfire is hard to beat.", "good": true }
+    ]
+  },
+  {
+    "icon": "💧",
+    "title": "Water Supply Running Low!",
+    "text": "The creek marked on your rough map has dried up. The men's canteens are empty and the nearest river is a full day's march. The July sun beats down mercilessly.",
+    "action": "quick_choice",
+    "choices": [
+      { "text": "🌿 Look for green vegetation in low ground", "result": "You spot a line of green willows in a dry wash and dig down three feet — water seeps in! Plains travelers knew that green plants signal underground water. The Corps used this trick many times.", "good": true },
+      { "text": "🦬 Follow buffalo trails", "result": "Buffalo trails often lead to water — animals know the land better than any map. You follow the tracks two miles to a hidden spring. Frontier wisdom saved the day!", "good": true },
+      { "text": "⏩ March faster to reach the river", "result": "Pushing hard without water is deadly. Two men collapse from dehydration before you find the river. Clark wrote that lack of water was 'more distressing than hunger.'", "good": false }
+    ]
+  },
+  {
+    "icon": "🔧",
+    "title": "Broken Pirogue!",
+    "text": "Your largest canoe has cracked open on a submerged rock! Water pours in and supplies are floating downstream. Sacagawea calmly scoops up irreplaceable journals and instruments from the water.",
+    "action": "quick_choice",
+    "choices": [
+      { "text": "🌲 Beach it and patch with pine pitch", "result": "You seal the crack with heated pine resin and elk hide. The Corps repaired boats constantly using whatever was at hand. Pine pitch was the duct tape of 1805!", "good": true },
+      { "text": "🪵 Build new dugout canoes", "result": "You fell cottonwoods and hollow them with fire and adze. It takes three days but the new canoes are sturdy. The Corps built dozens of dugout canoes throughout the journey.", "good": true },
+      { "text": "📦 Abandon the boat and carry supplies on foot", "result": "Without boats, you cannot move the 8,000 pounds of supplies. The expedition depends on river travel. Lewis called the pirogues 'absolutely essential to the enterprise.'", "good": false }
+    ]
+  },
+  {
+    "icon": "🐺",
+    "title": "Wolves Circling Camp!",
+    "text": "As darkness falls, dozens of wolves howl from every direction. Their eyes gleam at the edges of the firelight. Clark noted 'a great number of wolves about us all night.' Guard the provisions!",
+    "action": "tap_swat",
+    "swat_target": "🐺",
+    "swat_count": 6,
+    "swat_time": 6,
+    "success_text": "You drove the wolves back with fire and noise! The Corps always posted sentries through the night. In wolf country, the guards kept fires blazing until dawn.",
+    "fail_text": "The wolves snatched a sack of dried meat from the edge of camp! You lost three days of provisions. The Corps learned to hang food from high branches and keep armed guards on watch."
+  },
+  {
+    "icon": "🌌",
+    "title": "Stargazing for Position!",
+    "text": "Lewis unpacks his sextant, chronometer, and artificial horizon to take celestial observations. Jefferson ordered precise latitude and longitude readings throughout the journey. How do you help?",
+    "action": "quick_choice",
+    "choices": [
+      { "text": "🕯️ Hold the lantern steady for Lewis", "result": "Lewis sights Polaris and calculates your latitude to within a few miles! His astronomical readings created the first accurate map of the American West. Jefferson considered this data priceless.", "good": true },
+      { "text": "📖 Record the readings in the journal", "result": "Perfect. Clark was the expedition's primary mapmaker and recorder. His measurements and sketches became the basis for every American map of the West for the next 50 years.", "good": true },
+      { "text": "😴 Turn in early — stars can wait", "result": "Lewis insists this cannot wait — a cloudy night tomorrow means lost data forever. Mapping the continent was as important as reaching the Pacific. Science doesn't sleep!", "good": false }
+    ]
+  },
+  {
+    "icon": "📓",
+    "title": "Journal Writing by Firelight!",
+    "text": "Jefferson's orders were clear: record everything. Plants, animals, weather, rivers, and native peoples. Your ink is low and your quill is worn. Tonight you must choose what to document.",
+    "action": "quick_choice",
+    "choices": [
+      { "text": "🌿 Describe the new plant species found today", "result": "You carefully press a specimen and describe its leaves, flowers, and habitat. Lewis documented over 170 plant species unknown to Western science — many still carry names he gave them.", "good": true },
+      { "text": "🗺️ Map today's river course and landmarks", "result": "Clark sketches the river bends, tributaries, and notable bluffs. His maps were astonishingly accurate — some were still in use by the U.S. Army 50 years later!", "good": true },
+      { "text": "😤 Skip tonight — too tired to write", "result": "Every missed entry is lost knowledge forever. Some of the expedition's most important discoveries were recorded on the hardest, most exhausting days. Lewis and Clark almost never skipped a night.", "good": false }
+    ]
+  },
+  {
+    "icon": "🏔️",
+    "title": "The Great Falls Portage!",
+    "text": "Five massive waterfalls block the Missouri — an 18-mile stretch of roaring cascades. Everything must be carried overland: boats, supplies, weapons, and scientific instruments. The portage took the real Corps 24 brutal days.",
+    "action": "quick_choice",
+    "choices": [
+      { "text": "🛞 Build wooden wagon wheels from cottonwood", "result": "Brilliant! The Corps cut rounds from a cottonwood mast to make crude wheels for a cart. It was backbreaking but moved the heaviest loads. American ingenuity at its finest!", "good": true },
+      { "text": "💪 Carry everything on the men's backs", "result": "The men stagger under 200-pound loads across cactus, rocks, and rattlesnakes in searing heat. Several collapse. It works, but the wheels would have saved days of agony.", "good": false },
+      { "text": "🚢 Try Lewis's iron-frame boat experiment", "result": "Lewis brought a collapsible iron boat frame from Harper's Ferry for this exact moment. Sadly, without proper pine pitch to seal the elk-skin covering, it sank. A rare failure for the captains!", "good": true }
     ]
   }
 ]
