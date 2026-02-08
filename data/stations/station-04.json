@@ -17,11 +17,6 @@
       }
     ],
     "reflection": "Why do you think Lewis and Clark decided to build a fort and stay for the winter instead of continuing their journey?",
-    "image": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Karl_Bodmer_Travels_in_America_%2847%29.jpg/800px-Karl_Bodmer_Travels_in_America_%2847%29.jpg",
-      "alt": "Mandan village on the Missouri, painting by Karl Bodmer",
-      "caption": "Mandan Village, Karl Bodmer, 1833-1834 — Wikimedia Commons"
-    },
     "challenge": {
       "type": "multiple_choice",
       "question": "The Mandan had been trading with Europeans since 1738. That's how many years before Lewis and Clark arrived?",
@@ -34,7 +29,19 @@
       "correct": 2,
       "feedback_correct": "Correct! 1804 minus 1738 equals 66 years. The Mandan were experienced traders with Europeans long before Lewis and Clark showed up.",
       "feedback_incorrect": "Let's do the math: 1804 - 1738 = 66 years. The Mandan had been trading with Europeans for generations!"
-    }
+    },
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Karl_Bodmer_Travels_in_America_%2837%29.jpg/800px-Karl_Bodmer_Travels_in_America_%2837%29.jpg",
+        "alt": "Mandan Village on the Missouri, Karl Bodmer",
+        "caption": "Mandan Village on the Missouri, Karl Bodmer, 1833–1834 — Wikimedia Commons"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Bodmer_--_Mato-Tope.jpg/800px-Bodmer_--_Mato-Tope.jpg",
+        "alt": "Mato-Tope, Mandan chief, painted by Karl Bodmer",
+        "caption": "Mato-Tope (Four Bears), Mandan chief, Karl Bodmer, 1834 — Joslyn Art Museum"
+      }
+    ]
   },
   "standard": {
     "title": "The Mandan Villages and Fort Mandan",
@@ -54,11 +61,6 @@
       }
     ],
     "reflection": "The Mandan had been trading with Europeans since 1738 — over 65 years before Lewis and Clark arrived. How might this prior contact have shaped the encounter?",
-    "image": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Karl_Bodmer_Travels_in_America_%2847%29.jpg/800px-Karl_Bodmer_Travels_in_America_%2847%29.jpg",
-      "alt": "Mandan village on the Missouri, painting by Karl Bodmer",
-      "caption": "Mandan Village, Karl Bodmer, 1833-1834 — Wikimedia Commons"
-    },
     "challenge": {
       "type": "multiple_choice",
       "question": "The Mandan had been trading with Europeans since 1738. That's how many years before Lewis and Clark arrived?",
@@ -71,7 +73,19 @@
       "correct": 2,
       "feedback_correct": "Correct! 1804 minus 1738 equals 66 years. The Mandan were experienced traders with Europeans long before Lewis and Clark showed up.",
       "feedback_incorrect": "Let's do the math: 1804 - 1738 = 66 years. The Mandan had been trading with Europeans for generations!"
-    }
+    },
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Karl_Bodmer_Travels_in_America_%2837%29.jpg/800px-Karl_Bodmer_Travels_in_America_%2837%29.jpg",
+        "alt": "Mandan Village on the Missouri, Karl Bodmer",
+        "caption": "Mandan Village on the Missouri, Karl Bodmer, 1833–1834 — Wikimedia Commons"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Bodmer_--_Mato-Tope.jpg/800px-Bodmer_--_Mato-Tope.jpg",
+        "alt": "Mato-Tope, Mandan chief, painted by Karl Bodmer",
+        "caption": "Mato-Tope (Four Bears), Mandan chief, Karl Bodmer, 1834 — Joslyn Art Museum"
+      }
+    ]
   },
   "advanced": {
     "title": "The Mandan-Hidatsa Villages and Construction of Fort Mandan",
@@ -91,11 +105,6 @@
       }
     ],
     "reflection": "The Mandan-Hidatsa villages functioned as a major trade hub of the Northern Plains, connecting peoples from the Rockies to the Great Lakes. How does understanding this existing network change the narrative that Lewis and Clark were exploring “unknown” territory? What does Clark’s hiring of a French interpreter tell us about who was already present in this region?",
-    "image": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Karl_Bodmer_Travels_in_America_%2847%29.jpg/800px-Karl_Bodmer_Travels_in_America_%2847%29.jpg",
-      "alt": "Mandan village on the Missouri, painting by Karl Bodmer",
-      "caption": "Mandan Village, Karl Bodmer, 1833-1834 — Wikimedia Commons"
-    },
     "challenge": {
       "type": "multiple_choice",
       "question": "The Mandan had been trading with Europeans since 1738. That's how many years before Lewis and Clark arrived?",
@@ -108,6 +117,18 @@
       "correct": 2,
       "feedback_correct": "Correct! 1804 minus 1738 equals 66 years. The Mandan were experienced traders with Europeans long before Lewis and Clark showed up.",
       "feedback_incorrect": "Let's do the math: 1804 - 1738 = 66 years. The Mandan had been trading with Europeans for generations!"
-    }
+    },
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Karl_Bodmer_Travels_in_America_%2837%29.jpg/800px-Karl_Bodmer_Travels_in_America_%2837%29.jpg",
+        "alt": "Mandan Village on the Missouri, Karl Bodmer",
+        "caption": "Mandan Village on the Missouri, Karl Bodmer, 1833–1834 — Wikimedia Commons"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Bodmer_--_Mato-Tope.jpg/800px-Bodmer_--_Mato-Tope.jpg",
+        "alt": "Mato-Tope, Mandan chief, painted by Karl Bodmer",
+        "caption": "Mato-Tope (Four Bears), Mandan chief, Karl Bodmer, 1834 — Joslyn Art Museum"
+      }
+    ]
   }
 }

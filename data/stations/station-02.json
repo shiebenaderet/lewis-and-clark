@@ -24,11 +24,6 @@
       }
     ],
     "reflection": "Lewis describes wolves, rich soil, and fires on the plains. What do these details tell you about what the Great Plains were like in 1804?",
-    "image": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Albert_Bierstadt_-_Buffalo_Trail-_The_Impending_Storm_%281869%29.jpg/800px-Albert_Bierstadt_-_Buffalo_Trail-_The_Impending_Storm_%281869%29.jpg",
-      "alt": "Buffalo Trail: The Impending Storm by Albert Bierstadt, 1869",
-      "caption": "Buffalo Trail: The Impending Storm, Albert Bierstadt, 1869 — Wikimedia Commons"
-    },
     "challenge": {
       "type": "multiple_choice",
       "question": "Lewis wrote that the soil was 'parched with frequent fires.' Who was likely setting those fires, and why?",
@@ -41,7 +36,19 @@
       "correct": 1,
       "feedback_correct": "Excellent! Native Americans used controlled burns for thousands of years to manage grasslands, encourage new growth, and drive buffalo for hunting.",
       "feedback_incorrect": "Think again. Native Americans used controlled burns for thousands of years to manage grasslands and attract buffalo herds."
-    }
+    },
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Albert_Bierstadt_-_Buffalo_Trail%2C_the_Impending_Storm_%281869%29.jpg/800px-Albert_Bierstadt_-_Buffalo_Trail%2C_the_Impending_Storm_%281869%29.jpg",
+        "alt": "Buffalo Trail: The Impending Storm by Albert Bierstadt, 1869",
+        "caption": "Buffalo Trail: The Impending Storm, Albert Bierstadt, 1869 — Corcoran Gallery of Art"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Titian_Ramsay_Peale_-_American_Bison.jpg/800px-Titian_Ramsay_Peale_-_American_Bison.jpg",
+        "alt": "American Bison by Titian Ramsay Peale",
+        "caption": "American Bison, Titian Ramsay Peale — Lewis and Clark documented vast herds on the Great Plains"
+      }
+    ]
   },
   "standard": {
     "title": "The Platte River and the Great Plains",
@@ -68,11 +75,6 @@
       }
     ],
     "reflection": "Both Lewis and Clark write about the landscape, wildlife, and Native Americans. What picture of the Great Plains do their entries paint?",
-    "image": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Albert_Bierstadt_-_Buffalo_Trail-_The_Impending_Storm_%281869%29.jpg/800px-Albert_Bierstadt_-_Buffalo_Trail-_The_Impending_Storm_%281869%29.jpg",
-      "alt": "Buffalo Trail: The Impending Storm by Albert Bierstadt, 1869",
-      "caption": "Buffalo Trail: The Impending Storm, Albert Bierstadt, 1869 — Wikimedia Commons"
-    },
     "challenge": {
       "type": "multiple_choice",
       "question": "Lewis wrote that the soil was 'parched with frequent fires.' Who was likely setting those fires, and why?",
@@ -85,7 +87,19 @@
       "correct": 1,
       "feedback_correct": "Excellent! Native Americans used controlled burns for thousands of years to manage grasslands, encourage new growth, and drive buffalo for hunting.",
       "feedback_incorrect": "Think again. Native Americans used controlled burns for thousands of years to manage grasslands and attract buffalo herds."
-    }
+    },
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Albert_Bierstadt_-_Buffalo_Trail%2C_the_Impending_Storm_%281869%29.jpg/800px-Albert_Bierstadt_-_Buffalo_Trail%2C_the_Impending_Storm_%281869%29.jpg",
+        "alt": "Buffalo Trail: The Impending Storm by Albert Bierstadt, 1869",
+        "caption": "Buffalo Trail: The Impending Storm, Albert Bierstadt, 1869 — Corcoran Gallery of Art"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Titian_Ramsay_Peale_-_American_Bison.jpg/800px-Titian_Ramsay_Peale_-_American_Bison.jpg",
+        "alt": "American Bison by Titian Ramsay Peale",
+        "caption": "American Bison, Titian Ramsay Peale — Lewis and Clark documented vast herds on the Great Plains"
+      }
+    ]
   },
   "advanced": {
     "title": "The Platte River and the Great Plains",
@@ -113,11 +127,6 @@
       }
     ],
     "reflection": "Lewis notes that prairie fires have “parched” the soil, and Clark observes that the Indians are away hunting buffalo. What do these details suggest about how Native Americans managed and interacted with the Great Plains ecosystem? Research the concept of “controlled burns” — why might Native Americans have set deliberate fires?",
-    "image": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Albert_Bierstadt_-_Buffalo_Trail-_The_Impending_Storm_%281869%29.jpg/800px-Albert_Bierstadt_-_Buffalo_Trail-_The_Impending_Storm_%281869%29.jpg",
-      "alt": "Buffalo Trail: The Impending Storm by Albert Bierstadt, 1869",
-      "caption": "Buffalo Trail: The Impending Storm, Albert Bierstadt, 1869 — Wikimedia Commons"
-    },
     "challenge": {
       "type": "multiple_choice",
       "question": "Lewis wrote that the soil was 'parched with frequent fires.' Who was likely setting those fires, and why?",
@@ -130,6 +139,18 @@
       "correct": 1,
       "feedback_correct": "Excellent! Native Americans used controlled burns for thousands of years to manage grasslands, encourage new growth, and drive buffalo for hunting.",
       "feedback_incorrect": "Think again. Native Americans used controlled burns for thousands of years to manage grasslands and attract buffalo herds."
-    }
+    },
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Albert_Bierstadt_-_Buffalo_Trail%2C_the_Impending_Storm_%281869%29.jpg/800px-Albert_Bierstadt_-_Buffalo_Trail%2C_the_Impending_Storm_%281869%29.jpg",
+        "alt": "Buffalo Trail: The Impending Storm by Albert Bierstadt, 1869",
+        "caption": "Buffalo Trail: The Impending Storm, Albert Bierstadt, 1869 — Corcoran Gallery of Art"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Titian_Ramsay_Peale_-_American_Bison.jpg/800px-Titian_Ramsay_Peale_-_American_Bison.jpg",
+        "alt": "American Bison by Titian Ramsay Peale",
+        "caption": "American Bison, Titian Ramsay Peale — Lewis and Clark documented vast herds on the Great Plains"
+      }
+    ]
   }
 }

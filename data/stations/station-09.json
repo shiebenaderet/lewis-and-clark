@@ -18,11 +18,6 @@
       }
     ],
     "reflection": "The group almost starved crossing the mountains and were saved by the Nez Perce. How many times has the expedition been helped by Native Americans so far? What does that tell you?",
-    "image": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Lolo_trail.jpg/800px-Lolo_trail.jpg",
-      "alt": "The Lolo Trail through the Bitterroot Mountains",
-      "caption": "Lolo Trail, Bitterroot Mountains — Wikimedia Commons"
-    },
     "challenge": {
       "type": "multiple_choice",
       "question": "When the Corps crossed the Continental Divide, they left U.S. territory. What territory did they enter?",
@@ -35,7 +30,19 @@
       "correct": 2,
       "feedback_correct": "Right! At Lemhi Pass, they crossed from the Louisiana Purchase into Oregon Country, which was jointly claimed by the U.S. and Britain. The expedition was now in disputed territory.",
       "feedback_incorrect": "They entered Oregon Country, which was jointly claimed by both the U.S. and Britain. This reveals the expedition was partly about staking territorial claims."
-    }
+    },
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Lolo_trail.jpg/800px-Lolo_trail.jpg",
+        "alt": "Lolo Trail through the Bitterroot Mountains",
+        "caption": "Lolo Trail, Bitterroot Mountains — the most grueling stretch of the entire expedition"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Albert_Bierstadt_-_Rocky_Mountains%2C_Lander%27s_Peak.jpg/800px-Albert_Bierstadt_-_Rocky_Mountains%2C_Lander%27s_Peak.jpg",
+        "alt": "Rocky Mountains landscape by Albert Bierstadt",
+        "caption": "Rocky Mountain landscape, Albert Bierstadt — the Corps nearly perished crossing these mountains"
+      }
+    ]
   },
   "standard": {
     "title": "Over the Rockies to the Columbia River",
@@ -55,11 +62,6 @@
       }
     ],
     "reflection": "At Lemhi Pass, the Corps crossed from the Louisiana Purchase into Oregon Country — territory the U.S. did not own. What does this tell you about the expedition’s true purpose beyond just “exploring”?",
-    "image": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Lolo_trail.jpg/800px-Lolo_trail.jpg",
-      "alt": "The Lolo Trail through the Bitterroot Mountains",
-      "caption": "Lolo Trail, Bitterroot Mountains — Wikimedia Commons"
-    },
     "challenge": {
       "type": "multiple_choice",
       "question": "When the Corps crossed the Continental Divide, they left U.S. territory. What territory did they enter?",
@@ -72,7 +74,19 @@
       "correct": 2,
       "feedback_correct": "Right! At Lemhi Pass, they crossed from the Louisiana Purchase into Oregon Country, which was jointly claimed by the U.S. and Britain. The expedition was now in disputed territory.",
       "feedback_incorrect": "They entered Oregon Country, which was jointly claimed by both the U.S. and Britain. This reveals the expedition was partly about staking territorial claims."
-    }
+    },
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Lolo_trail.jpg/800px-Lolo_trail.jpg",
+        "alt": "Lolo Trail through the Bitterroot Mountains",
+        "caption": "Lolo Trail, Bitterroot Mountains — the most grueling stretch of the entire expedition"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Albert_Bierstadt_-_Rocky_Mountains%2C_Lander%27s_Peak.jpg/800px-Albert_Bierstadt_-_Rocky_Mountains%2C_Lander%27s_Peak.jpg",
+        "alt": "Rocky Mountains landscape by Albert Bierstadt",
+        "caption": "Rocky Mountain landscape, Albert Bierstadt — the Corps nearly perished crossing these mountains"
+      }
+    ]
   },
   "advanced": {
     "title": "The Rocky Mountain Crossing and Descent to the Columbia",
@@ -93,11 +107,6 @@
       }
     ],
     "reflection": "At Lemhi Pass, the expedition crossed from U.S. territory (the Louisiana Purchase) into Oregon Country, which was claimed by multiple nations. Analyze the expedition as an instrument of territorial expansion: How does the act of distributing medals, giving speeches about a “great father,” and mapping the territory serve as a form of sovereignty claim, even in territory the U.S. did not legally possess? How do the Nez Perce’s actions — feeding the starving explorers and teaching them canoe-building — complicate the narrative of American self-reliance?",
-    "image": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Lolo_trail.jpg/800px-Lolo_trail.jpg",
-      "alt": "The Lolo Trail through the Bitterroot Mountains",
-      "caption": "Lolo Trail, Bitterroot Mountains — Wikimedia Commons"
-    },
     "challenge": {
       "type": "multiple_choice",
       "question": "When the Corps crossed the Continental Divide, they left U.S. territory. What territory did they enter?",
@@ -110,6 +119,18 @@
       "correct": 2,
       "feedback_correct": "Right! At Lemhi Pass, they crossed from the Louisiana Purchase into Oregon Country, which was jointly claimed by the U.S. and Britain. The expedition was now in disputed territory.",
       "feedback_incorrect": "They entered Oregon Country, which was jointly claimed by both the U.S. and Britain. This reveals the expedition was partly about staking territorial claims."
-    }
+    },
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Lolo_trail.jpg/800px-Lolo_trail.jpg",
+        "alt": "Lolo Trail through the Bitterroot Mountains",
+        "caption": "Lolo Trail, Bitterroot Mountains — the most grueling stretch of the entire expedition"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Albert_Bierstadt_-_Rocky_Mountains%2C_Lander%27s_Peak.jpg/800px-Albert_Bierstadt_-_Rocky_Mountains%2C_Lander%27s_Peak.jpg",
+        "alt": "Rocky Mountains landscape by Albert Bierstadt",
+        "caption": "Rocky Mountain landscape, Albert Bierstadt — the Corps nearly perished crossing these mountains"
+      }
+    ]
   }
 }

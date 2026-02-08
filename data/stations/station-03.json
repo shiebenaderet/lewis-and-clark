@@ -24,11 +24,6 @@
       }
     ],
     "reflection": "Lewis and Clark gave speeches telling Native Americans they had a new “great father.” How do you think the Native Americans felt about this? Why?",
-    "image": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Lewis_and_Clark_at_Council_Bluff_by_C.M._Russell.jpg/800px-Lewis_and_Clark_at_Council_Bluff_by_C.M._Russell.jpg",
-      "alt": "Lewis and Clark at Council Bluff, painting by Charles M. Russell",
-      "caption": "Lewis and Clark at Council Bluff, Charles M. Russell, 1898 — Wikimedia Commons"
-    },
     "challenge": {
       "type": "multiple_choice",
       "question": "Lewis and Clark gave gifts 'in proportion to their consequence.' What does 'consequence' mean here?",
@@ -41,7 +36,19 @@
       "correct": 1,
       "feedback_correct": "Right! In 1804, 'consequence' meant importance or status. More important chiefs got bigger gifts — diplomacy through gift-giving.",
       "feedback_incorrect": "In 1804 English, 'consequence' meant importance or status. The bigger the chief's rank, the bigger the gift."
-    }
+    },
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Lewis_and_Clark_at_Council_Bluffs.jpg/800px-Lewis_and_Clark_at_Council_Bluffs.jpg",
+        "alt": "Lewis and Clark at Council Bluffs, painting",
+        "caption": "Lewis and Clark holding a council with Native Americans — Wikimedia Commons"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Indianpeacemedal.jpg/800px-Indianpeacemedal.jpg",
+        "alt": "Jefferson Indian Peace Medal",
+        "caption": "Jefferson Indian Peace Medal — Lewis and Clark distributed these as diplomatic gifts to Native leaders"
+      }
+    ]
   },
   "standard": {
     "title": "First Council with Western Indians",
@@ -68,11 +75,6 @@
       }
     ],
     "reflection": "Lewis and Clark claimed to represent a new “great father” for these tribes. How might the Oto and Missouri leaders have interpreted this message? What power dynamics are at play in this encounter?",
-    "image": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Lewis_and_Clark_at_Council_Bluff_by_C.M._Russell.jpg/800px-Lewis_and_Clark_at_Council_Bluff_by_C.M._Russell.jpg",
-      "alt": "Lewis and Clark at Council Bluff, painting by Charles M. Russell",
-      "caption": "Lewis and Clark at Council Bluff, Charles M. Russell, 1898 — Wikimedia Commons"
-    },
     "challenge": {
       "type": "multiple_choice",
       "question": "Lewis and Clark gave gifts 'in proportion to their consequence.' What does 'consequence' mean here?",
@@ -85,7 +87,19 @@
       "correct": 1,
       "feedback_correct": "Right! In 1804, 'consequence' meant importance or status. More important chiefs got bigger gifts — diplomacy through gift-giving.",
       "feedback_incorrect": "In 1804 English, 'consequence' meant importance or status. The bigger the chief's rank, the bigger the gift."
-    }
+    },
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Lewis_and_Clark_at_Council_Bluffs.jpg/800px-Lewis_and_Clark_at_Council_Bluffs.jpg",
+        "alt": "Lewis and Clark at Council Bluffs, painting",
+        "caption": "Lewis and Clark holding a council with Native Americans — Wikimedia Commons"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Indianpeacemedal.jpg/800px-Indianpeacemedal.jpg",
+        "alt": "Jefferson Indian Peace Medal",
+        "caption": "Jefferson Indian Peace Medal — Lewis and Clark distributed these as diplomatic gifts to Native leaders"
+      }
+    ]
   },
   "advanced": {
     "title": "First Diplomatic Council with Western Nations",
@@ -113,11 +127,6 @@
       }
     ],
     "reflection": "Clark records that gifts were given “in proportion to their consequence” (importance). Analyze the power dynamics of this diplomatic encounter. How did Lewis and Clark use ceremony, technology, and gift-giving as tools of diplomacy? How might the Oto and Missouri chiefs have had their own strategic reasons for engaging with the Americans?",
-    "image": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Lewis_and_Clark_at_Council_Bluff_by_C.M._Russell.jpg/800px-Lewis_and_Clark_at_Council_Bluff_by_C.M._Russell.jpg",
-      "alt": "Lewis and Clark at Council Bluff, painting by Charles M. Russell",
-      "caption": "Lewis and Clark at Council Bluff, Charles M. Russell, 1898 — Wikimedia Commons"
-    },
     "challenge": {
       "type": "multiple_choice",
       "question": "Lewis and Clark gave gifts 'in proportion to their consequence.' What does 'consequence' mean here?",
@@ -130,6 +139,18 @@
       "correct": 1,
       "feedback_correct": "Right! In 1804, 'consequence' meant importance or status. More important chiefs got bigger gifts — diplomacy through gift-giving.",
       "feedback_incorrect": "In 1804 English, 'consequence' meant importance or status. The bigger the chief's rank, the bigger the gift."
-    }
+    },
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Lewis_and_Clark_at_Council_Bluffs.jpg/800px-Lewis_and_Clark_at_Council_Bluffs.jpg",
+        "alt": "Lewis and Clark at Council Bluffs, painting",
+        "caption": "Lewis and Clark holding a council with Native Americans — Wikimedia Commons"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Indianpeacemedal.jpg/800px-Indianpeacemedal.jpg",
+        "alt": "Jefferson Indian Peace Medal",
+        "caption": "Jefferson Indian Peace Medal — Lewis and Clark distributed these as diplomatic gifts to Native leaders"
+      }
+    ]
   }
 }

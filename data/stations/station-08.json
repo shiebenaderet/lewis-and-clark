@@ -24,11 +24,6 @@
       }
     ],
     "reflection": "Imagine you were Sacagawea, seeing your brother and your people again after years of being away. How would you feel? How might this moment have changed the rest of the expedition?",
-    "image": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Sacajawea_at_the_Three_Forks.jpg/800px-Sacajawea_at_the_Three_Forks.jpg",
-      "alt": "Sacagawea at the Three Forks, painting by C.M. Russell",
-      "caption": "Sacagawea at the Three Forks, C.M. Russell, 1912 — Wikimedia Commons"
-    },
     "challenge": {
       "type": "multiple_choice",
       "question": "Why was this meeting place named 'Camp Fortunate'?",
@@ -41,7 +36,19 @@
       "correct": 2,
       "feedback_correct": "Exactly! What an incredible coincidence. Sacagawea's brother Cameahwait was the chief, which meant the Corps could negotiate for the horses they desperately needed to cross the Rockies.",
       "feedback_incorrect": "It was named Camp Fortunate because of an amazing coincidence: the Shoshone chief Cameahwait turned out to be Sacagawea's brother. This personal connection helped them get the horses they needed."
-    }
+    },
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Sacajawea_at_the_Three_Forks.jpg/800px-Sacajawea_at_the_Three_Forks.jpg",
+        "alt": "Sacagawea at the Three Forks, C.M. Russell painting",
+        "caption": "Sacagawea at the Three Forks, C.M. Russell, 1912 — Sacagawea recognized her homeland"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/William_Clark-Charles_Willson_Peale.jpg/800px-William_Clark-Charles_Willson_Peale.jpg",
+        "alt": "Portrait of William Clark by Charles Willson Peale",
+        "caption": "Captain Clark negotiated with the Shoshone for horses — portrait by C.W. Peale"
+      }
+    ]
   },
   "standard": {
     "title": "Camp Fortunate — The Shoshone Reunion",
@@ -68,11 +75,6 @@
       }
     ],
     "reflection": "Lewis describes the Shoshone as living in poverty yet being cheerful, generous, and honest. What values does Lewis seem to admire? What biases might be shaping his observations?",
-    "image": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Sacajawea_at_the_Three_Forks.jpg/800px-Sacajawea_at_the_Three_Forks.jpg",
-      "alt": "Sacagawea at the Three Forks, painting by C.M. Russell",
-      "caption": "Sacagawea at the Three Forks, C.M. Russell, 1912 — Wikimedia Commons"
-    },
     "challenge": {
       "type": "multiple_choice",
       "question": "Why was this meeting place named 'Camp Fortunate'?",
@@ -85,7 +87,19 @@
       "correct": 2,
       "feedback_correct": "Exactly! What an incredible coincidence. Sacagawea's brother Cameahwait was the chief, which meant the Corps could negotiate for the horses they desperately needed to cross the Rockies.",
       "feedback_incorrect": "It was named Camp Fortunate because of an amazing coincidence: the Shoshone chief Cameahwait turned out to be Sacagawea's brother. This personal connection helped them get the horses they needed."
-    }
+    },
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Sacajawea_at_the_Three_Forks.jpg/800px-Sacajawea_at_the_Three_Forks.jpg",
+        "alt": "Sacagawea at the Three Forks, C.M. Russell painting",
+        "caption": "Sacagawea at the Three Forks, C.M. Russell, 1912 — Sacagawea recognized her homeland"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/William_Clark-Charles_Willson_Peale.jpg/800px-William_Clark-Charles_Willson_Peale.jpg",
+        "alt": "Portrait of William Clark by Charles Willson Peale",
+        "caption": "Captain Clark negotiated with the Shoshone for horses — portrait by C.W. Peale"
+      }
+    ]
   },
   "advanced": {
     "title": "Camp Fortunate — The Shoshone Reunion and Its Strategic Implications",
@@ -113,11 +127,6 @@
       }
     ],
     "reflection": "Lewis writes that each Shoshone individual “is his own sovereign master and acts from the dictates of his own mind.” This description of individual liberty resonates with Enlightenment political philosophy. Yet Lewis simultaneously characterizes the Shoshone as living in “a wretched state of poverty.” Analyze the tension between Lewis’s admiration for Shoshone character and his judgment of their material condition. What cultural assumptions underlie his definition of “poverty”? How might the Shoshone have assessed their own circumstances differently?",
-    "image": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Sacajawea_at_the_Three_Forks.jpg/800px-Sacajawea_at_the_Three_Forks.jpg",
-      "alt": "Sacagawea at the Three Forks, painting by C.M. Russell",
-      "caption": "Sacagawea at the Three Forks, C.M. Russell, 1912 — Wikimedia Commons"
-    },
     "challenge": {
       "type": "multiple_choice",
       "question": "Why was this meeting place named 'Camp Fortunate'?",
@@ -130,6 +139,18 @@
       "correct": 2,
       "feedback_correct": "Exactly! What an incredible coincidence. Sacagawea's brother Cameahwait was the chief, which meant the Corps could negotiate for the horses they desperately needed to cross the Rockies.",
       "feedback_incorrect": "It was named Camp Fortunate because of an amazing coincidence: the Shoshone chief Cameahwait turned out to be Sacagawea's brother. This personal connection helped them get the horses they needed."
-    }
+    },
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Sacajawea_at_the_Three_Forks.jpg/800px-Sacajawea_at_the_Three_Forks.jpg",
+        "alt": "Sacagawea at the Three Forks, C.M. Russell painting",
+        "caption": "Sacagawea at the Three Forks, C.M. Russell, 1912 — Sacagawea recognized her homeland"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/William_Clark-Charles_Willson_Peale.jpg/800px-William_Clark-Charles_Willson_Peale.jpg",
+        "alt": "Portrait of William Clark by Charles Willson Peale",
+        "caption": "Captain Clark negotiated with the Shoshone for horses — portrait by C.W. Peale"
+      }
+    ]
   }
 }

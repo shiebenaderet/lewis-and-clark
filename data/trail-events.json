@@ -1,52 +1,112 @@
 [
   {
-    "icon": "🐻",
-    "title": "Grizzly Bear Sighting!",
-    "text": "Your party spots a massive grizzly bear along the riverbank. The Corps encountered grizzlies frequently — Lewis once described one chasing him into the river. You wait quietly until it moves on."
+    "icon": "\ud83d\udc3b",
+    "title": "Grizzly Bear!",
+    "text": "A massive grizzly charges toward the riverbank! Lewis once described one chasing him into the river. What do you do?",
+    "action": "quick_choice",
+    "choices": [
+      { "text": "\ud83c\udfcb Stand tall and shout!", "result": "The bear stops, studies your group, and lumbers away. Bold move \u2014 Lewis would approve!", "good": true },
+      { "text": "\ud83c\udf0a Back slowly toward the river", "result": "The bear loses interest and wanders off. Smart \u2014 the Corps often used the river as an escape route!", "good": true },
+      { "text": "\ud83c\udfc3 Run for the trees!", "result": "Running triggers the bear's chase instinct! It follows for 50 yards before giving up. Never run from a grizzly!", "good": false }
+    ]
   },
   {
-    "icon": "🌊",
+    "icon": "\ud83c\udf0a",
     "title": "River Rapids Ahead!",
-    "text": "The Missouri’s current grows fierce. Your boats are tossed by rapids, and everyone grabs their poles to push through. Several items get soaked, but nothing is lost. The Corps faced dangerous rapids throughout the journey."
+    "text": "The Missouri's current is fierce \u2014 your boats are tossed sideways! Everyone grabs their poles. How do you navigate?",
+    "action": "quick_choice",
+    "choices": [
+      { "text": "\u2693 Rope the boat to shore and portage", "result": "Safe but slow. You lose half a day hauling gear around the rapids. The Corps portaged around falls for nearly a month!", "good": true },
+      { "text": "\ud83d\udea3 Paddle hard and push through!", "result": "Your crew powers through! Some supplies get soaked but nothing is lost. The men cheer as you clear the rapids!", "good": true },
+      { "text": "\u23f8\ufe0f Wait for calmer waters", "result": "The river doesn't calm down. After wasting a full day, you portage anyway. Lewis noted the river 'never rests.'", "good": false }
+    ]
   },
   {
-    "icon": "🌩️",
+    "icon": "\u26c8\ufe0f",
     "title": "Thunderstorm on the Plains!",
-    "text": "A sudden thunderstorm rolls across the open prairie. Lightning cracks across the sky and rain pounds your camp. The Corps often endured violent weather with little shelter. You hunker down and wait it out."
+    "text": "A violent thunderstorm rolls in fast. Lightning cracks across the open prairie with no shelter in sight!",
+    "action": "quick_choice",
+    "choices": [
+      { "text": "\u26fa Set up camp in a low spot", "result": "Good thinking! Clark once barely escaped a flash flood in a ravine, but your low ground stays dry. You wait out the storm safely.", "good": true },
+      { "text": "\ud83c\udf33 Shelter under the tallest tree", "result": "Lightning strikes a tree nearby! Never shelter under tall trees in a storm. The Corps learned this the hard way.", "good": false },
+      { "text": "\ud83e\udded Press on through the storm", "result": "Soaked to the bone but still moving. The Corps often had no choice but to march through rain for days.", "good": true }
+    ]
   },
   {
-    "icon": "🦬",
+    "icon": "\ud83e\udd9f",
     "title": "Mosquito Swarm!",
-    "text": "Clouds of mosquitoes descend on your camp. Clark once wrote that they were ‘so numerous that I could not keep them off my gun long enough to take aim.’ You press on despite the pests."
+    "text": "Clouds of mosquitoes descend on your camp! Clark wrote he 'could not keep them off my gun long enough to take aim.' Fight back!",
+    "action": "tap_swat",
+    "swat_target": "\ud83e\udd9f",
+    "swat_count": 8,
+    "swat_time": 5,
+    "success_text": "You swatted enough mosquitoes to get some relief! The Corps burned green wood to create smoke \u2014 it was the only thing that helped.",
+    "fail_text": "The mosquitoes win this round! Your arms are covered in welts. The Corps endured this torment every single night on the plains."
   },
   {
-    "icon": "🦌",
+    "icon": "\ud83e\udd8c",
     "title": "Elk Herd Spotted!",
-    "text": "A large herd of elk grazes nearby. The hunters in your party bring down two, providing much-needed fresh meat. The Corps depended on hunting throughout the journey — they consumed up to 9 pounds of meat per person per day!"
+    "text": "A large herd of elk grazes nearby. The hunters need to bring down meat \u2014 the Corps ate up to 9 pounds per person per day!",
+    "action": "quick_choice",
+    "choices": [
+      { "text": "\ud83c\udff9 Send the best hunters downwind", "result": "Two elk brought down cleanly! That's over 800 pounds of meat. Drouillard would be proud \u2014 he was the expedition's best hunter.", "good": true },
+      { "text": "\ud83d\udca8 Rush the herd!", "result": "The herd scatters before you get close. No meat today. Patience and skill were essential for frontier hunting.", "good": false },
+      { "text": "\ud83e\uddee Set snares along the trail", "result": "You catch one small elk. Not a feast, but it will keep the party fed for a couple of days.", "good": true }
+    ]
   },
   {
-    "icon": "🌵",
-    "title": "Prickly Pear Cactus!",
-    "text": "The trail is covered in prickly pear cactus. Sharp spines pierce through your moccasins with every step. Lewis wrote that the cactus was ‘one of the beauties as well as the greatest pests of the plains.’"
+    "icon": "\ud83c\udf35",
+    "title": "Prickly Pear Cactus Field!",
+    "text": "The trail is carpeted with prickly pear cactus. Sharp spines pierce through your moccasins with every step!",
+    "action": "tap_swat",
+    "swat_target": "\ud83c\udf35",
+    "swat_count": 6,
+    "swat_time": 5,
+    "success_text": "You dodged most of the cactus! Lewis called prickly pear 'one of the beauties as well as the greatest pests of the plains.'",
+    "fail_text": "Ouch! Your moccasins are shredded and your feet are bleeding. The men had to stop constantly to pull out spines during the Great Falls portage."
   },
   {
-    "icon": "⛺",
+    "icon": "\u26fa",
     "title": "A Friendly Camp",
-    "text": "You encounter a small group of Native Americans who offer to share their fire and food. Throughout the expedition, the Corps relied on the generosity and knowledge of Indigenous peoples at critical moments."
+    "text": "You encounter a group of Native Americans who offer to trade. What do you bring to the meeting?",
+    "action": "quick_choice",
+    "choices": [
+      { "text": "\ud83c\udfa8 Trade beads and mirrors", "result": "They appreciate the colorful beads! Lewis and Clark carried 33 pounds of beads specifically for trade and diplomacy.", "good": true },
+      { "text": "\ud83c\udf96\ufe0f Offer a Jefferson peace medal", "result": "The chief accepts the medal with ceremony. Peace medals were the most important diplomatic gifts Lewis carried.", "good": true },
+      { "text": "\ud83d\udd2b Show your weapons to impress them", "result": "The display creates tension, not friendship. Clark learned that gifts and respect worked better than shows of force.", "good": false }
+    ]
   },
   {
-    "icon": "🌍",
-    "title": "Uncharted Territory",
-    "text": "Your maps show nothing but blank space ahead. The captains take out their compasses and sextants to chart the route. Lewis and Clark mapped thousands of miles of previously uncharted (by Europeans) territory."
+    "icon": "\ud83c\udf0d",
+    "title": "Fork in the River!",
+    "text": "The river splits into two branches. Which fork is the true Missouri? Choose wrong and you could lose weeks!",
+    "action": "quick_choice",
+    "choices": [
+      { "text": "\u2b05\ufe0f Take the left (south) fork", "result": "Correct! This happened at the Marias River. The men all voted for the north fork, but Lewis and Clark chose the south \u2014 and they were right!", "good": true },
+      { "text": "\u27a1\ufe0f Take the right (north) fork", "result": "That's the Marias River \u2014 a dead end! The Corps would have lost weeks. Lewis trusted his scientific observations over the popular vote.", "good": false },
+      { "text": "\ud83d\udd2d Send scouts up both forks", "result": "Smart! Lewis did exactly this \u2014 he scouted the south fork for days before committing. Scientific caution saved the expedition.", "good": true }
+    ]
   },
   {
-    "icon": "🐺",
-    "title": "Wolves Howling at Night!",
-    "text": "As darkness falls, the sound of wolves fills the air. Clark noted ‘a great number of wolves about us all night.’ The sentries keep watch while the rest of the party tries to sleep."
+    "icon": "\ud83d\udc3a",
+    "title": "Wolves at Night!",
+    "text": "As darkness falls, wolves howl all around your camp. Clark noted 'a great number of wolves about us all night.' Guard the camp!",
+    "action": "tap_swat",
+    "swat_target": "\ud83d\udc3a",
+    "swat_count": 5,
+    "swat_time": 6,
+    "success_text": "You kept the wolves at bay! The sentries earned their rest. The Corps always posted guards through the night.",
+    "fail_text": "The wolves got into the provisions! You lost some dried meat. The Corps learned to hang food high and keep watch."
   },
   {
-    "icon": "❄️",
+    "icon": "\u2744\ufe0f",
     "title": "Bitter Cold!",
-    "text": "Temperatures plummet well below freezing. During the winter at Fort Mandan, temperatures dropped to -45°F! The men huddle around fires and struggle to keep warm in their leather clothing."
+    "text": "Temperatures plummet to -20\u00b0F! At Fort Mandan it dropped to -45\u00b0F. How does your party survive the night?",
+    "action": "quick_choice",
+    "choices": [
+      { "text": "\ud83d\udd25 Build a big fire and huddle close", "result": "The fire keeps everyone warm enough to survive. At Fort Mandan, the men kept fires burning constantly for five months.", "good": true },
+      { "text": "\ud83e\udde5 Double up the leather bedrolls", "result": "Body heat plus leather \u2014 it works! The men often slept two to a bed during the coldest nights.", "good": true },
+      { "text": "\ud83c\udfc3 Keep marching to stay warm", "result": "Marching in -20\u00b0F wastes energy fast. Several men get frostbite. Lewis noted that exposed skin 'froze in minutes.'", "good": false }
+    ]
   }
 ]

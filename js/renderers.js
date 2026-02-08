@@ -23,14 +23,32 @@ function renderStation(index) {
 
   let html = '<div class="station-card">';
 
-  // Hero image
-  if (data.image) {
-    html += '<div class="station-hero">';
-    html += `<img src="${data.image.url}" alt="${escapeHtml(data.image.alt)}" loading="lazy" onerror="this.parentElement.style.display='none'">`;
-    if (data.image.caption) {
-      html += `<div class="station-hero-caption">${escapeHtml(data.image.caption)}</div>`;
+  // Image gallery (supports both single image and images array)
+  const images = data.images || (data.image ? [data.image] : []);
+  if (images.length > 0) {
+    html += `<div class="station-gallery" id="gallery-${index}">`;
+    images.forEach((img, imgIdx) => {
+      html += `<div class="gallery-slide ${imgIdx === 0 ? 'active' : ''}" data-slide="${imgIdx}">`;
+      html += `<div class="gallery-img-wrap">`;
+      html += `<img src="${img.url}" alt="${escapeHtml(img.alt)}" loading="${imgIdx === 0 ? 'eager' : 'lazy'}" onerror="this.closest('.gallery-slide').style.display='none'">`;
+      html += `</div>`;
+      if (img.caption) {
+        html += `<div class="gallery-caption">${escapeHtml(img.caption)}</div>`;
+      }
+      html += `</div>`;
+    });
+    if (images.length > 1) {
+      html += `<div class="gallery-nav">`;
+      html += `<button class="gallery-arrow gallery-prev" onclick="galleryNav(${index}, -1)">&lsaquo;</button>`;
+      html += `<div class="gallery-dots">`;
+      images.forEach((_, imgIdx) => {
+        html += `<button class="gallery-dot ${imgIdx === 0 ? 'active' : ''}" onclick="galleryGo(${index}, ${imgIdx})"></button>`;
+      });
+      html += `</div>`;
+      html += `<button class="gallery-arrow gallery-next" onclick="galleryNav(${index}, 1)">&rsaquo;</button>`;
+      html += `</div>`;
     }
-    html += '</div>';
+    html += `</div>`;
   }
 
   // Header
@@ -230,6 +248,31 @@ const SEGMENT_DATA = [
     toll: "Fleas, rain, spoiled food. But on Nov 7: 'Ocean in view! O! the joy!'" }
 ];
 
+// === GALLERY NAVIGATION ===
+function galleryNav(stationIndex, direction) {
+  const gallery = document.getElementById('gallery-' + stationIndex);
+  if (!gallery) return;
+  const slides = gallery.querySelectorAll('.gallery-slide');
+  const dots = gallery.querySelectorAll('.gallery-dot');
+  const current = gallery.querySelector('.gallery-slide.active');
+  const currentIdx = parseInt(current.dataset.slide);
+  let next = currentIdx + direction;
+  if (next < 0) next = slides.length - 1;
+  if (next >= slides.length) next = 0;
+  galleryGo(stationIndex, next);
+}
+
+function galleryGo(stationIndex, slideIdx) {
+  const gallery = document.getElementById('gallery-' + stationIndex);
+  if (!gallery) return;
+  gallery.querySelectorAll('.gallery-slide').forEach(s => s.classList.remove('active'));
+  gallery.querySelectorAll('.gallery-dot').forEach(d => d.classList.remove('active'));
+  const target = gallery.querySelector(`[data-slide="${slideIdx}"]`);
+  if (target) target.classList.add('active');
+  const dot = gallery.querySelectorAll('.gallery-dot')[slideIdx];
+  if (dot) dot.classList.add('active');
+}
+
 // === MAP RENDERING (Geographically Accurate) ===
 function renderMap() {
   const wrap = document.getElementById('map-svg-wrap');
@@ -415,7 +458,14 @@ function renderMap() {
     svg += `onclick="showSegmentTooltip(${i+1}, ${Math.round(mx)}, ${Math.round(my)})" />`;
   }
 
-  // --- Layer 4: Station markers ---
+  // --- Layer 4: Pulsing glow for current station (separate from clickable group) ---
+  positions.forEach((pos, i) => {
+    if (state.currentStation === i) {
+      svg += `<circle cx="${pos.x}" cy="${pos.y}" r="14" fill="none" stroke="#f5a623" stroke-width="1.5" opacity="0.5" pointer-events="none"><animate attributeName="r" values="13;18;13" dur="2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.5;0.15;0.5" dur="2s" repeatCount="indefinite"/></circle>`;
+    }
+  });
+
+  // --- Layer 5: Station markers (clickable) ---
   positions.forEach((pos, i) => {
     const visited = state.visitedStations.has(i);
     const current = state.currentStation === i;
@@ -428,21 +478,16 @@ function renderMap() {
 
     svg += `<g class="map-station ${visited ? 'visited' : ''} ${current ? 'current' : ''}" onclick="goToStation(${i}); showView('station');" style="cursor:pointer;">`;
 
-    // Glow for current station
-    if (current) {
-      svg += `<circle cx="${pos.x}" cy="${pos.y}" r="${r + 4}" fill="none" stroke="#f5a623" stroke-width="1" opacity="0.5"><animate attributeName="r" values="${r+3};${r+7};${r+3}" dur="2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.5;0.2;0.5" dur="2s" repeatCount="indefinite"/></circle>`;
-    }
-
     svg += `<circle cx="${pos.x}" cy="${pos.y}" r="${r}" fill="${fill}" stroke="${stroke}" stroke-width="2"/>`;
     svg += `<text x="${pos.x}" y="${pos.y + 3.5}" font-size="9" fill="#fff" font-family="sans-serif" text-anchor="middle" font-weight="bold">${i + 1}</text>`;
 
     // Label placement: alternate above/below to avoid overlap
     const labelAbove = (i % 2 === 0) || i === 9;
-    const labelY = labelAbove ? pos.y - r - 6 : pos.y + r + 12;
-    const labelY2 = labelAbove ? labelY + 10 : labelY + 10;
+    const labelY = labelAbove ? pos.y - r - 6 : pos.y + r + 14;
+    const labelY2 = labelY + 11;
 
-    svg += `<text x="${pos.x}" y="${labelY}" font-size="8" fill="#2c1810" text-anchor="middle" font-weight="bold">${pos.label}</text>`;
-    svg += `<text x="${pos.x}" y="${labelY2}" font-size="7" fill="#5c4033" text-anchor="middle">${pos.sublabel}</text>`;
+    svg += `<text x="${pos.x}" y="${labelY}" font-size="9" fill="#2c1810" text-anchor="middle" font-weight="bold">${pos.label}</text>`;
+    svg += `<text x="${pos.x}" y="${labelY2}" font-size="8" fill="#5c4033" text-anchor="middle">${pos.sublabel}</text>`;
 
     svg += '</g>';
   });
@@ -486,18 +531,18 @@ function renderMap() {
   const totalDays = SEGMENT_DATA.reduce((sum, s) => sum + (s ? s.days : 0), 0);
   svg += `<text x="${svgW / 2}" y="${svgH - 8}" font-size="8" fill="#8b7355" text-anchor="middle">Total journey: ~${totalMiles.toLocaleString()} miles over ${totalDays} days (one way)</text>`;
 
-  // --- Segment tooltip (hidden by default) ---
+  // --- Segment tooltip (hidden by default, larger text) ---
   svg += `<g id="segment-tooltip" display="none" pointer-events="none">`;
-  svg += `<rect id="seg-tip-bg" rx="6" fill="#2c1810" fill-opacity="0.95" stroke="#8b4513" stroke-width="1.5" width="240" height="140"/>`;
-  svg += `<text id="seg-tip-title" x="12" y="20" fill="#f5a623" font-size="11" font-weight="bold"></text>`;
-  svg += `<text id="seg-tip-miles" x="12" y="38" fill="#f4e8c1" font-size="9"></text>`;
-  svg += `<text id="seg-tip-time" x="12" y="52" fill="#f4e8c1" font-size="9"></text>`;
-  svg += `<text id="seg-tip-terrain" x="12" y="66" fill="#b8cfe8" font-size="8"></text>`;
-  svg += `<line id="seg-tip-divider" x1="12" y1="72" x2="228" y2="72" stroke="#8b4513" stroke-width="0.5"/>`;
-  svg += `<text id="seg-tip-health-label" x="12" y="86" fill="#e8a0a0" font-size="8" font-weight="bold"></text>`;
-  svg += `<text id="seg-tip-health" x="12" y="98" fill="#e8c0c0" font-size="8"></text>`;
-  svg += `<text id="seg-tip-supply-label" x="12" y="114" fill="#b5e8a0" font-size="8" font-weight="bold"></text>`;
-  svg += `<text id="seg-tip-supply" x="12" y="126" fill="#c8e8b8" font-size="8"></text>`;
+  svg += `<rect id="seg-tip-bg" rx="8" fill="#2c1810" fill-opacity="0.96" stroke="#8b4513" stroke-width="2" width="300" height="175"/>`;
+  svg += `<text id="seg-tip-title" x="15" y="24" fill="#f5a623" font-size="14" font-weight="bold"></text>`;
+  svg += `<text id="seg-tip-miles" x="15" y="46" fill="#f4e8c1" font-size="12"></text>`;
+  svg += `<text id="seg-tip-time" x="15" y="64" fill="#f4e8c1" font-size="11"></text>`;
+  svg += `<text id="seg-tip-terrain" x="15" y="82" fill="#b8cfe8" font-size="10"></text>`;
+  svg += `<line x1="15" y1="90" x2="285" y2="90" stroke="#8b4513" stroke-width="0.5"/>`;
+  svg += `<text id="seg-tip-health-label" x="15" y="108" fill="#e8a0a0" font-size="10" font-weight="bold"></text>`;
+  svg += `<text id="seg-tip-health" x="15" y="124" fill="#e8c0c0" font-size="10"></text>`;
+  svg += `<text id="seg-tip-supply-label" x="15" y="144" fill="#b5e8a0" font-size="10" font-weight="bold"></text>`;
+  svg += `<text id="seg-tip-supply" x="15" y="160" fill="#c8e8b8" font-size="10"></text>`;
   svg += `</g>`;
 
   svg += '</svg>';
@@ -527,16 +572,16 @@ function showSegmentTooltip(segIndex, cx, cy) {
   // Truncate long text lines for SVG
   const healthEl = document.getElementById('seg-tip-health');
   const supplyEl = document.getElementById('seg-tip-supply');
-  if (seg.health.length > 45) {
-    healthEl.textContent = seg.health.substring(0, 44) + '\u2026';
+  if (seg.health.length > 50) {
+    healthEl.textContent = seg.health.substring(0, 49) + '\u2026';
   }
-  if (seg.supplies.length > 45) {
-    supplyEl.textContent = seg.supplies.substring(0, 44) + '\u2026';
+  if (seg.supplies.length > 50) {
+    supplyEl.textContent = seg.supplies.substring(0, 49) + '\u2026';
   }
 
   // Position tooltip, clamped to viewport
-  const tipW = 240;
-  const tipH = 140;
+  const tipW = 300;
+  const tipH = 175;
   let tx = cx - tipW / 2;
   let ty = cy - tipH - 12;
   if (tx < 5) tx = 5;
@@ -575,69 +620,237 @@ function renderJournalTracker() {
   tbody.innerHTML = html;
 }
 
-// === TRAVEL TRANSITION ===
+// === INTERACTIVE TRAVEL TRANSITION ===
 function renderTravelTransition(fromIndex, toIndex, callback) {
   const overlay = document.getElementById('travel-overlay');
   const scene = document.getElementById('travel-scene');
 
-  // Trail segment data (distances in approximate miles between stations)
-  const distances = [0, 600, 180, 400, 0, 200, 350, 200, 300, 250];
+  const distances = [0, 600, 25, 400, 0, 0, 350, 200, 150, 300, 250];
   const miles = distances[toIndex] || 200;
 
-  // Pick 2-3 random events for the journey
-  const journeyEvents = [];
-  const numEvents = 2 + Math.floor(Math.random() * 2); // 2-3 events
+  // Pick 2-3 random events
   const shuffled = [...TRAIL_EVENTS].sort(() => Math.random() - 0.5);
-  for (let i = 0; i < Math.min(numEvents, shuffled.length); i++) {
-    journeyEvents.push(shuffled[i]);
-  }
+  const numEvents = 2 + Math.floor(Math.random() * 2);
+  const journeyEvents = shuffled.slice(0, Math.min(numEvents, shuffled.length));
 
   const stationNames = [
     "Camp Dubois", "Platte River", "Council Bluff", "Fort Mandan", "Fort Mandan",
-    "Fort Mandan", "Great Falls", "Camp Fortunate", "Rocky Mountains", "Fort Clatsop"
+    "Fort Mandan", "Great Falls", "Camp Fortunate", "Lolo Trail", "Fort Clatsop"
   ];
 
   let html = `<div class="travel-title">Traveling to ${stationNames[toIndex]}...</div>`;
   html += `<div class="travel-distance">${miles} miles to the next station</div>`;
   html += '<div class="travel-progress"><div class="travel-progress-bar" id="travel-bar"></div></div>';
+  html += '<div class="travel-score-line" id="travel-score-line"></div>';
   html += '<div id="travel-events"></div>';
-  html += '<button class="btn-travel-continue" id="travel-continue-btn" disabled onclick="finishTravel()">Arriving...</button>';
+  html += '<button class="btn-travel-continue" id="travel-continue-btn" style="display:none" onclick="finishTravel()">Continue</button>';
 
   scene.innerHTML = html;
   overlay.classList.add('active');
   window._travelCallback = callback;
+  window._travelEvents = journeyEvents;
+  window._travelStep = 0;
+  window._travelToIndex = toIndex;
+  window._travelPoints = 0;
 
-  // Animate the journey
+  // Show first event after a brief pause
+  setTimeout(() => travelShowEvent(), 500);
+}
+
+function travelShowEvent() {
+  const events = window._travelEvents;
+  const step = window._travelStep;
+  const total = events.length;
+  const toIndex = window._travelToIndex;
+
   const bar = document.getElementById('travel-bar');
-  const eventsContainer = document.getElementById('travel-events');
-  const continueBtn = document.getElementById('travel-continue-btn');
+  const container = document.getElementById('travel-events');
+  const scoreLine = document.getElementById('travel-score-line');
 
-  let step = 0;
-  const totalSteps = journeyEvents.length;
-  const stepDelay = 1200;
-
-  function showNextEvent() {
-    if (step < totalSteps) {
-      const evt = journeyEvents[step];
-      const progress = Math.round(((step + 1) / totalSteps) * 100);
-      bar.style.width = progress + '%';
-
-      const eventHtml = `<div class="travel-event">
-        <div class="travel-event-emoji">${evt.icon}</div>
-        <div class="travel-event-msg"><strong>${evt.title}</strong> ${evt.text}</div>
-      </div>`;
-
-      eventsContainer.innerHTML = eventHtml;
-      step++;
-      setTimeout(showNextEvent, stepDelay + Math.random() * 800);
-    } else {
-      bar.style.width = '100%';
-      continueBtn.disabled = false;
-      continueBtn.textContent = 'Arrive at Station ' + (toIndex + 1) + ' \u2192';
-    }
+  if (step >= total) {
+    // Journey complete — show arrival
+    bar.style.width = '100%';
+    const pts = window._travelPoints;
+    container.innerHTML = `<div class="travel-event travel-arrival">
+      <div class="travel-event-emoji">\u2b50</div>
+      <div class="travel-event-msg"><strong>Journey Complete!</strong> You earned <strong>${pts}</strong> trail ${pts === 1 ? 'point' : 'points'} on this leg.</div>
+    </div>`;
+    const btn = document.getElementById('travel-continue-btn');
+    btn.style.display = 'block';
+    btn.textContent = 'Arrive at Station ' + (toIndex + 1) + ' \u2192';
+    state.score += pts;
+    updateScoreDisplay();
+    saveGame();
+    return;
   }
 
-  setTimeout(showNextEvent, 600);
+  // Update progress
+  bar.style.width = Math.round((step / total) * 100) + '%';
+
+  const evt = events[step];
+
+  if (evt.action === 'tap_swat') {
+    renderTapChallenge(evt, container);
+  } else {
+    renderChoiceEvent(evt, container);
+  }
+}
+
+// --- Choice-based events ---
+function renderChoiceEvent(evt, container) {
+  let html = `<div class="travel-event">`;
+  html += `<div class="travel-event-emoji">${evt.icon}</div>`;
+  html += `<div class="travel-event-msg"><strong>${evt.title}</strong></div>`;
+  html += `<div class="travel-event-desc">${evt.text}</div>`;
+  html += `<div class="travel-choices">`;
+  evt.choices.forEach((choice, i) => {
+    html += `<button class="travel-choice-btn" onclick="handleTravelChoice(${i})">${choice.text}</button>`;
+  });
+  html += `</div></div>`;
+  container.innerHTML = html;
+}
+
+function handleTravelChoice(choiceIndex) {
+  const events = window._travelEvents;
+  const step = window._travelStep;
+  const evt = events[step];
+  const choice = evt.choices[choiceIndex];
+
+  const container = document.getElementById('travel-events');
+  const buttons = container.querySelectorAll('.travel-choice-btn');
+
+  // Disable all buttons and highlight chosen
+  buttons.forEach((btn, i) => {
+    btn.disabled = true;
+    btn.onclick = null;
+    if (i === choiceIndex) {
+      btn.classList.add(choice.good ? 'choice-good' : 'choice-bad');
+    }
+  });
+
+  // Award points
+  const pts = choice.good ? 5 : 1;
+  window._travelPoints += pts;
+
+  // Show result
+  const resultDiv = document.createElement('div');
+  resultDiv.className = 'travel-result ' + (choice.good ? 'result-good' : 'result-bad');
+  resultDiv.innerHTML = `<span class="result-points">${choice.good ? '+5' : '+1'}</span> ${choice.result}`;
+  container.querySelector('.travel-event').appendChild(resultDiv);
+
+  // Update score line
+  document.getElementById('travel-score-line').textContent = `Trail points this leg: ${window._travelPoints}`;
+
+  // Advance to next after pause
+  window._travelStep++;
+  setTimeout(() => travelShowEvent(), 2500);
+}
+
+// --- Tap/swat mini-game ---
+function renderTapChallenge(evt, container) {
+  const count = evt.swat_count || 6;
+  const timeLimit = evt.swat_time || 5;
+
+  let html = `<div class="travel-event">`;
+  html += `<div class="travel-event-emoji">${evt.icon}</div>`;
+  html += `<div class="travel-event-msg"><strong>${evt.title}</strong></div>`;
+  html += `<div class="travel-event-desc">${evt.text}</div>`;
+  html += `<div class="swat-arena" id="swat-arena">`;
+  html += `<div class="swat-timer" id="swat-timer">${timeLimit}s</div>`;
+  html += `<div class="swat-counter" id="swat-counter">0 / ${count}</div>`;
+  html += `<div class="swat-field" id="swat-field"></div>`;
+  html += `</div></div>`;
+  container.innerHTML = html;
+
+  // Start spawning targets
+  window._swatData = { target: evt.swat_target, needed: count, hit: 0, timeLeft: timeLimit, active: true };
+  window._swatResult = { success: evt.success_text, fail: evt.fail_text };
+  spawnSwatTarget();
+  startSwatTimer();
+}
+
+function spawnSwatTarget() {
+  if (!window._swatData || !window._swatData.active) return;
+  const field = document.getElementById('swat-field');
+  if (!field) return;
+
+  const target = document.createElement('button');
+  target.className = 'swat-target';
+  target.textContent = window._swatData.target;
+  target.style.left = Math.floor(Math.random() * 80) + '%';
+  target.style.top = Math.floor(Math.random() * 70) + '%';
+  target.onclick = function() {
+    hitSwatTarget(this);
+  };
+
+  field.appendChild(target);
+
+  // Remove target if not tapped within 1.5s
+  setTimeout(() => {
+    if (target.parentNode) {
+      target.classList.add('swat-miss');
+      setTimeout(() => { if (target.parentNode) target.remove(); }, 300);
+    }
+  }, 1500);
+
+  // Spawn next target
+  if (window._swatData.active) {
+    const delay = 400 + Math.random() * 600;
+    setTimeout(spawnSwatTarget, delay);
+  }
+}
+
+function hitSwatTarget(el) {
+  if (!window._swatData || !window._swatData.active) return;
+  el.classList.add('swat-hit');
+  el.onclick = null;
+  setTimeout(() => { if (el.parentNode) el.remove(); }, 200);
+
+  window._swatData.hit++;
+  const counter = document.getElementById('swat-counter');
+  if (counter) counter.textContent = `${window._swatData.hit} / ${window._swatData.needed}`;
+
+  // Check win
+  if (window._swatData.hit >= window._swatData.needed) {
+    window._swatData.active = false;
+    endSwatChallenge(true);
+  }
+}
+
+function startSwatTimer() {
+  const interval = setInterval(() => {
+    if (!window._swatData || !window._swatData.active) { clearInterval(interval); return; }
+    window._swatData.timeLeft--;
+    const timer = document.getElementById('swat-timer');
+    if (timer) timer.textContent = window._swatData.timeLeft + 's';
+
+    if (window._swatData.timeLeft <= 0) {
+      clearInterval(interval);
+      window._swatData.active = false;
+      endSwatChallenge(window._swatData.hit >= window._swatData.needed);
+    }
+  }, 1000);
+}
+
+function endSwatChallenge(success) {
+  const field = document.getElementById('swat-field');
+  if (field) field.innerHTML = '';
+
+  const pts = success ? 5 : 2;
+  window._travelPoints += pts;
+
+  const resultText = success ? window._swatResult.success : window._swatResult.fail;
+  const container = document.getElementById('travel-events');
+  const resultDiv = document.createElement('div');
+  resultDiv.className = 'travel-result ' + (success ? 'result-good' : 'result-bad');
+  resultDiv.innerHTML = `<span class="result-points">${success ? '+5' : '+2'}</span> ${resultText}`;
+  const evtEl = container.querySelector('.travel-event');
+  if (evtEl) evtEl.appendChild(resultDiv);
+
+  document.getElementById('travel-score-line').textContent = `Trail points this leg: ${window._travelPoints}`;
+
+  window._travelStep++;
+  setTimeout(() => travelShowEvent(), 2500);
 }
 
 function finishTravel() {

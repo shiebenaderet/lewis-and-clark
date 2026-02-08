@@ -18,11 +18,6 @@
       }
     ],
     "reflection": "Why do you think Sacagawea became so important to the expedition? What skills or knowledge might she have had that the other members didn’t?",
-    "image": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Sacagawea_with_Lewis_and_Clark.jpg/800px-Sacagawea_with_Lewis_and_Clark.jpg",
-      "alt": "Sacagawea with Lewis and Clark during their expedition",
-      "caption": "Sacagawea with Lewis and Clark, N.C. Wyeth, c. 1940 — Wikimedia Commons"
-    },
     "challenge": {
       "type": "multiple_choice",
       "question": "Lewis described a rattlesnake rattle being used during childbirth. What was his attitude toward this remedy?",
@@ -35,7 +30,19 @@
       "correct": 2,
       "feedback_correct": "Exactly! Lewis wrote 'whether this medicine was truly the cause or not, I shall not undertake to determine.' He was observing like a scientist — recording what happened without making claims he couldn't prove.",
       "feedback_incorrect": "Lewis actually wrote 'whether this medicine was truly the cause or not, I shall not undertake to determine' — he was being careful and scientific, not making claims he couldn't prove."
-    }
+    },
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Sacagawea_with_Lewis_and_Clark.jpg/800px-Sacagawea_with_Lewis_and_Clark.jpg",
+        "alt": "Sacagawea with Lewis and Clark, N.C. Wyeth painting",
+        "caption": "Sacagawea with Lewis and Clark, N.C. Wyeth, c. 1940 — Wikimedia Commons"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Sacagawea_dollar_obverse.png/800px-Sacagawea_dollar_obverse.png",
+        "alt": "Sacagawea dollar coin showing her carrying her infant son",
+        "caption": "Sacagawea dollar coin — depicts Sacagawea carrying her son Jean Baptiste, born at Fort Mandan"
+      }
+    ]
   },
   "standard": {
     "title": "Sacagawea Joins the Expedition",
@@ -55,11 +62,6 @@
       }
     ],
     "reflection": "Lewis records the use of rattlesnake rattle as medicine during childbirth. What does this tell us about medical knowledge and folk remedies on the frontier? Why might Lewis have been careful to say he couldn’t determine if it truly worked?",
-    "image": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Sacagawea_with_Lewis_and_Clark.jpg/800px-Sacagawea_with_Lewis_and_Clark.jpg",
-      "alt": "Sacagawea with Lewis and Clark during their expedition",
-      "caption": "Sacagawea with Lewis and Clark, N.C. Wyeth, c. 1940 — Wikimedia Commons"
-    },
     "challenge": {
       "type": "multiple_choice",
       "question": "Lewis described a rattlesnake rattle being used during childbirth. What was his attitude toward this remedy?",
@@ -72,7 +74,19 @@
       "correct": 2,
       "feedback_correct": "Exactly! Lewis wrote 'whether this medicine was truly the cause or not, I shall not undertake to determine.' He was observing like a scientist — recording what happened without making claims he couldn't prove.",
       "feedback_incorrect": "Lewis actually wrote 'whether this medicine was truly the cause or not, I shall not undertake to determine' — he was being careful and scientific, not making claims he couldn't prove."
-    }
+    },
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Sacagawea_with_Lewis_and_Clark.jpg/800px-Sacagawea_with_Lewis_and_Clark.jpg",
+        "alt": "Sacagawea with Lewis and Clark, N.C. Wyeth painting",
+        "caption": "Sacagawea with Lewis and Clark, N.C. Wyeth, c. 1940 — Wikimedia Commons"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Sacagawea_dollar_obverse.png/800px-Sacagawea_dollar_obverse.png",
+        "alt": "Sacagawea dollar coin showing her carrying her infant son",
+        "caption": "Sacagawea dollar coin — depicts Sacagawea carrying her son Jean Baptiste, born at Fort Mandan"
+      }
+    ]
   },
   "advanced": {
     "title": "Sacagawea, Charbonneau, and the Birth of Baptiste",
@@ -93,11 +107,6 @@
       }
     ],
     "reflection": "Lewis carefully avoids claiming the rattlesnake remedy actually worked, saying he “shall not undertake to determine” its effectiveness. Analyze this passage as a primary source: What does Lewis’s language reveal about Enlightenment-era attitudes toward scientific observation versus folk knowledge? How does Sacagawea’s story complicate the narrative of the expedition as a purely voluntary, heroic enterprise?",
-    "image": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Sacagawea_with_Lewis_and_Clark.jpg/800px-Sacagawea_with_Lewis_and_Clark.jpg",
-      "alt": "Sacagawea with Lewis and Clark during their expedition",
-      "caption": "Sacagawea with Lewis and Clark, N.C. Wyeth, c. 1940 — Wikimedia Commons"
-    },
     "challenge": {
       "type": "multiple_choice",
       "question": "Lewis described a rattlesnake rattle being used during childbirth. What was his attitude toward this remedy?",
@@ -110,6 +119,18 @@
       "correct": 2,
       "feedback_correct": "Exactly! Lewis wrote 'whether this medicine was truly the cause or not, I shall not undertake to determine.' He was observing like a scientist — recording what happened without making claims he couldn't prove.",
       "feedback_incorrect": "Lewis actually wrote 'whether this medicine was truly the cause or not, I shall not undertake to determine' — he was being careful and scientific, not making claims he couldn't prove."
-    }
+    },
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Sacagawea_with_Lewis_and_Clark.jpg/800px-Sacagawea_with_Lewis_and_Clark.jpg",
+        "alt": "Sacagawea with Lewis and Clark, N.C. Wyeth painting",
+        "caption": "Sacagawea with Lewis and Clark, N.C. Wyeth, c. 1940 — Wikimedia Commons"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Sacagawea_dollar_obverse.png/800px-Sacagawea_dollar_obverse.png",
+        "alt": "Sacagawea dollar coin showing her carrying her infant son",
+        "caption": "Sacagawea dollar coin — depicts Sacagawea carrying her son Jean Baptiste, born at Fort Mandan"
+      }
+    ]
   }
 }
