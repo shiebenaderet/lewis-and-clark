@@ -542,6 +542,42 @@ body {
   text-align: right;
 }
 
+/* Clickable journal fields (tap to auto-fill) */
+.clickable-fill {
+  cursor: pointer;
+  border-bottom: 1px dashed var(--leather);
+  display: inline-block;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.clickable-fill:hover {
+  background: rgba(139, 69, 19, 0.08);
+  border-bottom-color: var(--leather-dark);
+}
+
+.fill-hint {
+  font-size: 0.65rem;
+  font-weight: normal;
+  font-style: normal;
+  color: var(--leather);
+  opacity: 0.5;
+  margin-left: 0.3rem;
+  vertical-align: middle;
+}
+
+.clickable-fill:hover .fill-hint { opacity: 0.8; }
+
+.journal-field-input.field-filled,
+.journal-field-textarea.field-filled {
+  animation: fillFlash 0.6s ease;
+}
+
+@keyframes fillFlash {
+  0% { background: rgba(74, 124, 46, 0.2); }
+  100% { background: var(--parchment); }
+}
+
 /* Question / reflection area */
 .station-reflection {
   background: rgba(45, 80, 22, 0.08);
@@ -1129,6 +1165,49 @@ body {
   color: #e8a0a0;
 }
 
+/* --- Discovery Banner (shown on correct challenge) --- */
+.discovery-banner {
+  margin-top: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: linear-gradient(135deg, rgba(245,166,35,0.15), rgba(212,118,10,0.1));
+  border: 2px solid var(--campfire-glow);
+  border-radius: 8px;
+  color: var(--parchment);
+  font-size: 0.9rem;
+  animation: discoveryPop 0.5s ease;
+}
+
+.discovery-banner-icon { font-size: 1.3rem; vertical-align: middle; margin-right: 0.3rem; }
+.discovery-banner-desc { font-size: 0.8rem; opacity: 0.8; }
+
+@keyframes discoveryPop {
+  0% { transform: scale(0.9); opacity: 0; }
+  60% { transform: scale(1.02); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* --- Discoveries Grid (journal tracker) --- */
+.discoveries-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.5rem;
+}
+
+.discovery-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.6rem 0.75rem;
+  background: rgba(245, 166, 35, 0.08);
+  border: 1px solid rgba(212, 118, 10, 0.3);
+  border-radius: 6px;
+  font-size: 0.8rem;
+  color: var(--parchment);
+}
+
+.discovery-item-icon { font-size: 1.4rem; flex-shrink: 0; }
+.discovery-item-desc { font-size: 0.75rem; opacity: 0.7; }
+
 /* ============================================================
    SCORE DISPLAY
    ============================================================ */
@@ -1533,6 +1612,59 @@ body {
 /* ============================================================
    TEACHER RESOURCES (title screen — uses <details>/<summary>)
    ============================================================ */
+/* --- Save Code Panel --- */
+.save-code-panel {
+  margin-top: 1.5rem;
+  max-width: 420px;
+  width: 100%;
+}
+
+.save-code-panel[open] .teacher-toggle::after { content: ' \25B4'; }
+
+.save-code-controls {
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  background: rgba(0,0,0,0.25);
+  border: 1px solid rgba(244,232,193,0.15);
+  border-radius: 6px;
+  text-align: center;
+}
+
+.btn-save-code {
+  padding: 0.4rem 1rem;
+  border: 1px solid rgba(244,232,193,0.3);
+  border-radius: 4px;
+  background: rgba(244,232,193,0.08);
+  color: var(--parchment-dark);
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-save-code:hover {
+  background: rgba(244,232,193,0.15);
+  border-color: var(--parchment-dark);
+}
+
+.save-code-text {
+  display: block;
+  width: 100%;
+  min-height: 60px;
+  padding: 0.5rem;
+  border: 1px solid rgba(244,232,193,0.2);
+  border-radius: 4px;
+  background: rgba(0,0,0,0.3);
+  color: var(--parchment);
+  font-family: monospace;
+  font-size: 0.7rem;
+  word-break: break-all;
+  resize: vertical;
+  margin-bottom: 0.5rem;
+}
+
+.save-code-text::placeholder { color: rgba(244,232,193,0.3); }
+
 .teacher-resources {
   margin-top: 2rem;
   max-width: 420px;
