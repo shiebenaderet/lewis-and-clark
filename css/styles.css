@@ -103,6 +103,10 @@ body {
   position: relative;
   z-index: 1;
   max-width: 700px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .title-year {
@@ -1490,9 +1494,16 @@ body {
    ============================================================ */
 .title-continue {
   margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .btn-continue {
+  display: block;
+  width: 100%;
+  max-width: 320px;
   font-family: var(--font-heading);
   font-size: 1rem;
   padding: 0.7rem 2.5rem;
@@ -1502,10 +1513,21 @@ body {
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.3s;
+  text-align: center;
 }
 
 .btn-continue:hover {
   background: rgba(212, 118, 10, 0.2);
+}
+
+.btn-game-unlocked {
+  background: linear-gradient(135deg, rgba(45,80,22,0.3), rgba(74,124,46,0.15));
+  border-color: var(--forest-light);
+  color: #8fbc5a;
+}
+
+.btn-game-unlocked:hover {
+  background: linear-gradient(135deg, rgba(45,80,22,0.5), rgba(74,124,46,0.3));
 }
 
 .save-info {
@@ -1617,6 +1639,7 @@ body {
   margin-top: 1.5rem;
   max-width: 420px;
   width: 100%;
+  text-align: center;
 }
 
 .save-code-panel[open] .teacher-toggle::after { content: ' \25B4'; }
@@ -1628,6 +1651,17 @@ body {
   border: 1px solid rgba(244,232,193,0.15);
   border-radius: 6px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#save-code-area {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .btn-save-code {
@@ -1669,6 +1703,7 @@ body {
   margin-top: 2rem;
   max-width: 420px;
   width: 100%;
+  text-align: center;
 }
 
 .teacher-toggle {

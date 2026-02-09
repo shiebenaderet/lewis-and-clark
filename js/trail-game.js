@@ -79,17 +79,18 @@ const TrailGame = (() => {
     charbonneau: { full: 'Toussaint Charbonneau', born: '1767, Montreal', joined: 'Fort Mandan (Leg 3)', bio: 'A French-Canadian fur trader and Sacagawea\'s husband. Hired as interpreter. Not the most skilled boatman \u2014 he once nearly capsized a pirogue \u2014 but his connections proved useful.', ability: null }
   };
 
+  // Distances in river miles (matching Clark's journal calculations; total ~4,000 mi one-way)
   const LEGS = [
-    { from: 'Camp Dubois',          to: 'Great Plains',          miles: 600,  days: 67, date: 'May 14 – Jul 20, 1804', terrain: 'River — Missouri', consume: { food: 12, supplies: 5 } },
+    { from: 'Camp Dubois',          to: 'Great Plains',          miles: 660,  days: 67, date: 'May 14 – Jul 20, 1804', terrain: 'River — Missouri', consume: { food: 12, supplies: 5 } },
     { from: 'Great Plains',         to: 'Council Bluffs',        miles: 50,   days: 14, date: 'Jul 20 – Aug 3, 1804',  terrain: 'Prairie & River', consume: { food: 5, supplies: 3 } },
-    { from: 'Council Bluffs',       to: 'Mandan Villages',       miles: 630,  days: 86, date: 'Aug 3 – Oct 28, 1804',  terrain: 'River — upper Missouri', consume: { food: 14, supplies: 6 } },
+    { from: 'Council Bluffs',       to: 'Mandan Villages',       miles: 830,  days: 86, date: 'Aug 3 – Oct 28, 1804',  terrain: 'River — upper Missouri', consume: { food: 14, supplies: 6 } },
     { from: 'Mandan Villages',      to: 'Fort Mandan (winter)',  miles: 0,    days: 146,date: 'Oct 28, 1804 – Apr 7, 1805', terrain: 'Winter camp', consume: { food: 10, supplies: 3 } },
-    { from: 'Fort Mandan',          to: 'Missouri headwaters',   miles: 600,  days: 60, date: 'Apr 7 – Jun 13, 1805',  terrain: 'River — upper Missouri', consume: { food: 14, supplies: 7 } },
-    { from: 'Missouri headwaters',  to: 'Great Falls portage',   miles: 18,   days: 30, date: 'Jun 13 – Jul 15, 1805', terrain: 'Overland portage', consume: { food: 12, supplies: 10 } },
-    { from: 'Great Falls',          to: 'Camp Fortunate',        miles: 200,  days: 33, date: 'Jul 15 – Aug 17, 1805', terrain: 'River & mountains', consume: { food: 12, supplies: 6 } },
-    { from: 'Camp Fortunate',       to: 'Lemhi Pass & Rockies',  miles: 160,  days: 50, date: 'Aug 17 – Oct 7, 1805',  terrain: 'Rocky Mountains', consume: { food: 18, supplies: 10 } },
-    { from: 'Rockies (Nez Perce)',  to: 'Columbia River',        miles: 400,  days: 40, date: 'Oct 7 – Nov 7, 1805',   terrain: 'River — Snake & Columbia', consume: { food: 10, supplies: 5 } },
-    { from: 'Columbia River',       to: 'Fort Clatsop (Pacific)',miles: 100,  days: 13, date: 'Nov 7 – Nov 20, 1805',  terrain: 'River — Lower Columbia', consume: { food: 5, supplies: 2 } }
+    { from: 'Fort Mandan',          to: 'Great Falls',           miles: 1050, days: 60, date: 'Apr 7 – Jun 13, 1805',  terrain: 'River — upper Missouri', consume: { food: 14, supplies: 7 } },
+    { from: 'Great Falls',          to: 'Three Forks',           miles: 80,   days: 30, date: 'Jun 13 – Jul 15, 1805', terrain: 'Overland portage & river', consume: { food: 12, supplies: 10 } },
+    { from: 'Three Forks',          to: 'Camp Fortunate',        miles: 280,  days: 33, date: 'Jul 15 – Aug 17, 1805', terrain: 'River & mountains', consume: { food: 12, supplies: 6 } },
+    { from: 'Camp Fortunate',       to: 'Lolo Trail & Rockies',  miles: 220,  days: 50, date: 'Aug 17 – Oct 7, 1805',  terrain: 'Rocky Mountains', consume: { food: 18, supplies: 10 } },
+    { from: 'Rockies (Nez Perce)',  to: 'Columbia River',        miles: 500,  days: 40, date: 'Oct 7 – Nov 7, 1805',   terrain: 'River — Snake & Columbia', consume: { food: 10, supplies: 5 } },
+    { from: 'Columbia River',       to: 'Fort Clatsop (Pacific)',miles: 160,  days: 13, date: 'Nov 7 – Nov 20, 1805',  terrain: 'River — Lower Columbia', consume: { food: 5, supplies: 2 } }
   ];
 
   const STOP_DESCRIPTIONS = [
@@ -814,6 +815,62 @@ const TrailGame = (() => {
     return svg;
   }
 
+  // Summary map for victory/game-over screens — shows completed route
+  function routeSummaryMapSVG(legsCompleted) {
+    const pts = LEG_COORDS.map(c => mapProj(c[0], c[1]));
+    let svg = `<svg viewBox="0 0 ${MAP_W} ${MAP_H}" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:${MAP_W}px;border-radius:6px;border:1px solid #c8b898;">`;
+
+    // Background
+    svg += `<rect width="${MAP_W}" height="${MAP_H}" fill="#f4e8c1"/>`;
+
+    // Great Plains
+    const gp = [[49,-96],[49,-105],[37.5,-105],[37.5,-96]].map(p => mapProj(p[0],p[1]));
+    svg += `<polygon points="${gp.map(p=>p.x+','+p.y).join(' ')}" fill="#d4c98a" opacity="0.25"/>`;
+
+    // Rocky Mountains
+    const mtn = [[49,-109],[48,-111],[47,-113],[46,-114.5],[45,-114],[44,-112.5],[43,-111],[42,-110],[41,-110],[40,-109],[40,-107],[41,-108],[42,-109],[43,-109.5],[44,-110.5],[45,-112],[46,-112.5],[47,-111.5],[48,-109.5],[49,-107.5]].map(p => mapProj(p[0],p[1]));
+    svg += `<polygon points="${mtn.map(p=>p.x+','+p.y).join(' ')}" fill="#b8a88a" opacity="0.3"/>`;
+
+    // Pacific coast & ocean
+    const coast = [[49,-123],[48.5,-124.5],[47.5,-124.3],[46.5,-124],[46,-123.8],[45.5,-124],[44,-124.2],[43,-124.5],[42,-124.5],[41,-124.2],[40,-124.3],[39,-123.5],[38,-123]].map(p => mapProj(p[0],p[1]));
+    let coastPath = `M ${coast[0].x},${coast[0].y}`;
+    coast.slice(1).forEach(p => { coastPath += ` L ${p.x},${p.y}`; });
+    svg += `<path d="${coastPath} L 0,${MAP_H} L 0,0 L ${coast[0].x},${coast[0].y}" fill="#c8dce8" opacity="0.35"/>`;
+    svg += `<path d="${coastPath}" fill="none" stroke="#5a9bbc" stroke-width="1.5" opacity="0.6"/>`;
+
+    // Full trail — faint dashed
+    for (let i = 0; i < LEG_COORDS.length - 1; i++) {
+      svg += `<line x1="${pts[i].x}" y1="${pts[i].y}" x2="${pts[i+1].x}" y2="${pts[i+1].y}" stroke="#6b4423" stroke-width="1" stroke-dasharray="3,3" opacity="0.2"/>`;
+    }
+
+    // Completed legs — solid orange
+    for (let i = 0; i < legsCompleted; i++) {
+      svg += `<line x1="${pts[i].x}" y1="${pts[i].y}" x2="${pts[i+1].x}" y2="${pts[i+1].y}" stroke="#d4760a" stroke-width="3" stroke-linecap="round"/>`;
+    }
+
+    // Stop markers
+    for (let i = 0; i <= legsCompleted; i++) {
+      const isEnd = i === legsCompleted;
+      const r = isEnd ? 6 : 4;
+      const fill = isEnd ? '#8b1a1a' : '#f5a623';
+      const stroke = isEnd ? '#fff' : '#d4760a';
+      svg += `<circle cx="${pts[i].x}" cy="${pts[i].y}" r="${r}" fill="${fill}" stroke="${stroke}" stroke-width="${isEnd ? 2 : 1}"/>`;
+    }
+
+    // Start & end labels
+    svg += `<text x="${pts[0].x}" y="${pts[0].y - 10}" font-size="7" fill="#2c1810" text-anchor="middle" font-weight="bold">Camp Dubois</text>`;
+    if (legsCompleted >= LEG_COORDS.length - 1) {
+      svg += `<text x="${pts[pts.length-1].x}" y="${pts[pts.length-1].y - 10}" font-size="7" fill="#2c1810" text-anchor="middle" font-weight="bold">Fort Clatsop</text>`;
+    } else {
+      const endPt = pts[legsCompleted];
+      const leg = LEGS[Math.min(legsCompleted, LEGS.length - 1)];
+      svg += `<text x="${endPt.x}" y="${endPt.y - 10}" font-size="7" fill="#8b1a1a" text-anchor="middle" font-weight="bold">${leg.to || leg.from}</text>`;
+    }
+
+    svg += `</svg>`;
+    return svg;
+  }
+
   function renderTraveling() {
     const leg = LEGS[gs.currentLeg];
     const el = getEl();
@@ -971,6 +1028,10 @@ const TrailGame = (() => {
     };
     const msg = messages[reason] || messages.health;
     const leg = LEGS[Math.min(gs.currentLeg, LEGS.length - 1)];
+    const milesCovered = LEGS.slice(0, gs.currentLeg).reduce((s, l) => s + l.miles, 0);
+    const totalMiles = LEGS.reduce((s, l) => s + l.miles, 0);
+    const alive = gs.party.filter(m => m.health > 0);
+    const dead = gs.party.filter(m => m.health <= 0);
 
     const el = getEl();
     el.innerHTML = `
@@ -983,15 +1044,40 @@ const TrailGame = (() => {
             <p>Day ${gs.totalDays} of the journey</p>
           </div>
           <h2 style="color:var(--danger);">${msg.title}</h2>
-          <p class="tg-end-subtitle">The real Lewis &amp; Clark expedition made it through — can you?</p>
+          <p class="tg-end-subtitle">The real Lewis &amp; Clark expedition made it through &mdash; can you?</p>
+
+          <div class="tg-travel-map" style="margin:1rem 0;">${routeSummaryMapSVG(gs.currentLeg)}</div>
+
           <div class="tg-stats-grid">
             <div class="tg-stat-item"><span class="tg-stat-label">Days Survived</span><span class="tg-stat-value">${gs.totalDays}</span></div>
-            <div class="tg-stat-item"><span class="tg-stat-label">Distance Covered</span><span class="tg-stat-value">${LEGS.slice(0, gs.currentLeg).reduce((s, l) => s + l.miles, 0)} miles</span></div>
+            <div class="tg-stat-item"><span class="tg-stat-label">Distance Covered</span><span class="tg-stat-value">${milesCovered} of ${totalMiles} mi</span></div>
             <div class="tg-stat-item"><span class="tg-stat-label">Legs Completed</span><span class="tg-stat-value">${gs.currentLeg} of ${LEGS.length}</span></div>
-            <div class="tg-stat-item"><span class="tg-stat-label">Party Surviving</span><span class="tg-stat-value">${gs.party.filter(m => m.health > 0).length} of ${gs.party.length}</span></div>
+            <div class="tg-stat-item"><span class="tg-stat-label">Party Surviving</span><span class="tg-stat-value">${alive.length} of ${gs.party.length}</span></div>
           </div>
-          <button class="tg-btn tg-btn-primary" onclick="TrailGame.restart()" style="margin-right:0.5rem;">Try Again</button>
-          <button class="tg-btn tg-btn-leather" onclick="TrailGame.exitGame()">Return to Expedition</button>
+
+          <h3 style="margin:1rem 0 0.5rem;font-size:1.05rem;">Your Decisions</h3>
+          <div class="tg-stats-grid">
+            <div class="tg-stat-item"><span class="tg-stat-label">Good Decisions</span><span class="tg-stat-value" style="color:#4a7c2e;">${gs.goodDecisions}</span></div>
+            <div class="tg-stat-item"><span class="tg-stat-label">Bad Decisions</span><span class="tg-stat-value" style="color:#c44;">${gs.badDecisions}</span></div>
+          </div>
+
+          <h3 style="margin:1rem 0 0.5rem;font-size:1.05rem;">How You Compare to History</h3>
+          <table class="tg-comparison">
+            <tr><th></th><th>Your Expedition</th><th>Real Expedition</th></tr>
+            <tr><td>Days Traveled</td><td>${gs.totalDays}</td><td>554 (to Pacific)</td></tr>
+            <tr><td>Distance</td><td>${milesCovered} mi</td><td>4,162 mi (one-way)</td></tr>
+            <tr><td>Deaths</td><td>${dead.length}</td><td>1 (Sgt. Floyd)</td></tr>
+          </table>
+          <p style="font-size:0.8rem;color:var(--ink-light);font-style:italic;margin:0.5rem 0 1rem;">
+            The real expedition completed the full ${totalMiles}-mile journey in 554 days. Their only loss was Sgt. Charles Floyd, likely from a burst appendix.
+            Your expedition covered ${Math.round(milesCovered / totalMiles * 100)}% of the route before ${reason === 'starvation' ? 'starvation' : reason === 'mutiny' ? 'mutiny' : 'perishing'}.
+          </p>
+
+          ${partyHTML()}
+          <div style="margin-top:1.5rem;">
+            <button class="tg-btn tg-btn-primary" onclick="TrailGame.restart()" style="margin-right:0.5rem;">Try Again</button>
+            <button class="tg-btn tg-btn-leather" onclick="TrailGame.exitGame()">Return to Home</button>
+          </div>
         </div>
       </div>`;
   }
@@ -1009,7 +1095,7 @@ const TrailGame = (() => {
 
     // Historical expedition facts for comparison
     const realDays = 554; // May 14 1804 → Nov 20 1805 (outbound to Pacific)
-    const realMiles = 4162; // one-way distance
+    const realMiles = 4162; // one-way distance (Clark's journal estimate; round trip ~8,000)
     const realDeaths = 1; // Sgt. Floyd
     const realPartySize = 33; // after Fort Mandan (keelboat crew sent back)
 
@@ -1022,12 +1108,14 @@ const TrailGame = (() => {
         <div class="tg-card-body tg-endscreen">
           <h2 style="color:var(--forest);">Ocian in View! O! the Joy!</h2>
           <p class="tg-end-subtitle">The Corps of Discovery has reached the Pacific Ocean.</p>
-          <p style="margin-bottom:1.5rem;">
+          <p style="margin-bottom:1rem;">
             After ${gs.totalDays} days and ${totalMiles} miles, your expedition stands on the shores
             of the Pacific. Like the real Lewis and Clark, you have crossed a continent.
             ${alive.length === gs.party.length ? 'Remarkably, every member of your party survived!' :
               `${alive.length} of your ${gs.party.length} party members survived the journey.`}
           </p>
+
+          <div class="tg-travel-map" style="margin:1rem 0;">${routeSummaryMapSVG(LEGS.length)}</div>
 
           <div class="tg-stats-grid">
             <div class="tg-stat-item"><span class="tg-stat-label">Food Remaining</span><span class="tg-stat-value">${gs.food}%</span></div>
@@ -1071,7 +1159,7 @@ const TrailGame = (() => {
           ${partyHTML()}
           <div style="margin-top:1.5rem;">
             <button class="tg-btn tg-btn-primary" onclick="TrailGame.restart()" style="margin-right:0.5rem;">Play Again</button>
-            <button class="tg-btn tg-btn-leather" onclick="TrailGame.exitGame()">Return to Expedition</button>
+            <button class="tg-btn tg-btn-leather" onclick="TrailGame.exitGame()">Return to Home</button>
           </div>
         </div>
       </div>`;
@@ -1471,7 +1559,8 @@ const TrailGame = (() => {
 
     exitGame() {
       document.getElementById('trail-game-screen').classList.remove('active');
-      document.getElementById('completion-screen').classList.add('active');
+      document.getElementById('title-screen').classList.add('active');
+      updateTitleContinueButton();
     },
 
     launch() {

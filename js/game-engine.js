@@ -119,6 +119,7 @@ function completeExpedition() {
     <em>"We were now about to penetrate a country at least 2,000 miles in width, on which the foot of civilized man had never trod."</em> &mdash; Captain Meriwether Lewis
   `;
   showScreen('completion-screen');
+  unlockGame();
   clearSave();
 }
 
@@ -206,15 +207,17 @@ function updateTitleContinueButton() {
   const container = document.getElementById('title-continue');
   if (!container) return;
 
+  let html = '';
   if (hasSave()) {
     const saved = loadSave();
     const stationNum = saved ? saved.currentStation + 1 : 1;
-    container.innerHTML = `<button class="btn-continue" onclick="continueGame()">Continue Expedition (Station ${stationNum})</button>`;
-    container.style.display = 'block';
-  } else {
-    container.innerHTML = '';
-    container.style.display = 'none';
+    html += `<button class="btn-continue" onclick="continueGame()">Continue Expedition (Station ${stationNum})</button>`;
   }
+  if (isGameUnlocked()) {
+    html += `<button class="btn-continue btn-game-unlocked" onclick="TrailGame.launch()">Play the Corps of Discovery Game</button>`;
+  }
+  container.innerHTML = html;
+  container.style.display = html ? 'block' : 'none';
 }
 
 // === JOURNAL PDF EXPORT ===
