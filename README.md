@@ -8,7 +8,7 @@ An interactive website that turns 10 classroom stations on the Lewis & Clark exp
 
 ## Version
 
-**v0.9.3** — Corps of Discovery game: winter camp, scripted events, economy rebalance
+**v0.9.4** — Map-based travel animation between stops
 
 ## What This Is
 
@@ -84,6 +84,14 @@ Then open `http://localhost:8000` in your browser.
 **Note:** Opening `index.html` directly as a file (`file://`) will not work because browsers block `fetch()` requests from local files. You need a web server.
 
 ## Changelog
+
+### v0.9.4
+- **Map-based travel animation:** Replaces plain progress bar with SVG mini-map of the full expedition route
+  - Animated party dot travels from start to destination along the trail
+  - Completed legs shown as solid orange trail, future legs as faint dashes
+  - Geographic features: Missouri River, Columbia River, Rocky Mountains, Pacific coastline, Great Plains
+  - From/to station markers with labels
+  - Reuses equirectangular projection from the educational map
 
 ### v0.9.3
 - **Fort Mandan Winter Camp:** Special 3-round phase at leg 3 with unique actions — Forge Trade Goods, Learn from Mandan, Build Canoes, Hunt Buffalo, Trade, Rest
