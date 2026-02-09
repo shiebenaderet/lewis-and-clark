@@ -84,6 +84,20 @@ const NEXT_CLUES = {
   ]
 };
 
+// === DISCOVERIES (unlocked by getting challenges correct) ===
+const DISCOVERIES = [
+  { name: 'The Keelboat', icon: '\u26F5', desc: 'A 55-foot vessel that carried the Corps of Discovery into the unknown' },
+  { name: 'Prairie Dog', icon: '\uD83D\uDC3F\uFE0F', desc: 'A species new to American science, sent alive to President Jefferson' },
+  { name: 'Peace Medal Diplomacy', icon: '\uD83E\uDE99', desc: 'Jefferson\'s silver medals, given to tribal leaders to establish American relations' },
+  { name: 'Mandan Trade Network', icon: '\uD83C\uDF3E', desc: 'A vast continental trading system connecting the Great Lakes to the Rockies' },
+  { name: 'Jean Baptiste Charbonneau', icon: '\uD83D\uDC76', desc: 'Born Feb 11, 1805 at Fort Mandan \u2014 the youngest member of the expedition' },
+  { name: 'Terra Incognita', icon: '\uD83D\uDDFA\uFE0F', desc: 'Beyond Fort Mandan, the Corps entered land no American had ever mapped' },
+  { name: 'The Great Portage', icon: '\u26F0\uFE0F', desc: '18 miles overland \u2014 the most grueling physical challenge of the journey' },
+  { name: 'Shoshone Horses', icon: '\uD83D\uDC0E', desc: '29 horses acquired through Sacagawea\'s incredible reunion with her brother' },
+  { name: 'Nez Perce Rescue', icon: '\uD83E\uDE78', desc: 'The people who saved the starving expedition and taught them to build canoes' },
+  { name: 'The Great Vote', icon: '\uD83D\uDDF3\uFE0F', desc: 'Everyone voted \u2014 including York and Sacagawea \u2014 decades ahead of their time' }
+];
+
 // === STATION RENDERING ===
 function renderStation(index) {
   if (index < 0 || index >= STATIONS.length) return;
@@ -156,17 +170,19 @@ function renderStation(index) {
   });
   html += '</div>';
 
-  // Journal entries
+  // Journal entries (dates and authors are clickable to auto-fill journal)
   if (data.journals && data.journals.length > 0) {
     data.journals.forEach(j => {
+      const safeDate = j.date.replace(/'/g, "\\'");
+      const safeAuthor = j.author.replace(/'/g, "\\'");
       html += '<div class="journal-entry">';
-      html += `<div class="journal-date">${j.date}</div>`;
+      html += `<div class="journal-date clickable-fill" onclick="autoFillJournal(${index}, 'date', '${safeDate}')" title="Tap to add to your journal">${j.date} <span class="fill-hint">tap to add</span></div>`;
       html += '<div class="journal-text">';
       j.text.forEach(p => {
         html += `<p>${p}</p>`;
       });
       html += '</div>';
-      html += `<div class="journal-author">&mdash; ${j.author}</div>`;
+      html += `<div class="journal-author clickable-fill" onclick="autoFillJournal(${index}, 'author', '${safeAuthor}')" title="Tap to add to your journal">&mdash; ${j.author} <span class="fill-hint">tap to add</span></div>`;
       html += '</div>';
     });
   }
@@ -316,6 +332,16 @@ function answerChallenge(stationIndex, choiceIndex) {
     feedback.textContent = challenge.feedback_correct;
     feedback.className = 'challenge-feedback show correct';
     state.score += 10;
+    // Unlock discovery
+    if (!state.discoveries.includes(stationIndex) && DISCOVERIES[stationIndex]) {
+      state.discoveries.push(stationIndex);
+      const d = DISCOVERIES[stationIndex];
+      // Show discovery banner below feedback
+      const banner = document.createElement('div');
+      banner.className = 'discovery-banner';
+      banner.innerHTML = `<span class="discovery-banner-icon">${d.icon}</span> <strong>Discovery Unlocked:</strong> ${d.name} <span class="discovery-banner-desc">&mdash; ${d.desc}</span>`;
+      feedback.parentNode.insertBefore(banner, feedback.nextSibling);
+    }
   } else {
     feedback.textContent = challenge.feedback_incorrect;
     feedback.className = 'challenge-feedback show incorrect';
@@ -351,6 +377,28 @@ function answerChallenge(stationIndex, choiceIndex) {
       navEl.parentNode.insertBefore(clueEl, navEl);
     }
   }
+}
+
+function autoFillJournal(stationIndex, field, value) {
+  // Auto-fill the journal field and save
+  const inputId = `jf-${field}-${stationIndex}`;
+  const el = document.getElementById(inputId);
+  if (el) {
+    // Append if field already has content (e.g., multiple authors)
+    const current = el.value.trim();
+    if (current && !current.includes(value)) {
+      el.value = current + ', ' + value;
+    } else if (!current) {
+      el.value = value;
+    }
+    saveJournalField(stationIndex, field, el.value);
+    // Visual feedback — flash the field
+    el.classList.add('field-filled');
+    setTimeout(() => el.classList.remove('field-filled'), 1200);
+  }
+  // Update the clicked element's hint
+  const hint = event.currentTarget.querySelector('.fill-hint');
+  if (hint) { hint.textContent = 'added!'; setTimeout(() => { hint.textContent = 'tap to add'; }, 1500); }
 }
 
 function updateScoreDisplay() {
@@ -955,6 +1003,24 @@ function renderJournalTracker() {
   }
 
   tbody.innerHTML = html;
+
+  // Render discoveries section below the journal table
+  const discPanel = document.getElementById('discoveries-panel');
+  if (discPanel) {
+    if (state.discoveries.length === 0) {
+      discPanel.innerHTML = '<p style="color:#8b7355;font-style:italic;text-align:center;padding:1rem;">Answer Knowledge Checks correctly to unlock discoveries.</p>';
+    } else {
+      let dhtml = '<div class="discoveries-grid">';
+      state.discoveries.sort((a, b) => a - b).forEach(idx => {
+        const d = DISCOVERIES[idx];
+        if (d) {
+          dhtml += `<div class="discovery-item"><span class="discovery-item-icon">${d.icon}</span><div><strong>${d.name}</strong><br><span class="discovery-item-desc">${d.desc}</span></div></div>`;
+        }
+      });
+      dhtml += '</div>';
+      discPanel.innerHTML = dhtml;
+    }
+  }
 }
 
 // === INTERACTIVE TRAVEL TRANSITION ===

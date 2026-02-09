@@ -65,6 +65,7 @@ function continueGame() {
   state.score = saved.score || 0;
   state.challengesCompleted = saved.challengesCompleted || new Set();
   state.seenEvents = saved.seenEvents || [];
+  state.discoveries = saved.discoveries || [];
 
   // Update level buttons to reflect saved level
   document.querySelectorAll('.level-btn, .level-toggle button').forEach(btn => {
@@ -127,6 +128,79 @@ function restartGame() {
   showScreen('title-screen');
 }
 
+// === SAVE CODE SYSTEM ===
+function showSaveCodeUI() {
+  const code = generateSaveCode();
+  const el = document.getElementById('save-code-area');
+  if (!el) return;
+  if (!code) {
+    el.innerHTML = '<p style="color:#c44;">No save data found. Start playing first!</p>';
+    return;
+  }
+  el.innerHTML = `
+    <p style="margin:0 0 0.5rem;font-size:0.85rem;color:var(--ink-light);">Copy this code to save your progress. Paste it on any device to continue.</p>
+    <textarea class="save-code-text" id="save-code-output" readonly onclick="this.select()">${code}</textarea>
+    <button class="btn-save-code" onclick="copySaveCode()">Copy Code</button>`;
+}
+
+function copySaveCode() {
+  const ta = document.getElementById('save-code-output');
+  if (!ta) return;
+  ta.select();
+  try {
+    navigator.clipboard.writeText(ta.value).then(() => {
+      const btn = ta.nextElementSibling;
+      if (btn) { btn.textContent = 'Copied!'; setTimeout(() => { btn.textContent = 'Copy Code'; }, 2000); }
+    });
+  } catch (e) {
+    document.execCommand('copy');
+  }
+}
+
+function showLoadCodeUI() {
+  const el = document.getElementById('save-code-area');
+  if (!el) return;
+  el.innerHTML = `
+    <p style="margin:0 0 0.5rem;font-size:0.85rem;color:var(--ink-light);">Paste a save code to restore your progress.</p>
+    <textarea class="save-code-text" id="save-code-input" placeholder="Paste your save code here..."></textarea>
+    <button class="btn-save-code" onclick="applySaveCode()">Load Save</button>
+    <div id="save-code-error" style="color:#c44;font-size:0.85rem;margin-top:0.4rem;"></div>`;
+}
+
+function applySaveCode() {
+  const ta = document.getElementById('save-code-input');
+  const errEl = document.getElementById('save-code-error');
+  if (!ta || !ta.value.trim()) {
+    if (errEl) errEl.textContent = 'Please paste a save code first.';
+    return;
+  }
+  const saved = loadSaveCode(ta.value);
+  if (!saved) {
+    if (errEl) errEl.textContent = 'Invalid save code. Please check and try again.';
+    return;
+  }
+  // Restore state from code
+  state.level = saved.level;
+  state.currentStation = saved.currentStation;
+  state.visitedStations = saved.visitedStations;
+  state.journalEntries = saved.journalEntries;
+  state.currentView = saved.currentView || 'station';
+  state.score = saved.score || 0;
+  state.challengesCompleted = saved.challengesCompleted || new Set();
+  state.seenEvents = saved.seenEvents || [];
+  state.discoveries = saved.discoveries || [];
+  saveGame(); // persist to localStorage
+
+  document.querySelectorAll('.level-btn, .level-toggle button').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.level === state.level);
+  });
+  showScreen('game-screen');
+  showView(state.currentView);
+  renderStation(state.currentStation);
+  updateStationIndicator();
+  updateScoreDisplay();
+}
+
 // === TITLE CONTINUE BUTTON ===
 function updateTitleContinueButton() {
   const container = document.getElementById('title-continue');
@@ -170,6 +244,7 @@ function exportJournalPDF() {
           ${date ? `<div class="entry-date">${date}</div>` : ''}
         </div>
         ${author ? `<div class="entry-field"><span class="field-label">Journal Author(s):</span> ${author}</div>` : ''}
+        ${(state.discoveries || []).includes(i) && typeof DISCOVERIES !== 'undefined' && DISCOVERIES[i] ? `<div class="entry-field" style="color:#8b4513;"><span class="field-label">Discovery:</span> ${DISCOVERIES[i].name} &mdash; ${DISCOVERIES[i].desc}</div>` : ''}
         ${summary ? `
           <div class="entry-section">
             <div class="section-label">Summary of Events</div>
@@ -264,7 +339,7 @@ function exportJournalPDF() {
       <div class="cover-divider"></div>
       <div class="cover-by">Recorded by</div>
       <div class="cover-name">&nbsp;</div>
-      <div class="cover-stats">${state.visitedStations.size} stations visited &bull; ${state.challengesCompleted.size} knowledge checks completed &bull; ${state.score} points earned</div>
+      <div class="cover-stats">${state.visitedStations.size} stations visited &bull; ${state.challengesCompleted.size} knowledge checks completed &bull; ${(state.discoveries || []).length} discoveries &bull; ${state.score} points earned</div>
     </div>
   </div>
   ${entries}

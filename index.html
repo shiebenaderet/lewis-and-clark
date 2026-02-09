@@ -32,6 +32,17 @@
     </div>
     <button class="btn-start" onclick="startGame()">Begin the Expedition</button>
     <div id="title-continue" class="title-continue"></div>
+    <details class="save-code-panel">
+      <summary class="teacher-toggle">Save &amp; Load Progress</summary>
+      <div class="save-code-controls">
+        <p style="margin:0 0 0.75rem;font-size:0.85rem;color:var(--parchment-dark);">Use save codes to transfer your progress between devices, or bookmark your place.</p>
+        <div style="display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap;">
+          <button class="btn-save-code" onclick="showSaveCodeUI()">Get Save Code</button>
+          <button class="btn-save-code" onclick="showLoadCodeUI()">Enter Save Code</button>
+        </div>
+        <div id="save-code-area" style="margin-top:0.75rem;"></div>
+      </div>
+    </details>
     <details class="teacher-resources">
       <summary class="teacher-toggle">Teacher &amp; Student Resources</summary>
       <div class="teacher-links">
@@ -41,7 +52,7 @@
         <a href="https://www.gilderlehrman.org/history-resources/online-exhibitions/lewis-and-clark-expedition-interactive-map" target="_blank" rel="noopener">Interactive Expedition Map <span>Timeline &amp; route explorer &mdash; Gilder Lehrman Institute</span></a>
       </div>
     </details>
-    <div style="margin-top:2rem;font-size:0.7rem;color:rgba(244,232,193,0.3);font-family:var(--font-ui);">v0.9.5</div>
+    <div style="margin-top:2rem;font-size:0.7rem;color:rgba(244,232,193,0.3);font-family:var(--font-ui);">v0.10.0</div>
   </div>
 </div>
 
@@ -128,6 +139,8 @@
           </tbody>
         </table>
       </div>
+      <h3 style="margin:1.5rem 0 0.5rem;color:var(--leather-dark);font-size:1rem;">Discoveries</h3>
+      <div id="discoveries-panel"></div>
     </div>
   </div>
 </div>

@@ -65,6 +65,20 @@ const TrailGame = (() => {
     { id: 'charbonneau', name: 'Charbonneau',    role: 'Interpreter',  health: 100 }
   ];
 
+  // Biographical info for party members (shown on click)
+  const PARTY_BIOS = {
+    lewis: { full: 'Captain Meriwether Lewis', born: '1774, Virginia', joined: 'Expedition leader from the start', bio: 'Personal secretary to President Jefferson. A skilled naturalist and leader who documented hundreds of new species. Prone to dark moods but brilliant under pressure.', ability: null },
+    clark: { full: 'Captain William Clark', born: '1770, Virginia', joined: 'Co-commander from the start', bio: 'An experienced frontiersman and mapmaker. His detailed maps of the West remained the best available for decades. Known for his steady temperament and fairness.', ability: null },
+    york: { full: 'York', born: 'c. 1770, Virginia', joined: 'From the start (enslaved by Clark)', bio: 'An enslaved man brought by Clark. His strength and skills impressed Native peoples throughout the journey. He voted in the Great Vote at the Pacific \u2014 but was denied freedom upon return.', ability: null },
+    drouillard: { full: 'George Drouillard', born: 'c. 1773, Canada', joined: 'Recruited at the start', bio: 'Half French-Canadian, half Shawnee. The expedition\'s best hunter and sign-language interpreter. Could communicate with nearly every tribe they met.', ability: 'Better hunting (+15% success, +3 food)' },
+    ordway: { full: 'Sergeant John Ordway', born: '1775, New Hampshire', joined: 'From the start', bio: 'One of the most reliable NCOs. Kept his own detailed journal throughout the entire expedition. Often left in charge of camp when Lewis and Clark scouted ahead.', ability: null },
+    gass: { full: 'Sergeant Patrick Gass', born: '1771, Pennsylvania', joined: 'From the start', bio: 'The expedition\'s master carpenter. Built Fort Mandan, Fort Clatsop, and dozens of canoes. Published the first account of the expedition in 1807. Lived to age 98!', ability: 'Better repairs (+4 supplies, +2 health)' },
+    floyd: { full: 'Sergeant Charles Floyd', born: '1782, Kentucky', joined: 'From the start', bio: 'The only expedition member to die \u2014 likely from a burst appendix on August 20, 1804. No medicine of the era could have saved him. First U.S. soldier to die west of the Mississippi.', died: 'Leg 1 (August 20, 1804)' },
+    pryor: { full: 'Sergeant Nathaniel Pryor', born: '1772, Virginia', joined: 'From the start', bio: 'A capable NCO who led independent missions. After the expedition, he became an Indian agent and trader in Oklahoma territory.', ability: null },
+    sacagawea: { full: 'Sacagawea', born: 'c. 1788, Lemhi Valley (Shoshone)', joined: 'Fort Mandan (Leg 3)', bio: 'A Shoshone woman kidnapped as a child by the Hidatsa. Her knowledge of plants, territory, and languages was invaluable. Her presence with baby Jean Baptiste signaled peaceful intentions to every tribe.', ability: 'Better foraging (+4 food, +2 morale)' },
+    charbonneau: { full: 'Toussaint Charbonneau', born: '1767, Montreal', joined: 'Fort Mandan (Leg 3)', bio: 'A French-Canadian fur trader and Sacagawea\'s husband. Hired as interpreter. Not the most skilled boatman \u2014 he once nearly capsized a pirogue \u2014 but his connections proved useful.', ability: null }
+  };
+
   const LEGS = [
     { from: 'Camp Dubois',          to: 'Great Plains',          miles: 600,  days: 67, date: 'May 14 – Jul 20, 1804', terrain: 'River — Missouri', consume: { food: 12, supplies: 5 } },
     { from: 'Great Plains',         to: 'Council Bluffs',        miles: 50,   days: 14, date: 'Jul 20 – Aug 3, 1804',  terrain: 'Prairie & River', consume: { food: 5, supplies: 3 } },
@@ -391,7 +405,9 @@ const TrailGame = (() => {
       scavengedThisStop: false,
       knowledgeBonusUsed: [],   // legs where knowledge bonus was attempted
       knowledgeBonusCorrect: 0, // total correct answers (for victory screen)
-      lastKnowledgeResult: null // { correct, text } — shown after answering
+      lastKnowledgeResult: null, // { correct, text } — shown after answering
+      goodDecisions: 0,
+      badDecisions: 0
     };
   }
 
@@ -436,9 +452,10 @@ const TrailGame = (() => {
     return `<div class="tg-party-panel">${gs.party.map(m => {
       const hClass = m.health <= 0 ? 'dead' : m.health <= 30 ? 'poor' : m.health <= 60 ? 'fair' : 'good';
       const mClass = m.health <= 0 ? 'dead' : m.health <= 30 ? 'sick' : '';
-      return `<div class="tg-party-member ${mClass}">
+      return `<div class="tg-party-member ${mClass}" onclick="TrailGame.showBio('${m.id}')" style="cursor:pointer;" title="Click for bio">
         <span class="tg-party-health-dot ${hClass}"></span>
         <span>${m.name}</span>
+        <span class="tg-party-hp">${m.health > 0 ? m.health + '%' : 'dead'}</span>
       </div>`;
     }).join('')}</div>`;
   }
@@ -464,17 +481,31 @@ const TrailGame = (() => {
 
   function applyEffects(effects) {
     const diff = DIFFICULTY[gs.difficulty];
-    gs.food     = clamp(gs.food     + (effects.food || 0));
-    gs.health   = clamp(gs.health   + (effects.health || 0));
-    gs.supplies = clamp(gs.supplies + (effects.supplies || 0));
-    gs.morale   = clamp(gs.morale   + (effects.morale || 0));
+    // Scale negative effects by difficulty
+    const dmgScale = diff.foodMult; // 0.7 greenhorn, 1.0 explorer, 1.3 trailblazer
+    const food = effects.food || 0;
+    const health = effects.health || 0;
+    const supplies = effects.supplies || 0;
+    const morale = effects.morale || 0;
+    gs.food     = clamp(gs.food     + (food < 0 ? Math.round(food * dmgScale) : food));
+    gs.health   = clamp(gs.health   + (health < 0 ? Math.round(health * dmgScale) : health));
+    gs.supplies = clamp(gs.supplies + (supplies < 0 ? Math.round(supplies * dmgScale) : supplies));
+    gs.morale   = clamp(gs.morale   + (morale < 0 ? Math.round(morale * dmgScale) : morale));
 
-    // Random party member health effects
-    if (effects.health < -5) {
+    // Individual party member health damage — triggers more often now
+    if (health < -3) {
       const alive = gs.party.filter(m => m.health > 0);
       if (alive.length > 0) {
         const victim = alive[Math.floor(Math.random() * alive.length)];
-        victim.health = Math.max(0, victim.health + effects.health);
+        victim.health = Math.max(0, victim.health + Math.round(health * dmgScale));
+        // On harder difficulties, a second member may also take damage
+        if (dmgScale >= 1.0 && health < -5 && Math.random() < 0.3 * dmgScale) {
+          const alive2 = gs.party.filter(m => m.health > 0 && m.id !== victim.id);
+          if (alive2.length > 0) {
+            const victim2 = alive2[Math.floor(Math.random() * alive2.length)];
+            victim2.health = Math.max(0, victim2.health + Math.round(health * 0.5));
+          }
+        }
       }
     }
   }
@@ -516,6 +547,30 @@ const TrailGame = (() => {
           </button>
         </div>
       </div>`;
+  }
+
+  function showBio(memberId) {
+    const bio = PARTY_BIOS[memberId];
+    if (!bio) return;
+    const member = gs.party.find(m => m.id === memberId);
+    const hp = member ? member.health : 0;
+    const hClass = hp <= 0 ? 'dead' : hp <= 30 ? 'poor' : hp <= 60 ? 'fair' : 'good';
+
+    const overlay = document.createElement('div');
+    overlay.className = 'tg-bio-overlay';
+    overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
+    overlay.innerHTML = `
+      <div class="tg-bio-card">
+        <button class="tg-bio-close" onclick="this.closest('.tg-bio-overlay').remove()">&times;</button>
+        <h3>${bio.full}</h3>
+        <p class="tg-bio-role">${member ? member.role : ''} &bull; Born ${bio.born}</p>
+        <p class="tg-bio-detail"><strong>Joined:</strong> ${bio.joined}</p>
+        ${bio.died ? `<p class="tg-bio-detail" style="color:#c44;"><strong>Died:</strong> ${bio.died}</p>` : ''}
+        <p class="tg-bio-detail"><strong>Status:</strong> <span class="tg-party-health-dot ${hClass}" style="display:inline-block;"></span> ${hp > 0 ? hp + '% health' : 'Deceased'}</p>
+        ${bio.ability ? `<p class="tg-bio-detail" style="color:#d4760a;"><strong>Ability:</strong> ${bio.ability}</p>` : ''}
+        <p class="tg-bio-text">${bio.bio}</p>
+      </div>`;
+    document.body.appendChild(overlay);
   }
 
   function partyAbilityHints() {
@@ -788,6 +843,19 @@ const TrailGame = (() => {
       gs.health = clamp(gs.health - Math.round(5 * diff.foodMult));
     }
 
+    // Travel attrition: random party members lose health each leg
+    // Harder difficulties = more attrition, later legs = more dangerous
+    const attritionChance = 0.2 + (diff.foodMult - 0.7) * 0.3 + gs.currentLeg * 0.03;
+    gs.party.forEach(m => {
+      if (m.health > 0 && Math.random() < attritionChance) {
+        const loss = Math.round((2 + Math.random() * 6) * diff.foodMult);
+        m.health = Math.max(0, m.health - loss);
+        if (m.health <= 0 && m.id !== 'lewis' && m.id !== 'clark') {
+          addJournal(`${m.name} has perished from the hardships of the trail.`);
+        }
+      }
+    });
+
     addJournal(`Departed ${leg.from}. Traveling ${leg.miles} miles at ${gs.pace} pace.`);
 
     // Determine events for this leg — filter by leg range, avoid repeats
@@ -852,8 +920,9 @@ const TrailGame = (() => {
     const choice = event.choices[choiceIndex];
     const el = getEl();
 
-    // Apply effects
+    // Apply effects and track decisions
     applyEffects(choice);
+    if (choice.good) gs.goodDecisions++; else gs.badDecisions++;
     addJournal(`${event.title}: ${choice.result.substring(0, 80)}...`);
 
     const resultClass = choice.good ? 'tg-result-good' : 'tg-result-bad';
@@ -969,6 +1038,17 @@ const TrailGame = (() => {
             <div class="tg-stat-item"><span class="tg-stat-label">Rank</span><span class="tg-stat-value">${rank}</span></div>
           </div>
 
+          <h3 style="margin:1rem 0 0.5rem;font-size:1.05rem;">Your Decisions</h3>
+          <div class="tg-stats-grid">
+            <div class="tg-stat-item"><span class="tg-stat-label">Good Decisions</span><span class="tg-stat-value" style="color:#4a7c2e;">${gs.goodDecisions}</span></div>
+            <div class="tg-stat-item"><span class="tg-stat-label">Bad Decisions</span><span class="tg-stat-value" style="color:#c44;">${gs.badDecisions}</span></div>
+          </div>
+          <p style="font-size:0.8rem;color:var(--ink-light);margin:0.25rem 0 1rem;">
+            ${gs.goodDecisions > gs.badDecisions * 2 ? 'Your wise choices kept the expedition on track. Lewis and Clark would be proud.' :
+              gs.badDecisions > gs.goodDecisions ? 'Many tough calls went wrong \u2014 but you still made it. The real expedition faced similar hardships.' :
+              'A mix of good and bad calls \u2014 just like the real expedition, where every decision could mean life or death.'}
+          </p>
+
           <h3 style="margin:1rem 0 0.5rem;font-size:1.05rem;">How You Compare to History</h3>
           <table class="tg-comparison">
             <tr><th></th><th>Your Expedition</th><th>Real Expedition</th></tr>
@@ -980,6 +1060,9 @@ const TrailGame = (() => {
           <p style="font-size:0.8rem;color:var(--ink-light);font-style:italic;margin:0.5rem 0 1rem;">
             The real expedition took ${realDays} days from Camp Dubois to the Pacific coast (May 14, 1804 &ndash; Nov 20, 1805).
             The only death was Sgt. Charles Floyd, likely from a burst appendix &mdash; something no medicine of the era could have saved.
+            ${gs.totalDays < realDays ? `You were ${realDays - gs.totalDays} days faster than the real expedition!` :
+              gs.totalDays > realDays ? `Your expedition took ${gs.totalDays - realDays} days longer than the real one.` :
+              'Remarkably, your journey took exactly as long as the real expedition!'}
           </p>
 
           <p style="font-style:italic;color:var(--ink-light);margin-bottom:1rem;">
@@ -1371,6 +1454,7 @@ const TrailGame = (() => {
       renderStop();
     },
 
+    showBio(id) { showBio(id); },
     answerKnowledgeBonus(i) { answerKnowledgeBonus(i); },
     doAction(action) { doAction(action); },
     startTravel() { startTravel(); },

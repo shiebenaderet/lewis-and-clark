@@ -8,7 +8,7 @@ An interactive website that turns 10 classroom stations on the Lewis & Clark exp
 
 ## Version
 
-**v0.9.5** — Knowledge bonuses, party abilities, expedition comparison
+**v0.10.0** — Save codes, discoveries, party bios, difficulty tuning
 
 ## What This Is
 
@@ -30,7 +30,8 @@ This project replaces a paper-based station activity (where students walk around
 - **Image galleries** at each station with 2–3 images (scene paintings, portraits, artifacts) from Wikimedia Commons, with carousel navigation
 - **Knowledge checks** — multiple-choice challenges at each station with feedback and scoring
 - **Interactive travel events** — 29 diverse encounters between stations: choice-based decisions and tap/swat mini-games covering weather, wildlife, navigation, health, Native encounters, and camp life
-- **Save/resume** — localStorage persistence so students can pick up where they left off
+- **Save/resume** — localStorage persistence so students can pick up where they left off; portable save codes for cross-device transfer
+- **Discoveries** — 10 collectible items unlocked by answering Knowledge Checks correctly, logged in journal and PDF export
 - **Random trail events** between stations (grizzly bears, storms, mosquitoes, etc.)
 - **Reflection questions** at each station
 - **Primary source links** at each station to real digitized journal entries (University of Nebraska) and the Corps of Discovery Online Atlas (Lewis & Clark College)
@@ -84,6 +85,26 @@ Then open `http://localhost:8000` in your browser.
 **Note:** Opening `index.html` directly as a file (`file://`) will not work because browsers block `fetch()` requests from local files. You need a web server.
 
 ## Changelog
+
+### v0.10.0
+- **Portable save codes:** Students can generate a save code (base64-encoded game state) and paste it on any device to restore progress — works without authentication or accounts
+  - "Get Save Code" and "Enter Save Code" buttons on the title screen
+  - One-click copy to clipboard
+- **Click-to-fill journal entries:** Clicking dates or authors at a station auto-fills the journal field (appends if already populated). Visual hints (dashed underline, "click to add" text) guide students
+- **Discoveries system:** 10 collectible discoveries (one per station) unlocked by answering Knowledge Checks correctly
+  - Animated unlock banner with icon and description
+  - Discoveries logged in the Journal tracker with a dedicated grid panel
+  - Included in PDF journal export (per-entry and cover page stats)
+- **Clickable party member bios:** Click any party member in the Corps of Discovery game to see a biographical overlay with full name, birth, when they joined, historical bio, special ability, and fate
+- **Harder difficulty tuning:**
+  - Negative event effects now scale with difficulty (Trailblazer takes ~1.3x damage, Greenhorn ~0.7x)
+  - Party member damage threshold lowered (health < -3 triggers individual injuries, was -5)
+  - Travel attrition: party members randomly lose health each leg, scaling with difficulty and leg number (later legs are more dangerous)
+  - Lewis and Clark protected from attrition death (but not from event damage)
+- **Decision tracking & enhanced victory screen:**
+  - Good and bad decisions tracked throughout the game
+  - Victory screen shows decision summary with contextual feedback
+  - Journey length comparison vs. the real expedition (your days vs. 554 actual days)
 
 ### v0.9.5
 - **Knowledge bonus questions:** 10 trivia questions (one per stop) tied to the educational station content. Correct answers grant resource bonuses (food, supplies, health, morale), reinforcing what students learned
