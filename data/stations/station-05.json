@@ -33,14 +33,34 @@
     },
     "images": [
       {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Lewis_and_Clark_at_Three_Forks_by_Edgar_S._Paxson%2C_1912.jpg/800px-Lewis_and_Clark_at_Three_Forks_by_Edgar_S._Paxson%2C_1912.jpg",
-        "alt": "Lewis and Clark at Three Forks by Edgar S. Paxson, 1912 — featuring Sacagawea",
-        "caption": "Lewis and Clark at Three Forks, Edgar S. Paxson, 1912 — Montana State Capitol — Sacagawea points to her homeland"
+        "url": "data/images/station-05-a-with-sacagawea.jpg",
+        "alt": "The expedition traveling with Sacagawea as guide",
+        "caption": "The expedition with Sacagawea — she proved indispensable as guide and interpreter"
       },
       {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Lewis_and_Clark_on_the_Lower_Columbia.jpg/800px-Lewis_and_Clark_on_the_Lower_Columbia.jpg",
-        "alt": "Lewis and Clark on the Lower Columbia by Charles M. Russell, 1905",
-        "caption": "Lewis and Clark on the Lower Columbia, Charles M. Russell, 1905 — Sacagawea guides the expedition"
+        "url": "data/images/station-05-b-sacagawea-painting.jpg",
+        "alt": "Painting of Sacagawea",
+        "caption": "Sacagawea — the young Shoshone woman who joined the expedition at Fort Mandan"
+      },
+      {
+        "url": "data/images/station-05-c-sacagawea-baby.jpg",
+        "alt": "Sacagawea with her infant son Jean Baptiste",
+        "caption": "Sacagawea carrying her infant son Jean Baptiste (Pomp)"
+      },
+      {
+        "url": "data/images/station-05-d-charbonneau.jpg",
+        "alt": "Toussaint Charbonneau, fur trader and interpreter",
+        "caption": "Toussaint Charbonneau — French-Canadian fur trader hired as interpreter"
+      },
+      {
+        "url": "data/images/station-05-e-jean-baptiste-adult.jpg",
+        "alt": "Jean Baptiste Charbonneau as an adult",
+        "caption": "Jean Baptiste Charbonneau as an adult — born on the expedition, February 11, 1805"
+      },
+      {
+        "url": "data/images/station-05-f-jean-baptiste-mountain-man.jpg",
+        "alt": "Jean Baptiste Charbonneau as a mountain man",
+        "caption": "Jean Baptiste Charbonneau grew up to become a renowned mountain man and guide"
       }
     ]
   },
@@ -77,14 +97,34 @@
     },
     "images": [
       {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Lewis_and_Clark_at_Three_Forks_by_Edgar_S._Paxson%2C_1912.jpg/800px-Lewis_and_Clark_at_Three_Forks_by_Edgar_S._Paxson%2C_1912.jpg",
-        "alt": "Lewis and Clark at Three Forks by Edgar S. Paxson, 1912 — featuring Sacagawea",
-        "caption": "Lewis and Clark at Three Forks, Edgar S. Paxson, 1912 — Montana State Capitol — Sacagawea points to her homeland"
+        "url": "data/images/station-05-a-with-sacagawea.jpg",
+        "alt": "The expedition traveling with Sacagawea as guide",
+        "caption": "The expedition with Sacagawea — she proved indispensable as guide and interpreter"
       },
       {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Lewis_and_Clark_on_the_Lower_Columbia.jpg/800px-Lewis_and_Clark_on_the_Lower_Columbia.jpg",
-        "alt": "Lewis and Clark on the Lower Columbia by Charles M. Russell, 1905",
-        "caption": "Lewis and Clark on the Lower Columbia, Charles M. Russell, 1905 — Sacagawea guides the expedition"
+        "url": "data/images/station-05-b-sacagawea-painting.jpg",
+        "alt": "Painting of Sacagawea",
+        "caption": "Sacagawea — the young Shoshone woman who joined the expedition at Fort Mandan"
+      },
+      {
+        "url": "data/images/station-05-c-sacagawea-baby.jpg",
+        "alt": "Sacagawea with her infant son Jean Baptiste",
+        "caption": "Sacagawea carrying her infant son Jean Baptiste (Pomp)"
+      },
+      {
+        "url": "data/images/station-05-d-charbonneau.jpg",
+        "alt": "Toussaint Charbonneau, fur trader and interpreter",
+        "caption": "Toussaint Charbonneau — French-Canadian fur trader hired as interpreter"
+      },
+      {
+        "url": "data/images/station-05-e-jean-baptiste-adult.jpg",
+        "alt": "Jean Baptiste Charbonneau as an adult",
+        "caption": "Jean Baptiste Charbonneau as an adult — born on the expedition, February 11, 1805"
+      },
+      {
+        "url": "data/images/station-05-f-jean-baptiste-mountain-man.jpg",
+        "alt": "Jean Baptiste Charbonneau as a mountain man",
+        "caption": "Jean Baptiste Charbonneau grew up to become a renowned mountain man and guide"
       }
     ]
   },
@@ -122,14 +162,34 @@
     },
     "images": [
       {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Lewis_and_Clark_at_Three_Forks_by_Edgar_S._Paxson%2C_1912.jpg/800px-Lewis_and_Clark_at_Three_Forks_by_Edgar_S._Paxson%2C_1912.jpg",
-        "alt": "Lewis and Clark at Three Forks by Edgar S. Paxson, 1912 — featuring Sacagawea",
-        "caption": "Lewis and Clark at Three Forks, Edgar S. Paxson, 1912 — Montana State Capitol — Sacagawea points to her homeland"
+        "url": "data/images/station-05-a-with-sacagawea.jpg",
+        "alt": "The expedition traveling with Sacagawea as guide",
+        "caption": "The expedition with Sacagawea — she proved indispensable as guide and interpreter"
       },
       {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Lewis_and_Clark_on_the_Lower_Columbia.jpg/800px-Lewis_and_Clark_on_the_Lower_Columbia.jpg",
-        "alt": "Lewis and Clark on the Lower Columbia by Charles M. Russell, 1905",
-        "caption": "Lewis and Clark on the Lower Columbia, Charles M. Russell, 1905 — Sacagawea guides the expedition"
+        "url": "data/images/station-05-b-sacagawea-painting.jpg",
+        "alt": "Painting of Sacagawea",
+        "caption": "Sacagawea — the young Shoshone woman who joined the expedition at Fort Mandan"
+      },
+      {
+        "url": "data/images/station-05-c-sacagawea-baby.jpg",
+        "alt": "Sacagawea with her infant son Jean Baptiste",
+        "caption": "Sacagawea carrying her infant son Jean Baptiste (Pomp)"
+      },
+      {
+        "url": "data/images/station-05-d-charbonneau.jpg",
+        "alt": "Toussaint Charbonneau, fur trader and interpreter",
+        "caption": "Toussaint Charbonneau — French-Canadian fur trader hired as interpreter"
+      },
+      {
+        "url": "data/images/station-05-e-jean-baptiste-adult.jpg",
+        "alt": "Jean Baptiste Charbonneau as an adult",
+        "caption": "Jean Baptiste Charbonneau as an adult — born on the expedition, February 11, 1805"
+      },
+      {
+        "url": "data/images/station-05-f-jean-baptiste-mountain-man.jpg",
+        "alt": "Jean Baptiste Charbonneau as a mountain man",
+        "caption": "Jean Baptiste Charbonneau grew up to become a renowned mountain man and guide"
       }
     ]
   }

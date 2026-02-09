@@ -39,14 +39,19 @@
     },
     "images": [
       {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Lewis_and_Clark_at_Three_Forks_by_Edgar_S._Paxson%2C_1912.jpg/800px-Lewis_and_Clark_at_Three_Forks_by_Edgar_S._Paxson%2C_1912.jpg",
-        "alt": "Lewis and Clark at Three Forks by Edgar S. Paxson, 1912",
-        "caption": "Lewis and Clark at Three Forks, Edgar S. Paxson, 1912 — Sacagawea's reunion with the Shoshone"
+        "url": "data/images/station-08-a-meeting-shoshone.jpg",
+        "alt": "The expedition meeting the Shoshone people",
+        "caption": "The Corps of Discovery meeting the Shoshone — Sacagawea's people"
       },
       {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Portrait_of_William_Clark.jpg/800px-Portrait_of_William_Clark.jpg",
-        "alt": "Portrait of William Clark by Charles Willson Peale",
-        "caption": "Captain William Clark, painted by Charles Willson Peale, c. 1810"
+        "url": "data/images/station-08-b-meeting-rockies.jpg",
+        "alt": "Meeting in the Rocky Mountains",
+        "caption": "The expedition's encounter with the Shoshone in the Rocky Mountains"
+      },
+      {
+        "url": "data/images/station-08-c-lewis-tippet.jpg",
+        "alt": "Captain Lewis wearing a Shoshone tippet",
+        "caption": "Captain Lewis wearing a Shoshone tippet — a gift from Chief Cameahwait"
       }
     ]
   },
@@ -90,14 +95,19 @@
     },
     "images": [
       {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Lewis_and_Clark_at_Three_Forks_by_Edgar_S._Paxson%2C_1912.jpg/800px-Lewis_and_Clark_at_Three_Forks_by_Edgar_S._Paxson%2C_1912.jpg",
-        "alt": "Lewis and Clark at Three Forks by Edgar S. Paxson, 1912",
-        "caption": "Lewis and Clark at Three Forks, Edgar S. Paxson, 1912 — Sacagawea's reunion with the Shoshone"
+        "url": "data/images/station-08-a-meeting-shoshone.jpg",
+        "alt": "The expedition meeting the Shoshone people",
+        "caption": "The Corps of Discovery meeting the Shoshone — Sacagawea's people"
       },
       {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Portrait_of_William_Clark.jpg/800px-Portrait_of_William_Clark.jpg",
-        "alt": "Portrait of William Clark by Charles Willson Peale",
-        "caption": "Captain William Clark, painted by Charles Willson Peale, c. 1810"
+        "url": "data/images/station-08-b-meeting-rockies.jpg",
+        "alt": "Meeting in the Rocky Mountains",
+        "caption": "The expedition's encounter with the Shoshone in the Rocky Mountains"
+      },
+      {
+        "url": "data/images/station-08-c-lewis-tippet.jpg",
+        "alt": "Captain Lewis wearing a Shoshone tippet",
+        "caption": "Captain Lewis wearing a Shoshone tippet — a gift from Chief Cameahwait"
       }
     ]
   },
@@ -142,14 +152,19 @@
     },
     "images": [
       {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Lewis_and_Clark_at_Three_Forks_by_Edgar_S._Paxson%2C_1912.jpg/800px-Lewis_and_Clark_at_Three_Forks_by_Edgar_S._Paxson%2C_1912.jpg",
-        "alt": "Lewis and Clark at Three Forks by Edgar S. Paxson, 1912",
-        "caption": "Lewis and Clark at Three Forks, Edgar S. Paxson, 1912 — Sacagawea's reunion with the Shoshone"
+        "url": "data/images/station-08-a-meeting-shoshone.jpg",
+        "alt": "The expedition meeting the Shoshone people",
+        "caption": "The Corps of Discovery meeting the Shoshone — Sacagawea's people"
       },
       {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Portrait_of_William_Clark.jpg/800px-Portrait_of_William_Clark.jpg",
-        "alt": "Portrait of William Clark by Charles Willson Peale",
-        "caption": "Captain William Clark, painted by Charles Willson Peale, c. 1810"
+        "url": "data/images/station-08-b-meeting-rockies.jpg",
+        "alt": "Meeting in the Rocky Mountains",
+        "caption": "The expedition's encounter with the Shoshone in the Rocky Mountains"
+      },
+      {
+        "url": "data/images/station-08-c-lewis-tippet.jpg",
+        "alt": "Captain Lewis wearing a Shoshone tippet",
+        "caption": "Captain Lewis wearing a Shoshone tippet — a gift from Chief Cameahwait"
       }
     ]
   }

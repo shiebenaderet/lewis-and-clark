@@ -39,14 +39,24 @@
     },
     "images": [
       {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Captain_Lewis_%26_Clark_holding_a_council_with_the_Indians_LCCN2001699652.jpg/800px-Captain_Lewis_%26_Clark_holding_a_council_with_the_Indians_LCCN2001699652.jpg",
-        "alt": "Lewis and Clark holding a council with the Indians, from Patrick Gass journal, 1810",
-        "caption": "Lewis & Clark holding a council with the Indians — illustration from Patrick Gass journal, 1810 — Library of Congress"
+        "url": "data/images/station-03-a-addressing-oto-missouri.jpg",
+        "alt": "Lewis and Clark addressing the Oto and Missouri Indians",
+        "caption": "Lewis and Clark addressing the Oto and Missouri tribal leaders"
       },
       {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Portrait_of_William_Clark.jpg/800px-Portrait_of_William_Clark.jpg",
-        "alt": "Portrait of William Clark by Charles Willson Peale",
-        "caption": "Captain William Clark, painted by Charles Willson Peale, c. 1810 — Independence National Historical Park"
+        "url": "data/images/station-03-b-jefferson-medal.jpg",
+        "alt": "Jefferson peace medal given to tribal leaders",
+        "caption": "A Jefferson peace medal — presented to Native American chiefs during diplomatic councils"
+      },
+      {
+        "url": "data/images/station-03-c-handing-out-medals.jpg",
+        "alt": "The expedition distributing medals to Native American chiefs",
+        "caption": "The Corps distributing peace medals and gifts to tribal leaders"
+      },
+      {
+        "url": "data/images/station-03-d-blackbird-site.jpg",
+        "alt": "Chief Blackbird's burial site near the Missouri River",
+        "caption": "The burial site of Chief Blackbird overlooking the Missouri River"
       }
     ]
   },
@@ -90,14 +100,24 @@
     },
     "images": [
       {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Captain_Lewis_%26_Clark_holding_a_council_with_the_Indians_LCCN2001699652.jpg/800px-Captain_Lewis_%26_Clark_holding_a_council_with_the_Indians_LCCN2001699652.jpg",
-        "alt": "Lewis and Clark holding a council with the Indians, from Patrick Gass journal, 1810",
-        "caption": "Lewis & Clark holding a council with the Indians — illustration from Patrick Gass journal, 1810 — Library of Congress"
+        "url": "data/images/station-03-a-addressing-oto-missouri.jpg",
+        "alt": "Lewis and Clark addressing the Oto and Missouri Indians",
+        "caption": "Lewis and Clark addressing the Oto and Missouri tribal leaders"
       },
       {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Portrait_of_William_Clark.jpg/800px-Portrait_of_William_Clark.jpg",
-        "alt": "Portrait of William Clark by Charles Willson Peale",
-        "caption": "Captain William Clark, painted by Charles Willson Peale, c. 1810 — Independence National Historical Park"
+        "url": "data/images/station-03-b-jefferson-medal.jpg",
+        "alt": "Jefferson peace medal given to tribal leaders",
+        "caption": "A Jefferson peace medal — presented to Native American chiefs during diplomatic councils"
+      },
+      {
+        "url": "data/images/station-03-c-handing-out-medals.jpg",
+        "alt": "The expedition distributing medals to Native American chiefs",
+        "caption": "The Corps distributing peace medals and gifts to tribal leaders"
+      },
+      {
+        "url": "data/images/station-03-d-blackbird-site.jpg",
+        "alt": "Chief Blackbird's burial site near the Missouri River",
+        "caption": "The burial site of Chief Blackbird overlooking the Missouri River"
       }
     ]
   },
@@ -142,14 +162,24 @@
     },
     "images": [
       {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Captain_Lewis_%26_Clark_holding_a_council_with_the_Indians_LCCN2001699652.jpg/800px-Captain_Lewis_%26_Clark_holding_a_council_with_the_Indians_LCCN2001699652.jpg",
-        "alt": "Lewis and Clark holding a council with the Indians, from Patrick Gass journal, 1810",
-        "caption": "Lewis & Clark holding a council with the Indians — illustration from Patrick Gass journal, 1810 — Library of Congress"
+        "url": "data/images/station-03-a-addressing-oto-missouri.jpg",
+        "alt": "Lewis and Clark addressing the Oto and Missouri Indians",
+        "caption": "Lewis and Clark addressing the Oto and Missouri tribal leaders"
       },
       {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Portrait_of_William_Clark.jpg/800px-Portrait_of_William_Clark.jpg",
-        "alt": "Portrait of William Clark by Charles Willson Peale",
-        "caption": "Captain William Clark, painted by Charles Willson Peale, c. 1810 — Independence National Historical Park"
+        "url": "data/images/station-03-b-jefferson-medal.jpg",
+        "alt": "Jefferson peace medal given to tribal leaders",
+        "caption": "A Jefferson peace medal — presented to Native American chiefs during diplomatic councils"
+      },
+      {
+        "url": "data/images/station-03-c-handing-out-medals.jpg",
+        "alt": "The expedition distributing medals to Native American chiefs",
+        "caption": "The Corps distributing peace medals and gifts to tribal leaders"
+      },
+      {
+        "url": "data/images/station-03-d-blackbird-site.jpg",
+        "alt": "Chief Blackbird's burial site near the Missouri River",
+        "caption": "The burial site of Chief Blackbird overlooking the Missouri River"
       }
     ]
   }

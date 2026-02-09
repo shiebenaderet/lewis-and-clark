@@ -33,19 +33,14 @@
     },
     "images": [
       {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Lewis_and_Clark_on_the_Lower_Columbia.jpg/800px-Lewis_and_Clark_on_the_Lower_Columbia.jpg",
-        "alt": "Lewis and Clark on the Lower Columbia, painting by Charles M. Russell, 1905",
-        "caption": "Lewis and Clark on the Lower Columbia, Charles M. Russell, 1905 — Amon Carter Museum"
+        "url": "data/images/station-01-a-camp-dubois.jpg",
+        "alt": "Camp Dubois, the expedition's starting point near St. Louis",
+        "caption": "Camp Dubois — the Corps of Discovery's departure point near St. Louis, Missouri"
       },
       {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Meriwether_Lewis-Charles_Willson_Peale.jpg/800px-Meriwether_Lewis-Charles_Willson_Peale.jpg",
-        "alt": "Portrait of Meriwether Lewis by Charles Willson Peale, 1807",
-        "caption": "Captain Meriwether Lewis, painted by Charles Willson Peale, 1807 — Independence National Historical Park"
-      },
-      {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Portrait_of_William_Clark.jpg/800px-Portrait_of_William_Clark.jpg",
-        "alt": "Portrait of William Clark by Charles Willson Peale, c. 1810",
-        "caption": "Captain William Clark, painted by Charles Willson Peale, c. 1810 — Independence National Historical Park"
+        "url": "data/images/station-01-b-keelboat.jpg",
+        "alt": "The expedition's keelboat on the Missouri River",
+        "caption": "The 55-foot keelboat that carried the Corps up the Missouri River"
       }
     ]
   },
@@ -82,19 +77,14 @@
     },
     "images": [
       {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Lewis_and_Clark_on_the_Lower_Columbia.jpg/800px-Lewis_and_Clark_on_the_Lower_Columbia.jpg",
-        "alt": "Lewis and Clark on the Lower Columbia, painting by Charles M. Russell, 1905",
-        "caption": "Lewis and Clark on the Lower Columbia, Charles M. Russell, 1905 — Amon Carter Museum"
+        "url": "data/images/station-01-a-camp-dubois.jpg",
+        "alt": "Camp Dubois, the expedition's starting point near St. Louis",
+        "caption": "Camp Dubois — the Corps of Discovery's departure point near St. Louis, Missouri"
       },
       {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Meriwether_Lewis-Charles_Willson_Peale.jpg/800px-Meriwether_Lewis-Charles_Willson_Peale.jpg",
-        "alt": "Portrait of Meriwether Lewis by Charles Willson Peale, 1807",
-        "caption": "Captain Meriwether Lewis, painted by Charles Willson Peale, 1807 — Independence National Historical Park"
-      },
-      {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Portrait_of_William_Clark.jpg/800px-Portrait_of_William_Clark.jpg",
-        "alt": "Portrait of William Clark by Charles Willson Peale, c. 1810",
-        "caption": "Captain William Clark, painted by Charles Willson Peale, c. 1810 — Independence National Historical Park"
+        "url": "data/images/station-01-b-keelboat.jpg",
+        "alt": "The expedition's keelboat on the Missouri River",
+        "caption": "The 55-foot keelboat that carried the Corps up the Missouri River"
       }
     ]
   },
@@ -132,19 +122,14 @@
     },
     "images": [
       {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Lewis_and_Clark_on_the_Lower_Columbia.jpg/800px-Lewis_and_Clark_on_the_Lower_Columbia.jpg",
-        "alt": "Lewis and Clark on the Lower Columbia, painting by Charles M. Russell, 1905",
-        "caption": "Lewis and Clark on the Lower Columbia, Charles M. Russell, 1905 — Amon Carter Museum"
+        "url": "data/images/station-01-a-camp-dubois.jpg",
+        "alt": "Camp Dubois, the expedition's starting point near St. Louis",
+        "caption": "Camp Dubois — the Corps of Discovery's departure point near St. Louis, Missouri"
       },
       {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Meriwether_Lewis-Charles_Willson_Peale.jpg/800px-Meriwether_Lewis-Charles_Willson_Peale.jpg",
-        "alt": "Portrait of Meriwether Lewis by Charles Willson Peale, 1807",
-        "caption": "Captain Meriwether Lewis, painted by Charles Willson Peale, 1807 — Independence National Historical Park"
-      },
-      {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Portrait_of_William_Clark.jpg/800px-Portrait_of_William_Clark.jpg",
-        "alt": "Portrait of William Clark by Charles Willson Peale, c. 1810",
-        "caption": "Captain William Clark, painted by Charles Willson Peale, c. 1810 — Independence National Historical Park"
+        "url": "data/images/station-01-b-keelboat.jpg",
+        "alt": "The expedition's keelboat on the Missouri River",
+        "caption": "The 55-foot keelboat that carried the Corps up the Missouri River"
       }
     ]
   }
