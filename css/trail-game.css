@@ -727,3 +727,66 @@
     grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
   }
 }
+
+/* --- Modern Road Trip Comparison --- */
+.tg-modern-trip {
+  margin: 1.5rem 0 0.5rem;
+  border: 1px solid rgba(90,155,188,0.3);
+  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(58,107,140,0.08), rgba(58,107,140,0.02));
+}
+
+.tg-modern-toggle {
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--river-light, #5a9bbc);
+  cursor: pointer;
+  list-style: none;
+  padding: 0.65rem 1rem;
+  text-align: center;
+}
+.tg-modern-toggle::-webkit-details-marker { display: none; }
+.tg-modern-toggle::marker { display: none; content: ''; }
+.tg-modern-toggle::after { content: ' \25BE'; font-size: 0.7rem; }
+.tg-modern-trip[open] .tg-modern-toggle::after { content: ' \25B4'; }
+
+.tg-modern-content {
+  padding: 0.75rem 1rem 1rem;
+  border-top: 1px solid rgba(90,155,188,0.15);
+}
+
+.tg-modern-intro {
+  font-size: 0.85rem;
+  color: var(--ink-light, #5c4033);
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
+}
+
+.tg-modern-route {
+  text-align: center;
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--river, #3a6b8c);
+  padding: 0.5rem;
+  margin-bottom: 0.75rem;
+  background: rgba(58,107,140,0.08);
+  border-radius: 4px;
+  letter-spacing: 0.03em;
+}
+
+.tg-modern-cost-title {
+  font-size: 0.95rem;
+  color: var(--ink, #2c1810);
+  margin: 1rem 0 0.5rem;
+  text-align: center;
+}
+
+.tg-modern-footnote {
+  font-size: 0.75rem;
+  color: var(--ink-light, #5c4033);
+  font-style: italic;
+  line-height: 1.5;
+  margin-top: 0.75rem;
+}

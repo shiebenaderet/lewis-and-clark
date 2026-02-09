@@ -8,7 +8,7 @@ An interactive website that turns 10 classroom stations on the Lewis & Clark exp
 
 ## Version
 
-**v0.10.1** — Map UX, game screen polish, historical accuracy
+**v0.10.2** — Modern road trip comparison on end screens
 
 ## What This Is
 
@@ -85,6 +85,9 @@ Then open `http://localhost:8000` in your browser.
 **Note:** Opening `index.html` directly as a file (`file://`) will not work because browsers block `fetch()` requests from local files. You need a web server.
 
 ## Changelog
+
+### v0.10.2
+- **"What would this trip look like today?"** — Collapsible modern road trip comparison on both victory and game-over screens. Shows the same St. Louis-to-Astoria route on today's highways (I-70 → I-29 → I-80 → I-84 → US-30), with driving time (~4 days / 31 hours), estimated cost breakdown (gas $206, motels $225, food $180 = ~$611 total), and fun comparisons (speed: 5–15 mi/day vs. 65 mph, dangers: grizzlies vs. construction zones). Notes that the original expedition cost ~$2,500 (≈$70,000 today)
 
 ### v0.10.1
 - **Map clickability improvements:** Increased spacing between tightly-clustered stations (Fort Mandan group, Platte/Council Bluff). Added clickable midpoint scroll markers on every trail segment for easy access to journey details
