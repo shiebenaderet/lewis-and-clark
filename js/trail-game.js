@@ -5,6 +5,35 @@
 
 const TrailGame = (() => {
 
+  // --- Map Projection (reused from educational map) ---
+  const MAP_W = 700, MAP_H = 260;
+  const LAT_MIN = 37.5, LAT_MAX = 49, LON_MIN = -125.5, LON_MAX = -88;
+  const MID_LAT = (LAT_MIN + LAT_MAX) / 2;
+  const COS_LAT = Math.cos(MID_LAT * Math.PI / 180);
+  const LON_RANGE = (LON_MAX - LON_MIN) * COS_LAT;
+  const LAT_RANGE = LAT_MAX - LAT_MIN;
+
+  function mapProj(lat, lon) {
+    const x = ((lon - LON_MIN) * COS_LAT / LON_RANGE) * MAP_W;
+    const y = ((LAT_MAX - lat) / LAT_RANGE) * MAP_H;
+    return { x: Math.round(x * 10) / 10, y: Math.round(y * 10) / 10 };
+  }
+
+  // 11 waypoints for 10 legs (lat, lon)
+  const LEG_COORDS = [
+    [38.8, -90.1],   // 0  Camp Dubois
+    [41.0, -96.0],   // 1  Great Plains
+    [41.3, -96.0],   // 2  Council Bluffs
+    [47.3, -101.4],  // 3  Mandan Villages
+    [47.3, -101.4],  // 4  Fort Mandan (same location)
+    [45.9, -111.5],  // 5  Missouri headwaters (Three Forks)
+    [47.5, -111.3],  // 6  Great Falls
+    [45.0, -113.0],  // 7  Camp Fortunate
+    [46.5, -115.5],  // 8  Lolo Trail / Rockies
+    [46.1, -121.0],  // 9  Columbia River
+    [46.1, -123.9]   // 10 Fort Clatsop (Pacific)
+  ];
+
   // --- Constants ---
   const DIFFICULTY = {
     greenhorn:  { label: 'Greenhorn',    foodMult: 0.7, eventChance: 0.5, desc: 'More supplies, fewer dangers. A good first expedition.' },
@@ -478,6 +507,105 @@ const TrailGame = (() => {
       </div>`;
   }
 
+  function travelMapSVG(currentLeg) {
+    const pts = LEG_COORDS.map(c => mapProj(c[0], c[1]));
+    let svg = `<svg viewBox="0 0 ${MAP_W} ${MAP_H}" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:${MAP_W}px;border-radius:6px;border:1px solid #c8b898;">`;
+
+    // Background
+    svg += `<rect width="${MAP_W}" height="${MAP_H}" fill="#f4e8c1"/>`;
+
+    // Great Plains fill
+    const gp = [[49,-96],[49,-105],[37.5,-105],[37.5,-96]].map(p => mapProj(p[0],p[1]));
+    svg += `<polygon points="${gp.map(p=>p.x+','+p.y).join(' ')}" fill="#d4c98a" opacity="0.25"/>`;
+
+    // Rocky Mountains
+    const mtn = [[49,-109],[48,-111],[47,-113],[46,-114.5],[45,-114],[44,-112.5],[43,-111],[42,-110],[41,-110],[40,-109],[40,-107],[41,-108],[42,-109],[43,-109.5],[44,-110.5],[45,-112],[46,-112.5],[47,-111.5],[48,-109.5],[49,-107.5]].map(p => mapProj(p[0],p[1]));
+    svg += `<polygon points="${mtn.map(p=>p.x+','+p.y).join(' ')}" fill="#b8a88a" opacity="0.3"/>`;
+    // Peak marks
+    [[47.5,-113.5],[46,-114],[44.5,-113.5]].forEach(pk => {
+      const p = mapProj(pk[0],pk[1]);
+      svg += `<polygon points="${p.x},${p.y-6} ${p.x-4},${p.y+2} ${p.x+4},${p.y+2}" fill="#9a8a6a" opacity="0.5"/>`;
+    });
+
+    // Pacific coast & ocean
+    const coast = [[49,-123],[48.5,-124.5],[47.5,-124.3],[46.5,-124],[46,-123.8],[45.5,-124],[44,-124.2],[43,-124.5],[42,-124.5],[41,-124.2],[40,-124.3],[39,-123.5],[38,-123]].map(p => mapProj(p[0],p[1]));
+    let coastPath = `M ${coast[0].x},${coast[0].y}`;
+    coast.slice(1).forEach(p => { coastPath += ` L ${p.x},${p.y}`; });
+    svg += `<path d="${coastPath} L 0,${MAP_H} L 0,0 L ${coast[0].x},${coast[0].y}" fill="#c8dce8" opacity="0.35"/>`;
+    svg += `<path d="${coastPath}" fill="none" stroke="#5a9bbc" stroke-width="1.5" opacity="0.6"/>`;
+
+    // Missouri River (simplified)
+    const mo = [[38.6,-90.2],[39,-92.5],[39.3,-95],[41,-96],[42.5,-97],[44,-99.5],[46,-100.5],[47.3,-101.4],[47.8,-104],[48,-106],[47.8,-108.5],[47.5,-111.3],[46.5,-111.5],[45.9,-112]].map(p => mapProj(p[0],p[1]));
+    let moPath = `M ${mo[0].x},${mo[0].y}`;
+    for (let i = 1; i < mo.length; i++) {
+      const cx = (mo[i-1].x + mo[i].x) / 2;
+      const cy = (mo[i-1].y + mo[i].y) / 2;
+      moPath += ` Q ${cx},${cy} ${mo[i].x},${mo[i].y}`;
+    }
+    svg += `<path d="${moPath}" fill="none" stroke="#5a9bbc" stroke-width="1.8" stroke-dasharray="5,2" opacity="0.45"/>`;
+
+    // Columbia River (simplified)
+    const col = [[46.2,-116.5],[46,-118.5],[45.7,-120],[46,-122],[46.1,-124]].map(p => mapProj(p[0],p[1]));
+    let colPath = `M ${col[0].x},${col[0].y}`;
+    col.slice(1).forEach(p => { colPath += ` L ${p.x},${p.y}`; });
+    svg += `<path d="${colPath}" fill="none" stroke="#5a9bbc" stroke-width="1.5" stroke-dasharray="4,2" opacity="0.45"/>`;
+
+    // Labels
+    const lbl = (lat, lon, text, sz) => {
+      const p = mapProj(lat, lon);
+      svg += `<text x="${p.x}" y="${p.y}" font-size="${sz||8}" fill="#8b7355" text-anchor="middle" font-style="italic">${text}</text>`;
+    };
+    lbl(43, -100, 'Great Plains', 9);
+    lbl(44, -112.5, 'Rocky Mtns', 8);
+    lbl(42, -122, 'Pacific', 8);
+
+    // Trail — completed legs (solid orange)
+    for (let i = 0; i < currentLeg; i++) {
+      svg += `<line x1="${pts[i].x}" y1="${pts[i].y}" x2="${pts[i+1].x}" y2="${pts[i+1].y}" stroke="#d4760a" stroke-width="2.5" stroke-linecap="round"/>`;
+    }
+
+    // Trail — future legs (faint dashed)
+    for (let i = currentLeg + 1; i < LEG_COORDS.length - 1; i++) {
+      svg += `<line x1="${pts[i].x}" y1="${pts[i].y}" x2="${pts[i+1].x}" y2="${pts[i+1].y}" stroke="#6b4423" stroke-width="1" stroke-dasharray="3,3" opacity="0.25"/>`;
+    }
+
+    // Current leg — highlighted path with animated dot
+    const from = pts[currentLeg];
+    const to = pts[currentLeg + 1];
+    const pathId = 'travel-path';
+    svg += `<line x1="${from.x}" y1="${from.y}" x2="${to.x}" y2="${to.y}" stroke="#d4760a" stroke-width="3" stroke-dasharray="6,3" opacity="0.6"/>`;
+    svg += `<path id="${pathId}" d="M ${from.x},${from.y} L ${to.x},${to.y}" fill="none" stroke="none"/>`;
+
+    // Completed stop markers (small)
+    for (let i = 0; i <= currentLeg; i++) {
+      if (i === currentLeg) continue; // skip — drawn as "from" below
+      svg += `<circle cx="${pts[i].x}" cy="${pts[i].y}" r="4" fill="#f5a623" stroke="#d4760a" stroke-width="1"/>`;
+    }
+
+    // From marker (departure)
+    svg += `<circle cx="${from.x}" cy="${from.y}" r="7" fill="#8b1a1a" stroke="#fff" stroke-width="2"/>`;
+    svg += `<text x="${from.x}" y="${from.y - 11}" font-size="8" fill="#2c1810" text-anchor="middle" font-weight="bold">${LEGS[currentLeg].from}</text>`;
+
+    // To marker (destination)
+    svg += `<circle cx="${to.x}" cy="${to.y}" r="7" fill="#4a3a2a" stroke="#f5a623" stroke-width="2" opacity="0.7"/>`;
+    svg += `<text x="${to.x}" y="${to.y - 11}" font-size="8" fill="#2c1810" text-anchor="middle" font-weight="bold">${LEGS[currentLeg].to}</text>`;
+
+    // Animated party dot
+    svg += `<circle r="5" fill="#e63946" stroke="#fff" stroke-width="1.5">`;
+    svg += `<animateMotion dur="2.5s" fill="freeze" repeatCount="1"><mpath href="#${pathId}"/></animateMotion>`;
+    svg += `</circle>`;
+
+    // Pulsing glow on animated dot
+    svg += `<circle r="10" fill="none" stroke="#e63946" stroke-width="1" opacity="0.4">`;
+    svg += `<animateMotion dur="2.5s" fill="freeze" repeatCount="1"><mpath href="#${pathId}"/></animateMotion>`;
+    svg += `<animate attributeName="r" values="8;14;8" dur="1s" repeatCount="indefinite"/>`;
+    svg += `<animate attributeName="opacity" values="0.4;0.1;0.4" dur="1s" repeatCount="indefinite"/>`;
+    svg += `</circle>`;
+
+    svg += `</svg>`;
+    return svg;
+  }
+
   function renderTraveling() {
     const leg = LEGS[gs.currentLeg];
     const el = getEl();
@@ -487,18 +615,10 @@ const TrailGame = (() => {
         <div class="tg-card-body tg-travel-scene">
           <p class="tg-travel-text">Traveling to ${leg.to}...</p>
           <p class="tg-travel-detail">${leg.miles} miles &mdash; ${leg.terrain}</p>
-          <div class="tg-travel-progress">
-            <div class="tg-travel-progress-fill" style="width:0%"></div>
-          </div>
+          <div class="tg-travel-map">${travelMapSVG(gs.currentLeg)}</div>
           <p class="tg-travel-detail" style="margin-top:0.5rem;">The ${PACE[gs.pace].label.toLowerCase()} pace ${gs.pace === 'grueling' ? 'pushes the men hard' : gs.pace === 'cautious' ? 'preserves energy' : 'keeps steady progress'}.</p>
         </div>
       </div>`;
-
-    // Animate progress bar
-    setTimeout(() => {
-      const fill = el.querySelector('.tg-travel-progress-fill');
-      if (fill) fill.style.width = '100%';
-    }, 100);
 
     // Apply travel costs
     const diff = DIFFICULTY[gs.difficulty];
@@ -539,7 +659,7 @@ const TrailGame = (() => {
     gs.seenGameEvents.push(...gs.eventsThisLeg.map(e => e.id));
     gs.eventIndex = 0;
 
-    // After travel animation, show first event or arrive
+    // After map animation completes (~2.5s), show first event or arrive
     setTimeout(() => {
       const go = checkGameOver();
       if (go) { renderGameOver(go); return; }
@@ -549,7 +669,7 @@ const TrailGame = (() => {
       } else {
         arriveAtStop();
       }
-    }, 1800);
+    }, 3000);
   }
 
   function renderEvent() {

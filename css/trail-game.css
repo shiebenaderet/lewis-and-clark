@@ -389,6 +389,11 @@
   font-style: italic;
 }
 
+.tg-travel-map {
+  margin: 1rem auto;
+  max-width: 700px;
+}
+
 /* --- Party Panel --- */
 .tg-party-panel {
   display: grid;
