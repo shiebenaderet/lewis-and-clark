@@ -8,31 +8,81 @@ function escapeHtml(str) {
   return div.innerHTML;
 }
 
-// === DISCOVERY NARRATIVE CONSTANTS ===
-const DISCOVERY_INTROS = [
-  "Your search for the lost expedition begins here, at Camp Dubois near St. Louis. A local historian hands you a tattered leather journal \u2014 the first pages describe the start of an incredible journey westward\u2026",
-  "Following the expedition's route upriver, you reach the Platte River confluence. Among old trading post records, you find journal pages describing the Corps' first encounters with the Great Plains\u2026",
-  "At Council Bluff, you discover records of a momentous meeting. The journals describe Lewis and Clark's first formal councils with Native American leaders \u2014 a pattern that would repeat throughout the expedition\u2026",
-  "Pushing north along the Missouri, you find the remains of an earth lodge village. Here, the Mandan and Hidatsa peoples welcomed the Corps. You uncover journal entries about building a winter fort\u2026",
-  "Inside the reconstructed Fort Mandan, you find pages pressed between frozen logs \u2014 the winter journals. They describe brutal cold, a remarkable birth, and preparations for the unknown journey ahead\u2026",
-  "Spring has arrived in your retracing of the journey. You discover journal entries describing the moment the Corps departed Fort Mandan, leaving behind the last outpost of the known world\u2026",
-  "The sound of thundering water leads you to the Great Falls of the Missouri. Scattered among the rocks, you find journal pages describing one of the expedition's greatest physical challenges\u2026",
-  "In a mountain valley, you discover traces of a remarkable reunion. The journals describe the desperate search for horses \u2014 and an astonishing coincidence involving Sacagawea and her long-lost brother\u2026",
-  "High in the Bitterroot Mountains, you find carved trail markers and journal fragments. These pages describe the most harrowing stretch of the entire expedition \u2014 a crossing that nearly ended it all\u2026",
-  "At last, you reach the Pacific coast. Near the remains of Fort Clatsop, you uncover the final journals \u2014 including records of a remarkable democratic vote that was far ahead of its time\u2026"
-];
+// === DISCOVERY NARRATIVE CONSTANTS (per reading level) ===
+const DISCOVERY_INTROS = {
+  beginner: [
+    "Welcome to Camp Dubois! This is where Lewis and Clark started their big adventure. You found an old journal that tells the story of their journey west\u2026",
+    "You made it to the Platte River! In some old records, you found pages from the expedition's journal about their first time seeing the Great Plains\u2026",
+    "At Council Bluff, you found important records. Lewis and Clark held their first big meeting with Native American leaders here\u2026",
+    "You reached the Mandan villages along the Missouri River. The Mandan and Hidatsa people welcomed the expedition. You found journal entries about building a fort for winter\u2026",
+    "Inside Fort Mandan, you found frozen journal pages. They tell about the terrible cold, the birth of Sacagawea's baby, and plans for the journey ahead\u2026",
+    "Spring is here! You found journal entries about leaving Fort Mandan. From here, the expedition entered land that had never been mapped by Americans\u2026",
+    "You can hear a waterfall! You found journal pages about the Great Falls \u2014 one of the hardest parts of the whole trip\u2026",
+    "In a mountain valley, you found an amazing story. Sacagawea was reunited with her brother, and the expedition got the horses they desperately needed\u2026",
+    "High in the Bitterroot Mountains, you found journal pages about the scariest part of the journey. The expedition almost didn't make it through\u2026",
+    "You reached the Pacific Ocean! Near Fort Clatsop, you found the last journal entries \u2014 including a vote where everyone got a say, even Sacagawea and York\u2026"
+  ],
+  standard: [
+    "Your search for the lost expedition begins here, at Camp Dubois near St. Louis. A local historian hands you a tattered leather journal \u2014 the first pages describe the start of an incredible journey westward\u2026",
+    "Following the expedition's route upriver, you reach the Platte River confluence. Among old trading post records, you find journal pages describing the Corps' first encounters with the Great Plains\u2026",
+    "At Council Bluff, you discover records of a momentous meeting. The journals describe Lewis and Clark's first formal councils with Native American leaders \u2014 a pattern that would repeat throughout the expedition\u2026",
+    "Pushing north along the Missouri, you find the remains of an earth lodge village. Here, the Mandan and Hidatsa peoples welcomed the Corps. You uncover journal entries about building a winter fort\u2026",
+    "Inside the reconstructed Fort Mandan, you find pages pressed between frozen logs \u2014 the winter journals. They describe brutal cold, a remarkable birth, and preparations for the unknown journey ahead\u2026",
+    "Spring has arrived in your retracing of the journey. You discover journal entries describing the moment the Corps departed Fort Mandan, leaving behind the last outpost of the known world\u2026",
+    "The sound of thundering water leads you to the Great Falls of the Missouri. Scattered among the rocks, you find journal pages describing one of the expedition's greatest physical challenges\u2026",
+    "In a mountain valley, you discover traces of a remarkable reunion. The journals describe the desperate search for horses \u2014 and an astonishing coincidence involving Sacagawea and her long-lost brother\u2026",
+    "High in the Bitterroot Mountains, you find carved trail markers and journal fragments. These pages describe the most harrowing stretch of the entire expedition \u2014 a crossing that nearly ended it all\u2026",
+    "At last, you reach the Pacific coast. Near the remains of Fort Clatsop, you uncover the final journals \u2014 including records of a remarkable democratic vote that was far ahead of its time\u2026"
+  ],
+  advanced: [
+    "Your investigation into the Corps of Discovery begins at Camp Dubois, the staging ground near the confluence of the Mississippi and Missouri Rivers. Among deteriorating quartermaster records, you discover the expedition's initial journal entries \u2014 documenting the meticulous preparations that President Jefferson personally oversaw\u2026",
+    "Tracing the expedition upriver, you arrive at the Platte River confluence \u2014 the gateway to the Great Plains. Among records from fur-trading outposts, you uncover journal entries describing the Corps' dawning realization of the vast, treeless landscape stretching a thousand miles ahead\u2026",
+    "At Council Bluff, you discover meticulously recorded minutes from a momentous diplomatic encounter. Lewis and Clark's first formal councils with the Oto, Missouri, and Yankton Sioux nations established the pattern of ceremonial diplomacy that would shape U.S.-tribal relations for decades\u2026",
+    "Following the Missouri northward, you find remnants of the Mandan and Hidatsa earth lodge villages \u2014 once among the largest settlements on the continent. Buried among trade records, journal entries describe the Corps' arrival at this crucial crossroads of Plains commerce and diplomacy\u2026",
+    "Within the reconstructed Fort Mandan, you discover winter journals pressed between frozen cottonwood logs. These pages chronicle temperatures plunging to -45\u00B0F, the birth of Jean Baptiste Charbonneau to Sacagawea, and the systematic preparation of botanical specimens and maps for Jefferson\u2026",
+    "Spring 1805 marks the expedition's point of no return. You find journal entries suffused with both excitement and trepidation \u2014 the keelboat has been sent back to St. Louis with specimens, and the Corps now ventures beyond the last outpost of documented geography\u2026",
+    "The thundering cascade of the Great Falls confirms a landmark described by the Mandan. Among weathered journal fragments, you find accounts of the brutal 18-mile portage \u2014 a month of hauling 8,000 pounds of equipment across cactus fields, rattlesnake dens, and searing heat\u2026",
+    "In a valley near present-day Dillon, Montana, you uncover evidence of one of the expedition's most pivotal moments \u2014 the desperate search for Shoshone horses, culminating in the extraordinary coincidence of Sacagawea recognizing Chief Cameahwait as her long-lost brother\u2026",
+    "At the treeline of the Bitterroot Range, journal fragments describe what historians consider the expedition's closest brush with catastrophe. Eleven harrowing days of starvation, snow blindness, and slaughtered colts tested the limits of human endurance on the ancient Nez Perce trail\u2026",
+    "Standing where the Columbia meets the Pacific, you discover the expedition's final journals near the remains of Fort Clatsop. Most remarkably, these pages record a democratic vote in which Sacagawea and York \u2014 a Native woman and an enslaved man \u2014 were given equal voice, decades before such equality would be recognized by law\u2026"
+  ]
+};
 
-const NEXT_CLUES = [
-  "A torn page mentions heading up the Missouri River, watching for \u201Cthe great river that flows from the west\u201D \u2014 the Platte River, where the plains stretch endlessly\u2026",
-  "Clark's notes reference a planned council with chiefs of the Oto and Missouri nations at a bluff overlooking the river\u2026",
-  "The journals describe pushing north into the territory of the Mandan people, seeking shelter before winter arrives\u2026",
-  "References to building shelters and preparing for \u201Cthe most severe cold\u201D suggest the Corps is settling in for a long, harsh winter\u2026",
-  "Spring preparations are underway \u2014 new canoes, packed specimens, and excitement about venturing into lands \u201Con which the foot of civilized man had never trod.\u201D",
-  "Rumors from the Mandan people describe a massive waterfall upriver \u2014 the Great Falls of the Missouri. The expedition must find it\u2026",
-  "Desperate entries mention the urgent need for horses to cross the mountains. Sacagawea recognizes landmarks from her childhood \u2014 her people, the Shoshone, must be near\u2026",
-  "The Shoshone describe a terrible mountain crossing to the west \u2014 the Lolo Trail through the Bitterroot Mountains. Old Toby will guide them\u2026",
-  "After surviving the mountains, the journals speak of building canoes and racing downriver. The Columbia River should lead them to the Pacific Ocean at last\u2026"
-];
+const NEXT_CLUES = {
+  beginner: [
+    "The journal mentions heading up the Missouri River to find where another big river joins it \u2014 the Platte River\u2026",
+    "Clark's notes say they planned to meet with Native American chiefs at a high bluff near the river\u2026",
+    "The journals talk about going north to find the Mandan people and building shelter before winter\u2026",
+    "They mention getting ready for a very cold winter and building a warm place to stay\u2026",
+    "It's spring! They're making new canoes and getting ready to explore land that no American had ever mapped\u2026",
+    "People from the Mandan nation told them about a huge waterfall up the river. The expedition needs to find it\u2026",
+    "They desperately need horses to cross the mountains. Sacagawea thinks her people, the Shoshone, are nearby\u2026",
+    "The Shoshone warn about a terrible mountain crossing to the west. A guide named Old Toby will show the way\u2026",
+    "After crossing the mountains, they'll build canoes and follow the Columbia River toward the Pacific Ocean\u2026"
+  ],
+  standard: [
+    "A torn page mentions heading up the Missouri River, watching for \u201Cthe great river that flows from the west\u201D \u2014 the Platte River, where the plains stretch endlessly\u2026",
+    "Clark's notes reference a planned council with chiefs of the Oto and Missouri nations at a bluff overlooking the river\u2026",
+    "The journals describe pushing north into the territory of the Mandan people, seeking shelter before winter arrives\u2026",
+    "References to building shelters and preparing for \u201Cthe most severe cold\u201D suggest the Corps is settling in for a long, harsh winter\u2026",
+    "Spring preparations are underway \u2014 new canoes, packed specimens, and excitement about venturing into lands \u201Con which the foot of civilized man had never trod.\u201D",
+    "Rumors from the Mandan people describe a massive waterfall upriver \u2014 the Great Falls of the Missouri. The expedition must find it\u2026",
+    "Desperate entries mention the urgent need for horses to cross the mountains. Sacagawea recognizes landmarks from her childhood \u2014 her people, the Shoshone, must be near\u2026",
+    "The Shoshone describe a terrible mountain crossing to the west \u2014 the Lolo Trail through the Bitterroot Mountains. Old Toby will guide them\u2026",
+    "After surviving the mountains, the journals speak of building canoes and racing downriver. The Columbia River should lead them to the Pacific Ocean at last\u2026"
+  ],
+  advanced: [
+    "A torn journal page references the convergence of the Platte River with the Missouri \u2014 a geographic landmark marking the transition from woodland to grassland ecosystems and the true beginning of the Great Plains\u2026",
+    "Clark's diplomatic notes outline preparations for a formal council with chiefs of the Oto and Missouri nations, employing ceremonial protocols Jefferson designed to assert American sovereignty over the Louisiana Purchase\u2026",
+    "The journals describe an urgent push northward into Mandan territory before the Missouri freezes, seeking the sophisticated agricultural communities that controlled the Northern Plains trade network\u2026",
+    "Detailed references to constructing winter quarters and establishing a smithy suggest the Corps is preparing for months of extreme cold \u2014 and an opportunity to forge trade goods for the Mandan-Hidatsa exchange economy\u2026",
+    "Meticulous spring preparations are documented \u2014 the keelboat returns to St. Louis bearing specimens for Jefferson while the Corps advances into terra incognita, relying on geographic intelligence gathered from Mandan and Hidatsa informants\u2026",
+    "Geographic intelligence from the Hidatsa describes a series of massive cataracts on the Missouri \u2014 the Great Falls, which will require the most arduous portage of the entire expedition\u2026",
+    "Entries convey growing urgency to locate the Lemhi Shoshone and negotiate for horses. Sacagawea's recognition of childhood landmarks signals the Corps is entering her people's homeland near the Continental Divide\u2026",
+    "Shoshone geographic knowledge describes the Lolo Trail \u2014 an ancient Nez Perce route traversing the Bitterroot Range. Old Toby warns of snow, starvation, and terrain that will push the expedition to its absolute limit\u2026",
+    "Having survived the mountain crossing, the journals describe constructing dugout canoes and committing to the Columbia River system \u2014 a waterway that should, according to Nez Perce intelligence, carry them to the Pacific at last\u2026"
+  ]
+};
 
 // === STATION RENDERING ===
 function renderStation(index) {
@@ -80,11 +130,12 @@ function renderStation(index) {
     html += `</div>`;
   }
 
-  // Discovery intro
-  if (DISCOVERY_INTROS[index]) {
+  // Discovery intro (varies by reading level)
+  const intros = DISCOVERY_INTROS[state.level] || DISCOVERY_INTROS.standard;
+  if (intros[index]) {
     html += '<div class="discovery-intro">';
     html += '<div class="discovery-intro-label">Discovery</div>';
-    html += `<div class="discovery-intro-text">${DISCOVERY_INTROS[index]}</div>`;
+    html += `<div class="discovery-intro-text">${intros[index]}</div>`;
     html += '</div>';
   }
 
@@ -174,10 +225,11 @@ function renderStation(index) {
   }
 
   // Next clue (shown after challenge is completed, if not last station)
-  if (challengeCompleted && index < STATIONS.length - 1 && NEXT_CLUES[index]) {
+  const clues = NEXT_CLUES[state.level] || NEXT_CLUES.standard;
+  if (challengeCompleted && index < STATIONS.length - 1 && clues[index]) {
     html += '<div class="discovery-clue">';
     html += '<div class="discovery-clue-label">Clue to the Next Station</div>';
-    html += `<div class="discovery-clue-text">${NEXT_CLUES[index]}</div>`;
+    html += `<div class="discovery-clue-text">${clues[index]}</div>`;
     html += '</div>';
   }
 
@@ -289,12 +341,13 @@ function answerChallenge(stationIndex, choiceIndex) {
     }
 
     // Show the next clue
+    const clueArr = (NEXT_CLUES[state.level] || NEXT_CLUES.standard);
     const navEl = continueBtn.closest('.station-nav');
-    if (navEl && stationIndex < STATIONS.length - 1 && NEXT_CLUES[stationIndex]) {
+    if (navEl && stationIndex < STATIONS.length - 1 && clueArr[stationIndex]) {
       const clueEl = document.createElement('div');
       clueEl.className = 'discovery-clue';
       clueEl.innerHTML = '<div class="discovery-clue-label">Clue to the Next Station</div>' +
-        '<div class="discovery-clue-text">' + NEXT_CLUES[stationIndex] + '</div>';
+        '<div class="discovery-clue-text">' + clueArr[stationIndex] + '</div>';
       navEl.parentNode.insertBefore(clueEl, navEl);
     }
   }
@@ -912,10 +965,27 @@ function renderTravelTransition(fromIndex, toIndex, callback) {
   const distances = [0, 600, 25, 400, 0, 0, 350, 200, 150, 300, 250];
   const miles = distances[toIndex] || 200;
 
-  // Pick 2-3 random events
-  const shuffled = [...TRAIL_EVENTS].sort(() => Math.random() - 0.5);
+  // Pick 2-3 random events (no repeats until all 29 have been shown)
   const numEvents = 2 + Math.floor(Math.random() * 2);
-  const journeyEvents = shuffled.slice(0, Math.min(numEvents, shuffled.length));
+
+  // Filter out already-seen events; reset if all have been seen
+  let available = TRAIL_EVENTS.filter(e => !state.seenEvents.includes(e.title));
+  if (available.length < numEvents) {
+    state.seenEvents = [];
+    available = [...TRAIL_EVENTS];
+  }
+
+  // Fisher-Yates shuffle for unbiased randomization
+  for (let i = available.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [available[i], available[j]] = [available[j], available[i]];
+  }
+
+  const journeyEvents = available.slice(0, Math.min(numEvents, available.length));
+
+  // Track which events have been shown
+  journeyEvents.forEach(e => state.seenEvents.push(e.title));
+  saveGame();
 
   const stationNames = [
     "Camp Dubois", "Platte River", "Council Bluff", "Fort Mandan", "Fort Mandan",
@@ -1069,13 +1139,13 @@ function spawnSwatTarget() {
 
   field.appendChild(target);
 
-  // Remove target if not tapped within 1.5s
+  // Remove target if not tapped within 2.5s
   setTimeout(() => {
     if (target.parentNode) {
       target.classList.add('swat-miss');
       setTimeout(() => { if (target.parentNode) target.remove(); }, 300);
     }
-  }, 1500);
+  }, 2500);
 
   // Spawn next target
   if (window._swatData.active) {

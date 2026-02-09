@@ -11,7 +11,8 @@ let state = {
   journalEntries: {},
   currentView: 'station',
   score: 0,
-  challengesCompleted: new Set()
+  challengesCompleted: new Set(),
+  seenEvents: []
 };
 
 function resetState() {
@@ -22,7 +23,8 @@ function resetState() {
     journalEntries: {},
     currentView: 'station',
     score: 0,
-    challengesCompleted: new Set()
+    challengesCompleted: new Set(),
+    seenEvents: []
   };
   clearSave();
 }
@@ -48,6 +50,7 @@ function saveGame() {
       currentView: state.currentView,
       score: state.score,
       challengesCompleted: Array.from(state.challengesCompleted),
+      seenEvents: state.seenEvents || [],
       savedAt: new Date().toISOString()
     };
     localStorage.setItem(SAVE_KEY, JSON.stringify(data));
@@ -69,6 +72,7 @@ function loadSave() {
       currentView: data.currentView || 'station',
       score: data.score || 0,
       challengesCompleted: new Set(data.challengesCompleted || []),
+      seenEvents: data.seenEvents || [],
       savedAt: data.savedAt
     };
   } catch (e) {
