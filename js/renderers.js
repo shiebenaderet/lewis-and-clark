@@ -641,12 +641,16 @@ function renderMap() {
     return { x: Math.round(x * 10) / 10, y: Math.round(y * 10) / 10 };
   }
 
-  // Project station positions (with Fort Mandan offsets for stations 4-6)
+  // Project station positions (with offsets for tightly-clustered stations)
   const positions = mapStations.map((s, i) => {
     const p = proj(s.lat, s.lon);
-    // Offset co-located Fort Mandan stations (3, 4, 5)
-    if (i === 3) { p.x -= 15; p.y += 8; }
-    if (i === 5) { p.x += 15; p.y += 8; }
+    // Offset co-located Fort Mandan stations (3, 4, 5) — spread wider
+    if (i === 3) { p.x -= 28; p.y += 14; }
+    if (i === 4) { p.y -= 18; }
+    if (i === 5) { p.x += 28; p.y += 14; }
+    // Separate Platte River (1) and Council Bluff (2) — only 0.3° apart
+    if (i === 1) { p.y += 10; p.x -= 8; }
+    if (i === 2) { p.y -= 10; p.x += 8; }
     return { ...p, ...s };
   });
 
@@ -779,14 +783,22 @@ function renderMap() {
     svg += `<path d="M ${lastPos.x} ${lastPos.y} L ${nextPos.x} ${nextPos.y}" fill="none" stroke="#6b4423" stroke-width="2" stroke-dasharray="5,3" opacity="0.4"/>`;
   }
 
-  // --- Layer 3: Segment hit areas (only for visited segments, wider) ---
+  // --- Layer 3: Segment hit areas + midpoint markers (only for visited segments) ---
   for (let i = 0; i < positions.length - 1; i++) {
     if (!state.visitedStations.has(i) || !state.visitedStations.has(i + 1)) continue;
     const p1 = positions[i];
     const p2 = positions[i + 1];
+    // Wider invisible hit area for the trail line
     svg += `<line x1="${p1.x}" y1="${p1.y}" x2="${p2.x}" y2="${p2.y}" `;
     svg += `stroke="transparent" stroke-width="35" style="cursor:pointer;" `;
     svg += `onclick="showSegmentInfo(${i+1})" />`;
+    // Clickable midpoint marker (scroll icon) — especially helpful for short legs
+    const mx = (p1.x + p2.x) / 2;
+    const my = (p1.y + p2.y) / 2;
+    svg += `<g onclick="showSegmentInfo(${i+1})" style="cursor:pointer;" class="map-segment-marker">`;
+    svg += `<circle cx="${mx}" cy="${my}" r="9" fill="#f4e8c1" stroke="#8b7355" stroke-width="1.5" opacity="0.9"/>`;
+    svg += `<text x="${mx}" y="${my + 3.5}" font-size="10" fill="#5c4033" text-anchor="middle">&#x1F4DC;</text>`;
+    svg += `</g>`;
   }
 
   // --- Layer 4: Pulsing glow for current station ---

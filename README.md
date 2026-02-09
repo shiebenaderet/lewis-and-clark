@@ -8,7 +8,7 @@ An interactive website that turns 10 classroom stations on the Lewis & Clark exp
 
 ## Version
 
-**v0.10.0** — Save codes, discoveries, party bios, difficulty tuning
+**v0.10.1** — Map UX, game screen polish, historical accuracy
 
 ## What This Is
 
@@ -85,6 +85,14 @@ Then open `http://localhost:8000` in your browser.
 **Note:** Opening `index.html` directly as a file (`file://`) will not work because browsers block `fetch()` requests from local files. You need a web server.
 
 ## Changelog
+
+### v0.10.1
+- **Map clickability improvements:** Increased spacing between tightly-clustered stations (Fort Mandan group, Platte/Council Bluff). Added clickable midpoint scroll markers on every trail segment for easy access to journey details
+- **Game accessible from title screen:** After completing the educational expedition, "Play the Corps of Discovery Game" button appears on the main menu. Game exit returns to title screen
+- **Historical distance accuracy:** Corrected leg distances to total ~3,830 miles (matching Clark's journal estimates; was 2,758). Real expedition comparison uses Clark's 4,162-mile one-way calculation
+- **Enhanced game-over screen:** Now includes route map showing how far you got, comparison table vs. the real expedition, and decision tracking summary
+- **Route summary map on victory screen:** Full completed route shown on victory
+- **Title screen alignment fixes:** Centered save code panel, continue/game buttons, and all collapsible sections. Proper flex column layout throughout
 
 ### v0.10.0
 - **Portable save codes:** Students can generate a save code (base64-encoded game state) and paste it on any device to restore progress — works without authentication or accounts

@@ -125,3 +125,14 @@ function hasSave() {
     return false;
   }
 }
+
+// === GAME UNLOCK TRACKING ===
+const GAME_UNLOCK_KEY = 'lost-expedition-game-unlocked';
+
+function unlockGame() {
+  try { localStorage.setItem(GAME_UNLOCK_KEY, '1'); } catch (e) {}
+}
+
+function isGameUnlocked() {
+  try { return localStorage.getItem(GAME_UNLOCK_KEY) === '1'; } catch (e) { return false; }
+}
