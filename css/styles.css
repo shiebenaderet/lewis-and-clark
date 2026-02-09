@@ -244,6 +244,20 @@ body {
   white-space: nowrap;
 }
 
+.home-link {
+  font-family: var(--font-heading);
+  color: var(--parchment);
+  font-size: 1rem;
+  white-space: nowrap;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.home-link:hover {
+  color: var(--campfire-glow);
+}
+
 .station-indicator {
   font-family: var(--font-ui);
   color: var(--campfire-glow);
