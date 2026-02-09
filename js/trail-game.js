@@ -37,16 +37,16 @@ const TrailGame = (() => {
   ];
 
   const LEGS = [
-    { from: 'Camp Dubois',          to: 'Great Plains',          miles: 600,  days: 67, date: 'May 14 – Jul 20, 1804', terrain: 'River — Missouri', consume: { food: 18, supplies: 8 } },
-    { from: 'Great Plains',         to: 'Council Bluffs',        miles: 50,   days: 14, date: 'Jul 20 – Aug 3, 1804',  terrain: 'Prairie & River', consume: { food: 8, supplies: 4 } },
-    { from: 'Council Bluffs',       to: 'Mandan Villages',       miles: 630,  days: 86, date: 'Aug 3 – Oct 28, 1804',  terrain: 'River — upper Missouri', consume: { food: 22, supplies: 10 } },
-    { from: 'Mandan Villages',      to: 'Fort Mandan (winter)',  miles: 0,    days: 146,date: 'Oct 28, 1804 – Apr 7, 1805', terrain: 'Winter camp', consume: { food: 25, supplies: 5 } },
-    { from: 'Fort Mandan',          to: 'Missouri headwaters',   miles: 600,  days: 60, date: 'Apr 7 – Jun 13, 1805',  terrain: 'River — upper Missouri', consume: { food: 16, supplies: 8 } },
-    { from: 'Missouri headwaters',  to: 'Great Falls portage',   miles: 18,   days: 30, date: 'Jun 13 – Jul 15, 1805', terrain: 'Overland portage', consume: { food: 14, supplies: 12 } },
-    { from: 'Great Falls',          to: 'Camp Fortunate',        miles: 200,  days: 33, date: 'Jul 15 – Aug 17, 1805', terrain: 'River & mountains', consume: { food: 15, supplies: 8 } },
-    { from: 'Camp Fortunate',       to: 'Lemhi Pass & Rockies',  miles: 160,  days: 50, date: 'Aug 17 – Oct 7, 1805',  terrain: 'Rocky Mountains', consume: { food: 22, supplies: 14 } },
-    { from: 'Rockies (Nez Perce)',  to: 'Columbia River',        miles: 400,  days: 40, date: 'Oct 7 – Nov 7, 1805',   terrain: 'River — Snake & Columbia', consume: { food: 12, supplies: 6 } },
-    { from: 'Columbia River',       to: 'Fort Clatsop (Pacific)',miles: 100,  days: 13, date: 'Nov 7 – Nov 20, 1805',  terrain: 'River — Lower Columbia', consume: { food: 6, supplies: 3 } }
+    { from: 'Camp Dubois',          to: 'Great Plains',          miles: 600,  days: 67, date: 'May 14 – Jul 20, 1804', terrain: 'River — Missouri', consume: { food: 12, supplies: 5 } },
+    { from: 'Great Plains',         to: 'Council Bluffs',        miles: 50,   days: 14, date: 'Jul 20 – Aug 3, 1804',  terrain: 'Prairie & River', consume: { food: 5, supplies: 3 } },
+    { from: 'Council Bluffs',       to: 'Mandan Villages',       miles: 630,  days: 86, date: 'Aug 3 – Oct 28, 1804',  terrain: 'River — upper Missouri', consume: { food: 14, supplies: 6 } },
+    { from: 'Mandan Villages',      to: 'Fort Mandan (winter)',  miles: 0,    days: 146,date: 'Oct 28, 1804 – Apr 7, 1805', terrain: 'Winter camp', consume: { food: 10, supplies: 3 } },
+    { from: 'Fort Mandan',          to: 'Missouri headwaters',   miles: 600,  days: 60, date: 'Apr 7 – Jun 13, 1805',  terrain: 'River — upper Missouri', consume: { food: 14, supplies: 7 } },
+    { from: 'Missouri headwaters',  to: 'Great Falls portage',   miles: 18,   days: 30, date: 'Jun 13 – Jul 15, 1805', terrain: 'Overland portage', consume: { food: 12, supplies: 10 } },
+    { from: 'Great Falls',          to: 'Camp Fortunate',        miles: 200,  days: 33, date: 'Jul 15 – Aug 17, 1805', terrain: 'River & mountains', consume: { food: 12, supplies: 6 } },
+    { from: 'Camp Fortunate',       to: 'Lemhi Pass & Rockies',  miles: 160,  days: 50, date: 'Aug 17 – Oct 7, 1805',  terrain: 'Rocky Mountains', consume: { food: 18, supplies: 10 } },
+    { from: 'Rockies (Nez Perce)',  to: 'Columbia River',        miles: 400,  days: 40, date: 'Oct 7 – Nov 7, 1805',   terrain: 'River — Snake & Columbia', consume: { food: 10, supplies: 5 } },
+    { from: 'Columbia River',       to: 'Fort Clatsop (Pacific)',miles: 100,  days: 13, date: 'Nov 7 – Nov 20, 1805',  terrain: 'River — Lower Columbia', consume: { food: 5, supplies: 2 } }
   ];
 
   const STOP_DESCRIPTIONS = [
@@ -443,9 +443,9 @@ const TrailGame = (() => {
               <span class="tg-action-icon">&#9978;</span>
               <span class="tg-action-label">Rest<small>Restore health</small></span>
             </button>
-            <button class="tg-action-btn" onclick="TrailGame.doAction('trade')" ${gs.tradedThisStop || actionsLeft <= 0 ? 'disabled' : ''}>
+            <button class="tg-action-btn" onclick="TrailGame.doAction('trade')" ${gs.tradedThisStop || actionsLeft <= 0 || (gs.currentLeg >= 5 && gs.currentLeg <= 6) ? 'disabled' : ''}>
               <span class="tg-action-icon">&#129309;</span>
-              <span class="tg-action-label">Trade<small>Supplies for food</small></span>
+              <span class="tg-action-label">Trade<small>${(gs.currentLeg >= 5 && gs.currentLeg <= 6) ? 'No one to trade with' : 'Supplies for food'}</small></span>
             </button>
             <button class="tg-action-btn" onclick="TrailGame.doAction('forage')" ${actionsLeft <= 0 ? 'disabled' : ''}>
               <span class="tg-action-icon">&#127807;</span>
@@ -729,10 +729,33 @@ const TrailGame = (() => {
       }
       case 'trade': {
         gs.tradedThisStop = true;
-        gs.supplies = clamp(gs.supplies - 8);
-        gs.food = clamp(gs.food + 10);
-        gs.morale = clamp(gs.morale + 3);
-        addJournal('Traded supplies with local peoples for food and goodwill.');
+        // Variable trading based on location
+        const leg = gs.currentLeg;
+        if (leg <= 1 || leg === 3) {
+          // Early legs and Mandan — generous trading
+          gs.supplies = clamp(gs.supplies - 5);
+          gs.food = clamp(gs.food + 14);
+          gs.morale = clamp(gs.morale + 4);
+          addJournal('Traded with local peoples who are curious about your goods. A fair exchange — supplies for corn, meat, and goodwill.');
+        } else if (leg === 2) {
+          // Near Teton Sioux territory — tense, costly
+          gs.supplies = clamp(gs.supplies - 10);
+          gs.food = clamp(gs.food + 8);
+          gs.morale = clamp(gs.morale + 1);
+          addJournal('Trading is tense here. The local peoples drive a hard bargain, but you secure some provisions.');
+        } else if (leg >= 7 && leg <= 8) {
+          // Mountains / Nez Perce — trade for horses and food
+          gs.supplies = clamp(gs.supplies - 6);
+          gs.food = clamp(gs.food + 10);
+          gs.morale = clamp(gs.morale + 5);
+          addJournal('Traded with the local peoples for dried salmon and camas root. Their generosity lifts everyone\'s spirits.');
+        } else {
+          // Default — standard trade
+          gs.supplies = clamp(gs.supplies - 7);
+          gs.food = clamp(gs.food + 10);
+          gs.morale = clamp(gs.morale + 3);
+          addJournal('Traded supplies with local peoples for food and goodwill.');
+        }
         break;
       }
       case 'forage': {
@@ -753,7 +776,186 @@ const TrailGame = (() => {
     renderStop();
   }
 
+  // --- Fort Mandan Winter Camp ---
+  const WINTER_DESCRIPTIONS = [
+    'Early winter at Fort Mandan. The walls are up and the fires burn day and night. Mandan and Hidatsa visitors come to trade. The men keep busy forging tools, hunting, and preparing for spring.',
+    'Deep winter. The river is frozen solid — men walk across the ice to hunt. Sacagawea is expecting a child. Charbonneau gambles with the men. Lewis studies maps drawn by the Hidatsa, planning the route west.',
+    'Late winter. On February 11, Sacagawea gives birth to Jean Baptiste Charbonneau — "Pomp." Spring is near. The keelboat must be loaded with specimens and reports for President Jefferson.'
+  ];
+
+  function renderWinterCamp() {
+    const el = getEl();
+    const actionsLeft = gs.winterMaxActions - gs.winterActionsThisRound;
+    const roundDesc = WINTER_DESCRIPTIONS[gs.winterRound - 1] || WINTER_DESCRIPTIONS[0];
+
+    el.innerHTML = `
+      ${statusBarHTML()}
+      <div class="tg-card tg-fade-in">
+        <div class="tg-card-header">
+          <h2>Fort Mandan — Winter Camp</h2>
+          <p class="tg-subtitle">Winter ${gs.winterRound} of ${gs.winterMaxRounds} &mdash; Oct 1804 – Apr 1805</p>
+        </div>
+        <div class="tg-card-body">
+          <p class="tg-stop-desc">${roundDesc}</p>
+
+          <p style="font-size:0.85rem;color:var(--ink-light);margin-bottom:0.75rem;">
+            <strong>Actions remaining:</strong> ${actionsLeft} of ${gs.winterMaxActions}
+          </p>
+
+          <div class="tg-actions">
+            <button class="tg-action-btn" onclick="TrailGame.doWinterAction('hunt')" ${gs.huntedThisStop || actionsLeft <= 0 ? 'disabled' : ''}>
+              <span class="tg-action-icon">&#127993;</span>
+              <span class="tg-action-label">Hunt Buffalo<small>Brave the cold for food</small></span>
+            </button>
+            <button class="tg-action-btn" onclick="TrailGame.doWinterAction('rest')" ${gs.restedThisStop || actionsLeft <= 0 ? 'disabled' : ''}>
+              <span class="tg-action-icon">&#9978;</span>
+              <span class="tg-action-label">Rest<small>Recover from the cold</small></span>
+            </button>
+            <button class="tg-action-btn" onclick="TrailGame.doWinterAction('forge')" ${gs.winterForged || actionsLeft <= 0 ? 'disabled' : ''}>
+              <span class="tg-action-icon">&#9881;</span>
+              <span class="tg-action-label">Forge Trade Goods<small>Make hatchets to trade</small></span>
+            </button>
+            <button class="tg-action-btn" onclick="TrailGame.doWinterAction('learn')" ${gs.winterLearned || actionsLeft <= 0 ? 'disabled' : ''}>
+              <span class="tg-action-icon">&#128218;</span>
+              <span class="tg-action-label">Learn from Mandan<small>Maps &amp; route info</small></span>
+            </button>
+            <button class="tg-action-btn" onclick="TrailGame.doWinterAction('trade')" ${gs.tradedThisStop || actionsLeft <= 0 ? 'disabled' : ''}>
+              <span class="tg-action-icon">&#129309;</span>
+              <span class="tg-action-label">Trade with Mandan<small>Corn &amp; dried food</small></span>
+            </button>
+            <button class="tg-action-btn" onclick="TrailGame.doWinterAction('build')" ${gs.winterBuilt || actionsLeft <= 0 ? 'disabled' : ''}>
+              <span class="tg-action-icon">&#128736;</span>
+              <span class="tg-action-label">Build Canoes<small>Prepare for spring</small></span>
+            </button>
+          </div>
+
+          <div class="tg-continue-row">
+            <button class="tg-btn tg-btn-primary" onclick="TrailGame.advanceWinter()">
+              ${gs.winterRound < gs.winterMaxRounds ? 'Next Month &rarr;' : 'Spring — Depart West &rarr;'}
+            </button>
+          </div>
+
+          ${partyHTML()}
+          ${journalHTML()}
+        </div>
+      </div>`;
+  }
+
+  function doWinterAction(action) {
+    if (gs.winterActionsThisRound >= gs.winterMaxActions) return;
+    gs.winterActionsThisRound++;
+
+    switch (action) {
+      case 'hunt': {
+        gs.huntedThisStop = true;
+        const success = Math.random() < 0.6; // harder in winter
+        if (success) {
+          const gain = 8 + Math.floor(Math.random() * 8);
+          gs.food = clamp(gs.food + gain);
+          gs.health = clamp(gs.health - 3); // cold exposure
+          addJournal('Hunting party braves -40° temperatures and returns with buffalo. Frostbitten fingers, but full bellies.');
+        } else {
+          gs.health = clamp(gs.health - 5);
+          addJournal('Hunting party returns empty-handed, fingers and toes numb from the bitter cold.');
+        }
+        break;
+      }
+      case 'rest': {
+        gs.restedThisStop = true;
+        gs.health = clamp(gs.health + 10);
+        gs.morale = clamp(gs.morale + 4);
+        gs.party.forEach(m => { if (m.health > 0) m.health = Math.min(100, m.health + 8); });
+        addJournal('The men rest by the fire. Cruzatte plays his fiddle. Warmth and laughter push back the cold.');
+        break;
+      }
+      case 'forge': {
+        gs.winterForged = true;
+        gs.supplies = clamp(gs.supplies + 12);
+        gs.morale = clamp(gs.morale + 3);
+        addJournal('Shields works the forge day and night. The expedition produces war hatchets — highly valued trade goods the Mandan eagerly exchange for corn.');
+        break;
+      }
+      case 'learn': {
+        gs.winterLearned = true;
+        gs.morale = clamp(gs.morale + 6);
+        gs.supplies = clamp(gs.supplies + 3);
+        addJournal('The Hidatsa draw maps of the rivers ahead. They describe the Great Falls, the mountains, and the Shoshone who have horses. Invaluable intelligence for the journey west.');
+        break;
+      }
+      case 'trade': {
+        gs.tradedThisStop = true;
+        gs.supplies = clamp(gs.supplies - 5);
+        gs.food = clamp(gs.food + 14);
+        gs.morale = clamp(gs.morale + 4);
+        addJournal('The Mandan trade generously — corn, dried squash, and pemmican in exchange for forged hatchets and metalwork.');
+        break;
+      }
+      case 'build': {
+        gs.winterBuilt = true;
+        gs.supplies = clamp(gs.supplies + 8);
+        gs.morale = clamp(gs.morale + 3);
+        addJournal('The men hollow out cottonwood logs to build six dugout canoes for the spring push west. Hard work, but the fleet is taking shape.');
+        break;
+      }
+    }
+    renderWinterCamp();
+  }
+
+  function advanceWinter() {
+    if (gs.winterRound < gs.winterMaxRounds) {
+      gs.winterRound++;
+      gs.winterActionsThisRound = 0;
+      gs.huntedThisStop = false;
+      gs.restedThisStop = false;
+      gs.tradedThisStop = false;
+      gs.winterForged = false;
+      gs.winterLearned = false;
+      gs.winterBuilt = false;
+      gs.totalDays += 48; // each round ~48 days
+
+      // Winter cold snap — health drain each round
+      const coldDmg = Math.round(3 + Math.random() * 4);
+      gs.health = clamp(gs.health - coldDmg);
+      gs.food = clamp(gs.food - Math.round(5 * DIFFICULTY[gs.difficulty].foodMult));
+
+      // Scripted: Jean Baptiste born in round 3
+      if (gs.winterRound === 3) {
+        addJournal('February 11, 1805 — Sacagawea gives birth to Jean Baptiste Charbonneau. Lewis assists with the difficult delivery. The men call the baby "Pomp." New life in the frozen wilderness!');
+        gs.morale = clamp(gs.morale + 8);
+      }
+
+      renderWinterCamp();
+    } else {
+      // Spring departure — end winter, send keelboat back
+      addJournal('April 7, 1805 — Spring! The keelboat heads back to St. Louis carrying specimens, maps, and reports for President Jefferson. 33 souls push west into the unknown.');
+      gs.morale = clamp(gs.morale + 5);
+      gs.food = clamp(gs.food + 5); // spring provisions
+
+      // Normal arrival at next stop
+      arriveAtStop();
+    }
+  }
+
   function startTravel() {
+    // Special phase: Fort Mandan winter camp (leg 3)
+    if (gs.currentLeg === 3) {
+      gs.phase = 'winter-camp';
+      gs.winterRound = 1;
+      gs.winterMaxRounds = 3;
+      gs.winterActionsThisRound = 0;
+      gs.winterMaxActions = 4;
+      gs.winterForged = false;
+      gs.winterLearned = false;
+      gs.winterBuilt = false;
+      // Apply partial travel costs for winter
+      const diff = DIFFICULTY[gs.difficulty];
+      gs.food = clamp(gs.food - Math.round(10 * diff.foodMult));
+      gs.supplies = clamp(gs.supplies - 3);
+      gs.totalDays += 50; // ~first third of winter
+      addJournal('Winter sets in at Fort Mandan. The temperature drops to 40 below zero. The expedition hunkers down.');
+      renderWinterCamp();
+      return;
+    }
     gs.phase = 'traveling';
     renderTraveling();
   }
@@ -808,6 +1010,24 @@ const TrailGame = (() => {
         addJournal('Toussaint Charbonneau and his young Shoshone wife Sacagawea have joined the expedition. Her knowledge of the western lands will prove invaluable.');
       }
     }
+    if (gs.currentLeg === 6) {
+      // Camp Fortunate — Sacagawea reunion with her brother
+      addJournal('Sacagawea recognizes this valley — it is her homeland! When the Shoshone chief Cameahwait approaches, she runs to embrace him. He is her brother, separated since her childhood kidnapping. Through tears of joy, she translates as Lewis negotiates for the horses that will carry the expedition over the Rockies.');
+      gs.morale = clamp(gs.morale + 10);
+      gs.supplies = clamp(gs.supplies + 8); // horses and supplies from Shoshone trade
+    }
+    if (gs.currentLeg === 8) {
+      // Nez Perce territory — they save the starving expedition and help build canoes
+      addJournal('The Nez Perce take pity on the starving explorers. They share food and teach the men to build dugout canoes for the river journey ahead.');
+      gs.food = clamp(gs.food + 12);
+      gs.supplies = clamp(gs.supplies + 10);
+      gs.health = clamp(gs.health + 5);
+    }
+    if (gs.currentLeg === 9) {
+      // Pacific coast — "Ocean in View!"
+      addJournal('"Ocian in view! O! the joy!" Clark writes in his journal. After 4,000 miles and 18 months, the Corps of Discovery gazes upon the Pacific Ocean. The men cheer. Some weep. They have crossed the continent.');
+      gs.morale = clamp(gs.morale + 15);
+    }
 
     gs.phase = 'stop';
     renderStop();
@@ -844,6 +1064,8 @@ const TrailGame = (() => {
     startTravel() { startTravel(); },
     chooseEvent(i) { chooseEvent(i); },
     advanceAfterEvent() { advanceAfterEvent(); },
+    doWinterAction(action) { doWinterAction(action); },
+    advanceWinter() { advanceWinter(); },
 
     restart() {
       gs = newGameState('explorer');

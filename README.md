@@ -8,7 +8,7 @@ An interactive website that turns 10 classroom stations on the Lewis & Clark exp
 
 ## Version
 
-**v0.7.0** — Guided journal prompts, PDF export, 29 trail events, UI cleanup
+**v0.9.3** — Corps of Discovery game: winter camp, scripted events, economy rebalance
 
 ## What This Is
 
@@ -49,6 +49,7 @@ lewis-and-clark/
 │   ├── game-state.js           # State management (level, progress, journal)
 │   ├── renderers.js            # DOM rendering (stations, map, tracker)
 │   ├── trail-events.js         # Trail event overlay logic
+│   ├── trail-game.js           # Corps of Discovery bonus game
 │   └── game-engine.js          # Core game logic, navigation, init
 ├── data/
 │   ├── stations/
@@ -83,6 +84,48 @@ Then open `http://localhost:8000` in your browser.
 **Note:** Opening `index.html` directly as a file (`file://`) will not work because browsers block `fetch()` requests from local files. You need a web server.
 
 ## Changelog
+
+### v0.9.3
+- **Fort Mandan Winter Camp:** Special 3-round phase at leg 3 with unique actions — Forge Trade Goods, Learn from Mandan, Build Canoes, Hunt Buffalo, Trade, Rest
+- Scripted Jean Baptiste birth in winter round 3 with morale boost
+- Spring departure narrative sends keelboat back to Jefferson
+- **Scripted historical events:** Sacagawea's reunion with brother Cameahwait at Camp Fortunate, "Ocian in view!" at Pacific arrival
+- Nez Perce supply recovery at leg 8 (food, supplies, health boost)
+- Variable trading by location: generous at Mandan, tense near Teton, disabled at remote portage legs
+- Rebalanced resource consumption across all 10 legs
+
+### v0.9.2
+- Added `legs: [min, max]` ranges to all 22 game events for location filtering — no more Pacific events on the Great Plains
+- Fixed event shuffle (Fisher-Yates) and added seen-event tracking to prevent repetition
+- Party starts with 8 historically accurate core members (Lewis, Clark, York, Drouillard, Ordway, Gass, Floyd, Pryor)
+- Sgt. Floyd dies at leg 1 (scripted event); Sacagawea & Charbonneau join at Fort Mandan (leg 3)
+- Added "Repair & Scavenge" action at stops (+3-8 supplies, once per stop)
+- Renamed "Oregon Trail" to "Corps of Discovery" in all game text and CSS
+
+### v0.9.1
+- Discovery intro/clue text now changes with selected reading level (beginner/standard/advanced)
+- Mini-game target visibility increased from 1.5s to 2.5s; total game timers roughly doubled (10-12s)
+- Fixed trail event repetition: Fisher-Yates shuffle with seen-event tracking (no more bears 6 times)
+
+### v0.9.0
+- **Progressive discovery narrative:** Students "search for the lost expedition" with level-aware intro text and clue reveals at each station
+- **Station gating:** Must complete Knowledge Check to unlock "Continue West" button
+- **Progressive map reveal:** Only visited stations and a dim "?" for the next unvisited stop
+- Larger map elements (bigger markers, text, hit areas) for usability
+- Persistent HTML info panel on map with "Add to journal" button (replaces SVG tooltip)
+- Journal tracker only shows visited stations
+
+### v0.8.0
+- **Corps of Discovery bonus game** (unlocks after completing all 10 stations):
+  - 10-leg journey from Camp Dubois to Fort Clatsop with resource management
+  - 22 historical events with multiple-choice decisions affecting food, health, supplies, morale
+  - 8 party members with individual health tracking
+  - 3 difficulty levels (Greenhorn, Explorer, Trailblazer) and 3 pace settings
+  - Hunt, Rest, Trade, Forage actions at each stop
+  - Victory/game-over screens with expedition stats and ranking
+
+### v0.7.1
+- Replaced Wikimedia Commons image URLs with local curated images
 
 ### v0.7.0
 - Replaced "Historian's Reflection" textarea with guided journal entry prompts:
