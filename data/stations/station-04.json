@@ -32,14 +32,29 @@
     },
     "images": [
       {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Captain_Clark_and_his_men_building_a_line_of_huts_LCCN2001699654.jpg/800px-Captain_Clark_and_his_men_building_a_line_of_huts_LCCN2001699654.jpg",
-        "alt": "Captain Clark and his men building a line of huts, from Patrick Gass journal, 1810",
-        "caption": "Building Fort Mandan — illustration from Patrick Gass journal, 1810 — Library of Congress"
+        "url": "data/images/station-04-a-mandan-village.jpg",
+        "alt": "A Mandan village along the Missouri River",
+        "caption": "A Mandan earth lodge village along the Missouri River"
       },
       {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Meriwether_Lewis-Charles_Willson_Peale.jpg/800px-Meriwether_Lewis-Charles_Willson_Peale.jpg",
-        "alt": "Portrait of Meriwether Lewis by Charles Willson Peale, 1807",
-        "caption": "Captain Meriwether Lewis, painted by Charles Willson Peale, 1807 — Independence National Historical Park"
+        "url": "data/images/station-04-b-mandan-overlook.jpg",
+        "alt": "Overlook of the Mandan village site",
+        "caption": "Overlook of the Mandan village site in present-day North Dakota"
+      },
+      {
+        "url": "data/images/station-04-c-mandan-chief.jpg",
+        "alt": "Portrait of a Mandan chief",
+        "caption": "Portrait of a Mandan chief — the Mandan were experienced traders with Europeans"
+      },
+      {
+        "url": "data/images/station-04-d-fort-mandan-winter.jpg",
+        "alt": "Fort Mandan during the harsh winter",
+        "caption": "Fort Mandan — the expedition's winter quarters, 1804–1805"
+      },
+      {
+        "url": "data/images/station-04-e-village-arrival.jpg",
+        "alt": "The Corps of Discovery arriving at the Mandan villages",
+        "caption": "The Corps of Discovery arriving at the Mandan-Hidatsa villages"
       }
     ]
   },
@@ -76,14 +91,29 @@
     },
     "images": [
       {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Captain_Clark_and_his_men_building_a_line_of_huts_LCCN2001699654.jpg/800px-Captain_Clark_and_his_men_building_a_line_of_huts_LCCN2001699654.jpg",
-        "alt": "Captain Clark and his men building a line of huts, from Patrick Gass journal, 1810",
-        "caption": "Building Fort Mandan — illustration from Patrick Gass journal, 1810 — Library of Congress"
+        "url": "data/images/station-04-a-mandan-village.jpg",
+        "alt": "A Mandan village along the Missouri River",
+        "caption": "A Mandan earth lodge village along the Missouri River"
       },
       {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Meriwether_Lewis-Charles_Willson_Peale.jpg/800px-Meriwether_Lewis-Charles_Willson_Peale.jpg",
-        "alt": "Portrait of Meriwether Lewis by Charles Willson Peale, 1807",
-        "caption": "Captain Meriwether Lewis, painted by Charles Willson Peale, 1807 — Independence National Historical Park"
+        "url": "data/images/station-04-b-mandan-overlook.jpg",
+        "alt": "Overlook of the Mandan village site",
+        "caption": "Overlook of the Mandan village site in present-day North Dakota"
+      },
+      {
+        "url": "data/images/station-04-c-mandan-chief.jpg",
+        "alt": "Portrait of a Mandan chief",
+        "caption": "Portrait of a Mandan chief — the Mandan were experienced traders with Europeans"
+      },
+      {
+        "url": "data/images/station-04-d-fort-mandan-winter.jpg",
+        "alt": "Fort Mandan during the harsh winter",
+        "caption": "Fort Mandan — the expedition's winter quarters, 1804–1805"
+      },
+      {
+        "url": "data/images/station-04-e-village-arrival.jpg",
+        "alt": "The Corps of Discovery arriving at the Mandan villages",
+        "caption": "The Corps of Discovery arriving at the Mandan-Hidatsa villages"
       }
     ]
   },
@@ -120,14 +150,29 @@
     },
     "images": [
       {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Captain_Clark_and_his_men_building_a_line_of_huts_LCCN2001699654.jpg/800px-Captain_Clark_and_his_men_building_a_line_of_huts_LCCN2001699654.jpg",
-        "alt": "Captain Clark and his men building a line of huts, from Patrick Gass journal, 1810",
-        "caption": "Building Fort Mandan — illustration from Patrick Gass journal, 1810 — Library of Congress"
+        "url": "data/images/station-04-a-mandan-village.jpg",
+        "alt": "A Mandan village along the Missouri River",
+        "caption": "A Mandan earth lodge village along the Missouri River"
       },
       {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Meriwether_Lewis-Charles_Willson_Peale.jpg/800px-Meriwether_Lewis-Charles_Willson_Peale.jpg",
-        "alt": "Portrait of Meriwether Lewis by Charles Willson Peale, 1807",
-        "caption": "Captain Meriwether Lewis, painted by Charles Willson Peale, 1807 — Independence National Historical Park"
+        "url": "data/images/station-04-b-mandan-overlook.jpg",
+        "alt": "Overlook of the Mandan village site",
+        "caption": "Overlook of the Mandan village site in present-day North Dakota"
+      },
+      {
+        "url": "data/images/station-04-c-mandan-chief.jpg",
+        "alt": "Portrait of a Mandan chief",
+        "caption": "Portrait of a Mandan chief — the Mandan were experienced traders with Europeans"
+      },
+      {
+        "url": "data/images/station-04-d-fort-mandan-winter.jpg",
+        "alt": "Fort Mandan during the harsh winter",
+        "caption": "Fort Mandan — the expedition's winter quarters, 1804–1805"
+      },
+      {
+        "url": "data/images/station-04-e-village-arrival.jpg",
+        "alt": "The Corps of Discovery arriving at the Mandan villages",
+        "caption": "The Corps of Discovery arriving at the Mandan-Hidatsa villages"
       }
     ]
   }

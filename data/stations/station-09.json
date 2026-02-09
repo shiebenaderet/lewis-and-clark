@@ -33,14 +33,29 @@
     },
     "images": [
       {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Albert_Bierstadt_-_The_Rocky_Mountains%2C_Lander%27s_Peak.jpg/800px-Albert_Bierstadt_-_The_Rocky_Mountains%2C_Lander%27s_Peak.jpg",
-        "alt": "The Rocky Mountains, Lander's Peak by Albert Bierstadt, 1863",
-        "caption": "The Rocky Mountains, Lander's Peak, Albert Bierstadt, 1863 — the expedition's most grueling crossing"
+        "url": "data/images/station-09-a-lemhi-pass-aerial.jpg",
+        "alt": "Aerial view of Lemhi Pass on the Continental Divide",
+        "caption": "Lemhi Pass — where the expedition crossed the Continental Divide"
       },
       {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Lewis_and_Clark_on_the_Lower_Columbia.jpg/800px-Lewis_and_Clark_on_the_Lower_Columbia.jpg",
-        "alt": "Lewis and Clark on the Lower Columbia by Charles M. Russell, 1905",
-        "caption": "Lewis and Clark on the Lower Columbia, Charles M. Russell, 1905 — Amon Carter Museum"
+        "url": "data/images/station-09-b-lemhi-pass-landscape.jpg",
+        "alt": "The landscape at Lemhi Pass",
+        "caption": "The rugged landscape at Lemhi Pass on the Idaho-Montana border"
+      },
+      {
+        "url": "data/images/station-09-c-carving-canoes.jpg",
+        "alt": "The Corps carving dugout canoes",
+        "caption": "The Corps carving dugout canoes — a technique learned from the Nez Perce"
+      },
+      {
+        "url": "data/images/station-09-d-canoe-camp.jpg",
+        "alt": "Canoe Camp where the Corps built new boats",
+        "caption": "Canoe Camp on the Clearwater River — the Corps built five dugout canoes here"
+      },
+      {
+        "url": "data/images/station-09-e-dugout-canoe.jpg",
+        "alt": "A dugout canoe used by the expedition",
+        "caption": "A dugout canoe — hollowed from logs using controlled fire"
       }
     ]
   },
@@ -77,14 +92,29 @@
     },
     "images": [
       {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Albert_Bierstadt_-_The_Rocky_Mountains%2C_Lander%27s_Peak.jpg/800px-Albert_Bierstadt_-_The_Rocky_Mountains%2C_Lander%27s_Peak.jpg",
-        "alt": "The Rocky Mountains, Lander's Peak by Albert Bierstadt, 1863",
-        "caption": "The Rocky Mountains, Lander's Peak, Albert Bierstadt, 1863 — the expedition's most grueling crossing"
+        "url": "data/images/station-09-a-lemhi-pass-aerial.jpg",
+        "alt": "Aerial view of Lemhi Pass on the Continental Divide",
+        "caption": "Lemhi Pass — where the expedition crossed the Continental Divide"
       },
       {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Lewis_and_Clark_on_the_Lower_Columbia.jpg/800px-Lewis_and_Clark_on_the_Lower_Columbia.jpg",
-        "alt": "Lewis and Clark on the Lower Columbia by Charles M. Russell, 1905",
-        "caption": "Lewis and Clark on the Lower Columbia, Charles M. Russell, 1905 — Amon Carter Museum"
+        "url": "data/images/station-09-b-lemhi-pass-landscape.jpg",
+        "alt": "The landscape at Lemhi Pass",
+        "caption": "The rugged landscape at Lemhi Pass on the Idaho-Montana border"
+      },
+      {
+        "url": "data/images/station-09-c-carving-canoes.jpg",
+        "alt": "The Corps carving dugout canoes",
+        "caption": "The Corps carving dugout canoes — a technique learned from the Nez Perce"
+      },
+      {
+        "url": "data/images/station-09-d-canoe-camp.jpg",
+        "alt": "Canoe Camp where the Corps built new boats",
+        "caption": "Canoe Camp on the Clearwater River — the Corps built five dugout canoes here"
+      },
+      {
+        "url": "data/images/station-09-e-dugout-canoe.jpg",
+        "alt": "A dugout canoe used by the expedition",
+        "caption": "A dugout canoe — hollowed from logs using controlled fire"
       }
     ]
   },
@@ -122,14 +152,29 @@
     },
     "images": [
       {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Albert_Bierstadt_-_The_Rocky_Mountains%2C_Lander%27s_Peak.jpg/800px-Albert_Bierstadt_-_The_Rocky_Mountains%2C_Lander%27s_Peak.jpg",
-        "alt": "The Rocky Mountains, Lander's Peak by Albert Bierstadt, 1863",
-        "caption": "The Rocky Mountains, Lander's Peak, Albert Bierstadt, 1863 — the expedition's most grueling crossing"
+        "url": "data/images/station-09-a-lemhi-pass-aerial.jpg",
+        "alt": "Aerial view of Lemhi Pass on the Continental Divide",
+        "caption": "Lemhi Pass — where the expedition crossed the Continental Divide"
       },
       {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Lewis_and_Clark_on_the_Lower_Columbia.jpg/800px-Lewis_and_Clark_on_the_Lower_Columbia.jpg",
-        "alt": "Lewis and Clark on the Lower Columbia by Charles M. Russell, 1905",
-        "caption": "Lewis and Clark on the Lower Columbia, Charles M. Russell, 1905 — Amon Carter Museum"
+        "url": "data/images/station-09-b-lemhi-pass-landscape.jpg",
+        "alt": "The landscape at Lemhi Pass",
+        "caption": "The rugged landscape at Lemhi Pass on the Idaho-Montana border"
+      },
+      {
+        "url": "data/images/station-09-c-carving-canoes.jpg",
+        "alt": "The Corps carving dugout canoes",
+        "caption": "The Corps carving dugout canoes — a technique learned from the Nez Perce"
+      },
+      {
+        "url": "data/images/station-09-d-canoe-camp.jpg",
+        "alt": "Canoe Camp where the Corps built new boats",
+        "caption": "Canoe Camp on the Clearwater River — the Corps built five dugout canoes here"
+      },
+      {
+        "url": "data/images/station-09-e-dugout-canoe.jpg",
+        "alt": "A dugout canoe used by the expedition",
+        "caption": "A dugout canoe — hollowed from logs using controlled fire"
       }
     ]
   }
