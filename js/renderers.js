@@ -8,6 +8,32 @@ function escapeHtml(str) {
   return div.innerHTML;
 }
 
+// === DISCOVERY NARRATIVE CONSTANTS ===
+const DISCOVERY_INTROS = [
+  "Your search for the lost expedition begins here, at Camp Dubois near St. Louis. A local historian hands you a tattered leather journal \u2014 the first pages describe the start of an incredible journey westward\u2026",
+  "Following the expedition's route upriver, you reach the Platte River confluence. Among old trading post records, you find journal pages describing the Corps' first encounters with the Great Plains\u2026",
+  "At Council Bluff, you discover records of a momentous meeting. The journals describe Lewis and Clark's first formal councils with Native American leaders \u2014 a pattern that would repeat throughout the expedition\u2026",
+  "Pushing north along the Missouri, you find the remains of an earth lodge village. Here, the Mandan and Hidatsa peoples welcomed the Corps. You uncover journal entries about building a winter fort\u2026",
+  "Inside the reconstructed Fort Mandan, you find pages pressed between frozen logs \u2014 the winter journals. They describe brutal cold, a remarkable birth, and preparations for the unknown journey ahead\u2026",
+  "Spring has arrived in your retracing of the journey. You discover journal entries describing the moment the Corps departed Fort Mandan, leaving behind the last outpost of the known world\u2026",
+  "The sound of thundering water leads you to the Great Falls of the Missouri. Scattered among the rocks, you find journal pages describing one of the expedition's greatest physical challenges\u2026",
+  "In a mountain valley, you discover traces of a remarkable reunion. The journals describe the desperate search for horses \u2014 and an astonishing coincidence involving Sacagawea and her long-lost brother\u2026",
+  "High in the Bitterroot Mountains, you find carved trail markers and journal fragments. These pages describe the most harrowing stretch of the entire expedition \u2014 a crossing that nearly ended it all\u2026",
+  "At last, you reach the Pacific coast. Near the remains of Fort Clatsop, you uncover the final journals \u2014 including records of a remarkable democratic vote that was far ahead of its time\u2026"
+];
+
+const NEXT_CLUES = [
+  "A torn page mentions heading up the Missouri River, watching for \u201Cthe great river that flows from the west\u201D \u2014 the Platte River, where the plains stretch endlessly\u2026",
+  "Clark's notes reference a planned council with chiefs of the Oto and Missouri nations at a bluff overlooking the river\u2026",
+  "The journals describe pushing north into the territory of the Mandan people, seeking shelter before winter arrives\u2026",
+  "References to building shelters and preparing for \u201Cthe most severe cold\u201D suggest the Corps is settling in for a long, harsh winter\u2026",
+  "Spring preparations are underway \u2014 new canoes, packed specimens, and excitement about venturing into lands \u201Con which the foot of civilized man had never trod.\u201D",
+  "Rumors from the Mandan people describe a massive waterfall upriver \u2014 the Great Falls of the Missouri. The expedition must find it\u2026",
+  "Desperate entries mention the urgent need for horses to cross the mountains. Sacagawea recognizes landmarks from her childhood \u2014 her people, the Shoshone, must be near\u2026",
+  "The Shoshone describe a terrible mountain crossing to the west \u2014 the Lolo Trail through the Bitterroot Mountains. Old Toby will guide them\u2026",
+  "After surviving the mountains, the journals speak of building canoes and racing downriver. The Columbia River should lead them to the Pacific Ocean at last\u2026"
+];
+
 // === STATION RENDERING ===
 function renderStation(index) {
   if (index < 0 || index >= STATIONS.length) return;
@@ -20,6 +46,9 @@ function renderStation(index) {
   const station = STATIONS[index];
   const level = state.level;
   const data = station[level] || station.standard;
+
+  const challengeId = `challenge_${index}`;
+  const challengeCompleted = state.challengesCompleted.has(challengeId);
 
   let html = '<div class="station-card">';
 
@@ -51,9 +80,17 @@ function renderStation(index) {
     html += `</div>`;
   }
 
-  // Header
+  // Discovery intro
+  if (DISCOVERY_INTROS[index]) {
+    html += '<div class="discovery-intro">';
+    html += '<div class="discovery-intro-label">Discovery</div>';
+    html += `<div class="discovery-intro-text">${DISCOVERY_INTROS[index]}</div>`;
+    html += '</div>';
+  }
+
+  // Header (hide total station count for progressive discovery)
   html += '<div class="station-header">';
-  html += `<div class="station-number">Station ${index + 1} of ${STATIONS.length}</div>`;
+  html += `<div class="station-number">Station ${index + 1}</div>`;
   html += `<h2 class="station-title">${data.title}</h2>`;
   html += `<div class="station-date">${data.dates}</div>`;
   html += '</div>';
@@ -85,9 +122,7 @@ function renderStation(index) {
 
   // Interactive challenge
   if (data.challenge) {
-    const challengeId = `challenge_${index}`;
-    const completed = state.challengesCompleted.has(challengeId);
-    html += renderChallenge(data.challenge, index, completed);
+    html += renderChallenge(data.challenge, index, challengeCompleted);
   }
 
   // Journal entry prompts (populate the Expedition Journal)
@@ -138,13 +173,29 @@ function renderStation(index) {
     html += '</div></details>';
   }
 
-  // Navigation
+  // Next clue (shown after challenge is completed, if not last station)
+  if (challengeCompleted && index < STATIONS.length - 1 && NEXT_CLUES[index]) {
+    html += '<div class="discovery-clue">';
+    html += '<div class="discovery-clue-label">Clue to the Next Station</div>';
+    html += `<div class="discovery-clue-text">${NEXT_CLUES[index]}</div>`;
+    html += '</div>';
+  }
+
+  // Navigation (gated behind challenge completion)
   html += '<div class="station-nav">';
   html += `<button class="btn-station-nav" onclick="goToStation(${index - 1})" ${index === 0 ? 'disabled' : ''}>&larr; Previous Station</button>`;
   if (index < STATIONS.length - 1) {
-    html += `<button class="btn-station-nav primary" onclick="travelToStation(${index + 1})">Continue West &rarr;</button>`;
+    if (challengeCompleted) {
+      html += `<button class="btn-station-nav primary" onclick="travelToStation(${index + 1})">Continue West &rarr;</button>`;
+    } else {
+      html += `<button class="btn-station-nav locked" id="btn-continue-west" disabled>Complete the Knowledge Check &rarr;</button>`;
+    }
   } else {
-    html += `<button class="btn-station-nav primary" onclick="completeExpedition()">Complete the Expedition &rarr;</button>`;
+    if (challengeCompleted) {
+      html += `<button class="btn-station-nav primary" onclick="completeExpedition()">Complete the Expedition &rarr;</button>`;
+    } else {
+      html += `<button class="btn-station-nav locked" id="btn-continue-west" disabled>Complete the Knowledge Check &rarr;</button>`;
+    }
   }
   html += '</div>';
 
@@ -222,6 +273,31 @@ function answerChallenge(stationIndex, choiceIndex) {
   state.challengesCompleted.add(challengeId);
   updateScoreDisplay();
   saveGame();
+
+  // Enable Continue West button now that challenge is answered
+  const continueBtn = document.getElementById('btn-continue-west');
+  if (continueBtn) {
+    continueBtn.classList.remove('locked');
+    continueBtn.disabled = false;
+    continueBtn.classList.add('primary');
+    if (stationIndex < STATIONS.length - 1) {
+      continueBtn.textContent = 'Continue West \u2192';
+      continueBtn.onclick = function() { travelToStation(stationIndex + 1); };
+    } else {
+      continueBtn.textContent = 'Complete the Expedition \u2192';
+      continueBtn.onclick = function() { completeExpedition(); };
+    }
+
+    // Show the next clue
+    const navEl = continueBtn.closest('.station-nav');
+    if (navEl && stationIndex < STATIONS.length - 1 && NEXT_CLUES[stationIndex]) {
+      const clueEl = document.createElement('div');
+      clueEl.className = 'discovery-clue';
+      clueEl.innerHTML = '<div class="discovery-clue-label">Clue to the Next Station</div>' +
+        '<div class="discovery-clue-text">' + NEXT_CLUES[stationIndex] + '</div>';
+      navEl.parentNode.insertBefore(clueEl, navEl);
+    }
+  }
 }
 
 function updateScoreDisplay() {
@@ -579,75 +655,105 @@ function renderMap() {
   const cLbl = proj(45.2, -120);
   svg += `<text x="${cLbl.x}" y="${cLbl.y}" font-size="8" fill="#7a9aac" text-anchor="middle" font-style="italic" transform="rotate(5, ${cLbl.x}, ${cLbl.y})">Columbia River</text>`;
 
-  // --- Layer 2: Trail path (full route, dashed) ---
-  let trailD = `M ${positions[0].x} ${positions[0].y}`;
-  for (let i = 1; i < positions.length; i++) {
-    trailD += ` L ${positions[i].x} ${positions[i].y}`;
-  }
-  svg += `<path d="${trailD}" fill="none" stroke="#6b4423" stroke-width="2" stroke-dasharray="5,3" opacity="0.4"/>`;
+  // --- Progressive reveal: determine which stations to show ---
+  const visitedArr = Array.from(state.visitedStations).sort((a, b) => a - b);
+  const maxVisited = visitedArr.length > 0 ? Math.max(...visitedArr) : 0;
+  const nextStation = maxVisited < positions.length - 1 ? maxVisited + 1 : -1;
 
-  // --- Visited trail (progressive solid path) ---
-  if (state.visitedStations.size > 1) {
-    const visited = Array.from(state.visitedStations).sort((a,b) => a - b);
-    let visitedPath = `M ${positions[visited[0]].x} ${positions[visited[0]].y}`;
-    for (let i = 1; i < visited.length; i++) {
-      if (visited[i] === visited[i-1] + 1) {
-        visitedPath += ` L ${positions[visited[i]].x} ${positions[visited[i]].y}`;
+  // --- Layer 2: Visited trail (solid path between visited stations) ---
+  if (visitedArr.length > 1) {
+    let visitedPath = `M ${positions[visitedArr[0]].x} ${positions[visitedArr[0]].y}`;
+    for (let i = 1; i < visitedArr.length; i++) {
+      if (visitedArr[i] === visitedArr[i-1] + 1) {
+        visitedPath += ` L ${positions[visitedArr[i]].x} ${positions[visitedArr[i]].y}`;
       }
     }
     svg += `<path d="${visitedPath}" fill="none" stroke="#d4760a" stroke-width="3"/>`;
   }
 
-  // --- Layer 3: Segment hit areas (invisible, wide for hover/click) ---
-  for (let i = 0; i < positions.length - 1; i++) {
-    const p1 = positions[i];
-    const p2 = positions[i + 1];
-    const mx = (p1.x + p2.x) / 2;
-    const my = (p1.y + p2.y) / 2;
-    svg += `<line x1="${p1.x}" y1="${p1.y}" x2="${p2.x}" y2="${p2.y}" `;
-    svg += `stroke="transparent" stroke-width="20" style="cursor:pointer;" `;
-    svg += `onmouseenter="showSegmentTooltip(${i+1}, ${Math.round(mx)}, ${Math.round(my)})" `;
-    svg += `onmouseleave="hideSegmentTooltip()" `;
-    svg += `onclick="showSegmentTooltip(${i+1}, ${Math.round(mx)}, ${Math.round(my)})" />`;
+  // --- Dashed trail hint from last visited to next station ---
+  if (nextStation >= 0) {
+    const lastPos = positions[maxVisited];
+    const nextPos = positions[nextStation];
+    svg += `<path d="M ${lastPos.x} ${lastPos.y} L ${nextPos.x} ${nextPos.y}" fill="none" stroke="#6b4423" stroke-width="2" stroke-dasharray="5,3" opacity="0.4"/>`;
   }
 
-  // --- Layer 4: Pulsing glow for current station (separate from clickable group) ---
+  // --- Layer 3: Segment hit areas (only for visited segments, wider) ---
+  for (let i = 0; i < positions.length - 1; i++) {
+    if (!state.visitedStations.has(i) || !state.visitedStations.has(i + 1)) continue;
+    const p1 = positions[i];
+    const p2 = positions[i + 1];
+    svg += `<line x1="${p1.x}" y1="${p1.y}" x2="${p2.x}" y2="${p2.y}" `;
+    svg += `stroke="transparent" stroke-width="35" style="cursor:pointer;" `;
+    svg += `onclick="showSegmentInfo(${i+1})" />`;
+  }
+
+  // --- Layer 4: Pulsing glow for current station ---
   positions.forEach((pos, i) => {
     if (state.currentStation === i) {
-      svg += `<circle cx="${pos.x}" cy="${pos.y}" r="14" fill="none" stroke="#f5a623" stroke-width="1.5" opacity="0.5" pointer-events="none"><animate attributeName="r" values="13;18;13" dur="2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.5;0.15;0.5" dur="2s" repeatCount="indefinite"/></circle>`;
+      svg += `<circle cx="${pos.x}" cy="${pos.y}" r="18" fill="none" stroke="#f5a623" stroke-width="1.5" opacity="0.5" pointer-events="none"><animate attributeName="r" values="17;23;17" dur="2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.5;0.15;0.5" dur="2s" repeatCount="indefinite"/></circle>`;
     }
   });
 
-  // --- Layer 5: Station markers (clickable) ---
+  // --- Layer 5: Station markers (progressive — only visited + next) ---
   positions.forEach((pos, i) => {
     const visited = state.visitedStations.has(i);
     const current = state.currentStation === i;
+    const isNext = i === nextStation;
 
-    let fill = '#6b4423';
-    let stroke = '#5c2e0a';
-    let r = 8;
-    if (visited) { fill = '#f5a623'; stroke = '#d4760a'; }
-    if (current) { fill = '#8b1a1a'; stroke = '#ffffff'; r = 10; }
+    // Only show visited stations and the next one
+    if (!visited && !isNext) return;
 
-    svg += `<g class="map-station ${visited ? 'visited' : ''} ${current ? 'current' : ''}" onclick="goToStation(${i}); showView('station');" style="cursor:pointer;">`;
+    let fill, stroke, r, label, numberText;
+    if (isNext && !visited) {
+      // Undiscovered "next" station — dimmed with "?"
+      fill = '#4a3a2a';
+      stroke = '#6b5a4a';
+      r = 10;
+      numberText = '?';
+    } else if (current) {
+      fill = '#8b1a1a';
+      stroke = '#ffffff';
+      r = 14;
+      numberText = String(i + 1);
+    } else {
+      fill = '#f5a623';
+      stroke = '#d4760a';
+      r = 12;
+      numberText = String(i + 1);
+    }
 
-    svg += `<circle cx="${pos.x}" cy="${pos.y}" r="${r}" fill="${fill}" stroke="${stroke}" stroke-width="2"/>`;
-    svg += `<text x="${pos.x}" y="${pos.y + 3.5}" font-size="9" fill="#fff" font-family="sans-serif" text-anchor="middle" font-weight="bold">${i + 1}</text>`;
+    if (isNext && !visited) {
+      // Next station: clickable but shows message instead of navigating
+      svg += `<g class="map-station" onclick="alert('Continue your journey to discover this station!')" style="cursor:pointer; opacity:0.5;">`;
+    } else {
+      svg += `<g class="map-station ${visited ? 'visited' : ''} ${current ? 'current' : ''}" onclick="goToStation(${i}); showView('station');" style="cursor:pointer;">`;
+    }
+
+    svg += `<circle cx="${pos.x}" cy="${pos.y}" r="${r}" fill="${fill}" stroke="${stroke}" stroke-width="2.5"/>`;
+    svg += `<text x="${pos.x}" y="${pos.y + 4}" font-size="11" fill="#fff" font-family="sans-serif" text-anchor="middle" font-weight="bold">${numberText}</text>`;
 
     // Label placement: alternate above/below to avoid overlap
     const labelAbove = (i % 2 === 0) || i === 9;
-    const labelY = labelAbove ? pos.y - r - 6 : pos.y + r + 14;
-    const labelY2 = labelY + 11;
+    const labelY = labelAbove ? pos.y - r - 6 : pos.y + r + 16;
+    const labelY2 = labelY + 13;
 
-    svg += `<text x="${pos.x}" y="${labelY}" font-size="9" fill="#2c1810" text-anchor="middle" font-weight="bold">${pos.label}</text>`;
-    svg += `<text x="${pos.x}" y="${labelY2}" font-size="8" fill="#5c4033" text-anchor="middle">${pos.sublabel}</text>`;
+    if (isNext && !visited) {
+      svg += `<text x="${pos.x}" y="${labelY}" font-size="11" fill="#8b7355" text-anchor="middle" font-style="italic">Unknown</text>`;
+      svg += `<text x="${pos.x}" y="${labelY2}" font-size="9" fill="#8b7355" text-anchor="middle">destination</text>`;
+    } else {
+      svg += `<text x="${pos.x}" y="${labelY}" font-size="11" fill="#2c1810" text-anchor="middle" font-weight="bold">${pos.label}</text>`;
+      svg += `<text x="${pos.x}" y="${labelY2}" font-size="9" fill="#5c4033" text-anchor="middle">${pos.sublabel}</text>`;
+    }
 
     svg += '</g>';
   });
 
-  // --- Fort Mandan cluster bracket (stations 4-6) ---
-  const fm = proj(47.3, -101.4);
-  svg += `<text x="${fm.x}" y="${fm.y - 25}" font-size="7" fill="#8b7355" text-anchor="middle" font-style="italic">Stations 4\u20136: Fort Mandan</text>`;
+  // --- Fort Mandan cluster bracket (only show if station 3+ visited) ---
+  if (state.visitedStations.has(3)) {
+    const fm = proj(47.3, -101.4);
+    svg += `<text x="${fm.x}" y="${fm.y - 30}" font-size="8" fill="#8b7355" text-anchor="middle" font-style="italic">Stations 4\u20136: Fort Mandan</text>`;
+  }
 
   // --- Compass rose (upper-right) ---
   const crX = svgW - 45;
@@ -679,78 +785,94 @@ function renderMap() {
   // --- Map title ---
   svg += `<text x="${svgW / 2}" y="22" font-size="13" fill="#2c1810" text-anchor="middle" font-weight="bold" letter-spacing="0.5">The Trail of the Corps of Discovery, 1804\u20131806</text>`;
 
-  // --- Cumulative journey stats ---
-  const totalMiles = SEGMENT_DATA.reduce((sum, s) => sum + (s ? s.miles : 0), 0);
-  const totalDays = SEGMENT_DATA.reduce((sum, s) => sum + (s ? s.days : 0), 0);
-  svg += `<text x="${svgW / 2}" y="${svgH - 8}" font-size="8" fill="#8b7355" text-anchor="middle">Total journey: ~${totalMiles.toLocaleString()} miles over ${totalDays} days (one way)</text>`;
-
-  // --- Segment tooltip (hidden by default, larger text) ---
-  svg += `<g id="segment-tooltip" display="none" pointer-events="none">`;
-  svg += `<rect id="seg-tip-bg" rx="8" fill="#2c1810" fill-opacity="0.96" stroke="#8b4513" stroke-width="2" width="300" height="175"/>`;
-  svg += `<text id="seg-tip-title" x="15" y="24" fill="#f5a623" font-size="14" font-weight="bold"></text>`;
-  svg += `<text id="seg-tip-miles" x="15" y="46" fill="#f4e8c1" font-size="12"></text>`;
-  svg += `<text id="seg-tip-time" x="15" y="64" fill="#f4e8c1" font-size="11"></text>`;
-  svg += `<text id="seg-tip-terrain" x="15" y="82" fill="#b8cfe8" font-size="10"></text>`;
-  svg += `<line x1="15" y1="90" x2="285" y2="90" stroke="#8b4513" stroke-width="0.5"/>`;
-  svg += `<text id="seg-tip-health-label" x="15" y="108" fill="#e8a0a0" font-size="10" font-weight="bold"></text>`;
-  svg += `<text id="seg-tip-health" x="15" y="124" fill="#e8c0c0" font-size="10"></text>`;
-  svg += `<text id="seg-tip-supply-label" x="15" y="144" fill="#b5e8a0" font-size="10" font-weight="bold"></text>`;
-  svg += `<text id="seg-tip-supply" x="15" y="160" fill="#c8e8b8" font-size="10"></text>`;
-  svg += `</g>`;
+  // --- Journey progress stats (only for visited segments) ---
+  let traveledMiles = 0;
+  let traveledDays = 0;
+  for (let i = 1; i < SEGMENT_DATA.length; i++) {
+    if (state.visitedStations.has(i) && SEGMENT_DATA[i]) {
+      traveledMiles += SEGMENT_DATA[i].miles;
+      traveledDays += SEGMENT_DATA[i].days;
+    }
+  }
+  if (traveledMiles > 0) {
+    svg += `<text x="${svgW / 2}" y="${svgH - 8}" font-size="9" fill="#8b7355" text-anchor="middle">Your journey so far: ~${traveledMiles.toLocaleString()} miles over ${traveledDays} days</text>`;
+  }
 
   svg += '</svg>';
   wrap.innerHTML = svg;
 }
 
-// === SEGMENT TOOLTIP FUNCTIONS ===
-function showSegmentTooltip(segIndex, cx, cy) {
+// === MAP INFO PANEL (persistent HTML panel below the map) ===
+function showSegmentInfo(segIndex) {
   const seg = SEGMENT_DATA[segIndex];
   if (!seg) return;
 
-  const g = document.getElementById('segment-tooltip');
-  const svgEl = g.closest('svg');
-  const svgW = svgEl.viewBox.baseVal.width;
-  const svgH = svgEl.viewBox.baseVal.height;
+  const panel = document.getElementById('map-info-panel');
 
-  // Populate text
-  document.getElementById('seg-tip-title').textContent = `Leg ${segIndex}: Station ${segIndex} \u2192 ${segIndex + 1}`;
-  document.getElementById('seg-tip-miles').textContent = seg.miles > 0 ? `\u{1F4CF} ${seg.miles} miles` : '\u{1F3D5} Same location';
-  document.getElementById('seg-tip-time').textContent = `\u{1F4C5} ${seg.days} days (${seg.dateRange})`;
-  document.getElementById('seg-tip-terrain').textContent = `\u{1F30D} ${seg.terrain}`;
-  document.getElementById('seg-tip-health-label').textContent = 'Health:';
-  document.getElementById('seg-tip-health').textContent = seg.health;
-  document.getElementById('seg-tip-supply-label').textContent = 'Supplies:';
-  document.getElementById('seg-tip-supply').textContent = seg.supplies;
+  let html = '<div class="map-info-header">';
+  html += `<div class="map-info-title">Leg ${segIndex}: Station ${segIndex} \u2192 Station ${segIndex + 1}</div>`;
+  html += '<button class="map-info-close" onclick="closeMapInfo()">&times;</button>';
+  html += '</div>';
 
-  // Truncate long text lines for SVG
-  const healthEl = document.getElementById('seg-tip-health');
-  const supplyEl = document.getElementById('seg-tip-supply');
-  if (seg.health.length > 50) {
-    healthEl.textContent = seg.health.substring(0, 49) + '\u2026';
-  }
-  if (seg.supplies.length > 50) {
-    supplyEl.textContent = seg.supplies.substring(0, 49) + '\u2026';
-  }
+  html += '<div class="map-info-grid">';
+  html += `<div class="map-info-item"><span class="map-info-item-label">Distance</span><span class="map-info-item-value">${seg.miles > 0 ? seg.miles + ' miles' : 'Same location'}</span></div>`;
+  html += `<div class="map-info-item"><span class="map-info-item-label">Duration</span><span class="map-info-item-value">${seg.days} days</span></div>`;
+  html += `<div class="map-info-item"><span class="map-info-item-label">Dates</span><span class="map-info-item-value">${seg.dateRange}</span></div>`;
+  html += `<div class="map-info-item"><span class="map-info-item-label">Terrain</span><span class="map-info-item-value">${seg.terrain}</span></div>`;
+  html += '</div>';
 
-  // Position tooltip, clamped to viewport
-  const tipW = 300;
-  const tipH = 175;
-  let tx = cx - tipW / 2;
-  let ty = cy - tipH - 12;
-  if (tx < 5) tx = 5;
-  if (tx + tipW > svgW - 5) tx = svgW - tipW - 5;
-  if (ty < 5) ty = cy + 15; // flip below if too high
+  html += '<div class="map-info-detail">';
+  html += `<p><strong>Health:</strong> ${seg.health}</p>`;
+  html += `<p><strong>Supplies:</strong> ${seg.supplies}</p>`;
+  html += `<p><strong>Toll:</strong> ${seg.toll}</p>`;
+  html += '</div>';
 
-  g.setAttribute('transform', `translate(${tx}, ${ty})`);
-  g.setAttribute('display', 'block');
+  // "Add to journal" button
+  html += `<button class="map-info-btn" onclick="addSegmentToJournal(${segIndex})">Add journey details to your journal</button>`;
+
+  panel.innerHTML = html;
+  panel.classList.add('active');
 }
 
-function hideSegmentTooltip() {
-  const g = document.getElementById('segment-tooltip');
-  if (g) g.setAttribute('display', 'none');
+function closeMapInfo() {
+  const panel = document.getElementById('map-info-panel');
+  if (panel) panel.classList.remove('active');
 }
 
-// === JOURNAL TRACKER RENDERING ===
+function addSegmentToJournal(segIndex) {
+  const seg = SEGMENT_DATA[segIndex];
+  if (!seg) return;
+
+  // Destination station index (0-indexed) equals segIndex
+  const destIdx = segIndex;
+  const currentSummary = state.journalEntries[`summary_${destIdx}`] || '';
+  const travelNote = `[Journey: ${seg.miles} miles, ${seg.days} days. ${seg.terrain}. ${seg.toll}]`;
+
+  // Only add if not already present
+  if (!currentSummary.includes('[Journey:')) {
+    state.journalEntries[`summary_${destIdx}`] = travelNote + (currentSummary ? '\n\n' + currentSummary : '');
+  }
+
+  // Also set dates if not already filled
+  if (!state.journalEntries[`date_${destIdx}`]) {
+    state.journalEntries[`date_${destIdx}`] = seg.dateRange;
+  }
+
+  saveGame();
+
+  // Visual feedback on the button
+  const btns = document.querySelectorAll('.map-info-btn');
+  btns.forEach(btn => {
+    btn.textContent = 'Added to journal!';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = 'Add journey details to your journal';
+      btn.disabled = false;
+    }, 2000);
+  });
+}
+
+// === JOURNAL TRACKER RENDERING (only show visited stations) ===
 function renderJournalTracker() {
   const tbody = document.getElementById('tracker-body');
   let html = '';
@@ -758,18 +880,25 @@ function renderJournalTracker() {
   for (let i = 0; i < STATIONS.length; i++) {
     const visited = state.visitedStations.has(i);
 
+    // Only show visited stations (progressive discovery)
+    if (!visited) continue;
+
     const savedDate = state.journalEntries[`date_${i}`] || '';
     const savedAuthor = state.journalEntries[`author_${i}`] || '';
     const savedSummary = state.journalEntries[`summary_${i}`] || '';
     const savedReflection = state.journalEntries[`reflection_${i}`] || '';
 
     html += '<tr>';
-    html += `<td class="tracker-station-num ${visited ? 'visited' : ''}">${i + 1}</td>`;
-    html += `<td><input type="text" value="${escapeHtml(savedDate)}" placeholder="${visited ? 'Date(s)...' : '???'}" onchange="saveJournalField(${i}, 'date', this.value)" ${!visited ? 'disabled' : ''}/></td>`;
-    html += `<td><input type="text" value="${escapeHtml(savedAuthor)}" placeholder="${visited ? 'Author(s)...' : '???'}" onchange="saveJournalField(${i}, 'author', this.value)" ${!visited ? 'disabled' : ''}/></td>`;
-    html += `<td><textarea placeholder="${visited ? 'Summary...' : '???'}" onchange="saveJournalField(${i}, 'summary', this.value)" ${!visited ? 'disabled' : ''}>${escapeHtml(savedSummary)}</textarea></td>`;
-    html += `<td><textarea placeholder="${visited ? 'Analysis...' : '???'}" onchange="saveReflection(${i}, this.value)" ${!visited ? 'disabled' : ''}>${escapeHtml(savedReflection)}</textarea></td>`;
+    html += `<td class="tracker-station-num visited">${i + 1}</td>`;
+    html += `<td><input type="text" value="${escapeHtml(savedDate)}" placeholder="Date(s)..." onchange="saveJournalField(${i}, 'date', this.value)"/></td>`;
+    html += `<td><input type="text" value="${escapeHtml(savedAuthor)}" placeholder="Author(s)..." onchange="saveJournalField(${i}, 'author', this.value)"/></td>`;
+    html += `<td><textarea placeholder="Summary..." onchange="saveJournalField(${i}, 'summary', this.value)">${escapeHtml(savedSummary)}</textarea></td>`;
+    html += `<td><textarea placeholder="Analysis..." onchange="saveReflection(${i}, this.value)">${escapeHtml(savedReflection)}</textarea></td>`;
     html += '</tr>';
+  }
+
+  if (html === '') {
+    html = '<tr><td colspan="5" style="text-align:center;color:#8b7355;padding:2rem;font-style:italic;">Visit stations to add entries to your journal.</td></tr>';
   }
 
   tbody.innerHTML = html;

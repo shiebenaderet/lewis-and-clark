@@ -41,7 +41,7 @@
         <a href="https://www.gilderlehrman.org/history-resources/online-exhibitions/lewis-and-clark-expedition-interactive-map" target="_blank" rel="noopener">Interactive Expedition Map <span>Timeline &amp; route explorer &mdash; Gilder Lehrman Institute</span></a>
       </div>
     </details>
-    <div style="margin-top:2rem;font-size:0.7rem;color:rgba(244,232,193,0.3);font-family:var(--font-ui);">v0.8.0</div>
+    <div style="margin-top:2rem;font-size:0.7rem;color:rgba(244,232,193,0.3);font-family:var(--font-ui);">v0.9.0</div>
   </div>
 </div>
 
@@ -95,9 +95,10 @@
           <span>Current station</span>
         </div>
         <div class="map-legend-item" style="margin-left: 1rem; opacity: 0.7;">
-          <span style="font-style: italic;">Hover trail between stations for journey details</span>
+          <span style="font-style: italic;">Click the trail between stations for journey details</span>
         </div>
       </div>
+      <div class="map-info-panel" id="map-info-panel"></div>
       <div class="map-atlas-link">
         <a href="http://lcatlas.lclark.edu/" target="_blank" rel="noopener" class="atlas-btn">&#x1F5FA; Explore the Corps of Discovery Online Atlas</a>
         <span class="atlas-credit">Lewis &amp; Clark College &mdash; interactive GIS map with detailed route layers</span>
@@ -161,7 +162,7 @@
     <button class="btn-restart btn-export" onclick="exportJournalPDF()">Export Journal as PDF</button>
     <div style="margin:1.5rem 0 0.5rem;border-top:1px solid rgba(244,232,193,0.2);padding-top:1.5rem;">
       <p style="font-size:0.9rem;color:rgba(244,232,193,0.7);margin-bottom:0.75rem;font-style:italic;">You've earned access to a bonus game!</p>
-      <button class="btn-restart" style="background:linear-gradient(135deg,#2d5016,#4a7c2e);border-color:#2d5016;" onclick="TrailGame.launch()">Play the Oregon Trail Game</button>
+      <button class="btn-restart" style="background:linear-gradient(135deg,#2d5016,#4a7c2e);border-color:#2d5016;" onclick="TrailGame.launch()">Play the Corps of Discovery Game</button>
     </div>
     <button class="btn-restart btn-secondary" onclick="restartGame()">Start a New Expedition</button>
   </div>
