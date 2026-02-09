@@ -8,7 +8,7 @@ An interactive website that turns 10 classroom stations on the Lewis & Clark exp
 
 ## Version
 
-**v0.9.4** — Map-based travel animation between stops
+**v0.9.5** — Knowledge bonuses, party abilities, expedition comparison
 
 ## What This Is
 
@@ -84,6 +84,16 @@ Then open `http://localhost:8000` in your browser.
 **Note:** Opening `index.html` directly as a file (`file://`) will not work because browsers block `fetch()` requests from local files. You need a web server.
 
 ## Changelog
+
+### v0.9.5
+- **Knowledge bonus questions:** 10 trivia questions (one per stop) tied to the educational station content. Correct answers grant resource bonuses (food, supplies, health, morale), reinforcing what students learned
+- **Party member abilities:** Living party members provide unique bonuses:
+  - Drouillard (Scout): higher hunting success rate and food yield
+  - Sacagawea (Guide): better foraging results and morale boost
+  - Sgt. Gass (Carpenter): superior repair and scavenging output
+  - Ability hints shown on stop screen so players understand the system
+- **Enhanced victory screen:** Side-by-side comparison table with the real Lewis & Clark expedition (days to Pacific, distance, party survival, deaths). Historical context about the actual 554-day journey and Sgt. Floyd's death
+- Knowledge bonus score tracked and displayed on victory screen
 
 ### v0.9.4
 - **Map-based travel animation:** Replaces plain progress bar with SVG mini-map of the full expedition route

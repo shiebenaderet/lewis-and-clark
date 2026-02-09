@@ -91,6 +91,80 @@ const TrailGame = (() => {
     'Clark writes in his journal: "Ocian in view! O! the joy." You\'ve reached the Pacific coast. Now the Corps must vote on where to spend the winter. Everyone votes — including York and Sacagawea.'
   ];
 
+  // --- Knowledge Bonus Questions (one per stop, tied to educational content) ---
+  const KNOWLEDGE_QUESTIONS = [
+    { // Stop 0 — Camp Dubois
+      question: 'Who sent Lewis and Clark on this expedition?',
+      options: ['George Washington', 'Thomas Jefferson', 'Benjamin Franklin', 'John Adams'],
+      correct: 1,
+      bonus: { food: 5, supplies: 3, morale: 3 },
+      explanation: 'President Thomas Jefferson commissioned the expedition to explore the Louisiana Purchase and find a route to the Pacific.'
+    },
+    { // Stop 1 — Great Plains
+      question: 'What animal did the expedition encounter in enormous herds on the Great Plains?',
+      options: ['Wild horses', 'Elk', 'Buffalo (bison)', 'Pronghorn antelope'],
+      correct: 2,
+      bonus: { food: 6, morale: 3 },
+      explanation: 'The Great Plains were home to massive buffalo herds — sometimes thousands of animals stretching to the horizon.'
+    },
+    { // Stop 2 — Council Bluffs
+      question: 'What items did Lewis and Clark bring to give tribal leaders during diplomatic meetings?',
+      options: ['Gold coins and jewels', 'Peace medals, flags, and trade goods', 'Horses and cattle', 'Written treaties from Congress'],
+      correct: 1,
+      bonus: { supplies: 5, morale: 4 },
+      explanation: 'The Corps carried peace medals bearing Jefferson\'s image, American flags, and trade goods like beads and metalwork for tribal diplomacy.'
+    },
+    { // Stop 3 — Mandan Villages
+      question: 'Why were the Mandan-Hidatsa villages important to the expedition?',
+      options: ['They had gold the expedition needed', 'They were a major trade hub with knowledge of western routes', 'They were the expedition\'s final destination', 'The U.S. Army had a fort there already'],
+      correct: 1,
+      bonus: { food: 5, supplies: 5, morale: 3 },
+      explanation: 'The Mandan-Hidatsa villages were a thriving trade center where thousands of people exchanged goods and knowledge from across the continent.'
+    },
+    { // Stop 4 — Fort Mandan (winter)
+      question: 'Who was born at Fort Mandan during the winter of 1804-1805?',
+      options: ['A Mandan chief\'s son', 'Jean Baptiste Charbonneau, Sacagawea\'s baby', 'A litter of puppies for the expedition', 'No one — births were rare on expeditions'],
+      correct: 1,
+      bonus: { health: 5, morale: 5 },
+      explanation: 'Sacagawea gave birth to Jean Baptiste Charbonneau on February 11, 1805. The men nicknamed the baby "Pomp."'
+    },
+    { // Stop 5 — Missouri headwaters / Great Falls
+      question: 'How far was the portage around the Great Falls?',
+      options: ['About 1 mile', 'About 5 miles', 'About 18 miles', 'About 50 miles'],
+      correct: 2,
+      bonus: { supplies: 6, health: 3 },
+      explanation: 'The Great Falls portage was a brutal 18-mile overland haul through grizzly bear territory, prickly pear cactus, and mosquito swarms.'
+    },
+    { // Stop 6 — Great Falls → Camp Fortunate
+      question: 'What amazing coincidence helped the expedition get horses from the Shoshone?',
+      options: ['They found abandoned horses in a valley', 'Sacagawea recognized the Shoshone chief as her brother', 'Lewis won them in a bet', 'Clark drew a map that impressed the chief'],
+      correct: 1,
+      bonus: { supplies: 5, morale: 6 },
+      explanation: 'When the expedition met the Shoshone, Sacagawea realized their chief Cameahwait was her brother, separated since her childhood kidnapping.'
+    },
+    { // Stop 7 — Camp Fortunate → Rockies (Lolo Trail)
+      question: 'Which people saved the starving expedition after the Rocky Mountain crossing?',
+      options: ['The Shoshone', 'The Blackfeet', 'The Nez Perce', 'The Chinook'],
+      correct: 2,
+      bonus: { food: 6, health: 4 },
+      explanation: 'The Nez Perce fed the starving explorers camas root and dried salmon, and taught them to build dugout canoes.'
+    },
+    { // Stop 8 — Rockies → Columbia River
+      question: 'What river did the expedition ride from the Rockies to the Pacific coast?',
+      options: ['The Missouri River', 'The Mississippi River', 'The Snake and Columbia Rivers', 'The Colorado River'],
+      correct: 2,
+      bonus: { morale: 6, supplies: 3 },
+      explanation: 'After crossing the Rockies, the Corps built canoes and descended the Snake River to the Columbia River, which carried them to the Pacific.'
+    },
+    { // Stop 9 — Columbia River → Fort Clatsop
+      question: 'What was remarkable about "The Great Vote" at the Pacific coast?',
+      options: ['Only officers were allowed to vote', 'Everyone voted — including York (enslaved) and Sacagawea (a woman)', 'They voted to turn back immediately', 'The vote was unanimous to stay at the ocean'],
+      correct: 1,
+      bonus: { morale: 8 },
+      explanation: 'Everyone voted on where to build winter camp — including York and Sacagawea. This was decades before enslaved people or women had voting rights.'
+    }
+  ];
+
   // --- Game Events ---
   const GAME_EVENTS = [
     // WEATHER
@@ -314,7 +388,10 @@ const TrailGame = (() => {
       huntedThisStop: false,
       restedThisStop: false,
       tradedThisStop: false,
-      scavengedThisStop: false
+      scavengedThisStop: false,
+      knowledgeBonusUsed: [],   // legs where knowledge bonus was attempted
+      knowledgeBonusCorrect: 0, // total correct answers (for victory screen)
+      lastKnowledgeResult: null // { correct, text } — shown after answering
     };
   }
 
@@ -380,6 +457,11 @@ const TrailGame = (() => {
 
   function clamp(val) { return Math.max(0, Math.min(100, Math.round(val))); }
 
+  function memberAlive(id) {
+    const m = gs.party.find(p => p.id === id);
+    return m && m.health > 0;
+  }
+
   function applyEffects(effects) {
     const diff = DIFFICULTY[gs.difficulty];
     gs.food     = clamp(gs.food     + (effects.food || 0));
@@ -436,6 +518,73 @@ const TrailGame = (() => {
       </div>`;
   }
 
+  function partyAbilityHints() {
+    const hints = [];
+    if (memberAlive('drouillard')) hints.push('Drouillard: better hunting');
+    if (memberAlive('sacagawea')) hints.push('Sacagawea: better foraging');
+    if (memberAlive('gass')) hints.push('Sgt. Gass: better repairs');
+    if (hints.length === 0) return '';
+    return `<div class="tg-ability-note">Party abilities: ${hints.join(' &bull; ')}</div>`;
+  }
+
+  function knowledgeBonusHTML() {
+    const q = KNOWLEDGE_QUESTIONS[gs.currentLeg];
+    if (!q) return '';
+    const used = gs.knowledgeBonusUsed.includes(gs.currentLeg);
+
+    // Show result if just answered
+    if (used && gs.lastKnowledgeResult) {
+      const r = gs.lastKnowledgeResult;
+      return `<div class="tg-knowledge-bonus ${r.correct ? 'tg-kb-correct' : 'tg-kb-wrong'}">
+        <p style="margin:0 0 0.3rem;font-weight:bold;">${r.correct ? 'Correct! Knowledge bonus earned!' : 'Not quite — no bonus this time.'}</p>
+        <p style="margin:0;font-size:0.85rem;">${q.explanation}</p>
+        ${r.correct ? `<p style="margin:0.3rem 0 0;font-size:0.8rem;opacity:0.85;">${r.bonusText}</p>` : ''}
+      </div>`;
+    }
+
+    // Already used (from previous render / re-visit)
+    if (used) return '';
+
+    // Show question
+    return `<div class="tg-knowledge-bonus">
+      <p style="margin:0 0 0.5rem;font-weight:bold;">Knowledge Bonus</p>
+      <p style="margin:0 0 0.5rem;">${q.question}</p>
+      <div class="tg-kb-options">
+        ${q.options.map((opt, i) =>
+          `<button class="tg-kb-option" onclick="TrailGame.answerKnowledgeBonus(${i})">${opt}</button>`
+        ).join('')}
+      </div>
+    </div>`;
+  }
+
+  function answerKnowledgeBonus(choiceIndex) {
+    const q = KNOWLEDGE_QUESTIONS[gs.currentLeg];
+    if (!q || gs.knowledgeBonusUsed.includes(gs.currentLeg)) return;
+
+    gs.knowledgeBonusUsed.push(gs.currentLeg);
+    const correct = choiceIndex === q.correct;
+
+    if (correct) {
+      gs.knowledgeBonusCorrect++;
+      const b = q.bonus;
+      if (b.food) gs.food = clamp(gs.food + b.food);
+      if (b.health) gs.health = clamp(gs.health + b.health);
+      if (b.supplies) gs.supplies = clamp(gs.supplies + b.supplies);
+      if (b.morale) gs.morale = clamp(gs.morale + b.morale);
+      const parts = [];
+      if (b.food) parts.push(`Food +${b.food}`);
+      if (b.health) parts.push(`Health +${b.health}`);
+      if (b.supplies) parts.push(`Supplies +${b.supplies}`);
+      if (b.morale) parts.push(`Morale +${b.morale}`);
+      gs.lastKnowledgeResult = { correct: true, bonusText: parts.join(' | ') };
+      addJournal(`Knowledge bonus! Correctly answered about ${LEGS[gs.currentLeg].from}. Resources gained.`);
+    } else {
+      gs.lastKnowledgeResult = { correct: false };
+    }
+
+    renderStop();
+  }
+
   function renderStop() {
     const leg = LEGS[gs.currentLeg];
     const desc = STOP_DESCRIPTIONS[gs.currentLeg] || '';
@@ -457,6 +606,8 @@ const TrailGame = (() => {
         </div>
         <div class="tg-card-body">
           <p class="tg-stop-desc">${desc}</p>
+
+          ${knowledgeBonusHTML()}
 
           <p style="font-size:0.85rem;color:var(--ink-light);margin-bottom:0.75rem;">
             <strong>Actions remaining:</strong> ${actionsLeft} of ${gs.maxActionsPerStop} &nbsp;|&nbsp;
@@ -485,6 +636,8 @@ const TrailGame = (() => {
               <span class="tg-action-label">Repair &amp; Scavenge<small>Recover supplies</small></span>
             </button>
           </div>
+
+          ${partyAbilityHints()}
 
           <div style="margin-top:0.75rem;">
             <p style="font-size:0.85rem;margin-bottom:0.5rem;"><strong>Set pace for next leg:</strong></p>
@@ -778,11 +931,21 @@ const TrailGame = (() => {
     gs.phase = 'victory';
     const totalMiles = LEGS.reduce((s, l) => s + l.miles, 0);
     const alive = gs.party.filter(m => m.health > 0);
+    const dead = gs.party.filter(m => m.health <= 0);
     const rating = gs.food + gs.health + gs.supplies + gs.morale;
     let rank = 'Frontier Legend';
     if (rating < 100) rank = 'Weary Traveler';
     else if (rating < 200) rank = 'Seasoned Explorer';
     else if (rating < 300) rank = 'Master Pathfinder';
+
+    // Historical expedition facts for comparison
+    const realDays = 554; // May 14 1804 → Nov 20 1805 (outbound to Pacific)
+    const realMiles = 4162; // one-way distance
+    const realDeaths = 1; // Sgt. Floyd
+    const realPartySize = 33; // after Fort Mandan (keelboat crew sent back)
+
+    const kbTotal = KNOWLEDGE_QUESTIONS.length;
+    const kbScore = gs.knowledgeBonusCorrect || 0;
 
     const el = getEl();
     el.innerHTML = `
@@ -796,17 +959,30 @@ const TrailGame = (() => {
             ${alive.length === gs.party.length ? 'Remarkably, every member of your party survived!' :
               `${alive.length} of your ${gs.party.length} party members survived the journey.`}
           </p>
+
           <div class="tg-stats-grid">
-            <div class="tg-stat-item"><span class="tg-stat-label">Total Days</span><span class="tg-stat-value">${gs.totalDays}</span></div>
-            <div class="tg-stat-item"><span class="tg-stat-label">Distance</span><span class="tg-stat-value">${totalMiles} miles</span></div>
-            <div class="tg-stat-item"><span class="tg-stat-label">Party Survived</span><span class="tg-stat-value">${alive.length} of ${gs.party.length}</span></div>
             <div class="tg-stat-item"><span class="tg-stat-label">Food Remaining</span><span class="tg-stat-value">${gs.food}%</span></div>
             <div class="tg-stat-item"><span class="tg-stat-label">Health</span><span class="tg-stat-value">${gs.health}%</span></div>
             <div class="tg-stat-item"><span class="tg-stat-label">Supplies</span><span class="tg-stat-value">${gs.supplies}%</span></div>
             <div class="tg-stat-item"><span class="tg-stat-label">Morale</span><span class="tg-stat-value">${gs.morale}%</span></div>
+            <div class="tg-stat-item"><span class="tg-stat-label">Knowledge Bonus</span><span class="tg-stat-value">${kbScore} of ${kbTotal}</span></div>
             <div class="tg-stat-item"><span class="tg-stat-label">Rank</span><span class="tg-stat-value">${rank}</span></div>
           </div>
-          <p style="font-style:italic;color:var(--ink-light);margin-bottom:1.5rem;">
+
+          <h3 style="margin:1rem 0 0.5rem;font-size:1.05rem;">How You Compare to History</h3>
+          <table class="tg-comparison">
+            <tr><th></th><th>Your Expedition</th><th>Real Expedition</th></tr>
+            <tr><td>Days to Pacific</td><td>${gs.totalDays}</td><td>${realDays}</td></tr>
+            <tr><td>Distance</td><td>${totalMiles} mi</td><td>${realMiles} mi</td></tr>
+            <tr><td>Party at Pacific</td><td>${alive.length} of ${gs.party.length}</td><td>32 of ${realPartySize}</td></tr>
+            <tr><td>Deaths</td><td>${dead.length}</td><td>${realDeaths} (Sgt. Floyd)</td></tr>
+          </table>
+          <p style="font-size:0.8rem;color:var(--ink-light);font-style:italic;margin:0.5rem 0 1rem;">
+            The real expedition took ${realDays} days from Camp Dubois to the Pacific coast (May 14, 1804 &ndash; Nov 20, 1805).
+            The only death was Sgt. Charles Floyd, likely from a burst appendix &mdash; something no medicine of the era could have saved.
+          </p>
+
+          <p style="font-style:italic;color:var(--ink-light);margin-bottom:1rem;">
             Difficulty: ${DIFFICULTY[gs.difficulty].label}
           </p>
           ${partyHTML()}
@@ -827,12 +1003,15 @@ const TrailGame = (() => {
     switch (action) {
       case 'hunt': {
         gs.huntedThisStop = true;
-        const success = Math.random() < 0.7;
+        const drouillardBonus = memberAlive('drouillard');
+        const success = Math.random() < (drouillardBonus ? 0.85 : 0.7);
         if (success) {
-          const gain = 6 + Math.floor(Math.random() * 10);
+          const gain = 6 + Math.floor(Math.random() * 10) + (drouillardBonus ? 3 : 0);
           gs.food = clamp(gs.food + gain);
           gs.supplies = clamp(gs.supplies - 2);
-          addJournal(`Successful hunt! Gained food. The men dine well tonight.`);
+          addJournal(drouillardBonus
+            ? 'Drouillard leads the hunt with expert skill. Plenty of game tonight!'
+            : 'Successful hunt! Gained food. The men dine well tonight.');
         } else {
           gs.supplies = clamp(gs.supplies - 3);
           addJournal('Hunting party returns empty-handed. Ammunition wasted.');
@@ -879,17 +1058,25 @@ const TrailGame = (() => {
         break;
       }
       case 'forage': {
-        const gain = 2 + Math.floor(Math.random() * 5);
+        const sacaBonus = memberAlive('sacagawea');
+        const gain = 2 + Math.floor(Math.random() * 5) + (sacaBonus ? 4 : 0);
         gs.food = clamp(gs.food + gain);
-        addJournal('Foraging party finds berries, roots, and wild onions.');
+        if (sacaBonus) gs.morale = clamp(gs.morale + 2);
+        addJournal(sacaBonus
+          ? 'Sacagawea identifies edible roots and wild artichokes the men would have walked past. Her knowledge feeds the party.'
+          : 'Foraging party finds berries, roots, and wild onions.');
         break;
       }
       case 'scavenge': {
         gs.scavengedThisStop = true;
-        const gain = 3 + Math.floor(Math.random() * 6);
+        const gassBonus = memberAlive('gass');
+        const gain = 3 + Math.floor(Math.random() * 6) + (gassBonus ? 4 : 0);
         gs.supplies = clamp(gs.supplies + gain);
         gs.morale = clamp(gs.morale + 2);
-        addJournal('Sgt. Gass leads a repair detail. Mended boats, patched gear, and salvaged useful materials.');
+        if (gassBonus) gs.health = clamp(gs.health + 2);
+        addJournal(gassBonus
+          ? 'Sgt. Gass, the expedition\'s master carpenter, leads repairs with expert hands. Boats sealed tight, gear patched, and spare parts salvaged.'
+          : 'The men repair what they can. Mended boats, patched gear, and salvaged useful materials.');
         break;
       }
     }
@@ -968,12 +1155,15 @@ const TrailGame = (() => {
     switch (action) {
       case 'hunt': {
         gs.huntedThisStop = true;
-        const success = Math.random() < 0.6; // harder in winter
+        const drBonus = memberAlive('drouillard');
+        const success = Math.random() < (drBonus ? 0.75 : 0.6); // harder in winter
         if (success) {
-          const gain = 8 + Math.floor(Math.random() * 8);
+          const gain = 8 + Math.floor(Math.random() * 8) + (drBonus ? 3 : 0);
           gs.food = clamp(gs.food + gain);
           gs.health = clamp(gs.health - 3); // cold exposure
-          addJournal('Hunting party braves -40° temperatures and returns with buffalo. Frostbitten fingers, but full bellies.');
+          addJournal(drBonus
+            ? 'Drouillard tracks buffalo through deep snow and brings down two. Frostbitten, but the party eats well.'
+            : 'Hunting party braves -40° temperatures and returns with buffalo. Frostbitten fingers, but full bellies.');
         } else {
           gs.health = clamp(gs.health - 5);
           addJournal('Hunting party returns empty-handed, fingers and toes numb from the bitter cold.');
@@ -1105,6 +1295,7 @@ const TrailGame = (() => {
     gs.restedThisStop = false;
     gs.tradedThisStop = false;
     gs.scavengedThisStop = false;
+    gs.lastKnowledgeResult = null;
 
     if (gs.currentLeg >= LEGS.length) {
       renderVictory();
@@ -1180,6 +1371,7 @@ const TrailGame = (() => {
       renderStop();
     },
 
+    answerKnowledgeBonus(i) { answerKnowledgeBonus(i); },
     doAction(action) { doAction(action); },
     startTravel() { startTravel(); },
     chooseEvent(i) { chooseEvent(i); },
