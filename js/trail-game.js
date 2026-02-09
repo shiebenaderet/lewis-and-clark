@@ -480,6 +480,45 @@ const TrailGame = (() => {
     return m && m.health > 0;
   }
 
+  // Modern road trip comparison for end screens
+  function modernRoadTripHTML() {
+    return `
+      <details class="tg-modern-trip">
+        <summary class="tg-modern-toggle">What would this trip look like today?</summary>
+        <div class="tg-modern-content">
+          <p class="tg-modern-intro">
+            The same journey from <strong>St. Louis, MO</strong> to <strong>Astoria, OR</strong>
+            today is a road trip on modern highways:
+          </p>
+          <div class="tg-modern-route">
+            I-70 W &rarr; I-29 N &rarr; I-80 W &rarr; I-84 W &rarr; US-30 W
+          </div>
+          <table class="tg-comparison">
+            <tr><th></th><th>Lewis &amp; Clark (1804)</th><th>Modern Road Trip</th></tr>
+            <tr><td>Distance</td><td>~4,162 mi (river &amp; trail)</td><td>~2,130 mi (highway)</td></tr>
+            <tr><td>Duration</td><td>554 days</td><td>~4 days (31 hrs driving)</td></tr>
+            <tr><td>Speed</td><td>5&ndash;15 mi/day</td><td>~65 mph</td></tr>
+            <tr><td>Party size</td><td>33 explorers</td><td>You + snacks</td></tr>
+            <tr><td>Dangers</td><td>Grizzlies, rapids, starvation</td><td>Construction zones, gas station coffee</td></tr>
+          </table>
+          <h4 class="tg-modern-cost-title">Estimated Cost Today</h4>
+          <div class="tg-stats-grid">
+            <div class="tg-stat-item"><span class="tg-stat-label">Gas</span><span class="tg-stat-value">$206</span></div>
+            <div class="tg-stat-item"><span class="tg-stat-label">Motels (3 nights)</span><span class="tg-stat-value">$225</span></div>
+            <div class="tg-stat-item"><span class="tg-stat-label">Food &amp; Snacks</span><span class="tg-stat-value">$180</span></div>
+            <div class="tg-stat-item"><span class="tg-stat-label">Total</span><span class="tg-stat-value" style="color:var(--campfire-glow);font-weight:bold;">~$611</span></div>
+          </div>
+          <p class="tg-modern-footnote">
+            The original expedition cost about $2,500 in 1803 &mdash; roughly $70,000 in today's dollars.
+            Congress approved the funding after Jefferson's request, making it one of the greatest bargains in American history.
+          </p>
+          <p class="tg-modern-footnote" style="margin-top:0.35rem;">
+            Gas estimate: 71 gal @ $2.90/gal (30 mpg avg). Motels at $75/night. Food at $45/day.
+          </p>
+        </div>
+      </details>`;
+  }
+
   function applyEffects(effects) {
     const diff = DIFFICULTY[gs.difficulty];
     // Scale negative effects by difficulty
@@ -1073,6 +1112,8 @@ const TrailGame = (() => {
             Your expedition covered ${Math.round(milesCovered / totalMiles * 100)}% of the route before ${reason === 'starvation' ? 'starvation' : reason === 'mutiny' ? 'mutiny' : 'perishing'}.
           </p>
 
+          ${modernRoadTripHTML()}
+
           ${partyHTML()}
           <div style="margin-top:1.5rem;">
             <button class="tg-btn tg-btn-primary" onclick="TrailGame.restart()" style="margin-right:0.5rem;">Try Again</button>
@@ -1153,7 +1194,9 @@ const TrailGame = (() => {
               'Remarkably, your journey took exactly as long as the real expedition!'}
           </p>
 
-          <p style="font-style:italic;color:var(--ink-light);margin-bottom:1rem;">
+          ${modernRoadTripHTML()}
+
+          <p style="font-style:italic;color:var(--ink-light);margin:1rem 0;">
             Difficulty: ${DIFFICULTY[gs.difficulty].label}
           </p>
           ${partyHTML()}
