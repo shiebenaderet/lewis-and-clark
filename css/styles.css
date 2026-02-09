@@ -1600,6 +1600,179 @@ body {
 }
 
 /* ============================================================
+   DISCOVERY NARRATIVE
+   ============================================================ */
+.discovery-intro {
+  background: linear-gradient(135deg, rgba(58, 107, 140, 0.08), rgba(58, 107, 140, 0.03));
+  border: 1.5px solid rgba(58, 107, 140, 0.2);
+  border-radius: 6px;
+  padding: 1.25rem;
+  margin: 1rem 1.5rem 0;
+}
+
+.discovery-intro-label {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--river);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.discovery-intro-text {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--ink-light);
+  font-style: italic;
+}
+
+.discovery-clue {
+  background: linear-gradient(135deg, rgba(212, 118, 10, 0.08), rgba(212, 118, 10, 0.03));
+  border: 1.5px solid rgba(212, 118, 10, 0.25);
+  border-left: 4px solid var(--campfire);
+  border-radius: 0 6px 6px 0;
+  padding: 1rem 1.25rem;
+  margin-top: 1.25rem;
+}
+
+.discovery-clue-label {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--campfire);
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.discovery-clue-text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--ink-light);
+}
+
+/* ============================================================
+   MAP INFO PANEL (persistent, replaces SVG tooltip)
+   ============================================================ */
+.map-info-panel {
+  display: none;
+  background: linear-gradient(135deg, #2c1810, #3d2518);
+  border: 2px solid var(--leather);
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin-top: 1rem;
+  color: var(--parchment);
+  animation: slideUp 0.3s ease;
+}
+
+.map-info-panel.active {
+  display: block;
+}
+
+.map-info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.map-info-title {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  color: var(--campfire-glow);
+}
+
+.map-info-close {
+  background: none;
+  border: none;
+  color: var(--parchment-dark);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  line-height: 1;
+}
+
+.map-info-close:hover {
+  color: var(--parchment);
+}
+
+.map-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.map-info-item {
+  font-size: 0.85rem;
+}
+
+.map-info-item-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--campfire);
+  display: block;
+}
+
+.map-info-item-value {
+  color: var(--parchment-dark);
+}
+
+.map-info-detail {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.map-info-detail p {
+  margin-bottom: 0.4rem;
+  color: var(--parchment-dark);
+}
+
+.map-info-detail strong {
+  color: var(--parchment);
+}
+
+.map-info-btn {
+  margin-top: 0.75rem;
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  padding: 0.5rem 1rem;
+  background: rgba(58, 107, 140, 0.3);
+  color: var(--parchment);
+  border: 1px solid var(--river);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.map-info-btn:hover {
+  background: rgba(58, 107, 140, 0.5);
+}
+
+.map-info-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Locked nav button */
+.btn-station-nav.locked {
+  background: #555;
+  border: 1px dashed rgba(255,255,255,0.3);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.btn-station-nav.locked:hover {
+  transform: none;
+  background: #555;
+  box-shadow: none;
+}
+
+/* ============================================================
    RESPONSIVE
    ============================================================ */
 @media (max-width: 768px) {

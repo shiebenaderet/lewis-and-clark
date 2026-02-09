@@ -76,14 +76,18 @@ function continueGame() {
   updateScoreDisplay();
 }
 
-// === STATION NAVIGATION ===
+// === STATION NAVIGATION (gated — only visited stations) ===
 function goToStation(index) {
-  if (index >= 0 && index < STATIONS.length) {
+  if (index >= 0 && index < STATIONS.length && state.visitedStations.has(index)) {
     renderStation(index);
   }
 }
 
 function travelToStation(index) {
+  // Require challenge completion at current station before traveling
+  const challengeId = `challenge_${state.currentStation}`;
+  if (!state.challengesCompleted.has(challengeId)) return;
+
   if (TRAIL_EVENTS.length > 0) {
     renderTravelTransition(state.currentStation, index, () => renderStation(index));
   } else {
@@ -93,7 +97,7 @@ function travelToStation(index) {
 
 function updateStationIndicator() {
   document.getElementById('station-indicator').textContent =
-    `Station ${state.currentStation + 1} of ${STATIONS.length}`;
+    `Station ${state.currentStation + 1}`;
 }
 
 // === COMPLETION ===
@@ -277,6 +281,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   const loaded = await loadAllData();
   if (loaded) {
     updateTitleContinueButton();
-    console.log('The Lost Expedition v0.7.0: Ready');
+    console.log('The Lost Expedition v0.9.0: Ready');
   }
 });
