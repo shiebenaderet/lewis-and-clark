@@ -554,6 +554,90 @@
   animation: tgFadeIn 0.4s ease;
 }
 
+/* --- Knowledge Bonus --- */
+.tg-knowledge-bonus {
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  border: 2px solid #d4760a;
+  border-radius: 8px;
+  background: rgba(212,118,10,0.08);
+}
+
+.tg-knowledge-bonus.tg-kb-correct {
+  border-color: #4a7c2e;
+  background: rgba(74,124,46,0.1);
+}
+
+.tg-knowledge-bonus.tg-kb-wrong {
+  border-color: #c44;
+  background: rgba(204,68,68,0.08);
+}
+
+.tg-kb-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.tg-kb-option {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #8b4513;
+  border-radius: 5px;
+  background: var(--parchment);
+  color: var(--ink);
+  font-family: Georgia, serif;
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s;
+}
+
+.tg-kb-option:hover {
+  background: #e6d5a0;
+  border-color: #d4760a;
+}
+
+/* --- Expedition Comparison Table --- */
+.tg-comparison {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.85rem;
+}
+
+.tg-comparison th {
+  background: rgba(139,69,19,0.15);
+  padding: 0.4rem 0.6rem;
+  text-align: left;
+  border-bottom: 2px solid #8b4513;
+  color: var(--ink);
+}
+
+.tg-comparison td {
+  padding: 0.35rem 0.6rem;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.tg-comparison tr td:nth-child(2),
+.tg-comparison tr td:nth-child(3) {
+  text-align: center;
+}
+
+.tg-comparison tr:last-child td { border-bottom: none; }
+
+/* --- Party Ability Indicator --- */
+.tg-ability-note {
+  font-size: 0.8rem;
+  color: #5c2e0a;
+  font-style: italic;
+  margin-top: 0.5rem;
+  padding: 0.4rem 0.6rem;
+  background: rgba(212,118,10,0.06);
+  border-radius: 4px;
+}
+
 /* --- Responsive --- */
 @media (max-width: 600px) {
   .tg-status-bar {
