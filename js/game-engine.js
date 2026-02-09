@@ -40,6 +40,7 @@ function startGame() {
   state.journalEntries = {};
   state.score = 0;
   state.challengesCompleted = new Set();
+  state.seenEvents = [];
   showScreen('game-screen');
   showView('station');
   renderStation(0);
@@ -63,6 +64,7 @@ function continueGame() {
   state.currentView = saved.currentView || 'station';
   state.score = saved.score || 0;
   state.challengesCompleted = saved.challengesCompleted || new Set();
+  state.seenEvents = saved.seenEvents || [];
 
   // Update level buttons to reflect saved level
   document.querySelectorAll('.level-btn, .level-toggle button').forEach(btn => {

@@ -1,5 +1,5 @@
 // ============================================================
-// trail-game.js — Oregon Trail-style Lewis & Clark expedition game
+// trail-game.js — Corps of Discovery expedition game
 // Unlocks after completing the educational journey
 // ============================================================
 
@@ -18,15 +18,22 @@ const TrailGame = (() => {
     grueling: { label: 'Grueling', speed: 1.4, foodMult: 1.3, healthRisk: 0.20, desc: 'Fast but exhausting' }
   };
 
-  const PARTY_MEMBERS = [
+  // Starting party — the core Corps of Discovery members from Camp Dubois
+  const STARTING_PARTY = [
     { id: 'lewis',       name: 'Capt. Lewis',    role: 'Commander',    health: 100 },
     { id: 'clark',       name: 'Capt. Clark',    role: 'Commander',    health: 100 },
     { id: 'york',        name: 'York',            role: 'Hunter',       health: 100 },
-    { id: 'sacagawea',   name: 'Sacagawea',      role: 'Guide',        health: 100 },
     { id: 'drouillard',  name: 'Drouillard',     role: 'Scout',        health: 100 },
-    { id: 'charbonneau', name: 'Charbonneau',    role: 'Interpreter',  health: 100 },
     { id: 'ordway',      name: 'Sgt. Ordway',    role: 'Sergeant',     health: 100 },
-    { id: 'gass',        name: 'Sgt. Gass',      role: 'Carpenter',    health: 100 }
+    { id: 'gass',        name: 'Sgt. Gass',      role: 'Carpenter',    health: 100 },
+    { id: 'floyd',       name: 'Sgt. Floyd',     role: 'Sergeant',     health: 100 },
+    { id: 'pryor',       name: 'Sgt. Pryor',     role: 'Sergeant',     health: 100 }
+  ];
+
+  // Members who join at Fort Mandan (leg 3)
+  const MANDAN_RECRUITS = [
+    { id: 'sacagawea',   name: 'Sacagawea',      role: 'Guide',        health: 100 },
+    { id: 'charbonneau', name: 'Charbonneau',    role: 'Interpreter',  health: 100 }
   ];
 
   const LEGS = [
@@ -58,7 +65,7 @@ const TrailGame = (() => {
   // --- Game Events ---
   const GAME_EVENTS = [
     // WEATHER
-    { id: 'thunderstorm', category: 'weather', title: 'Thunderstorm on the Plains',
+    { id: 'thunderstorm', category: 'weather', title: 'Thunderstorm on the Plains', legs: [0, 5],
       narrative: 'Dark clouds roll in fast. Thunder cracks across the prairie and rain falls in sheets. Lightning strikes nearby.',
       choices: [
         { text: 'Make camp immediately and secure the boats', result: 'You hunker down and ride out the storm. Some supplies get damp, but nothing is lost.', food: 0, health: 0, supplies: -2, morale: -3, good: true },
@@ -66,14 +73,14 @@ const TrailGame = (() => {
         { text: 'Seek shelter in a nearby grove of cottonwoods', result: 'The trees provide cover, but lightning strikes close. Everyone is shaken but safe.', food: 0, health: -2, supplies: 0, morale: -5, good: true }
       ]
     },
-    { id: 'hailstorm', category: 'weather', title: 'Violent Hailstorm',
+    { id: 'hailstorm', category: 'weather', title: 'Violent Hailstorm', legs: [4, 5],
       narrative: 'Hailstones the size of musket balls pound down from the sky. Clark and several men are caught in the open.',
       choices: [
         { text: 'Everyone take cover under the boats!', result: 'The overturned boats shield the party. Some bruises, but no serious injuries.', food: 0, health: -3, supplies: -3, morale: -3, good: true },
         { text: 'Rush to the nearest overhang or ravine', result: 'You find a sheltering bluff just in time. The hail batters the landscape around you.', food: 0, health: -2, supplies: 0, morale: -2, good: true }
       ]
     },
-    { id: 'bitter_cold', category: 'weather', title: 'Bitter Cold Snap',
+    { id: 'bitter_cold', category: 'weather', title: 'Bitter Cold Snap', legs: [3, 4],
       narrative: 'The temperature plunges to 40 degrees below zero. Frostbite is a real danger. The Missouri River is frozen solid.',
       choices: [
         { text: 'Stay in camp, keep fires burning, melt snow for water', result: 'You lose travel days but keep everyone alive. The hunters bring in some game.', food: -4, health: -3, supplies: -3, morale: -5, good: true },
@@ -81,7 +88,7 @@ const TrailGame = (() => {
         { text: 'Visit the Mandan villages to trade for food and warmth', result: 'The Mandan welcome you. They share corn and dried squash in exchange for metalwork.', food: 6, health: 2, supplies: -5, morale: 5, good: true }
       ]
     },
-    { id: 'flash_flood', category: 'weather', title: 'Flash Flood!',
+    { id: 'flash_flood', category: 'weather', title: 'Flash Flood!', legs: [4, 6],
       narrative: 'A wall of water comes roaring down the creek bed. Clark, Sacagawea, and baby Baptiste are nearly swept away.',
       choices: [
         { text: 'Drop everything and scramble to high ground immediately', result: 'Everyone escapes, but Clark\'s compass, gunpowder, and some provisions are lost to the flood.', food: -5, health: 0, supplies: -8, morale: -4, good: true },
@@ -89,7 +96,7 @@ const TrailGame = (() => {
       ]
     },
     // WILDLIFE
-    { id: 'grizzly_bear', category: 'wildlife', title: 'Grizzly Bear Attack!',
+    { id: 'grizzly_bear', category: 'wildlife', title: 'Grizzly Bear Attack!', legs: [1, 8],
       narrative: 'A massive grizzly charges from the brush! Lewis wrote that these bears are "verry hard to kill." Six rifle balls barely slow them down.',
       choices: [
         { text: 'Form a firing line — coordinated volley!', result: 'It takes eight shots, but the bear finally falls. You have hundreds of pounds of meat, but used precious ammunition.', food: 12, health: -3, supplies: -4, morale: 3, good: true },
@@ -97,7 +104,7 @@ const TrailGame = (() => {
         { text: 'Play dead and hope it loses interest', result: 'The bear investigates, sniffs at a motionless man, then wanders off. Nobody breathes for a full minute.', food: 0, health: -5, supplies: 0, morale: -8, good: false }
       ]
     },
-    { id: 'buffalo_herd', category: 'wildlife', title: 'Buffalo Herd Spotted',
+    { id: 'buffalo_herd', category: 'wildlife', title: 'Buffalo Herd Spotted', legs: [0, 4],
       narrative: 'An enormous herd of buffalo stretches across the plain — thousands of animals. The ground trembles with their movement.',
       choices: [
         { text: 'Organize a careful hunting party', result: 'Drouillard leads the hunt and brings down three buffalo. The party feasts on hump meat and tongue!', food: 15, health: 2, supplies: -2, morale: 8, good: true },
@@ -105,14 +112,14 @@ const TrailGame = (() => {
         { text: 'Observe and document — Jefferson wants scientific data', result: 'Lewis makes detailed sketches and notes on behavior. No meat gained, but the President will be pleased.', food: 0, health: 0, supplies: 0, morale: 5, good: true }
       ]
     },
-    { id: 'rattlesnake', category: 'wildlife', title: 'Rattlesnake in Camp',
+    { id: 'rattlesnake', category: 'wildlife', title: 'Rattlesnake in Camp', legs: [0, 6],
       narrative: 'A rattlesnake is coiled near the sleeping area. Its rattle buzzes ominously in the darkness.',
       choices: [
         { text: 'Carefully dispatch it with a long stick', result: 'The snake is killed safely. Lewis preserves it as a specimen for President Jefferson.', food: 0, health: 0, supplies: 0, morale: 2, good: true },
         { text: 'Move camp to avoid more snakes', result: 'You relocate but lose half a day. The new campsite is better situated near fresh water.', food: -2, health: 0, supplies: 0, morale: 0, good: true }
       ]
     },
-    { id: 'mosquito_swarm', category: 'wildlife', title: 'Mosquito Plague',
+    { id: 'mosquito_swarm', category: 'wildlife', title: 'Mosquito Plague', legs: [0, 6],
       narrative: 'Clouds of mosquitoes descend on the camp. Clark writes they are "so numerous that we can scarcely breathe."',
       choices: [
         { text: 'Build smudge fires with green wood for smoke', result: 'The smoke keeps the worst of them away, but everyone\'s eyes burn and the meat tastes of ash.', food: -2, health: -3, supplies: -2, morale: -4, good: true },
@@ -121,7 +128,7 @@ const TrailGame = (() => {
       ]
     },
     // HEALTH
-    { id: 'dysentery', category: 'health', title: 'Illness Strikes the Camp',
+    { id: 'dysentery', category: 'health', title: 'Illness Strikes the Camp', legs: [0, 9],
       narrative: 'Several men fall ill with violent stomach cramps and fever. The brackish water may be to blame.',
       choices: [
         { text: 'Rest for two days and boil all drinking water', result: 'The sick men recover slowly. Clark administers "Rush\'s pills" — powerful (and unpleasant) medicine.', food: -5, health: -5, supplies: -3, morale: -3, good: true },
@@ -129,14 +136,14 @@ const TrailGame = (() => {
         { text: 'Ask local tribes for medicinal remedies', result: 'A tribal healer shares a bark tea remedy. The men improve within a day. Lewis carefully documents the treatment.', food: 0, health: 3, supplies: -2, morale: 5, good: true }
       ]
     },
-    { id: 'prickly_pear', category: 'health', title: 'Prickly Pear Nightmare',
+    { id: 'prickly_pear', category: 'health', title: 'Prickly Pear Nightmare', legs: [5, 5],
       narrative: 'The portage route is covered in prickly pear cactus. The spines pierce through double-soled moccasins, leaving men limping and bleeding.',
       choices: [
         { text: 'Wrap feet in extra leather and proceed slowly', result: 'Progress is slow but the extra protection helps. Some spines still get through, but fewer injuries.', food: -3, health: -4, supplies: -5, morale: -3, good: true },
         { text: 'Search for an alternate route around the cactus field', result: 'You find a longer path through rocky ground. More tiring but far less painful.', food: -5, health: -2, supplies: -2, morale: 0, good: true }
       ]
     },
-    { id: 'near_starvation', category: 'health', title: 'Food Supplies Running Low',
+    { id: 'near_starvation', category: 'health', title: 'Food Supplies Running Low', legs: [4, 8],
       narrative: 'Game has been scarce for days. The portable soup (a kind of dried broth) is nearly gone. Men are eating candle tallow to survive.',
       choices: [
         { text: 'Butcher one of the horses for meat', result: 'The horse meat sustains the party for several days. It tastes terrible, but it keeps everyone alive.', food: 10, health: -2, supplies: 0, morale: -5, good: true },
@@ -145,7 +152,7 @@ const TrailGame = (() => {
       ]
     },
     // NAVIGATION
-    { id: 'river_fork', category: 'navigation', title: 'The River Forks — Which Way?',
+    { id: 'river_fork', category: 'navigation', title: 'The River Forks — Which Way?', legs: [4, 4],
       narrative: 'The Missouri splits into two branches. The men are convinced the muddy north fork is the true Missouri. Lewis suspects the clear south fork is correct.',
       choices: [
         { text: 'Trust Lewis\'s instinct — take the south fork', result: 'Lewis is right! The south fork leads to the Great Falls, confirming this is the true Missouri. The men are impressed.', food: -3, health: 0, supplies: 0, morale: 8, good: true },
@@ -153,7 +160,7 @@ const TrailGame = (() => {
         { text: 'Split into two scouting parties to investigate both', result: 'Lewis scouts south while Clark scouts north. After a few days, the answer is clear — south fork is correct.', food: -5, health: -2, supplies: -2, morale: 3, good: true }
       ]
     },
-    { id: 'rapids', category: 'navigation', title: 'Dangerous Rapids Ahead',
+    { id: 'rapids', category: 'navigation', title: 'Dangerous Rapids Ahead', legs: [1, 9],
       narrative: 'The river narrows into churning white water. Rocks jut up everywhere. Running these rapids could capsize the boats.',
       choices: [
         { text: 'Portage around the rapids — carry everything overland', result: 'Exhausting work, but safe. The boats and supplies make it through intact.', food: -4, health: -4, supplies: -2, morale: -2, good: true },
@@ -161,7 +168,7 @@ const TrailGame = (() => {
         { text: 'Hire local Native guides who know this stretch of river', result: 'The guides expertly navigate the rapids. Your trade goods are well spent for their knowledge.', food: 0, health: 0, supplies: -5, morale: 5, good: true }
       ]
     },
-    { id: 'lost_trail', category: 'navigation', title: 'Lost in the Mountains',
+    { id: 'lost_trail', category: 'navigation', title: 'Lost in the Mountains', legs: [7, 8],
       narrative: 'Snow has obscured the trail. Old Toby, your Shoshone guide, is uncertain which ridge to follow. Every wrong turn costs precious energy and daylight.',
       choices: [
         { text: 'Climb to a high point and survey the landscape', result: 'Clark spots a familiar river valley in the distance. You correct course and find the trail again.', food: -3, health: -3, supplies: 0, morale: 2, good: true },
@@ -170,7 +177,7 @@ const TrailGame = (() => {
       ]
     },
     // ENCOUNTERS
-    { id: 'teton_sioux', category: 'encounter', title: 'Confrontation with the Teton Sioux',
+    { id: 'teton_sioux', category: 'encounter', title: 'Confrontation with the Teton Sioux', legs: [2, 2],
       narrative: 'The Teton Sioux block the river and demand tribute. Warriors grab the bow cable of your boat. Their chief, Black Buffalo, watches with crossed arms. This could turn violent.',
       choices: [
         { text: 'Stand firm — ready weapons but do not fire', result: 'A tense standoff ensues. After three agonizing days of negotiation, Black Buffalo allows passage. No blood is shed, but it was close.', food: -5, health: 0, supplies: -8, morale: -5, good: true },
@@ -178,21 +185,21 @@ const TrailGame = (() => {
         { text: 'Turn the swivel cannon toward them as a show of force', result: 'The show of firepower creates a standoff. Warriors notch arrows. Clark eventually defuses the situation, but relations are poisoned.', food: 0, health: -3, supplies: -5, morale: -8, good: false }
       ]
     },
-    { id: 'mandan_feast', category: 'encounter', title: 'Mandan Buffalo Dance',
+    { id: 'mandan_feast', category: 'encounter', title: 'Mandan Buffalo Dance', legs: [3, 3],
       narrative: 'The Mandan invite you to a great feast and buffalo dance ceremony. Drums echo through the village as hundreds gather.',
       choices: [
         { text: 'Join the celebration — share food, music, and stories', result: 'York amazes everyone with his dancing. The Mandan are delighted and trade generously. A night to remember!', food: 8, health: 3, supplies: 3, morale: 12, good: true },
         { text: 'Attend respectfully but keep your distance', result: 'You watch politely. The Mandan appreciate your respect but wish you had joined in more.', food: 3, health: 0, supplies: 0, morale: 3, good: true }
       ]
     },
-    { id: 'nez_perce_rescue', category: 'encounter', title: 'The Nez Perce Save the Expedition',
+    { id: 'nez_perce_rescue', category: 'encounter', title: 'The Nez Perce Save the Expedition', legs: [8, 8],
       narrative: 'Your party stumbles out of the mountains — starving, exhausted, barely alive. A Nez Perce village lies ahead. They could help... or see you as a threat.',
       choices: [
         { text: 'Approach peacefully, showing empty hands', result: 'The Nez Perce feed you camas root and dried salmon. They teach you to build canoes. The expedition is saved!', food: 14, health: 8, supplies: 5, morale: 15, good: true },
         { text: 'Send Sacagawea ahead as a sign of peace', result: 'Sacagawea\'s presence — a woman with a baby — signals peaceful intentions. The Nez Perce welcome you warmly.', food: 12, health: 6, supplies: 3, morale: 12, good: true }
       ]
     },
-    { id: 'chinook_traders', category: 'encounter', title: 'Chinook Trading Party',
+    { id: 'chinook_traders', category: 'encounter', title: 'Chinook Trading Party', legs: [8, 9],
       narrative: 'A group of Chinook approach in large, beautifully carved canoes. They are shrewd traders, experienced in dealing with European and American ships.',
       choices: [
         { text: 'Trade metal tools and beads for dried fish and furs', result: 'The Chinook drive a hard bargain. You give up some supplies but gain valuable food and local knowledge.', food: 8, health: 0, supplies: -6, morale: 4, good: true },
@@ -201,21 +208,21 @@ const TrailGame = (() => {
       ]
     },
     // DISCOVERIES
-    { id: 'prairie_dogs', category: 'discovery', title: 'Prairie Dog Town',
+    { id: 'prairie_dogs', category: 'discovery', title: 'Prairie Dog Town', legs: [1, 2],
       narrative: 'Lewis discovers an enormous "village" of small barking animals — prairie dogs! He\'s determined to capture one alive to send to President Jefferson.',
       choices: [
         { text: 'Spend the afternoon trying to dig one out', result: 'After hours of digging and flooding burrows with water, you capture one alive! Lewis is thrilled.', food: -2, health: -2, supplies: 0, morale: 8, good: true },
         { text: 'Document them in the journal and move on', result: 'Lewis makes detailed sketches and notes. No specimen, but no time wasted either.', food: 0, health: 0, supplies: 0, morale: 3, good: true }
       ]
     },
-    { id: 'specimen_collection', category: 'discovery', title: 'New Species Discovered!',
+    { id: 'specimen_collection', category: 'discovery', title: 'New Species Discovered!', legs: [0, 7],
       narrative: 'Lewis spots a bird he\'s never seen before — black and white with a long tail, chattering loudly. It\'s a magpie, unknown to American science!',
       choices: [
         { text: 'Collect specimens and make detailed sketches', result: 'Lewis documents the magpie along with three other new species. Jefferson will be delighted with these scientific discoveries.', food: -1, health: 0, supplies: -1, morale: 6, good: true },
         { text: 'Note its location and keep moving', result: 'You mark it in the journal. Speed is more important right now than specimens.', food: 0, health: 0, supplies: 0, morale: 2, good: true }
       ]
     },
-    { id: 'stargazing', category: 'discovery', title: 'Celestial Navigation',
+    { id: 'stargazing', category: 'discovery', title: 'Celestial Navigation', legs: [0, 9],
       narrative: 'A clear night sky offers a perfect opportunity for astronomical observations. Lewis can use his sextant to calculate your exact position.',
       choices: [
         { text: 'Spend the evening taking careful measurements', result: 'Lewis records precise latitude and longitude readings. These measurements will help create accurate maps of the territory.', food: -1, health: 0, supplies: 0, morale: 5, good: true },
@@ -223,28 +230,28 @@ const TrailGame = (() => {
       ]
     },
     // CAMP LIFE
-    { id: 'boat_repairs', category: 'camp', title: 'Boats Need Repair',
+    { id: 'boat_repairs', category: 'camp', title: 'Boats Need Repair', legs: [0, 6],
       narrative: 'The pirogues are leaking badly. Sergeant Gass, the expedition\'s carpenter, says they must be caulked and patched before continuing.',
       choices: [
         { text: 'Stop for a day to make proper repairs', result: 'Gass supervises the repairs. Pine pitch seals the leaks. The boats are better than ever.', food: -3, health: 0, supplies: -4, morale: 3, good: true },
         { text: 'Do quick patches and keep moving', result: 'The hasty repairs hold for a while, but the boats take on water again within days.', food: -1, health: 0, supplies: -2, morale: -2, good: false }
       ]
     },
-    { id: 'journal_writing', category: 'camp', title: 'Evening by the Campfire',
+    { id: 'journal_writing', category: 'camp', title: 'Evening by the Campfire', legs: [0, 9],
       narrative: 'A quiet evening. The men sit around the fire telling stories. Lewis writes in his journal by firelight. Cruzatte plays his fiddle.',
       choices: [
         { text: 'Join the celebration — let the men enjoy themselves', result: 'Music and laughter fill the camp. Even the sentries are smiling. Morale soars around the crackling fire.', food: -1, health: 2, supplies: 0, morale: 10, good: true },
         { text: 'Use the time to organize supplies and plan tomorrow', result: 'Good planning helps you find supplies you thought were lost. A productive evening.', food: 0, health: 0, supplies: 3, morale: 2, good: true }
       ]
     },
-    { id: 'equipment_breakdown', category: 'camp', title: 'Iron Boat Frame Fails',
+    { id: 'equipment_breakdown', category: 'camp', title: 'Iron Boat Frame Fails', legs: [5, 5],
       narrative: 'Lewis\'s experimental iron boat frame — "The Experiment" — cannot be properly sealed. Elk skins won\'t hold without pine pitch, and there are no pine trees here.',
       choices: [
         { text: 'Abandon the iron frame and build new canoes from cottonwood', result: 'It takes days, but the cottonwood dugouts float beautifully. Lewis mourns his invention, but the expedition continues.', food: -5, health: -3, supplies: -5, morale: -3, good: true },
         { text: 'Try animal tallow and charcoal as a sealant', result: 'The improvised sealant fails within hours. Water pours in. You lose a day and still have to build canoes.', food: -6, health: -4, supplies: -8, morale: -8, good: false }
       ]
     },
-    { id: 'the_vote', category: 'camp', title: 'The Great Vote',
+    { id: 'the_vote', category: 'camp', title: 'The Great Vote', legs: [9, 9],
       narrative: 'You\'ve reached the Pacific coast. Now you must decide where to build winter quarters. Everyone in the party will have a say — including York and Sacagawea.',
       choices: [
         { text: 'South side of the Columbia — near elk and the Clatsop people', result: 'The vote is nearly unanimous. Fort Clatsop will be built on the south shore. Democracy on the frontier!', food: 0, health: 0, supplies: 0, morale: 10, good: true },
@@ -267,16 +274,18 @@ const TrailGame = (() => {
       supplies: 100,
       morale: 80,
       pace: 'steady',
-      party: PARTY_MEMBERS.map(m => ({ ...m })),
+      party: STARTING_PARTY.map(m => ({ ...m })),
       journal: [],
       eventsThisLeg: [],
       eventIndex: 0,
+      seenGameEvents: [],
       phase: 'start', // start, stop, traveling, event, event-result, gameover, victory
       actionsThisStop: 0,
       maxActionsPerStop: 3,
       huntedThisStop: false,
       restedThisStop: false,
-      tradedThisStop: false
+      tradedThisStop: false,
+      scavengedThisStop: false
     };
   }
 
@@ -376,7 +385,7 @@ const TrailGame = (() => {
       <div class="tg-card tg-fade-in">
         <div class="tg-card-header">
           <h2>The Lewis &amp; Clark Expedition</h2>
-          <p class="tg-subtitle">An Oregon Trail Adventure, 1804&ndash;1806</p>
+          <p class="tg-subtitle">Corps of Discovery, 1804&ndash;1806</p>
         </div>
         <div class="tg-card-body tg-start">
           <p class="tg-start-intro">
@@ -442,6 +451,10 @@ const TrailGame = (() => {
               <span class="tg-action-icon">&#127807;</span>
               <span class="tg-action-label">Forage<small>Find edible plants</small></span>
             </button>
+            <button class="tg-action-btn" onclick="TrailGame.doAction('scavenge')" ${gs.scavengedThisStop || actionsLeft <= 0 ? 'disabled' : ''}>
+              <span class="tg-action-icon">&#128295;</span>
+              <span class="tg-action-label">Repair &amp; Scavenge<small>Recover supplies</small></span>
+            </button>
           </div>
 
           <div style="margin-top:0.75rem;">
@@ -504,10 +517,26 @@ const TrailGame = (() => {
 
     addJournal(`Departed ${leg.from}. Traveling ${leg.miles} miles at ${gs.pace} pace.`);
 
-    // Determine events for this leg
+    // Determine events for this leg — filter by leg range, avoid repeats
     const numEvents = Math.random() < diff.eventChance ? (Math.random() < 0.4 ? 2 : 1) : (Math.random() < 0.3 ? 1 : 0);
-    const shuffled = [...GAME_EVENTS].sort(() => Math.random() - 0.5);
-    gs.eventsThisLeg = shuffled.slice(0, Math.max(1, numEvents));
+    let available = GAME_EVENTS.filter(e =>
+      gs.currentLeg >= e.legs[0] && gs.currentLeg <= e.legs[1] &&
+      !gs.seenGameEvents.includes(e.id)
+    );
+    // If too few unseen events for this leg, reset seen list and re-filter
+    if (available.length < Math.max(1, numEvents)) {
+      gs.seenGameEvents = [];
+      available = GAME_EVENTS.filter(e =>
+        gs.currentLeg >= e.legs[0] && gs.currentLeg <= e.legs[1]
+      );
+    }
+    // Fisher-Yates shuffle
+    for (let i = available.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [available[i], available[j]] = [available[j], available[i]];
+    }
+    gs.eventsThisLeg = available.slice(0, Math.max(1, numEvents));
+    gs.seenGameEvents.push(...gs.eventsThisLeg.map(e => e.id));
     gs.eventIndex = 0;
 
     // After travel animation, show first event or arrive
@@ -712,6 +741,14 @@ const TrailGame = (() => {
         addJournal('Foraging party finds berries, roots, and wild onions.');
         break;
       }
+      case 'scavenge': {
+        gs.scavengedThisStop = true;
+        const gain = 3 + Math.floor(Math.random() * 6);
+        gs.supplies = clamp(gs.supplies + gain);
+        gs.morale = clamp(gs.morale + 2);
+        addJournal('Sgt. Gass leads a repair detail. Mended boats, patched gear, and salvaged useful materials.');
+        break;
+      }
     }
     renderStop();
   }
@@ -745,6 +782,7 @@ const TrailGame = (() => {
     gs.huntedThisStop = false;
     gs.restedThisStop = false;
     gs.tradedThisStop = false;
+    gs.scavengedThisStop = false;
 
     if (gs.currentLeg >= LEGS.length) {
       renderVictory();
@@ -753,6 +791,24 @@ const TrailGame = (() => {
 
     const leg = LEGS[gs.currentLeg];
     addJournal(`Arrived at ${leg.from}.`);
+
+    // Scripted party changes at specific legs
+    if (gs.currentLeg === 1) {
+      // Sgt. Floyd dies — historically the only death on the expedition
+      const floyd = gs.party.find(m => m.id === 'floyd');
+      if (floyd && floyd.health > 0) {
+        floyd.health = 0;
+        addJournal('Sgt. Charles Floyd has died — likely from a burst appendix. He is the first U.S. soldier to die west of the Mississippi.');
+      }
+    }
+    if (gs.currentLeg === 3) {
+      // At Fort Mandan: Sacagawea & Charbonneau join
+      if (!gs.party.find(m => m.id === 'sacagawea')) {
+        gs.party.push(...MANDAN_RECRUITS.map(m => ({ ...m })));
+        addJournal('Toussaint Charbonneau and his young Shoshone wife Sacagawea have joined the expedition. Her knowledge of the western lands will prove invaluable.');
+      }
+    }
+
     gs.phase = 'stop';
     renderStop();
   }

@@ -28,7 +28,7 @@
     "action": "tap_swat",
     "swat_target": "🐍",
     "swat_count": 7,
-    "swat_time": 5,
+    "swat_time": 10,
     "success_text": "You drove the rattlers back with sticks and stones! The Corps used long poles to sweep snakes off rocky trails. Lewis carefully preserved several specimens to send back to Jefferson.",
     "fail_text": "One snake strikes at a moccasin! Luckily it hits leather, not skin. The men of the Corps were bitten several times — they treated bites with bark poultices."
   },
@@ -72,7 +72,7 @@
     "action": "tap_swat",
     "swat_target": "🧊",
     "swat_count": 10,
-    "swat_time": 6,
+    "swat_time": 12,
     "success_text": "You deflected the worst of it with packs and buffalo hides! Clark's group sheltered under a rock ledge during the real storm, nearly drowning in the flash flood that followed.",
     "fail_text": "The hail batters the party badly — bruises everywhere and one man is nearly knocked unconscious. Clark wrote that the hailstones left 'the men bleeding and their bodies much battered.'"
   },
@@ -105,7 +105,7 @@
     "action": "tap_swat",
     "swat_target": "🦟",
     "swat_count": 9,
-    "swat_time": 5,
+    "swat_time": 12,
     "success_text": "You swatted enough to get some relief! The Corps burned green wood to create smoke screens — it was the only thing that helped against the relentless swarms.",
     "fail_text": "The mosquitoes win this round. Your arms are covered in welts. The Corps endured this torment every single night on the plains. Clark called them 'the most tormenting insect.'"
   },
@@ -116,7 +116,7 @@
     "action": "tap_swat",
     "swat_target": "🌵",
     "swat_count": 6,
-    "swat_time": 5,
+    "swat_time": 10,
     "success_text": "You kicked aside the worst patches! Lewis called prickly pear 'one of the beauties as well as the greatest pests of the plains.' The men went through dozens of moccasins during the portage.",
     "fail_text": "Your moccasins are shredded and your feet are bleeding. The Great Falls portage was 18 miles of cactus, sharp rocks, and rattlesnakes — the men called it the worst stretch of the entire journey."
   },
@@ -193,7 +193,7 @@
     "action": "tap_swat",
     "swat_target": "🪵",
     "swat_count": 8,
-    "swat_time": 7,
+    "swat_time": 12,
     "success_text": "You hacked and hauled enough timber to clear a narrow path! The Bitterroot crossing was choked with deadfall. Clark wrote they made 'only 12 miles in a full day' through the fallen trees.",
     "fail_text": "The deadfall wins. You have to backtrack and find another route, losing a full day. The men's hands are blistered and bleeding from swinging dull axes on frozen wood."
   },
@@ -204,7 +204,7 @@
     "action": "tap_swat",
     "swat_target": "🏜️",
     "swat_count": 5,
-    "swat_time": 6,
+    "swat_time": 10,
     "success_text": "You hauled them out with ropes and poles! The Missouri's shifting sandbars were a constant hazard. Lewis noted the men were 'frequently up to their armpits in quicksand and water.'",
     "fail_text": "One man sinks to his waist before being dragged free. He loses both moccasins in the muck. The Missouri's quicksand trapped men, horses, and boats throughout the journey upstream."
   },
@@ -281,7 +281,7 @@
     "action": "tap_swat",
     "swat_target": "🐺",
     "swat_count": 6,
-    "swat_time": 6,
+    "swat_time": 10,
     "success_text": "You drove the wolves back with fire and noise! The Corps always posted sentries through the night. In wolf country, the guards kept fires blazing until dawn.",
     "fail_text": "The wolves snatched a sack of dried meat from the edge of camp! You lost three days of provisions. The Corps learned to hang food from high branches and keep armed guards on watch."
   },
