@@ -1,0 +1,571 @@
+/* ============================================================
+   trail-game.css — Oregon Trail-style expedition game
+   ============================================================ */
+
+/* --- Game Screen Layout --- */
+#trail-game-screen {
+  background: linear-gradient(180deg, #1a0f08 0%, #2c1810 40%, #1a0f08 100%);
+  min-height: 100vh;
+  color: var(--parchment);
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+.trail-game-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0.5rem 1rem 2rem;
+}
+
+/* --- Top Status Bar --- */
+.tg-status-bar {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: rgba(0,0,0,0.4);
+  border: 1px solid #5c4033;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-size: 0.85rem;
+}
+
+.tg-status-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.tg-status-label {
+  color: #a08060;
+  min-width: 60px;
+}
+
+.tg-status-bar-track {
+  flex: 1;
+  height: 10px;
+  background: #1a0f08;
+  border-radius: 5px;
+  border: 1px solid #5c4033;
+  overflow: hidden;
+  position: relative;
+}
+
+.tg-status-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.6s ease;
+}
+
+.tg-status-bar-fill.food { background: linear-gradient(90deg, #8b4513, #d4760a); }
+.tg-status-bar-fill.health { background: linear-gradient(90deg, #2d5016, #4a7c2e); }
+.tg-status-bar-fill.supplies { background: linear-gradient(90deg, #3a6b8c, #5a9bbc); }
+.tg-status-bar-fill.morale { background: linear-gradient(90deg, #8b6914, #f5a623); }
+
+.tg-status-value {
+  min-width: 32px;
+  text-align: right;
+  font-family: system-ui, sans-serif;
+  font-size: 0.8rem;
+  color: var(--parchment-dark);
+}
+
+.tg-date-location {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.4rem;
+  border-top: 1px solid #3a2a1a;
+  font-size: 0.85rem;
+}
+
+.tg-date { color: #d4760a; }
+.tg-location { color: var(--parchment); font-style: italic; }
+
+/* --- Main Content Card --- */
+.tg-card {
+  background: linear-gradient(160deg, #f4e8c1 0%, #e6d5a0 100%);
+  border: 2px solid #8b4513;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.3);
+  color: var(--ink);
+  overflow: hidden;
+}
+
+.tg-card-header {
+  background: linear-gradient(135deg, #5c2e0a, #8b4513);
+  padding: 1rem 1.25rem;
+  color: var(--parchment);
+  border-bottom: 2px solid #3a1a08;
+}
+
+.tg-card-header h2 {
+  margin: 0;
+  font-size: 1.3rem;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.tg-card-header .tg-subtitle {
+  margin: 0.25rem 0 0;
+  font-size: 0.9rem;
+  color: #e6d5a0;
+  font-style: italic;
+}
+
+.tg-card-body {
+  padding: 1.25rem;
+}
+
+/* --- Game Start Screen --- */
+.tg-start {
+  text-align: center;
+}
+
+.tg-start-intro {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  color: var(--ink-light);
+}
+
+.tg-difficulty-select {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.tg-difficulty-btn {
+  padding: 0.6rem 1.2rem;
+  border: 2px solid #8b4513;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--ink);
+  font-family: Georgia, serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tg-difficulty-btn:hover {
+  background: #e6d5a0;
+}
+
+.tg-difficulty-btn.selected {
+  background: #8b4513;
+  color: var(--parchment);
+  border-color: #5c2e0a;
+}
+
+.tg-difficulty-desc {
+  font-size: 0.85rem;
+  color: var(--ink-light);
+  margin-bottom: 1.5rem;
+  font-style: italic;
+  min-height: 2.5em;
+}
+
+/* --- Buttons --- */
+.tg-btn {
+  display: inline-block;
+  padding: 0.7rem 1.8rem;
+  border: none;
+  border-radius: 6px;
+  font-family: Georgia, serif;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+}
+
+.tg-btn-primary {
+  background: linear-gradient(135deg, #2d5016, #4a7c2e);
+  color: var(--parchment);
+  border: 2px solid #2d5016;
+}
+
+.tg-btn-primary:hover { background: linear-gradient(135deg, #4a7c2e, #5d9a3a); }
+
+.tg-btn-leather {
+  background: linear-gradient(135deg, #8b4513, #a0522d);
+  color: var(--parchment);
+  border: 2px solid #5c2e0a;
+}
+
+.tg-btn-leather:hover { background: linear-gradient(135deg, #a0522d, #b5673a); }
+
+.tg-btn-danger {
+  background: linear-gradient(135deg, #8b1a1a, #a52a2a);
+  color: var(--parchment);
+  border: 2px solid #5a0a0a;
+}
+
+.tg-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* --- Station/Stop View --- */
+.tg-stop-desc {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+  color: var(--ink-light);
+}
+
+.tg-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.tg-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #8b4513;
+  border-radius: 6px;
+  background: rgba(139,69,19,0.08);
+  color: var(--ink);
+  font-family: Georgia, serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+}
+
+.tg-action-btn:hover:not(:disabled) {
+  background: rgba(139,69,19,0.18);
+  border-color: #5c2e0a;
+}
+
+.tg-action-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.tg-action-btn .tg-action-icon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.tg-action-btn .tg-action-label {
+  display: flex;
+  flex-direction: column;
+}
+
+.tg-action-btn .tg-action-label small {
+  font-size: 0.75rem;
+  color: var(--ink-light);
+}
+
+.tg-continue-row {
+  text-align: center;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #d4c49a;
+}
+
+/* --- Event View --- */
+.tg-event-narrative {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+  color: var(--ink);
+  padding: 0.75rem;
+  background: rgba(139,69,19,0.06);
+  border-left: 3px solid #8b4513;
+  border-radius: 0 6px 6px 0;
+}
+
+.tg-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.tg-choice-btn {
+  display: block;
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border: 1px solid #8b4513;
+  border-radius: 6px;
+  background: var(--parchment);
+  color: var(--ink);
+  font-family: Georgia, serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s;
+  line-height: 1.4;
+}
+
+.tg-choice-btn:hover {
+  background: #e6d5a0;
+  border-color: #5c2e0a;
+}
+
+.tg-choice-btn.chosen-good {
+  background: #d4edda;
+  border-color: #2d5016;
+  cursor: default;
+}
+
+.tg-choice-btn.chosen-bad {
+  background: #f8d7da;
+  border-color: #8b1a1a;
+  cursor: default;
+}
+
+.tg-choice-btn.disabled-choice {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* --- Event Result --- */
+.tg-result {
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  animation: tgFadeIn 0.4s ease;
+}
+
+.tg-result-good {
+  background: rgba(45,80,22,0.12);
+  border: 1px solid #4a7c2e;
+  color: #2d5016;
+}
+
+.tg-result-bad {
+  background: rgba(139,26,26,0.1);
+  border: 1px solid #c44;
+  color: #8b1a1a;
+}
+
+.tg-result-neutral {
+  background: rgba(58,107,140,0.1);
+  border: 1px solid #5a9bbc;
+  color: #2a5a7c;
+}
+
+/* --- Travel Animation --- */
+.tg-travel-scene {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.tg-travel-progress {
+  width: 100%;
+  height: 8px;
+  background: #1a0f08;
+  border-radius: 4px;
+  margin: 1.5rem 0;
+  border: 1px solid #5c4033;
+  overflow: hidden;
+}
+
+.tg-travel-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #d4760a, #f5a623);
+  border-radius: 3px;
+  transition: width 1s ease;
+}
+
+.tg-travel-text {
+  font-size: 1.1rem;
+  color: var(--parchment);
+  margin-bottom: 0.5rem;
+}
+
+.tg-travel-detail {
+  font-size: 0.85rem;
+  color: #a08060;
+  font-style: italic;
+}
+
+/* --- Party Panel --- */
+.tg-party-panel {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.tg-party-member {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.6rem;
+  background: rgba(0,0,0,0.05);
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+.tg-party-member.sick {
+  background: rgba(139,26,26,0.1);
+  color: #8b1a1a;
+}
+
+.tg-party-member.dead {
+  opacity: 0.4;
+  text-decoration: line-through;
+}
+
+.tg-party-health-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.tg-party-health-dot.good { background: #4a7c2e; }
+.tg-party-health-dot.fair { background: #d4760a; }
+.tg-party-health-dot.poor { background: #c44; }
+.tg-party-health-dot.dead { background: #666; }
+
+/* --- Game Over / Victory --- */
+.tg-endscreen {
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.tg-endscreen h2 {
+  font-size: 1.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.tg-endscreen .tg-end-subtitle {
+  font-size: 1rem;
+  color: var(--ink-light);
+  font-style: italic;
+  margin-bottom: 1.5rem;
+}
+
+.tg-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.tg-stat-item {
+  padding: 0.5rem 0.75rem;
+  background: rgba(0,0,0,0.05);
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+
+.tg-stat-label {
+  color: var(--ink-light);
+  font-size: 0.75rem;
+  display: block;
+}
+
+.tg-stat-value {
+  font-weight: bold;
+  color: var(--ink);
+}
+
+.tg-tombstone {
+  max-width: 280px;
+  margin: 0 auto 1.5rem;
+  padding: 1.5rem;
+  border: 3px double #5c4033;
+  border-radius: 10px 10px 0 0;
+  background: rgba(0,0,0,0.06);
+  text-align: center;
+}
+
+.tg-tombstone h3 {
+  font-size: 1.2rem;
+  margin: 0 0 0.5rem;
+}
+
+.tg-tombstone p {
+  font-size: 0.9rem;
+  color: var(--ink-light);
+  margin: 0.25rem 0;
+  font-style: italic;
+}
+
+/* --- Journal Log --- */
+.tg-journal-log {
+  max-height: 200px;
+  overflow-y: auto;
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: rgba(0,0,0,0.05);
+  border-radius: 6px;
+  border: 1px solid #d4c49a;
+  font-size: 0.8rem;
+}
+
+.tg-journal-entry {
+  padding: 0.3rem 0;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  color: var(--ink-light);
+  line-height: 1.4;
+}
+
+.tg-journal-entry:last-child { border-bottom: none; }
+.tg-journal-date { color: #8b4513; font-weight: bold; }
+
+/* --- Back button --- */
+.tg-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.4rem 0.8rem;
+  margin-bottom: 0.75rem;
+  border: 1px solid #5c4033;
+  border-radius: 4px;
+  background: transparent;
+  color: #a08060;
+  font-family: system-ui, sans-serif;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tg-back-btn:hover {
+  background: rgba(255,255,255,0.05);
+  color: var(--parchment);
+}
+
+/* --- Animations --- */
+@keyframes tgFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.tg-fade-in {
+  animation: tgFadeIn 0.4s ease;
+}
+
+/* --- Responsive --- */
+@media (max-width: 600px) {
+  .tg-status-bar {
+    grid-template-columns: 1fr;
+    font-size: 0.8rem;
+  }
+  .tg-actions {
+    grid-template-columns: 1fr;
+  }
+  .tg-difficulty-select {
+    flex-direction: column;
+    align-items: center;
+  }
+  .tg-stats-grid {
+    grid-template-columns: 1fr;
+  }
+  .tg-party-panel {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  }
+}
