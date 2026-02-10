@@ -19,17 +19,15 @@
     ],
     "reflection": "Why do you think so many different kinds of people joined this expedition? What skills would each person bring?",
     "challenge": {
-      "type": "multiple_choice",
-      "question": "Based on what you just read, how many men were in the Corps of Discovery when they set off?",
-      "options": [
-        "About 12",
-        "Nearly four dozen (about 48)",
-        "Over 100",
-        "Exactly 33"
-      ],
-      "correct": 1,
-      "feedback_correct": "That's right! Nearly four dozen men — from soldiers to carpenters to hunters — set off from Camp Dubois.",
-      "feedback_incorrect": "Not quite. Clark wrote that nearly four dozen men (about 48) were involved at the start of the expedition."
+      "type": "map_click",
+      "question": "The expedition just set off! Click on the map to show where Camp Dubois is located.",
+      "instruction": "Click near St. Louis, Missouri — where the Missouri and Mississippi Rivers meet.",
+      "correct_lat": 38.8,
+      "correct_lon": -90.1,
+      "tolerance": 3.0,
+      "location_name": "Camp Dubois, near St. Louis",
+      "feedback_correct": "That's right! Camp Dubois was located near St. Louis, where the Missouri River flows into the Mississippi. This was the starting point of the entire expedition.",
+      "feedback_incorrect": "Not quite — Camp Dubois was near St. Louis, Missouri, at the eastern edge of the map where the Missouri and Mississippi Rivers meet. Look for the far right side of the trail."
     },
     "images": [
       {
@@ -56,24 +54,22 @@
         "date": "Monday, May 14, 1804",
         "text": [
           "Rained the forepart of the day. I determined to go as far as St. Charles, a French village 7 leagues up the Missouri and wait at that place until Capt. Lewis could finish the business in which he was obliged to attend to at St. Louis and join me by land.",
-          "I set out at 4 o’clock in the presence of many of the neighboring inhabitants and proceeded on under a gentle breeze up the Missouri and camped on the island."
+          "I set out at 4 o'clock in the presence of many of the neighboring inhabitants and proceeded on under a gentle breeze up the Missouri and camped on the island."
         ],
         "author": "Captain Clark"
       }
     ],
     "reflection": "The Corps of Discovery included people from very different backgrounds. What does this tell you about what was needed for such an expedition?",
     "challenge": {
-      "type": "multiple_choice",
-      "question": "Based on what you just read, how many men were in the Corps of Discovery when they set off?",
-      "options": [
-        "About 12",
-        "Nearly four dozen (about 48)",
-        "Over 100",
-        "Exactly 33"
-      ],
-      "correct": 1,
-      "feedback_correct": "That's right! Nearly four dozen men — from soldiers to carpenters to hunters — set off from Camp Dubois.",
-      "feedback_incorrect": "Not quite. Clark wrote that nearly four dozen men (about 48) were involved at the start of the expedition."
+      "type": "map_click",
+      "question": "The expedition just set off! Click on the map to show where Camp Dubois is located.",
+      "instruction": "Click near St. Louis, Missouri — where the Missouri and Mississippi Rivers meet.",
+      "correct_lat": 38.8,
+      "correct_lon": -90.1,
+      "tolerance": 3.0,
+      "location_name": "Camp Dubois, near St. Louis",
+      "feedback_correct": "That's right! Camp Dubois was located near St. Louis, where the Missouri River flows into the Mississippi. This was the starting point of the entire expedition.",
+      "feedback_incorrect": "Not quite — Camp Dubois was near St. Louis, Missouri, at the eastern edge of the map where the Missouri and Mississippi Rivers meet. Look for the far right side of the trail."
     },
     "images": [
       {
@@ -94,31 +90,29 @@
     "context": [
       "The Corps of Discovery sets off from Camp Dubois (Camp Wood) outside St. Louis and begins its ascent of the Missouri River. The expedition, commissioned by President Thomas Jefferson following the Louisiana Purchase of 1803, was tasked with finding a practical route to the Pacific Ocean, establishing diplomatic relations with Native American nations, and documenting the geography, flora, and fauna of the western territory.",
       "Nearly four dozen men compose the initial party, drawn from diverse backgrounds reflecting the American frontier. Three members are sons of French-Canadian fathers and Native American mothers, representing the existing mixed communities along the frontier. Clark brings York, a man he had enslaved since childhood, who would play a significant role throughout the journey. The rest include Army volunteers, skilled hunters, carpenters, and French boatmen (engagés).",
-      "Their fleet consists of a 55-foot keelboat capable of carrying 12 tons of supplies and two smaller pirogues. Navigating upstream against the Missouri’s powerful current requires every technique available: sailing when wind permits, rowing, pushing with setting poles, and cordelling — wading along the bank and hauling the boats forward with tow ropes."
+      "Their fleet consists of a 55-foot keelboat capable of carrying 12 tons of supplies and two smaller pirogues. Navigating upstream against the Missouri's powerful current requires every technique available: sailing when wind permits, rowing, pushing with setting poles, and cordelling — wading along the bank and hauling the boats forward with tow ropes."
     ],
     "journals": [
       {
         "date": "Monday, May 14, 1804",
         "text": [
           "Rained the forepart of the day. I determined to go as far as St. Charles, a French village 7 leagues up the Missouri and wait at that place until Capt. Lewis could finish the business in which he was obliged to attend to at St. Louis and join me by land.",
-          "I set out at 4 o’clock in the presence of many of the neighboring inhabitants and proceeded on under a gentle breeze up the Missouri and camped on the island."
+          "I set out at 4 o'clock in the presence of many of the neighboring inhabitants and proceeded on under a gentle breeze up the Missouri and camped on the island."
         ],
         "author": "Captain Clark"
       }
     ],
-    "reflection": "Consider the composition of the Corps — soldiers, frontiersmen, enslaved individuals, and men of mixed heritage. What does this reveal about American society on the frontier in 1804? How might each person’s background have contributed differently to the expedition’s success?",
+    "reflection": "Consider the composition of the Corps — soldiers, frontiersmen, enslaved individuals, and men of mixed heritage. What does this reveal about American society on the frontier in 1804? How might each person's background have contributed differently to the expedition's success?",
     "challenge": {
-      "type": "multiple_choice",
-      "question": "Based on what you just read, how many men were in the Corps of Discovery when they set off?",
-      "options": [
-        "About 12",
-        "Nearly four dozen (about 48)",
-        "Over 100",
-        "Exactly 33"
-      ],
-      "correct": 1,
-      "feedback_correct": "That's right! Nearly four dozen men — from soldiers to carpenters to hunters — set off from Camp Dubois.",
-      "feedback_incorrect": "Not quite. Clark wrote that nearly four dozen men (about 48) were involved at the start of the expedition."
+      "type": "map_click",
+      "question": "The expedition just set off! Click on the map to show where Camp Dubois is located.",
+      "instruction": "Click near St. Louis, Missouri — where the Missouri and Mississippi Rivers meet.",
+      "correct_lat": 38.8,
+      "correct_lon": -90.1,
+      "tolerance": 3.0,
+      "location_name": "Camp Dubois, near St. Louis",
+      "feedback_correct": "That's right! Camp Dubois was located near St. Louis, where the Missouri River flows into the Mississippi. This was the starting point of the entire expedition.",
+      "feedback_incorrect": "Not quite — Camp Dubois was near St. Louis, Missouri, at the eastern edge of the map where the Missouri and Mississippi Rivers meet. Look for the far right side of the trail."
     },
     "images": [
       {

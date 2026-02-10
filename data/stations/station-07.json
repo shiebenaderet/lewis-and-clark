@@ -19,17 +19,15 @@
     ],
     "reflection": "Lewis uses very descriptive words to tell us about the Great Falls. What words or phrases help you picture what the falls looked like?",
     "challenge": {
-      "type": "multiple_choice",
-      "question": "How long did it take the Corps to portage (carry everything overland) around the Great Falls?",
-      "options": [
-        "About 3 days",
-        "About 1 week",
-        "About 2 weeks",
-        "Nearly a month"
-      ],
-      "correct": 3,
-      "feedback_correct": "Correct! The portage took nearly a month — from mid-June to mid-July. They had to carry heavy boats and supplies 16 miles overland while dealing with grizzly bears, cactus, and mosquitoes.",
-      "feedback_incorrect": "It actually took nearly a month! The 16-mile portage was one of the most grueling parts of the entire expedition."
+      "type": "fill_in_blank",
+      "question": "Complete Lewis's famous description when he first saw the Great Falls:",
+      "quote_before": "I hurried down the hill … to gaze on this sublimely grand spectacle … the",
+      "blank_answer": "grandest sight I ever beheld",
+      "quote_after": ".",
+      "hint": "Lewis used a superlative to describe what he saw — the greatest _____ of his life.",
+      "accepted_answers": ["grandest sight i ever beheld", "grandest sight i ever saw", "grandest sight", "grandest sight i had ever beheld"],
+      "feedback_correct": "That's the quote! Lewis called the Great Falls 'the grandest sight I ever beheld.' His poetic description stands out as one of the most literary passages in the entire journal.",
+      "feedback_incorrect": "Lewis called it 'the grandest sight I ever beheld.' This dramatic moment inspired some of his most poetic writing in the entire journal."
     },
     "images": [
       {
@@ -68,17 +66,15 @@
     ],
     "reflection": "Lewis calls the Great Falls “the grandest sight I ever beheld.” His writing becomes unusually poetic here. Why might this natural wonder have affected him so strongly? What literary techniques does he use to convey the experience?",
     "challenge": {
-      "type": "multiple_choice",
-      "question": "How long did it take the Corps to portage (carry everything overland) around the Great Falls?",
-      "options": [
-        "About 3 days",
-        "About 1 week",
-        "About 2 weeks",
-        "Nearly a month"
-      ],
-      "correct": 3,
-      "feedback_correct": "Correct! The portage took nearly a month — from mid-June to mid-July. They had to carry heavy boats and supplies 16 miles overland while dealing with grizzly bears, cactus, and mosquitoes.",
-      "feedback_incorrect": "It actually took nearly a month! The 16-mile portage was one of the most grueling parts of the entire expedition."
+      "type": "fill_in_blank",
+      "question": "Complete Lewis's famous description when he first saw the Great Falls:",
+      "quote_before": "I hurried down the hill … to gaze on this sublimely grand spectacle … the",
+      "blank_answer": "grandest sight I ever beheld",
+      "quote_after": ".",
+      "hint": "Lewis used a superlative to describe what he saw — the greatest _____ of his life.",
+      "accepted_answers": ["grandest sight i ever beheld", "grandest sight i ever saw", "grandest sight", "grandest sight i had ever beheld"],
+      "feedback_correct": "That's the quote! Lewis called the Great Falls 'the grandest sight I ever beheld.' His poetic description stands out as one of the most literary passages in the entire journal.",
+      "feedback_incorrect": "Lewis called it 'the grandest sight I ever beheld.' This dramatic moment inspired some of his most poetic writing in the entire journal."
     },
     "images": [
       {
@@ -119,17 +115,15 @@
     ],
     "reflection": "Lewis’s description of the Great Falls is often cited as an example of the “sublime” in early American nature writing — the Romantic-era concept that nature’s overwhelming grandeur inspires both awe and terror. Analyze Lewis’s literary techniques: his use of sensory details, metaphor, and scale. Note also the detail about “several Indian lodges” — even at this “undiscovered” wonder, there is evidence of prior human presence. What does this suggest?",
     "challenge": {
-      "type": "multiple_choice",
-      "question": "How long did it take the Corps to portage (carry everything overland) around the Great Falls?",
-      "options": [
-        "About 3 days",
-        "About 1 week",
-        "About 2 weeks",
-        "Nearly a month"
-      ],
-      "correct": 3,
-      "feedback_correct": "Correct! The portage took nearly a month — from mid-June to mid-July. They had to carry heavy boats and supplies 16 miles overland while dealing with grizzly bears, cactus, and mosquitoes.",
-      "feedback_incorrect": "It actually took nearly a month! The 16-mile portage was one of the most grueling parts of the entire expedition."
+      "type": "fill_in_blank",
+      "question": "Complete Lewis's famous description when he first saw the Great Falls:",
+      "quote_before": "I hurried down the hill … to gaze on this sublimely grand spectacle … the",
+      "blank_answer": "grandest sight I ever beheld",
+      "quote_after": ".",
+      "hint": "Lewis used a superlative to describe what he saw — the greatest _____ of his life.",
+      "accepted_answers": ["grandest sight i ever beheld", "grandest sight i ever saw", "grandest sight", "grandest sight i had ever beheld"],
+      "feedback_correct": "That's the quote! Lewis called the Great Falls 'the grandest sight I ever beheld.' His poetic description stands out as one of the most literary passages in the entire journal.",
+      "feedback_incorrect": "Lewis called it 'the grandest sight I ever beheld.' This dramatic moment inspired some of his most poetic writing in the entire journal."
     },
     "images": [
       {

@@ -19,17 +19,15 @@
     ],
     "reflection": "Lewis compares their little boats to the ships of Columbus and Captain Cook. Why do you think he made this comparison? How was he feeling at this moment?",
     "challenge": {
-      "type": "multiple_choice",
-      "question": "Lewis compared their little fleet to the ships of which famous explorers?",
-      "options": [
-        "Marco Polo and Magellan",
-        "Columbus and Captain Cook",
-        "Drake and Raleigh",
-        "Hudson and Cabot"
-      ],
-      "correct": 1,
-      "feedback_correct": "That's right! Lewis wrote their boats were 'not quite so respectable as that of Columbus or Captain Cook' but viewed 'with as much pleasure.' He saw their mission as equally historic.",
-      "feedback_incorrect": "Lewis specifically compared their fleet to those of Columbus and Captain Cook. He saw their expedition as equally important to history."
+      "type": "fill_in_blank",
+      "question": "Complete this famous quote from Lewis's journal on the day they left Fort Mandan:",
+      "quote_before": "This little fleet, although not quite so respectable as that of",
+      "blank_answer": "Columbus or Captain Cook",
+      "quote_after": ", was still viewed by us with as much pleasure as those deservedly famed adventurers ever beheld theirs.",
+      "hint": "Lewis compared their boats to the ships of two famous explorers.",
+      "accepted_answers": ["columbus or captain cook", "columbus and captain cook", "columbus or capt cook", "columbus and capt. cook", "columbus or capt. cook"],
+      "feedback_correct": "That's right! Lewis compared their humble fleet to the ships of Columbus and Captain Cook. He saw their expedition as equally historic — a remarkable display of confidence and ambition.",
+      "feedback_incorrect": "The answer is Columbus or Captain Cook. Lewis wrote that their boats weren't as grand as those famous explorers' ships, but were viewed 'with as much pleasure.' He saw their mission as equally historic."
     },
     "images": [
       {
@@ -65,17 +63,15 @@
     ],
     "reflection": "Lewis calls this “among the most happy” moments of his life. What emotions come through in his writing? How does his comparison to Columbus and Captain Cook reveal his sense of the expedition’s importance?",
     "challenge": {
-      "type": "multiple_choice",
-      "question": "Lewis compared their little fleet to the ships of which famous explorers?",
-      "options": [
-        "Marco Polo and Magellan",
-        "Columbus and Captain Cook",
-        "Drake and Raleigh",
-        "Hudson and Cabot"
-      ],
-      "correct": 1,
-      "feedback_correct": "That's right! Lewis wrote their boats were 'not quite so respectable as that of Columbus or Captain Cook' but viewed 'with as much pleasure.' He saw their mission as equally historic.",
-      "feedback_incorrect": "Lewis specifically compared their fleet to those of Columbus and Captain Cook. He saw their expedition as equally important to history."
+      "type": "fill_in_blank",
+      "question": "Complete this famous quote from Lewis's journal on the day they left Fort Mandan:",
+      "quote_before": "This little fleet, although not quite so respectable as that of",
+      "blank_answer": "Columbus or Captain Cook",
+      "quote_after": ", was still viewed by us with as much pleasure as those deservedly famed adventurers ever beheld theirs.",
+      "hint": "Lewis compared their boats to the ships of two famous explorers.",
+      "accepted_answers": ["columbus or captain cook", "columbus and captain cook", "columbus or capt cook", "columbus and capt. cook", "columbus or capt. cook"],
+      "feedback_correct": "That's right! Lewis compared their humble fleet to the ships of Columbus and Captain Cook. He saw their expedition as equally historic — a remarkable display of confidence and ambition.",
+      "feedback_incorrect": "The answer is Columbus or Captain Cook. Lewis wrote that their boats weren't as grand as those famous explorers' ships, but were viewed 'with as much pleasure.' He saw their mission as equally historic."
     },
     "images": [
       {
@@ -111,17 +107,15 @@
     ],
     "reflection": "Lewis writes that they are entering a country “on which the foot of civilized man had never trod.” Critically examine this phrase. What assumptions does it reveal about Lewis’s worldview? How does this language erase the Indigenous peoples who had lived in, traveled through, and shaped this landscape for thousands of years? Compare this to how Lewis describes Native Americans elsewhere in the journals.",
     "challenge": {
-      "type": "multiple_choice",
-      "question": "Lewis compared their little fleet to the ships of which famous explorers?",
-      "options": [
-        "Marco Polo and Magellan",
-        "Columbus and Captain Cook",
-        "Drake and Raleigh",
-        "Hudson and Cabot"
-      ],
-      "correct": 1,
-      "feedback_correct": "That's right! Lewis wrote their boats were 'not quite so respectable as that of Columbus or Captain Cook' but viewed 'with as much pleasure.' He saw their mission as equally historic.",
-      "feedback_incorrect": "Lewis specifically compared their fleet to those of Columbus and Captain Cook. He saw their expedition as equally important to history."
+      "type": "fill_in_blank",
+      "question": "Complete this famous quote from Lewis's journal on the day they left Fort Mandan:",
+      "quote_before": "This little fleet, although not quite so respectable as that of",
+      "blank_answer": "Columbus or Captain Cook",
+      "quote_after": ", was still viewed by us with as much pleasure as those deservedly famed adventurers ever beheld theirs.",
+      "hint": "Lewis compared their boats to the ships of two famous explorers.",
+      "accepted_answers": ["columbus or captain cook", "columbus and captain cook", "columbus or capt cook", "columbus and capt. cook", "columbus or capt. cook"],
+      "feedback_correct": "That's right! Lewis compared their humble fleet to the ships of Columbus and Captain Cook. He saw their expedition as equally historic — a remarkable display of confidence and ambition.",
+      "feedback_incorrect": "The answer is Columbus or Captain Cook. Lewis wrote that their boats weren't as grand as those famous explorers' ships, but were viewed 'with as much pleasure.' He saw their mission as equally historic."
     },
     "images": [
       {
