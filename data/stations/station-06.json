@@ -20,20 +20,19 @@
     "reflection": "Lewis compares their little boats to the ships of Columbus and Captain Cook. Why do you think he made this comparison? How was he feeling at this moment?",
     "challenge": {
       "type": "fill_in_blank",
-      "question": "Lewis compared their little boats to the ships of two famous explorers. Complete his quote:",
-      "quote_before": "This little fleet, although not quite so respectable as that of",
-      "blank_answer": "Columbus or Captain Cook",
-      "quote_after": ", was still viewed by us with as much pleasure as those deservedly famed adventurers ever beheld theirs.",
-      "hint": "Think of two famous explorers whose ships were much bigger and fancier.",
+      "question": "Lewis was thrilled to finally head west. Complete his quote about leaving Fort Mandan:",
+      "quote_before": "Leaving Fort Mandan was one of the",
+      "blank_answer": "happiest",
+      "quote_after": "moments of my life.",
+      "hint": "Lewis had been dreaming about this trip for 10 years. How would he describe this moment?",
       "accepted_answers": [
-        "columbus or captain cook",
-        "columbus and captain cook",
-        "columbus or capt cook",
-        "columbus and capt. cook",
-        "columbus or capt. cook"
+        "happiest",
+        "most happy",
+        "happiest moments",
+        "happiest moment"
       ],
-      "feedback_correct": "That’s right! Lewis compared their little boats to the famous ships of Columbus and Captain Cook. He was so excited that he felt their journey was just as important!",
-      "feedback_incorrect": "The answer is Columbus or Captain Cook. Lewis compared their small boats to the ships of those famous explorers. Even though their boats were small, Lewis felt their expedition was just as important!"
+      "feedback_correct": "That’s right! Lewis called leaving Fort Mandan one of the ‘happiest’ moments of his life. He had been dreaming about this journey for 10 years!",
+      "feedback_incorrect": "The answer is ‘happiest.’ Lewis wrote that leaving Fort Mandan was one of the happiest moments of his life — he had been dreaming about this expedition for 10 years!"
     },
     "images": [
       {
