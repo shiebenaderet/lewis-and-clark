@@ -112,32 +112,44 @@ function updateStationIndicator() {
 // === COMPLETION ===
 function completeExpedition() {
   const completionText = document.getElementById('completion-text');
-  const visited = state.visitedStations.size;
-  const challengesDone = state.challengesCompleted.size;
   const discCount = state.discoveries.length;
-  let milestoneHtml = '';
-  if (discCount >= 10) {
-    milestoneHtml = '<div class="completion-milestone master"><span class="completion-milestone-icon">\u{1F3C6}</span> Master Explorer &mdash; All 10 discoveries unlocked!</div>';
-  } else if (discCount >= 5) {
-    milestoneHtml = '<div class="completion-milestone junior"><span class="completion-milestone-icon">\u{1F3C5}</span> Junior Naturalist &mdash; ' + discCount + ' of 10 discoveries unlocked</div>';
-  } else if (discCount > 0) {
-    milestoneHtml = '<div class="completion-milestone">' + discCount + ' of 10 discoveries unlocked. Answer more Knowledge Checks correctly to earn milestones!</div>';
-  }
 
-  completionText.innerHTML = `
-    You've retraced the entire journey of the Corps of Discovery, from Camp Dubois to the Pacific Ocean and back through history!
-    <br><br>
-    You visited <strong>${visited} of ${STATIONS.length}</strong> stations and completed <strong>${challengesDone}</strong> knowledge checks.
-    <br>Discoveries: <strong>${discCount} of 10</strong>
-    <br>Your score: <strong>${state.score} points</strong>
-    ${milestoneHtml}
-    <br>
-    The expedition covered over 8,000 miles in 2 years, 4 months, and 10 days. They documented 178 plants and 122 animals previously unknown to science, established relations with dozens of Native American nations, and proved that an overland route to the Pacific was possible.
-    <br><br>
-    <em>"We were now about to penetrate a country at least 2,000 miles in width, on which the foot of civilized man had never trod."</em> &mdash; Captain Meriwether Lewis
-  `;
+  // Build the "Recovered Journal" timeline
+  let timelineHtml = '<div class="recovered-journal">';
+  timelineHtml += '<h2 class="recovered-journal-title">The Recovered Journal</h2>';
+  timelineHtml += '<p class="recovered-journal-intro">You\u2019ve recovered all 10 pages of the lost journal. Here is the story they tell:</p>';
+  timelineHtml += '<div class="recovered-timeline">';
+  for (let i = 0; i < STATIONS.length; i++) {
+    const s = STATIONS[i];
+    const d = s[state.level] || s.standard;
+    const disc = state.discoveries.includes(i) && DISCOVERIES[i] ? DISCOVERIES[i] : null;
+    const summary = state.journalEntries[`summary_${i}`] || '';
+    timelineHtml += '<div class="timeline-entry">';
+    timelineHtml += `<div class="timeline-marker">${disc ? disc.icon : '<span class="timeline-number">' + (i + 1) + '</span>'}</div>`;
+    timelineHtml += '<div class="timeline-content">';
+    timelineHtml += `<div class="timeline-station">${d.title}</div>`;
+    timelineHtml += `<div class="timeline-date">${d.dates}</div>`;
+    if (disc) {
+      timelineHtml += `<div class="timeline-clue"><span class="evidence-pin">&#x1F4CC;</span> ${disc.clue}</div>`;
+    }
+    if (summary) {
+      timelineHtml += `<div class="timeline-summary">&ldquo;${summary.substring(0, 150)}${summary.length > 150 ? '&hellip;' : ''}&rdquo;</div>`;
+    }
+    timelineHtml += '</div></div>';
+  }
+  timelineHtml += '</div>';
+
+  // Master Explorer synthesis
+  if (discCount >= 10 && typeof MILESTONE_SYNTHESIS !== 'undefined') {
+    timelineHtml += '<div class="completion-synthesis"><span class="completion-synthesis-icon">\u{1F3C6}</span> <strong>Master Explorer</strong><br>' + MILESTONE_SYNTHESIS[10] + '</div>';
+  } else if (discCount >= 5 && typeof MILESTONE_SYNTHESIS !== 'undefined') {
+    timelineHtml += '<div class="completion-synthesis junior"><span class="completion-synthesis-icon">\u{1F3C5}</span> <strong>Junior Naturalist</strong><br>' + MILESTONE_SYNTHESIS[5] + '</div>';
+  }
+  timelineHtml += '</div>';
+
+  completionText.innerHTML = timelineHtml;
   showScreen('completion-screen');
-  // Show final knowledge test
+  // Show final knowledge test (framed as Jefferson report)
   _ftScore = 0;
   _ftAnswered = 0;
   showFinalTest();

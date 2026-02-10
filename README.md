@@ -8,7 +8,7 @@ An interactive website that turns 10 classroom stations on the Lewis & Clark exp
 
 ## Version
 
-**v0.16.2** — Redesigned fill-in-the-blank quotes
+**v0.17.0** — Stage 5: Narrative Immersion Overhaul
 
 ## What This Is
 
@@ -33,7 +33,10 @@ This project replaces a paper-based station activity (where students walk around
 - **Fort Mandan seasonal atmosphere** — stations 4-6 feature distinct seasonal theming (autumn amber, winter blue, spring green) with tinted headers, borders, journal entries, and labeled season banners
 - **Interactive travel events** — 29 diverse encounters between stations: choice-based decisions and tap/swat mini-games covering weather, wildlife, navigation, health, Native encounters, and camp life
 - **Save/resume** — localStorage persistence so students can pick up where they left off; portable save codes for cross-device transfer
-- **Discoveries** — 10 collectible items unlocked by answering Knowledge Checks correctly, logged in journal and PDF export, with a progress tracker on every station and milestone achievements (Junior Naturalist at 5/10, Master Explorer at 10/10)
+- **Discoveries with clue fragments** — 10 collectible items unlocked by answering Knowledge Checks correctly, each with a narrative clue connecting to the expedition's bigger story. Progress tracker on every station with milestone achievements and synthesis messages at 5/10 (Junior Naturalist) and 10/10 (Master Explorer)
+- **Journal recovery mechanic** — journal entries are locked behind challenges, revealed with animation on completion, creating a genuine "discovery" moment
+- **Narrative variation** — key emotional stations (Sacagawea's baby, Shoshone reunion, Pacific arrival) get special visual framing and historical callouts
+- **Narrative completion screen** — "The Recovered Journal" timeline and "Report to President Jefferson" final test with narrative feedback
 - **Random trail events** between stations (grizzly bears, storms, mosquitoes, etc.)
 - **Reflection questions** at each station
 - **Primary source links** at each station to real digitized journal entries (University of Nebraska) and the Corps of Discovery Online Atlas (Lewis & Clark College)
@@ -87,6 +90,27 @@ Then open `http://localhost:8000` in your browser.
 **Note:** Opening `index.html` directly as a file (`file://`) will not work because browsers block `fetch()` requests from local files. You need a web server.
 
 ## Changelog
+
+### v0.17.0 — Narrative Immersion Overhaul
+- **Journal Recovery Mechanic** — journal entries are now locked behind a "Lost Journal Page" visual until the station challenge is completed:
+  - Locked state shows a torn-paper teaser (first ~120 characters, blurred) with a padlock icon
+  - Completing the challenge triggers a "Journal Page Recovered!" banner animation and reveals the full journal entries
+  - Works alongside the existing scenario system: scenario hides journals until answered, but full text still requires the challenge
+- **Discovery Clue Fragments** — each of the 10 discoveries now includes a narrative clue that connects to the expedition's bigger story:
+  - Clue fragments shown in an "evidence" callout after discovery unlock
+  - Milestone synthesis at 5 discoveries (Junior Naturalist): pattern about Native American dependence
+  - Milestone synthesis at 10 discoveries (Master Explorer): full-picture thesis about the expedition's complicated legacy
+- **Narrative Variation** — 3 key emotional moments get special visual treatment:
+  - Station 5 (Sacagawea's baby): "A Human Moment" witness framing with character moment callout about Jean Baptiste's future
+  - Station 8 (Shoshone reunion): "Turning Point" banner explaining how this moment saved the expedition
+  - Station 10 (Pacific / The Vote): "Ocean in View!" climax framing with Clark's famous quote and reflective coda
+- **Completion Screen Rebuild** — "The Recovered Journal" replaces the old stats dump:
+  - Vertical timeline showing all 10 stations with name, date, discovery icon + clue fragment, and student summary excerpt
+  - Milestone synthesis displayed at bottom based on discovery count
+  - Final test reframed as "Your Report to President Jefferson" with narrative feedback based on score
+- **Journal Gating** — "Continue West" now requires a brief summary entry (20+ characters):
+  - Soft nudge, not a hard lock (students can still navigate via map)
+  - "Skip for now" link appears after 10 seconds to prevent frustration
 
 ### v0.16.2
 - **Redesigned fill-in-the-blank quotes** (station 7) so the blank is answerable from surrounding context:

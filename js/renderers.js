@@ -86,17 +86,30 @@ const NEXT_CLUES = {
 
 // === DISCOVERIES (unlocked by getting challenges correct) ===
 const DISCOVERIES = [
-  { name: 'The Keelboat', icon: '\u26F5', desc: 'A 55-foot vessel that carried the Corps of Discovery into the unknown' },
-  { name: 'Prairie Dog', icon: '\uD83D\uDC3F\uFE0F', desc: 'A species new to American science, sent alive to President Jefferson' },
-  { name: 'Peace Medal Diplomacy', icon: '\uD83E\uDE99', desc: 'Jefferson\'s silver medals, given to tribal leaders to establish American relations' },
-  { name: 'Mandan Trade Network', icon: '\uD83C\uDF3E', desc: 'A vast continental trading system connecting the Great Lakes to the Rockies' },
-  { name: 'Jean Baptiste Charbonneau', icon: '\uD83D\uDC76', desc: 'Born Feb 11, 1805 at Fort Mandan \u2014 the youngest member of the expedition' },
-  { name: 'Terra Incognita', icon: '\uD83D\uDDFA\uFE0F', desc: 'Beyond Fort Mandan, the Corps entered land no American had ever mapped' },
-  { name: 'The Great Portage', icon: '\u26F0\uFE0F', desc: '18 miles overland \u2014 the most grueling physical challenge of the journey' },
-  { name: 'Shoshone Horses', icon: '\uD83D\uDC0E', desc: '29 horses acquired through Sacagawea\'s incredible reunion with her brother' },
-  { name: 'Nez Perce Rescue', icon: '\uD83E\uDE78', desc: 'The people who saved the starving expedition and taught them to build canoes' },
-  { name: 'The Great Vote', icon: '\uD83D\uDDF3\uFE0F', desc: 'Everyone voted \u2014 including York and Sacagawea \u2014 decades ahead of their time' }
+  { name: 'The Keelboat', icon: '\u26F5', desc: 'A 55-foot vessel that carried the Corps of Discovery into the unknown', clue: 'Jefferson\u2019s orders mention a water route to the Pacific \u2014 the Northwest Passage. Does it exist?' },
+  { name: 'Prairie Dog', icon: '\uD83D\uDC3F\uFE0F', desc: 'A species new to American science, sent alive to President Jefferson', clue: 'Lewis collected a live prairie dog to ship to Jefferson. Cataloging unknown species was a core mission.' },
+  { name: 'Peace Medal Diplomacy', icon: '\uD83E\uDE99', desc: 'Jefferson\u2019s silver medals, given to tribal leaders to establish American relations', clue: 'Jefferson designed specific peace medal ceremonies. What was the political purpose behind the \u201Cscientific\u201D expedition?' },
+  { name: 'Mandan Trade Network', icon: '\uD83C\uDF3E', desc: 'A vast continental trading system connecting the Great Lakes to the Rockies', clue: 'The Mandan already traded with Europeans. The \u201Cunknown\u201D West wasn\u2019t unknown to everyone.' },
+  { name: 'Jean Baptiste Charbonneau', icon: '\uD83D\uDC76', desc: 'Born Feb 11, 1805 at Fort Mandan \u2014 the youngest member of the expedition', clue: 'Sacagawea\u2019s baby was born on the expedition. Why would they bring an infant into the wilderness?' },
+  { name: 'Terra Incognita', icon: '\uD83D\uDDFA\uFE0F', desc: 'Beyond Fort Mandan, the Corps entered land no American had ever mapped', clue: 'Lewis compared their boats to Columbus\u2019s ships. He saw this as a voyage of world-historical importance.' },
+  { name: 'The Great Portage', icon: '\u26F0\uFE0F', desc: '18 miles overland \u2014 the most grueling physical challenge of the journey', clue: 'The Great Falls forced an 18-mile portage. The \u201Ceasy water route\u201D Jefferson hoped for doesn\u2019t exist.' },
+  { name: 'Shoshone Horses', icon: '\uD83D\uDC0E', desc: '29 horses acquired through Sacagawea\u2019s incredible reunion with her brother', clue: 'Without Sacagawea recognizing her brother, the expedition would have had no horses \u2014 and likely failed.' },
+  { name: 'Nez Perce Rescue', icon: '\uD83E\uDE78', desc: 'The people who saved the starving expedition and taught them to build canoes', clue: 'The Nez Perce saved the starving expedition. Every major survival moment depended on Native peoples.' },
+  { name: 'The Great Vote', icon: '\uD83D\uDDF3\uFE0F', desc: 'Everyone voted \u2014 including York and Sacagawea \u2014 decades ahead of their time', clue: 'York and Sacagawea voted equally. On the frontier, the rules of \u201Ccivilization\u201D didn\u2019t always apply.' }
 ];
+
+// === MILESTONE SYNTHESIS MESSAGES ===
+const MILESTONE_SYNTHESIS = {
+  5: 'Pattern emerging: The expedition depended on Native American knowledge, trade, and diplomacy at every turn. Jefferson imagined a scientific mission \u2014 but survival required human connections.',
+  10: 'The full picture: Jefferson sent Lewis and Clark to find a water route to the Pacific and claim the land for America. But the \u201Cunknown\u201D West was home to millions. The expedition succeeded not through American superiority, but through the generosity of the Mandan, Shoshone, and Nez Perce peoples. The journal you\u2019ve recovered tells a more complicated story than the one Jefferson expected.'
+};
+
+// === NARRATIVE VARIATION — special stations ===
+const STATION_NARRATIVE = {
+  4: { type: 'witness', label: 'A Human Moment', tagline: 'You\u2019re about to witness one of the most personal moments of the entire expedition.' },
+  7: { type: 'turning-point', label: 'Turning Point', tagline: 'This moment changed everything. Without it, the expedition almost certainly fails.' },
+  9: { type: 'climax', label: 'Ocean in View!', tagline: 'After 4,000 miles and 18 months, they finally reached the end of the continent.' }
+};
 
 // === FINAL EXPEDITION TEST (shown on completion screen) ===
 const FINAL_TEST = {
@@ -128,8 +141,8 @@ function showFinalTest() {
   if (!area) return;
   const questions = FINAL_TEST[state.level] || FINAL_TEST.standard;
   let html = '<div class="final-test">';
-  html += '<h2 class="final-test-title">Expedition Knowledge Test</h2>';
-  html += '<p class="final-test-subtitle">How much did you learn on your journey? Answer 5 questions to find out.</p>';
+  html += '<h2 class="final-test-title">Your Report to President Jefferson</h2>';
+  html += '<p class="final-test-subtitle">The President wants to know what you\u2019ve learned. Answer his questions about the expedition.</p>';
   html += '<div id="final-test-questions">';
   questions.forEach((q, i) => {
     html += `<div class="ft-question" id="ftq_${i}">`;
@@ -179,10 +192,10 @@ function answerFinalTest(qIdx, choice) {
     const result = document.getElementById('ft-result');
     const pct = Math.round((_ftScore / questions.length) * 100);
     let grade = '';
-    if (pct === 100) grade = 'Perfect score! You\u2019re a true expedition scholar.';
-    else if (pct >= 80) grade = 'Excellent! You paid close attention on your journey.';
-    else if (pct >= 60) grade = 'Good work! You picked up a lot along the trail.';
-    else grade = 'Keep exploring! Try revisiting some stations to learn more.';
+    if (pct === 100) grade = 'Jefferson\u2019s response: \u201CExcellent work. You have the makings of a true explorer-scholar. The republic is in your debt.\u201D';
+    else if (pct >= 80) grade = 'Jefferson\u2019s response: \u201CA solid report. You\u2019ve grasped the essential story of this remarkable journey.\u201D';
+    else if (pct >= 60) grade = 'Jefferson\u2019s response: \u201CA fair accounting. Perhaps review the journals more carefully before your next expedition.\u201D';
+    else grade = 'Jefferson\u2019s response: \u201CI expected a more thorough report. Revisit the journals and try again, young historian.\u201D';
     result.innerHTML = `<strong>${_ftScore} / ${questions.length}</strong> (${pct}%) \u2014 ${grade}`;
     result.style.display = '';
     state.score += _ftScore * 5;
@@ -274,6 +287,15 @@ function renderStation(index) {
   });
   html += '</div>';
 
+  // Narrative variation banner for special stations
+  const narrative = STATION_NARRATIVE[index];
+  if (narrative) {
+    html += `<div class="narrative-banner narrative-${narrative.type}">`;
+    html += `<div class="narrative-banner-label">${narrative.label}</div>`;
+    html += `<div class="narrative-banner-text">${narrative.tagline}</div>`;
+    html += '</div>';
+  }
+
   // "What Would You Do?" scenario (Stage 2 — appears before journals)
   const scenarioId = `scenario_${index}`;
   const scenarioCompleted = state.scenariosCompleted.has(scenarioId);
@@ -281,27 +303,46 @@ function renderStation(index) {
     html += renderScenario(data.scenario, index, scenarioCompleted);
   }
 
-  // Journal entries (dates and authors are clickable to auto-fill journal)
-  // If scenario exists and not yet completed, journals start hidden
-  const journalHidden = data.scenario && !scenarioCompleted ? ' style="display:none"' : '';
-  html += `<div class="journal-entries-wrap" id="journals_${index}"${journalHidden}>`;
-  if (data.scenario) {
+  // === JOURNAL RECOVERY MECHANIC ===
+  // Journals are LOCKED until the challenge is completed ("recover the lost page").
+  // If a scenario exists and isn't answered yet, the whole section is hidden.
+  // Otherwise, show a locked teaser OR the full recovered journal.
+  const scenarioBlocking = data.scenario && !scenarioCompleted;
+  const journalsRecovered = challengeCompleted;
+
+  html += `<div class="journal-entries-wrap" id="journals_${index}"${scenarioBlocking ? ' style="display:none"' : ''}>`;
+  if (data.scenario && !scenarioBlocking) {
     html += '<div class="journal-reveal-label">Now read what they actually wrote...</div>';
   }
+
   if (data.journals && data.journals.length > 0) {
-    data.journals.forEach(j => {
-      const safeDate = j.date.replace(/'/g, "\\'");
-      const safeAuthor = j.author.replace(/'/g, "\\'");
-      html += '<div class="journal-entry">';
-      html += `<div class="journal-date clickable-fill" onclick="autoFillJournal(${index}, 'date', '${safeDate}')" title="Tap to add to your journal">${j.date} <span class="fill-hint">tap to add</span></div>`;
-      html += '<div class="journal-text">';
-      j.text.forEach(p => {
-        html += `<p>${p}</p>`;
+    if (journalsRecovered) {
+      // RECOVERED — show full journal entries
+      html += '<div class="journal-recovered-banner"><span class="journal-recovered-icon">&#x1F4DC;</span> Journal Page Recovered</div>';
+      data.journals.forEach(j => {
+        const safeDate = j.date.replace(/'/g, "\\'");
+        const safeAuthor = j.author.replace(/'/g, "\\'");
+        html += '<div class="journal-entry">';
+        html += `<div class="journal-date clickable-fill" onclick="autoFillJournal(${index}, 'date', '${safeDate}')" title="Tap to add to your journal">${j.date} <span class="fill-hint">tap to add</span></div>`;
+        html += '<div class="journal-text">';
+        j.text.forEach(p => {
+          html += `<p>${p}</p>`;
+        });
+        html += '</div>';
+        html += `<div class="journal-author clickable-fill" onclick="autoFillJournal(${index}, 'author', '${safeAuthor}')" title="Tap to add to your journal">&mdash; ${j.author} <span class="fill-hint">tap to add</span></div>`;
+        html += '</div>';
       });
+    } else {
+      // LOCKED — show teaser with torn page effect
+      const firstJournal = data.journals[0];
+      const teaser = firstJournal.text[0].replace(/<[^>]+>/g, '').substring(0, 120);
+      html += '<div class="journal-locked">';
+      html += '<div class="journal-locked-icon">&#x1F512;</div>';
+      html += '<div class="journal-locked-label">Lost Journal Page</div>';
+      html += `<div class="journal-locked-teaser">&ldquo;${teaser}&hellip;&rdquo;</div>`;
+      html += '<div class="journal-locked-hint">Complete the Knowledge Check below to recover this journal entry.</div>';
       html += '</div>';
-      html += `<div class="journal-author clickable-fill" onclick="autoFillJournal(${index}, 'author', '${safeAuthor}')" title="Tap to add to your journal">&mdash; ${j.author} <span class="fill-hint">tap to add</span></div>`;
-      html += '</div>';
-    });
+    }
   }
   html += '</div>';
 
@@ -387,20 +428,27 @@ function renderStation(index) {
   }
   html += '</div>';
 
-  // Navigation (gated behind challenge completion)
+  // Navigation (gated behind challenge completion + journal nudge)
+  const hasSummary = (state.journalEntries[`summary_${index}`] || '').trim().length >= 20;
   html += '<div class="station-nav">';
   html += `<button class="btn-station-nav" onclick="goToStation(${index - 1})" ${index === 0 ? 'disabled' : ''}>&larr; Previous Station</button>`;
   if (index < STATIONS.length - 1) {
-    if (challengeCompleted) {
-      html += `<button class="btn-station-nav primary" onclick="travelToStation(${index + 1})">Continue West &rarr;</button>`;
-    } else {
+    if (!challengeCompleted) {
       html += `<button class="btn-station-nav locked" id="btn-continue-west" disabled>Complete the Knowledge Check &rarr;</button>`;
+    } else if (!hasSummary) {
+      html += `<button class="btn-station-nav locked" id="btn-continue-west" disabled>Write a brief journal summary to continue &rarr;</button>`;
+      html += `<div class="journal-skip-hint" id="journal-skip-${index}" style="display:none"><a href="#" onclick="event.preventDefault();enableContinueWest(${index})">skip for now</a></div>`;
+    } else {
+      html += `<button class="btn-station-nav primary" onclick="travelToStation(${index + 1})">Continue West &rarr;</button>`;
     }
   } else {
-    if (challengeCompleted) {
-      html += `<button class="btn-station-nav primary" onclick="completeExpedition()">Complete the Expedition &rarr;</button>`;
-    } else {
+    if (!challengeCompleted) {
       html += `<button class="btn-station-nav locked" id="btn-continue-west" disabled>Complete the Knowledge Check &rarr;</button>`;
+    } else if (!hasSummary) {
+      html += `<button class="btn-station-nav locked" id="btn-continue-west" disabled>Write a brief journal summary to continue &rarr;</button>`;
+      html += `<div class="journal-skip-hint" id="journal-skip-${index}" style="display:none"><a href="#" onclick="event.preventDefault();enableContinueWest(${index})">skip for now</a></div>`;
+    } else {
+      html += `<button class="btn-station-nav primary" onclick="completeExpedition()">Complete the Expedition &rarr;</button>`;
     }
   }
   html += '</div>';
@@ -418,6 +466,12 @@ function renderStation(index) {
     } else if (data.challenge.type === 'ordering') {
       initOrderingChallenge(index);
     }
+  }
+
+  // Show "skip for now" link after 10 seconds if journal gate is active
+  const skipHint = document.getElementById(`journal-skip-${index}`);
+  if (skipHint) {
+    setTimeout(() => { skipHint.style.display = ''; }, 10000);
   }
 }
 
@@ -1020,12 +1074,19 @@ function completeChallengeResult(stationIndex, isCorrect, challenge) {
       banner.className = 'discovery-banner';
       banner.innerHTML = `<span class="discovery-banner-icon">${d.icon}</span> <strong>Discovery Unlocked:</strong> ${d.name} <span class="discovery-banner-desc">&mdash; ${d.desc}</span>`;
       feedback.parentNode.insertBefore(banner, feedback.nextSibling);
+      // Show clue fragment as evidence
+      if (d.clue) {
+        const clueEl = document.createElement('div');
+        clueEl.className = 'evidence-clue';
+        clueEl.innerHTML = `<span class="evidence-clue-pin">&#x1F4CC;</span> <span class="evidence-clue-text">${d.clue}</span>`;
+        banner.after(clueEl);
+      }
       // Check for milestone achievements
       const count = state.discoveries.length;
       if (count === 5 || count === 10) {
         const milestone = count === 5
-          ? { title: 'Junior Naturalist', desc: 'You\'ve uncovered 5 of 10 discoveries \u2014 halfway to Master Explorer!', icon: '\u{1F3C5}' }
-          : { title: 'Master Explorer', desc: 'All 10 discoveries unlocked! You\'ve mastered the trail of Lewis & Clark.', icon: '\u{1F3C6}' };
+          ? { title: 'Junior Naturalist', desc: MILESTONE_SYNTHESIS[5], icon: '\u{1F3C5}' }
+          : { title: 'Master Explorer', desc: MILESTONE_SYNTHESIS[10], icon: '\u{1F3C6}' };
         const mEl = document.createElement('div');
         mEl.className = 'milestone-popup';
         mEl.innerHTML = `<span class="milestone-popup-icon">${milestone.icon}</span><div><strong class="milestone-popup-title">${milestone.title}</strong><div class="milestone-popup-desc">${milestone.desc}</div></div>`;
@@ -1056,18 +1117,34 @@ function completeChallengeResult(stationIndex, isCorrect, challenge) {
   updateScoreDisplay();
   saveGame();
 
-  // Enable Continue West button now that challenge is answered
+  // Enable Continue West button (with journal gate check)
   const continueBtn = document.getElementById('btn-continue-west');
   if (continueBtn) {
-    continueBtn.classList.remove('locked');
-    continueBtn.disabled = false;
-    continueBtn.classList.add('primary');
-    if (stationIndex < STATIONS.length - 1) {
-      continueBtn.textContent = 'Continue West \u2192';
-      continueBtn.onclick = function() { travelToStation(stationIndex + 1); };
+    const summaryWritten = (state.journalEntries[`summary_${stationIndex}`] || '').trim().length >= 20;
+    if (summaryWritten) {
+      continueBtn.classList.remove('locked');
+      continueBtn.disabled = false;
+      continueBtn.classList.add('primary');
+      if (stationIndex < STATIONS.length - 1) {
+        continueBtn.textContent = 'Continue West \u2192';
+        continueBtn.onclick = function() { travelToStation(stationIndex + 1); };
+      } else {
+        continueBtn.textContent = 'Complete the Expedition \u2192';
+        continueBtn.onclick = function() { completeExpedition(); };
+      }
     } else {
-      continueBtn.textContent = 'Complete the Expedition \u2192';
-      continueBtn.onclick = function() { completeExpedition(); };
+      continueBtn.textContent = 'Write a brief journal summary to continue \u2192';
+      // Add a skip hint that appears after 10s
+      const navEl = continueBtn.closest('.station-nav');
+      if (navEl && !document.getElementById(`journal-skip-${stationIndex}`)) {
+        const skipEl = document.createElement('div');
+        skipEl.className = 'journal-skip-hint';
+        skipEl.id = `journal-skip-${stationIndex}`;
+        skipEl.style.display = 'none';
+        skipEl.innerHTML = '<a href="#" onclick="event.preventDefault();enableContinueWest(' + stationIndex + ')">skip for now</a>';
+        navEl.appendChild(skipEl);
+        setTimeout(() => { skipEl.style.display = ''; }, 10000);
+      }
     }
 
     // Show the next clue
@@ -1079,6 +1156,68 @@ function completeChallengeResult(stationIndex, isCorrect, challenge) {
       clueEl.innerHTML = '<div class="discovery-clue-label">Clue to the Next Station</div>' +
         '<div class="discovery-clue-text">' + clueArr[stationIndex] + '</div>';
       navEl.parentNode.insertBefore(clueEl, navEl);
+    }
+  }
+
+  // === JOURNAL RECOVERY REVEAL ===
+  // Replace the locked teaser with full journal entries
+  const journalWrap = document.getElementById(`journals_${stationIndex}`);
+  if (journalWrap) {
+    const locked = journalWrap.querySelector('.journal-locked');
+    if (locked) {
+      const station = STATIONS[stationIndex];
+      const data = station[state.level] || station.standard;
+      if (data.journals && data.journals.length > 0) {
+        let jhtml = '<div class="journal-recovered-banner fade-in"><span class="journal-recovered-icon">&#x1F4DC;</span> Journal Page Recovered!</div>';
+        data.journals.forEach(j => {
+          const sd = j.date.replace(/'/g, "\\'");
+          const sa = j.author.replace(/'/g, "\\'");
+          jhtml += '<div class="journal-entry fade-in">';
+          jhtml += '<div class="journal-date clickable-fill" onclick="autoFillJournal(' + stationIndex + ', \'date\', \'' + sd + '\')" title="Tap to add to your journal">' + j.date + ' <span class="fill-hint">tap to add</span></div>';
+          jhtml += '<div class="journal-text">';
+          j.text.forEach(p => { jhtml += '<p>' + p + '</p>'; });
+          jhtml += '</div>';
+          jhtml += '<div class="journal-author clickable-fill" onclick="autoFillJournal(' + stationIndex + ', \'author\', \'' + sa + '\')" title="Tap to add to your journal">&mdash; ' + j.author + ' <span class="fill-hint">tap to add</span></div>';
+          jhtml += '</div>';
+        });
+        locked.outerHTML = jhtml;
+      }
+    }
+  }
+}
+
+// --- Journal gating helpers ---
+function checkJournalGate(stationIndex) {
+  const summary = (state.journalEntries[`summary_${stationIndex}`] || '').trim();
+  if (summary.length >= 20) {
+    const btn = document.getElementById('btn-continue-west');
+    if (btn && btn.disabled) {
+      btn.classList.remove('locked');
+      btn.disabled = false;
+      btn.classList.add('primary');
+      if (stationIndex < STATIONS.length - 1) {
+        btn.textContent = 'Continue West \u2192';
+        btn.onclick = function() { travelToStation(stationIndex + 1); };
+      } else {
+        btn.textContent = 'Complete the Expedition \u2192';
+        btn.onclick = function() { completeExpedition(); };
+      }
+    }
+  }
+}
+
+function enableContinueWest(stationIndex) {
+  const btn = document.getElementById('btn-continue-west');
+  if (btn) {
+    btn.classList.remove('locked');
+    btn.disabled = false;
+    btn.classList.add('primary');
+    if (stationIndex < STATIONS.length - 1) {
+      btn.textContent = 'Continue West \u2192';
+      btn.onclick = function() { travelToStation(stationIndex + 1); };
+    } else {
+      btn.textContent = 'Complete the Expedition \u2192';
+      btn.onclick = function() { completeExpedition(); };
     }
   }
 }

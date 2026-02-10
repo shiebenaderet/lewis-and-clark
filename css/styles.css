@@ -1071,6 +1071,265 @@ body {
 }
 .completion-milestone-icon { font-size: 1.2rem; margin-right: 0.3rem; vertical-align: middle; }
 
+/* --- Stage 5: Journal Recovery --- */
+.journal-locked {
+  text-align: center;
+  padding: 2rem 1.5rem;
+  margin: 1rem 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(139, 69, 19, 0.04),
+    rgba(139, 69, 19, 0.04) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  border: 2px dashed rgba(139, 69, 19, 0.3);
+  border-radius: 8px;
+  position: relative;
+}
+.journal-locked-icon {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 0.5rem;
+  opacity: 0.6;
+}
+.journal-locked-label {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  color: var(--leather);
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+.journal-locked-teaser {
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--ink-light);
+  opacity: 0.6;
+  filter: blur(0.5px);
+  max-width: 400px;
+  margin: 0 auto 0.75rem;
+  line-height: 1.5;
+}
+.journal-locked-hint {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  color: var(--campfire);
+  font-weight: 600;
+}
+
+.journal-recovered-banner {
+  text-align: center;
+  padding: 0.6rem 1rem;
+  margin: 0.75rem 0;
+  background: linear-gradient(135deg, rgba(245, 166, 35, 0.12), rgba(212, 118, 10, 0.08));
+  border: 2px solid var(--campfire-glow);
+  border-radius: 8px;
+  color: var(--campfire-glow);
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: bold;
+  animation: recoveryFlash 0.8s ease;
+}
+.journal-recovered-icon {
+  font-size: 1.2rem;
+  margin-right: 0.3rem;
+  vertical-align: middle;
+}
+
+@keyframes recoveryFlash {
+  0% { opacity: 0; transform: scale(0.95); }
+  50% { background: rgba(245, 166, 35, 0.25); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* --- Stage 5: Evidence Clue Fragments --- */
+.evidence-clue {
+  margin-top: 0.5rem;
+  padding: 0.6rem 0.85rem;
+  background: rgba(244, 232, 193, 0.08);
+  border-left: 3px solid var(--campfire-glow);
+  border-radius: 0 6px 6px 0;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--parchment-dark);
+  line-height: 1.5;
+}
+.evidence-clue-pin {
+  font-style: normal;
+  margin-right: 0.25rem;
+}
+
+/* --- Stage 5: Narrative Variation Banners --- */
+.narrative-banner {
+  margin: 1rem 0;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  text-align: center;
+}
+.narrative-banner-label {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+.narrative-banner-text {
+  font-size: 0.9rem;
+  font-style: italic;
+  line-height: 1.5;
+}
+.narrative-witness {
+  background: linear-gradient(135deg, rgba(90, 155, 188, 0.1), rgba(58, 107, 140, 0.06));
+  border: 1.5px solid rgba(90, 155, 188, 0.3);
+}
+.narrative-witness .narrative-banner-label { color: var(--river); }
+.narrative-witness .narrative-banner-text { color: var(--ink-light); }
+.narrative-turning-point {
+  background: linear-gradient(135deg, rgba(212, 118, 10, 0.1), rgba(245, 166, 35, 0.06));
+  border: 1.5px solid rgba(212, 118, 10, 0.3);
+}
+.narrative-turning-point .narrative-banner-label { color: var(--campfire); }
+.narrative-turning-point .narrative-banner-text { color: var(--ink-light); }
+.narrative-climax {
+  background: linear-gradient(135deg, rgba(45, 80, 22, 0.1), rgba(74, 124, 46, 0.06));
+  border: 1.5px solid rgba(74, 124, 46, 0.3);
+}
+.narrative-climax .narrative-banner-label { color: var(--forest-light); font-size: 0.9rem; }
+.narrative-climax .narrative-banner-text { color: var(--ink-light); }
+
+/* --- Stage 5: Journal Gating --- */
+.journal-skip-hint {
+  text-align: center;
+  margin-top: 0.4rem;
+  font-size: 0.75rem;
+  opacity: 0;
+  animation: fadeIn 0.5s ease forwards;
+}
+.journal-skip-hint a {
+  color: var(--parchment-dark);
+  opacity: 0.5;
+  text-decoration: underline;
+}
+.journal-skip-hint a:hover { opacity: 0.8; }
+
+/* --- Stage 5: Recovered Journal Timeline (Completion Screen) --- */
+.recovered-journal {
+  text-align: left;
+  margin-bottom: 1.5rem;
+}
+.recovered-journal-title {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  color: var(--parchment);
+  text-align: center;
+  margin-bottom: 0.25rem;
+}
+.recovered-journal-intro {
+  font-size: 0.9rem;
+  color: var(--parchment-dark);
+  text-align: center;
+  margin-bottom: 1.25rem;
+  font-style: italic;
+}
+.recovered-timeline {
+  position: relative;
+  padding-left: 2.5rem;
+}
+.recovered-timeline::before {
+  content: '';
+  position: absolute;
+  left: 1rem;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--campfire-glow), var(--campfire), var(--forest-light));
+}
+.timeline-entry {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+.timeline-marker {
+  position: absolute;
+  left: -2.5rem;
+  width: 2rem;
+  text-align: center;
+  font-size: 1.1rem;
+  line-height: 1;
+  z-index: 1;
+}
+.timeline-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: var(--leather);
+  color: var(--parchment);
+  border-radius: 50%;
+  font-size: 0.65rem;
+  font-weight: 700;
+  font-family: var(--font-ui);
+}
+.timeline-content {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(244, 232, 193, 0.1);
+  border-radius: 6px;
+}
+.timeline-station {
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  color: var(--parchment);
+  font-weight: bold;
+}
+.timeline-date {
+  font-size: 0.75rem;
+  color: var(--parchment-dark);
+  opacity: 0.7;
+  margin-bottom: 0.3rem;
+}
+.timeline-clue {
+  font-size: 0.8rem;
+  font-style: italic;
+  color: var(--campfire-glow);
+  margin-bottom: 0.2rem;
+  line-height: 1.4;
+}
+.evidence-pin { font-style: normal; }
+.timeline-summary {
+  font-size: 0.8rem;
+  color: var(--parchment-dark);
+  opacity: 0.8;
+  line-height: 1.4;
+}
+
+.completion-synthesis {
+  margin-top: 1.5rem;
+  padding: 1rem 1.25rem;
+  background: linear-gradient(135deg, rgba(245, 166, 35, 0.12), rgba(212, 118, 10, 0.08));
+  border: 2px solid var(--campfire-glow);
+  border-radius: 8px;
+  color: var(--parchment);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  text-align: center;
+}
+.completion-synthesis.junior {
+  border-color: rgba(192, 192, 192, 0.4);
+  background: linear-gradient(135deg, rgba(192, 192, 192, 0.1), rgba(160, 160, 160, 0.06));
+}
+.completion-synthesis-icon {
+  font-size: 1.3rem;
+  vertical-align: middle;
+  margin-right: 0.3rem;
+}
+
 /* --- Final Expedition Test --- */
 .final-test {
   margin-top: 2rem;
