@@ -8,6 +8,12 @@ function showScreen(screenId) {
   document.getElementById(screenId).classList.add('active');
 }
 
+function goHome() {
+  saveGame();
+  showScreen('title-screen');
+  updateTitleContinueButton();
+}
+
 // === LEVEL MANAGEMENT ===
 function setLevel(level) {
   state.level = level;
@@ -191,6 +197,8 @@ function applySaveCode() {
   state.seenEvents = saved.seenEvents || [];
   state.discoveries = saved.discoveries || [];
   saveGame(); // persist to localStorage
+  // If all 10 stations visited, unlock the game
+  if (state.visitedStations.size >= 10) unlockGame();
 
   document.querySelectorAll('.level-btn, .level-toggle button').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.level === state.level);
