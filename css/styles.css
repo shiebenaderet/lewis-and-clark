@@ -21,6 +21,7 @@
   --campfire-glow: #f5a623;
   --danger: #8b1a1a;
   --trail-brown: #6b4423;
+  --old-paper-text: #3d2518;
   --font-heading: 'Georgia', 'Times New Roman', serif;
   --font-body: 'Georgia', serif;
   --font-journal: 'Georgia', italic, serif;
@@ -650,13 +651,13 @@ body {
   font-size: 0.65rem;
   font-weight: normal;
   font-style: normal;
-  color: var(--leather);
-  opacity: 0.5;
+  color: var(--leather-dark);
+  opacity: 0.7;
   margin-left: 0.3rem;
   vertical-align: middle;
 }
 
-.clickable-fill:hover .fill-hint { opacity: 0.8; }
+.clickable-fill:hover .fill-hint { opacity: 1; }
 
 .journal-field-input.field-filled,
 .journal-field-textarea.field-filled {
@@ -1089,7 +1090,7 @@ body {
 .final-test-subtitle {
   font-size: 0.85rem;
   color: var(--parchment-dark);
-  opacity: 0.7;
+  opacity: 0.85;
   margin-bottom: 1.25rem;
   text-align: center;
 }
@@ -1107,7 +1108,7 @@ body {
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(244,232,193,0.15);
   border-radius: 6px;
-  color: var(--parchment-dark);
+  color: var(--parchment);
   font-family: var(--font-body);
   font-size: 0.85rem;
   cursor: pointer;
@@ -1638,7 +1639,7 @@ body {
 
 /* --- Challenge: Fill in the Blank --- */
 .fill-blank-quote {
-  background: rgba(107, 68, 35, 0.1);
+  background: rgba(107, 68, 35, 0.15);
   border-left: 3px solid var(--campfire-glow);
   padding: 1rem 1.25rem;
   margin-bottom: 0.75rem;
@@ -1646,7 +1647,7 @@ body {
   font-style: italic;
   font-size: 1rem;
   line-height: 1.7;
-  color: var(--old-paper-text);
+  color: var(--parchment);
 }
 .quote-text {
   color: inherit;
@@ -1654,24 +1655,30 @@ body {
 .fill-blank-input {
   display: inline-block;
   width: auto;
-  min-width: 180px;
-  max-width: 300px;
-  padding: 0.3rem 0.5rem;
-  margin: 0 0.15rem;
-  background: rgba(244, 232, 193, 0.2);
+  min-width: 200px;
+  max-width: 320px;
+  padding: 0.4rem 0.6rem;
+  margin: 0.2rem 0.15rem;
+  background: rgba(244, 232, 193, 0.35);
   border: 2px dashed var(--campfire-glow);
   border-radius: 4px;
   font-family: Georgia, serif;
   font-size: 1rem;
   font-style: normal;
-  color: var(--old-paper-text);
+  color: var(--parchment);
   text-align: center;
   vertical-align: baseline;
+  box-shadow: inset 0 1px 4px rgba(0,0,0,0.3);
+}
+.fill-blank-input::placeholder {
+  color: rgba(244, 232, 193, 0.5);
+  font-style: italic;
 }
 .fill-blank-input:focus {
   outline: none;
   border-color: #f5a623;
-  background: rgba(244, 232, 193, 0.35);
+  border-style: solid;
+  background: rgba(244, 232, 193, 0.45);
 }
 .fill-blank-input.correct {
   border-style: solid;
@@ -1696,13 +1703,13 @@ body {
 }
 .fill-blank-hint {
   font-size: 0.85rem;
-  color: #b8a88a;
+  color: var(--parchment-dark);
   margin-bottom: 0.5rem;
 }
 .fill-blank-reveal {
   margin-top: 0.4rem;
   font-size: 0.9rem;
-  color: #b8a88a;
+  color: var(--parchment-dark);
   font-style: italic;
 }
 
@@ -1761,7 +1768,7 @@ body {
   padding: 0.4rem 0.6rem;
   font-size: 0.8rem;
   text-align: center;
-  color: #b8a88a;
+  color: var(--parchment-dark);
 }
 
 /* Responsive: Stack image match on small screens */
@@ -1866,7 +1873,7 @@ body {
 .milestone-badge.junior {
   background: linear-gradient(135deg, rgba(192,192,192,0.2), rgba(160,160,160,0.1));
   border: 1px solid rgba(140,140,140,0.4);
-  color: #5c5c5c;
+  color: #4a4a4a;
 }
 
 .milestone-badge.master {
@@ -2386,8 +2393,8 @@ body {
   padding: 0.4rem 1rem;
   border: 1px solid rgba(244,232,193,0.3);
   border-radius: 4px;
-  background: rgba(244,232,193,0.08);
-  color: var(--parchment-dark);
+  background: rgba(244,232,193,0.1);
+  color: var(--parchment);
   font-family: var(--font-ui);
   font-size: 0.8rem;
   cursor: pointer;
@@ -2415,7 +2422,7 @@ body {
   margin-bottom: 0.5rem;
 }
 
-.save-code-text::placeholder { color: rgba(244,232,193,0.3); }
+.save-code-text::placeholder { color: rgba(244,232,193,0.55); }
 
 .teacher-resources {
   margin-top: 2rem;
@@ -2427,7 +2434,7 @@ body {
 .teacher-toggle {
   font-family: var(--font-ui);
   font-size: 0.75rem;
-  color: rgba(244, 232, 193, 0.4);
+  color: rgba(244, 232, 193, 0.65);
   cursor: pointer;
   list-style: none;
   text-align: center;
@@ -2465,7 +2472,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 4px;
   text-decoration: none;
-  color: rgba(244, 232, 193, 0.6);
+  color: rgba(244, 232, 193, 0.8);
   font-family: var(--font-ui);
   font-size: 0.78rem;
   transition: all 0.2s;
@@ -2480,7 +2487,7 @@ body {
 .teacher-links a span {
   display: block;
   font-size: 0.65rem;
-  color: rgba(244, 232, 193, 0.3);
+  color: rgba(244, 232, 193, 0.55);
   margin-top: 0.1rem;
 }
 

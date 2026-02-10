@@ -8,7 +8,7 @@ An interactive website that turns 10 classroom stations on the Lewis & Clark exp
 
 ## Version
 
-**v0.16.0** — Level-differentiated challenges, end-of-expedition test, CC BY-NC 4.0 license
+**v0.16.1** — Contrast and legibility fixes
 
 ## What This Is
 
@@ -87,6 +87,19 @@ Then open `http://localhost:8000` in your browser.
 **Note:** Opening `index.html` directly as a file (`file://`) will not work because browsers block `fetch()` requests from local files. You need a web server.
 
 ## Changelog
+
+### v0.16.1
+- **Contrast and legibility fixes** across the entire site:
+  - Defined missing `--old-paper-text` CSS variable (affected fill-in-the-blank quotes and scenario text)
+  - Fill-in-the-blank input field: stronger background, inset shadow, visible placeholder text, solid border on focus
+  - Fill-in-the-blank hint and reveal text: upgraded from faint tan to legible parchment
+  - Image-match captions: upgraded from faint tan to legible parchment
+  - Teacher resources links: opacity raised from 0.6/0.3 to 0.8/0.55
+  - Teacher toggle text: opacity raised from 0.4 to 0.65
+  - Save code buttons and placeholders: stronger text color
+  - Journal click-to-fill hints: darker color, higher opacity
+  - Final test subtitle and options: improved contrast
+  - Milestone badge (Junior Naturalist): darker text for better readability
 
 ### v0.16.0
 - **Level-differentiated challenges** — all 10 station challenges now scale with the selected reading level:
