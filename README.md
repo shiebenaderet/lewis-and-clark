@@ -8,7 +8,7 @@ An interactive website that turns 10 classroom stations on the Lewis & Clark exp
 
 ## Version
 
-**v0.14.0** — Discovery milestones and progress tracker
+**v0.15.0** — Detailed geographic map and harder challenges
 
 ## What This Is
 
@@ -87,6 +87,16 @@ Then open `http://localhost:8000` in your browser.
 **Note:** Opening `index.html` directly as a file (`file://`) will not work because browsers block `fetch()` requests from local files. You need a web server.
 
 ## Changelog
+
+### v0.15.0
+- **Detailed geographic map** for map-click challenges: Pacific coastline, state/territory boundary lines, mountain range shading with peak symbols, 6 named rivers (Missouri, Columbia, Snake, Mississippi, Yellowstone, Platte), Great Lakes edge, 10 modern city reference labels (St. Louis, Omaha, Bismarck, Helena, Portland, etc.), and region labels
+- **Challenge difficulty rebalance** — 6 of 10 stations updated so answers require actually reading the journals and context:
+  - **Station 1** (map click): instruction no longer tells you the answer; must read Clark's journal to identify the starting river
+  - **Station 4** (image match): quote removed from question; captions replaced with neutral "Image A/B/C/D" labels
+  - **Station 6** (fill-in-blank): changed to a harder quote ("the foot of civilized man had never trod") that requires close reading
+  - **Station 8** (map click): geographic region removed from instruction; must read context to determine location
+  - **Station 9** (ordering): items rewritten with more specific journal details instead of paraphrasing the context
+  - **Station 10** (image match): reframed as a primary source identification question with neutral captions
 
 ### v0.14.0
 - **Discovery progress tracker** on every station: visual progress bar, 10 icon slots that fill in as discoveries are unlocked, and live updates when a new discovery is earned

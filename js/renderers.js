@@ -526,33 +526,95 @@ function initMapClickChallenge(stationIndex) {
     { lat: 46.1, lon: -123.9 }
   ];
 
-  // Build mini SVG map
+  // Build mini SVG map with geographic detail
   let svg = `<svg viewBox="0 0 ${svgW} ${svgH}" xmlns="http://www.w3.org/2000/svg" class="map-click-svg" style="font-family:Georgia,serif;">`;
-  svg += `<rect width="${svgW}" height="${svgH}" fill="#f4e8c1"/>`;
+  // Land and water background
+  svg += `<rect width="${svgW}" height="${svgH}" fill="#e8dcc8"/>`;
 
-  // Rivers (simplified)
-  const missouri = [[38.8,-90.1],[39.5,-92.5],[41.0,-96.0],[43.0,-98.5],[46.0,-100.5],[47.3,-101.4],[47.5,-111.3]];
-  const columbia = [[45.9,-112.5],[46.5,-115.5],[46.2,-119.0],[46.1,-123.9]];
-  [missouri, columbia].forEach(river => {
-    const pts = river.map(c => proj(c[0], c[1]));
-    svg += `<polyline points="${pts.map(p => p.x+','+p.y).join(' ')}" fill="none" stroke="#7bafd4" stroke-width="2.5" stroke-dasharray="6,3" opacity="0.6"/>`;
+  // Pacific Ocean (west coast)
+  const coast = [[49,-124.5],[48.4,-124.6],[47.5,-124.4],[46.8,-124.1],[46.2,-124.0],[45.5,-124.0],[44.5,-124.2],[43.5,-124.4],[42,-124.5],[41,-124.3],[39,-123.8],[38,-123.0],[37,-122.5],[36.5,-122]];
+  const coastPts = coast.map(c => proj(c[0], c[1]));
+  svg += `<path d="M0,0 L0,${svgH} L${coastPts[coastPts.length-1].x},${svgH} ${coastPts.reverse().map(p => 'L'+p.x+','+p.y).join(' ')} L0,0 Z" fill="#c5dbe8" opacity="0.5"/>`;
+  svg += `<polyline points="${coast.reverse().map(c => {const p=proj(c[0],c[1]); return p.x+','+p.y;}).join(' ')}" fill="none" stroke="#8fb8d4" stroke-width="1.5"/>`;
+
+  // State/territory boundaries (approximate)
+  const stateBorders = [
+    // US-Canada border (49th parallel)
+    [[49,-126.5],[49,-87.5]],
+    // Major N-S state lines
+    [[-104,49],[-104,37]].map(c => [c[1],c[0]]), // Montana/Dakota border area
+    [[-111,49],[-111,37]].map(c => [c[1],c[0]]), // Montana/Idaho area
+    [[-117,49],[-117,42]].map(c => [c[1],c[0]]), // WA/OR border area
+    // Major E-W state lines
+    [[42,-124.5],[42,-104]], // OR/CA border
+    [[46,-124.5],[46,-117]], // WA/OR border
+  ];
+  stateBorders.forEach(border => {
+    const pts = border.map(c => proj(c[0], c[1]));
+    svg += `<polyline points="${pts.map(p => p.x+','+p.y).join(' ')}" fill="none" stroke="#b8a88a" stroke-width="0.8" stroke-dasharray="4,4" opacity="0.5"/>`;
   });
 
-  // Mountain ridgeline
-  const mtns = [[44.5,-109],[45.5,-111],[46.5,-113],[47,-114.5],[46.5,-115.5],[45.5,-116]];
-  const mtnPts = mtns.map(c => proj(c[0], c[1]));
-  svg += `<polyline points="${mtnPts.map(p => p.x+','+p.y).join(' ')}" fill="none" stroke="#8b7355" stroke-width="2" opacity="0.5"/>`;
+  // Rivers (more detailed, solid lines)
+  const rivers = [
+    { name: 'Missouri R.', pts: [[38.8,-90.1],[38.9,-91.5],[39.1,-93.0],[39.5,-94.6],[40.0,-95.5],[41.0,-96.0],[42.0,-96.5],[43.0,-98.5],[44.5,-100.0],[46.0,-100.5],[47.3,-101.4],[48.0,-104.0],[47.8,-107.0],[47.5,-111.3]], w: 2.5 },
+    { name: 'Columbia R.', pts: [[46.2,-119.0],[46.0,-120.5],[46.1,-121.5],[46.1,-123.9]], w: 2.5 },
+    { name: 'Snake R.', pts: [[45.9,-112.5],[45.5,-114.0],[46.5,-115.5],[46.4,-117.0],[46.2,-119.0]], w: 2 },
+    { name: 'Mississippi R.', pts: [[47.5,-90.5],[45.0,-89.5],[43.0,-91.0],[41.5,-90.5],[40.0,-91.5],[38.8,-90.1],[37.5,-89.5]], w: 3 },
+    { name: 'Yellowstone R.', pts: [[46.0,-100.5],[46.8,-105.0],[45.8,-108.5],[45.0,-110.5]], w: 1.5 },
+    { name: 'Platte R.', pts: [[41.0,-96.0],[41.0,-98.5],[41.0,-101.5],[41.0,-104.5]], w: 1.5 },
+  ];
+  rivers.forEach(r => {
+    const pts = r.pts.map(c => proj(c[0], c[1]));
+    svg += `<polyline points="${pts.map(p => p.x+','+p.y).join(' ')}" fill="none" stroke="#7bafd4" stroke-width="${r.w}" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>`;
+  });
 
-  // Labels
-  const labP = proj(42, -100);
-  svg += `<text x="${labP.x}" y="${labP.y}" text-anchor="middle" font-size="16" fill="#8b7355" font-style="italic" opacity="0.6">Great Plains</text>`;
-  const labM = proj(46, -113.5);
-  svg += `<text x="${labM.x}" y="${labM.y}" text-anchor="middle" font-size="14" fill="#6b4423" font-style="italic" opacity="0.5" transform="rotate(-15,${labM.x},${labM.y})">Rocky Mountains</text>`;
+  // Mountain range (shaded area, not just a line)
+  const mtnWest = [[44,-110],[45,-112],[46,-114],[47,-115],[48,-116],[48.5,-116]];
+  const mtnEast = [[48.5,-114.5],[48,-113.5],[47,-112.5],[46,-111],[45,-110],[44,-108.5]];
+  const mtnAll = [...mtnWest, ...mtnEast.reverse()];
+  const mtnPath = mtnAll.map((c,i) => {const p=proj(c[0],c[1]); return (i===0?'M':'L')+p.x+','+p.y;}).join(' ') + ' Z';
+  svg += `<path d="${mtnPath}" fill="#a09070" opacity="0.15"/>`;
+  // Mountain ridge symbols
+  const mtnPeaks = [[44.5,-109.5],[45.2,-110.8],[46,-112.5],[46.5,-113.5],[47,-114.5],[47.5,-115.5]];
+  mtnPeaks.forEach(c => {
+    const p = proj(c[0], c[1]);
+    svg += `<path d="M${p.x-6},${p.y+4} L${p.x},${p.y-6} L${p.x+6},${p.y+4}" fill="none" stroke="#8b7355" stroke-width="1.5" opacity="0.6"/>`;
+  });
 
-  // Station dots (dimmed reference)
-  mapStations.forEach((s, i) => {
-    const p = proj(s.lat, s.lon);
-    svg += `<circle cx="${p.x}" cy="${p.y}" r="5" fill="#6b4423" opacity="0.25"/>`;
+  // Great Lakes (partial, east edge of map)
+  const lakeSuperior = [[47,-87.5],[47.5,-88.5],[48,-89.5],[48.5,-89]];
+  const lsPts = lakeSuperior.map(c => proj(c[0], c[1]));
+  svg += `<polyline points="${lsPts.map(p => p.x+','+p.y).join(' ')}" fill="none" stroke="#7bafd4" stroke-width="2" opacity="0.5"/>`;
+
+  // Region labels
+  const regions = [
+    { text: 'Great Plains', lat: 42, lon: -100, size: 15, rotate: 0 },
+    { text: 'Rocky Mountains', lat: 46.5, lon: -113.5, size: 12, rotate: -20 },
+    { text: 'Pacific Ocean', lat: 43, lon: -126, size: 13, rotate: 90 },
+  ];
+  regions.forEach(r => {
+    const p = proj(r.lat, r.lon);
+    const rot = r.rotate ? ` transform="rotate(${r.rotate},${p.x},${p.y})"` : '';
+    svg += `<text x="${p.x}" y="${p.y}" text-anchor="middle" font-size="${r.size}" fill="#8b7355" font-style="italic" opacity="0.5"${rot}>${r.text}</text>`;
+  });
+
+  // City reference labels (so students can orient themselves)
+  const cities = [
+    { name: 'St. Louis', lat: 38.6, lon: -90.2 },
+    { name: 'Omaha', lat: 41.3, lon: -95.9 },
+    { name: 'Bismarck', lat: 46.8, lon: -100.8 },
+    { name: 'Billings', lat: 45.8, lon: -108.5 },
+    { name: 'Helena', lat: 46.6, lon: -112.0 },
+    { name: 'Portland', lat: 45.5, lon: -122.7 },
+    { name: 'Boise', lat: 43.6, lon: -116.2 },
+    { name: 'Denver', lat: 39.7, lon: -105.0 },
+    { name: 'Minneapolis', lat: 44.9, lon: -93.3 },
+    { name: 'Seattle', lat: 47.6, lon: -122.3 },
+  ];
+  cities.forEach(c => {
+    const p = proj(c.lat, c.lon);
+    svg += `<circle cx="${p.x}" cy="${p.y}" r="2.5" fill="#666" opacity="0.5"/>`;
+    svg += `<text x="${p.x+5}" y="${p.y+4}" font-size="10" fill="#666" opacity="0.6" style="font-family:system-ui,sans-serif;">${c.name}</text>`;
   });
 
   // Click target (invisible, full coverage)

@@ -20,14 +20,22 @@
     "reflection": "Lewis compares their little boats to the ships of Columbus and Captain Cook. Why do you think he made this comparison? How was he feeling at this moment?",
     "challenge": {
       "type": "fill_in_blank",
-      "question": "Complete this famous quote from Lewis's journal on the day they left Fort Mandan:",
-      "quote_before": "This little fleet, although not quite so respectable as that of",
-      "blank_answer": "Columbus or Captain Cook",
-      "quote_after": ", was still viewed by us with as much pleasure as those deservedly famed adventurers ever beheld theirs.",
-      "hint": "Lewis compared their boats to the ships of two famous explorers.",
-      "accepted_answers": ["columbus or captain cook", "columbus and captain cook", "columbus or capt cook", "columbus and capt. cook", "columbus or capt. cook"],
-      "feedback_correct": "That's right! Lewis compared their humble fleet to the ships of Columbus and Captain Cook. He saw their expedition as equally historic — a remarkable display of confidence and ambition.",
-      "feedback_incorrect": "The answer is Columbus or Captain Cook. Lewis wrote that their boats weren't as grand as those famous explorers' ships, but were viewed 'with as much pleasure.' He saw their mission as equally historic."
+      "question": "Lewis was deeply excited to leave Fort Mandan. Complete this quote from his journal about what lay ahead:",
+      "quote_before": "We were now about to penetrate a country at least two thousand miles in width, on which the foot of",
+      "blank_answer": "civilized man had never trod",
+      "quote_after": "— the good or evil it had in store for us was for experiment yet to determine.",
+      "hint": "Lewis is describing how no American or European had been where they were going.",
+      "accepted_answers": [
+        "civilized man had never trod",
+        "civilised man had never trod",
+        "civilized man had never tread",
+        "civilized man never trod",
+        "civilized man had never walked",
+        "white man had never trod",
+        "a white man had never trod"
+      ],
+      "feedback_correct": "Exactly! Lewis wrote ‘the foot of civilized man had never trod’ — capturing the enormity of venturing into completely unmapped territory. Of course, millions of Native Americans already lived there, but from Lewis’s perspective, this was terra incognita.",
+      "feedback_incorrect": "The answer is ‘civilized man had never trod.’ Lewis was describing how no American or European had ever traveled through the vast country ahead of them. Read his journal entry carefully for this famous line."
     },
     "images": [
       {
@@ -64,14 +72,22 @@
     "reflection": "Lewis calls this “among the most happy” moments of his life. What emotions come through in his writing? How does his comparison to Columbus and Captain Cook reveal his sense of the expedition’s importance?",
     "challenge": {
       "type": "fill_in_blank",
-      "question": "Complete this famous quote from Lewis's journal on the day they left Fort Mandan:",
-      "quote_before": "This little fleet, although not quite so respectable as that of",
-      "blank_answer": "Columbus or Captain Cook",
-      "quote_after": ", was still viewed by us with as much pleasure as those deservedly famed adventurers ever beheld theirs.",
-      "hint": "Lewis compared their boats to the ships of two famous explorers.",
-      "accepted_answers": ["columbus or captain cook", "columbus and captain cook", "columbus or capt cook", "columbus and capt. cook", "columbus or capt. cook"],
-      "feedback_correct": "That's right! Lewis compared their humble fleet to the ships of Columbus and Captain Cook. He saw their expedition as equally historic — a remarkable display of confidence and ambition.",
-      "feedback_incorrect": "The answer is Columbus or Captain Cook. Lewis wrote that their boats weren't as grand as those famous explorers' ships, but were viewed 'with as much pleasure.' He saw their mission as equally historic."
+      "question": "Lewis was deeply excited to leave Fort Mandan. Complete this quote from his journal about what lay ahead:",
+      "quote_before": "We were now about to penetrate a country at least two thousand miles in width, on which the foot of",
+      "blank_answer": "civilized man had never trod",
+      "quote_after": "— the good or evil it had in store for us was for experiment yet to determine.",
+      "hint": "Lewis is describing how no American or European had been where they were going.",
+      "accepted_answers": [
+        "civilized man had never trod",
+        "civilised man had never trod",
+        "civilized man had never tread",
+        "civilized man never trod",
+        "civilized man had never walked",
+        "white man had never trod",
+        "a white man had never trod"
+      ],
+      "feedback_correct": "Exactly! Lewis wrote ‘the foot of civilized man had never trod’ — capturing the enormity of venturing into completely unmapped territory. Of course, millions of Native Americans already lived there, but from Lewis’s perspective, this was terra incognita.",
+      "feedback_incorrect": "The answer is ‘civilized man had never trod.’ Lewis was describing how no American or European had ever traveled through the vast country ahead of them. Read his journal entry carefully for this famous line."
     },
     "images": [
       {
@@ -108,14 +124,22 @@
     "reflection": "Lewis writes that they are entering a country “on which the foot of civilized man had never trod.” Critically examine this phrase. What assumptions does it reveal about Lewis’s worldview? How does this language erase the Indigenous peoples who had lived in, traveled through, and shaped this landscape for thousands of years? Compare this to how Lewis describes Native Americans elsewhere in the journals.",
     "challenge": {
       "type": "fill_in_blank",
-      "question": "Complete this famous quote from Lewis's journal on the day they left Fort Mandan:",
-      "quote_before": "This little fleet, although not quite so respectable as that of",
-      "blank_answer": "Columbus or Captain Cook",
-      "quote_after": ", was still viewed by us with as much pleasure as those deservedly famed adventurers ever beheld theirs.",
-      "hint": "Lewis compared their boats to the ships of two famous explorers.",
-      "accepted_answers": ["columbus or captain cook", "columbus and captain cook", "columbus or capt cook", "columbus and capt. cook", "columbus or capt. cook"],
-      "feedback_correct": "That's right! Lewis compared their humble fleet to the ships of Columbus and Captain Cook. He saw their expedition as equally historic — a remarkable display of confidence and ambition.",
-      "feedback_incorrect": "The answer is Columbus or Captain Cook. Lewis wrote that their boats weren't as grand as those famous explorers' ships, but were viewed 'with as much pleasure.' He saw their mission as equally historic."
+      "question": "Lewis was deeply excited to leave Fort Mandan. Complete this quote from his journal about what lay ahead:",
+      "quote_before": "We were now about to penetrate a country at least two thousand miles in width, on which the foot of",
+      "blank_answer": "civilized man had never trod",
+      "quote_after": "— the good or evil it had in store for us was for experiment yet to determine.",
+      "hint": "Lewis is describing how no American or European had been where they were going.",
+      "accepted_answers": [
+        "civilized man had never trod",
+        "civilised man had never trod",
+        "civilized man had never tread",
+        "civilized man never trod",
+        "civilized man had never walked",
+        "white man had never trod",
+        "a white man had never trod"
+      ],
+      "feedback_correct": "Exactly! Lewis wrote ‘the foot of civilized man had never trod’ — capturing the enormity of venturing into completely unmapped territory. Of course, millions of Native Americans already lived there, but from Lewis’s perspective, this was terra incognita.",
+      "feedback_incorrect": "The answer is ‘civilized man had never trod.’ Lewis was describing how no American or European had ever traveled through the vast country ahead of them. Read his journal entry carefully for this famous line."
     },
     "images": [
       {
