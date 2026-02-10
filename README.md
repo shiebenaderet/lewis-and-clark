@@ -8,7 +8,7 @@ An interactive website that turns 10 classroom stations on the Lewis & Clark exp
 
 ## Version
 
-**v0.10.2** — Modern road trip comparison on end screens
+**v0.11.0** — Diverse challenge types replace monotonous multiple-choice
 
 ## What This Is
 
@@ -28,7 +28,7 @@ This project replaces a paper-based station activity (where students walk around
 - **Guided journal entry prompts** at each station (date, author, summary, analysis) that auto-populate the journal tracker
 - **PDF journal export** — antique-styled journal with cover page, printable/saveable for Canvas submission
 - **Image galleries** at each station with 2–3 images (scene paintings, portraits, artifacts) from Wikimedia Commons, with carousel navigation
-- **Knowledge checks** — multiple-choice challenges at each station with feedback and scoring
+- **Diverse knowledge checks** — 5 challenge types across 10 stations: map click, chronological ordering (drag-and-drop), fill-in-the-blank journal quotes, image matching, and multiple choice
 - **Interactive travel events** — 29 diverse encounters between stations: choice-based decisions and tap/swat mini-games covering weather, wildlife, navigation, health, Native encounters, and camp life
 - **Save/resume** — localStorage persistence so students can pick up where they left off; portable save codes for cross-device transfer
 - **Discoveries** — 10 collectible items unlocked by answering Knowledge Checks correctly, logged in journal and PDF export
@@ -85,6 +85,16 @@ Then open `http://localhost:8000` in your browser.
 **Note:** Opening `index.html` directly as a file (`file://`) will not work because browsers block `fetch()` requests from local files. You need a web server.
 
 ## Changelog
+
+### v0.11.0
+- **Diverse challenge types** replace identical multiple-choice at every station with 5 distinct interactive formats:
+  - **Map click** (stations 1, 8): Click the expedition's location on a mini SVG map with equirectangular projection, rivers, mountains, and reference labels
+  - **Chronological ordering** (stations 3, 9): Drag-and-drop (or arrow buttons) to arrange 5 historical events in correct sequence
+  - **Fill-in-the-blank** (stations 6, 7): Complete famous journal quotes with fuzzy answer matching (accepts multiple phrasings)
+  - **Image match** (stations 4, 10): Select which historical image matches a journal description from a 2x2 grid
+  - **Multiple choice** (stations 2, 5): Retained for stations with strong existing questions
+- All challenge types share unified scoring, discovery unlocking, and Continue West gating
+- New CSS for all interactive challenge types with responsive layouts
 
 ### v0.10.2
 - **"What would this trip look like today?"** — Collapsible modern road trip comparison on both victory and game-over screens. Shows the same St. Louis-to-Astoria route on today's highways (I-70 → I-29 → I-80 → I-84 → US-30), with driving time (~4 days / 31 hours), estimated cost breakdown (gas $206, motels $225, food $180 = ~$611 total), and fun comparisons (speed: 5–15 mi/day vs. 65 mph, dangers: grizzlies vs. construction zones). Notes that the original expedition cost ~$2,500 (≈$70,000 today)
