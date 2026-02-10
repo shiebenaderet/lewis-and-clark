@@ -372,10 +372,12 @@ function renderStation(index) {
 
   // === JOURNAL RECOVERY MECHANIC ===
   // Journals are LOCKED until the challenge is completed ("recover the lost page").
+  // EXCEPTION: fill_in_blank challenges ask students to complete a journal quote,
+  // so the journal must be visible for them to find the answer.
   // If a scenario exists and isn't answered yet, the whole section is hidden.
-  // Otherwise, show a locked teaser OR the full recovered journal.
   const scenarioBlocking = data.scenario && !scenarioCompleted;
-  const journalsRecovered = challengeCompleted;
+  const isFillBlank = data.challenge && data.challenge.type === 'fill_in_blank';
+  const journalsRecovered = challengeCompleted || isFillBlank;
 
   html += `<div class="journal-entries-wrap" id="journals_${index}"${scenarioBlocking ? ' style="display:none"' : ''}>`;
   if (data.scenario && !scenarioBlocking) {
@@ -384,8 +386,10 @@ function renderStation(index) {
 
   if (data.journals && data.journals.length > 0) {
     if (journalsRecovered) {
-      // RECOVERED — show full journal entries
-      html += '<div class="journal-recovered-banner"><span class="journal-recovered-icon">&#x1F4DC;</span> Journal Page Recovered</div>';
+      // RECOVERED — show full journal entries (skip banner for fill-in-blank since journals were never locked)
+      if (challengeCompleted && !isFillBlank) {
+        html += '<div class="journal-recovered-banner"><span class="journal-recovered-icon">&#x1F4DC;</span> Journal Page Recovered</div>';
+      }
       data.journals.forEach(j => {
         const safeDate = j.date.replace(/'/g, "\\'");
         const safeAuthor = j.author.replace(/'/g, "\\'");
