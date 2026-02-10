@@ -51,7 +51,27 @@
         "alt": "Captain Lewis wearing a Shoshone tippet",
         "caption": "Captain Lewis wearing a Shoshone tippet — a gift from Chief Cameahwait"
       }
-    ]
+    ],
+    "scenario": {
+      "title": "What Would You Do?",
+      "situation": "You desperately need horses to cross the Rocky Mountains. You’ve found the Shoshone, but they’re wary of strangers with guns. You have trade goods, weapons, and Sacagawea (who is Shoshone). How do you approach them?",
+      "choices": [
+        {
+          "text": "Display your weapons to show you’re too powerful to refuse",
+          "feedback": "Threats would almost certainly backfire. The Shoshone know these mountains — they could easily disappear, and you’d be stranded without horses in deadly terrain."
+        },
+        {
+          "text": "Offer trade goods — beads, medals, and metal tools for their horses",
+          "feedback": "Trade goods helped, but the Shoshone were initially suspicious. Trade alone might not have been enough to seal the deal in time."
+        },
+        {
+          "text": "Send Sacagawea ahead to speak to them in their own language",
+          "feedback": "This is close to what happened! Sacagawea recognized these were her people, and Clark wrote that she ‘danced for the joyful sight.’ Even better — the chief turned out to be her brother!"
+        }
+      ],
+      "correct": 2,
+      "reveal": "Clark wrote: ‘The Interpreter and squaw who were before me at some distance danced for the joyful sight, and she made signs to me that they were her Nation.’ Then came the incredible coincidence — Chief Cameahwait was Sacagawea’s brother! This personal connection secured the horses the expedition desperately needed."
+    }
   },
   "standard": {
     "title": "Camp Fortunate — The Shoshone Reunion",
@@ -105,7 +125,27 @@
         "alt": "Captain Lewis wearing a Shoshone tippet",
         "caption": "Captain Lewis wearing a Shoshone tippet — a gift from Chief Cameahwait"
       }
-    ]
+    ],
+    "scenario": {
+      "title": "What Would You Do?",
+      "situation": "You desperately need horses to cross the Rocky Mountains. You’ve found the Shoshone, but they’re wary of strangers with guns. You have trade goods, weapons, and Sacagawea (who is Shoshone). How do you approach them?",
+      "choices": [
+        {
+          "text": "Display your weapons to show you’re too powerful to refuse",
+          "feedback": "Threats would almost certainly backfire. The Shoshone know these mountains — they could easily disappear, and you’d be stranded without horses in deadly terrain."
+        },
+        {
+          "text": "Offer trade goods — beads, medals, and metal tools for their horses",
+          "feedback": "Trade goods helped, but the Shoshone were initially suspicious. Trade alone might not have been enough to seal the deal in time."
+        },
+        {
+          "text": "Send Sacagawea ahead to speak to them in their own language",
+          "feedback": "This is close to what happened! Sacagawea recognized these were her people, and Clark wrote that she ‘danced for the joyful sight.’ Even better — the chief turned out to be her brother!"
+        }
+      ],
+      "correct": 2,
+      "reveal": "Clark wrote: ‘The Interpreter and squaw who were before me at some distance danced for the joyful sight, and she made signs to me that they were her Nation.’ Then came the incredible coincidence — Chief Cameahwait was Sacagawea’s brother! This personal connection secured the horses the expedition desperately needed."
+    }
   },
   "advanced": {
     "title": "Camp Fortunate — The Shoshone Reunion and Its Strategic Implications",
@@ -160,6 +200,26 @@
         "alt": "Captain Lewis wearing a Shoshone tippet",
         "caption": "Captain Lewis wearing a Shoshone tippet — a gift from Chief Cameahwait"
       }
-    ]
+    ],
+    "scenario": {
+      "title": "What Would You Do?",
+      "situation": "You desperately need horses to cross the Rocky Mountains. You’ve found the Shoshone, but they’re wary of strangers with guns. You have trade goods, weapons, and Sacagawea (who is Shoshone). How do you approach them?",
+      "choices": [
+        {
+          "text": "Display your weapons to show you’re too powerful to refuse",
+          "feedback": "Threats would almost certainly backfire. The Shoshone know these mountains — they could easily disappear, and you’d be stranded without horses in deadly terrain."
+        },
+        {
+          "text": "Offer trade goods — beads, medals, and metal tools for their horses",
+          "feedback": "Trade goods helped, but the Shoshone were initially suspicious. Trade alone might not have been enough to seal the deal in time."
+        },
+        {
+          "text": "Send Sacagawea ahead to speak to them in their own language",
+          "feedback": "This is close to what happened! Sacagawea recognized these were her people, and Clark wrote that she ‘danced for the joyful sight.’ Even better — the chief turned out to be her brother!"
+        }
+      ],
+      "correct": 2,
+      "reveal": "Clark wrote: ‘The Interpreter and squaw who were before me at some distance danced for the joyful sight, and she made signs to me that they were her Nation.’ Then came the incredible coincidence — Chief Cameahwait was Sacagawea’s brother! This personal connection secured the horses the expedition desperately needed."
+    }
   }
 }

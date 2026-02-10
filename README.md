@@ -8,7 +8,7 @@ An interactive website that turns 10 classroom stations on the Lewis & Clark exp
 
 ## Version
 
-**v0.11.0** — Diverse challenge types replace monotonous multiple-choice
+**v0.12.0** — "What Would You Do?" scenario decisions before journal reveals
 
 ## What This Is
 
@@ -29,6 +29,7 @@ This project replaces a paper-based station activity (where students walk around
 - **PDF journal export** — antique-styled journal with cover page, printable/saveable for Canvas submission
 - **Image galleries** at each station with 2–3 images (scene paintings, portraits, artifacts) from Wikimedia Commons, with carousel navigation
 - **Diverse knowledge checks** — 5 challenge types across 10 stations: map click, chronological ordering (drag-and-drop), fill-in-the-blank journal quotes, image matching, and multiple choice
+- **"What Would You Do?" scenarios** — 5 stations present a historical dilemma before revealing the journals; students choose what they'd do, then read what Lewis & Clark actually did, with journals fading in after the reveal
 - **Interactive travel events** — 29 diverse encounters between stations: choice-based decisions and tap/swat mini-games covering weather, wildlife, navigation, health, Native encounters, and camp life
 - **Save/resume** — localStorage persistence so students can pick up where they left off; portable save codes for cross-device transfer
 - **Discoveries** — 10 collectible items unlocked by answering Knowledge Checks correctly, logged in journal and PDF export
@@ -66,7 +67,7 @@ lewis-and-clark/
 
 ### Editing Content
 
-**To update station text:** Edit the JSON files in `data/stations/`. Each file has three objects (`beginner`, `standard`, `advanced`) with `title`, `dates`, `context`, `journals`, `reflection`, `images` (array), and `challenge` fields.
+**To update station text:** Edit the JSON files in `data/stations/`. Each file has three objects (`beginner`, `standard`, `advanced`) with `title`, `dates`, `context`, `journals`, `reflection`, `images` (array), `challenge`, and optional `scenario` fields.
 
 **To add trail events:** Edit `data/trail-events.json`. Each event has `icon`, `title`, `text`, `action` (`quick_choice` or `tap_swat`), and type-specific fields (`choices` array or `swat_target`/`swat_count`/`swat_time`).
 
@@ -85,6 +86,15 @@ Then open `http://localhost:8000` in your browser.
 **Note:** Opening `index.html` directly as a file (`file://`) will not work because browsers block `fetch()` requests from local files. You need a web server.
 
 ## Changelog
+
+### v0.12.0
+- **"What Would You Do?" scenario decisions** at 5 stations (3, 5, 7, 8, 10): students face the same dilemma Lewis & Clark faced before reading the journals
+  - 3 choices per scenario with individual feedback explaining historical consequences
+  - Correct answer highlighted with a "What actually happened" historical reveal panel
+  - Journals hidden until the scenario is answered, then fade in with "Now read what they actually wrote..." label
+  - Scenario completion tracked in state and persisted via localStorage/save codes
+  - +10 points for choosing what the Corps actually did, +5 for other valid choices
+- Scenarios: First contact diplomacy (station 3), rattlesnake rattle remedy (station 5), Great Falls portage (station 7), approaching the Shoshone for horses (station 8), democratic vote for winter camp (station 10)
 
 ### v0.11.0
 - **Diverse challenge types** replace identical multiple-choice at every station with 5 distinct interactive formats:

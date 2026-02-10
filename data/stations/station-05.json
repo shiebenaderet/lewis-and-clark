@@ -62,7 +62,27 @@
         "alt": "Jean Baptiste Charbonneau as a mountain man",
         "caption": "Jean Baptiste Charbonneau grew up to become a renowned mountain man and guide"
       }
-    ]
+    ],
+    "scenario": {
+      "title": "What Would You Do?",
+      "situation": "Sacagawea is in difficult labor with her first child. She’s been in great pain for hours. A trader suggests crushing rattlesnake rattle into water and giving it to her. What do you do?",
+      "choices": [
+        {
+          "text": "Refuse — it sounds dangerous and unscientific",
+          "feedback": "While cautious, refusing means you have nothing else to offer. In 1805, there were no hospitals or doctors nearby. Sometimes frontier remedies were all that was available."
+        },
+        {
+          "text": "Try it — you have a rattlesnake rattle and there’s nothing to lose",
+          "feedback": "This is what Lewis did! He provided the rattle, it was crushed and mixed with water, and Sacagawea delivered within 10 minutes. Lewis carefully noted he couldn’t prove it actually helped."
+        },
+        {
+          "text": "Wait and do nothing — nature will take its course",
+          "feedback": "While labor does usually resolve on its own, doing nothing when someone is suffering and a remedy is available would be hard to justify to the rest of the group."
+        }
+      ],
+      "correct": 1,
+      "reveal": "Lewis wrote: ‘Having the rattle of a snake by me, I gave it to him and he administered two rings of it to the woman broken in small pieces and added to a small quantity of water.’ She delivered within 10 minutes. But Lewis was honest about his uncertainty: ‘Whether this medicine was truly the cause or not, I shall not undertake to determine.’"
+    }
   },
   "standard": {
     "title": "Sacagawea Joins the Expedition",
@@ -126,7 +146,27 @@
         "alt": "Jean Baptiste Charbonneau as a mountain man",
         "caption": "Jean Baptiste Charbonneau grew up to become a renowned mountain man and guide"
       }
-    ]
+    ],
+    "scenario": {
+      "title": "What Would You Do?",
+      "situation": "Sacagawea is in difficult labor with her first child. She’s been in great pain for hours. A trader suggests crushing rattlesnake rattle into water and giving it to her. What do you do?",
+      "choices": [
+        {
+          "text": "Refuse — it sounds dangerous and unscientific",
+          "feedback": "While cautious, refusing means you have nothing else to offer. In 1805, there were no hospitals or doctors nearby. Sometimes frontier remedies were all that was available."
+        },
+        {
+          "text": "Try it — you have a rattlesnake rattle and there’s nothing to lose",
+          "feedback": "This is what Lewis did! He provided the rattle, it was crushed and mixed with water, and Sacagawea delivered within 10 minutes. Lewis carefully noted he couldn’t prove it actually helped."
+        },
+        {
+          "text": "Wait and do nothing — nature will take its course",
+          "feedback": "While labor does usually resolve on its own, doing nothing when someone is suffering and a remedy is available would be hard to justify to the rest of the group."
+        }
+      ],
+      "correct": 1,
+      "reveal": "Lewis wrote: ‘Having the rattle of a snake by me, I gave it to him and he administered two rings of it to the woman broken in small pieces and added to a small quantity of water.’ She delivered within 10 minutes. But Lewis was honest about his uncertainty: ‘Whether this medicine was truly the cause or not, I shall not undertake to determine.’"
+    }
   },
   "advanced": {
     "title": "Sacagawea, Charbonneau, and the Birth of Baptiste",
@@ -191,6 +231,26 @@
         "alt": "Jean Baptiste Charbonneau as a mountain man",
         "caption": "Jean Baptiste Charbonneau grew up to become a renowned mountain man and guide"
       }
-    ]
+    ],
+    "scenario": {
+      "title": "What Would You Do?",
+      "situation": "Sacagawea is in difficult labor with her first child. She’s been in great pain for hours. A trader suggests crushing rattlesnake rattle into water and giving it to her. What do you do?",
+      "choices": [
+        {
+          "text": "Refuse — it sounds dangerous and unscientific",
+          "feedback": "While cautious, refusing means you have nothing else to offer. In 1805, there were no hospitals or doctors nearby. Sometimes frontier remedies were all that was available."
+        },
+        {
+          "text": "Try it — you have a rattlesnake rattle and there’s nothing to lose",
+          "feedback": "This is what Lewis did! He provided the rattle, it was crushed and mixed with water, and Sacagawea delivered within 10 minutes. Lewis carefully noted he couldn’t prove it actually helped."
+        },
+        {
+          "text": "Wait and do nothing — nature will take its course",
+          "feedback": "While labor does usually resolve on its own, doing nothing when someone is suffering and a remedy is available would be hard to justify to the rest of the group."
+        }
+      ],
+      "correct": 1,
+      "reveal": "Lewis wrote: ‘Having the rattle of a snake by me, I gave it to him and he administered two rings of it to the woman broken in small pieces and added to a small quantity of water.’ She delivered within 10 minutes. But Lewis was honest about his uncertainty: ‘Whether this medicine was truly the cause or not, I shall not undertake to determine.’"
+    }
   }
 }
