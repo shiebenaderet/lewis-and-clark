@@ -20,11 +20,11 @@
     "reflection": "Why do you think so many different kinds of people joined this expedition? What skills would each person bring?",
     "challenge": {
       "type": "map_click",
-      "question": "Based on Clark’s journal, click on the map to show where the expedition began their journey.",
-      "instruction": "Use the journal entry to figure out which river they traveled on and where they started.",
+      "question": "The expedition started their journey near a big city where two rivers meet. Click on the map to show where they began.",
+      "instruction": "Hint: Clark wrote about sailing up the Missouri River. Find where the Missouri meets the Mississippi — that’s near St. Louis!",
       "correct_lat": 38.8,
       "correct_lon": -90.1,
-      "tolerance": 2.5,
+      "tolerance": 3.5,
       "location_name": "Camp Dubois, near St. Louis",
       "feedback_correct": "That's right! Camp Dubois was located near St. Louis, where the Missouri River flows into the Mississippi. This was the starting point of the entire expedition.",
       "feedback_incorrect": "Not quite — Camp Dubois was near St. Louis, Missouri, at the eastern edge of the map where the Missouri and Mississippi Rivers meet. Look for the far right side of the trail."
@@ -105,11 +105,11 @@
     "reflection": "Consider the composition of the Corps — soldiers, frontiersmen, enslaved individuals, and men of mixed heritage. What does this reveal about American society on the frontier in 1804? How might each person's background have contributed differently to the expedition's success?",
     "challenge": {
       "type": "map_click",
-      "question": "Based on Clark’s journal, click on the map to show where the expedition began their journey.",
-      "instruction": "Use the journal entry to figure out which river they traveled on and where they started.",
+      "question": "Using only Clark’s journal entry, identify the expedition’s departure point. Click the precise location on the map.",
+      "instruction": "No hints — read the journal carefully for geographic clues.",
       "correct_lat": 38.8,
       "correct_lon": -90.1,
-      "tolerance": 2.5,
+      "tolerance": 1.8,
       "location_name": "Camp Dubois, near St. Louis",
       "feedback_correct": "That's right! Camp Dubois was located near St. Louis, where the Missouri River flows into the Mississippi. This was the starting point of the entire expedition.",
       "feedback_incorrect": "Not quite — Camp Dubois was near St. Louis, Missouri, at the eastern edge of the map where the Missouri and Mississippi Rivers meet. Look for the far right side of the trail."

@@ -20,16 +20,16 @@
     "reflection": "Why do you think Sacagawea became so important to the expedition? What skills or knowledge might she have had that the other members didn’t?",
     "challenge": {
       "type": "multiple_choice",
-      "question": "Lewis described a rattlesnake rattle being used during childbirth. What was his attitude toward this remedy?",
+      "question": "Lewis wrote about using a rattlesnake rattle to help Sacagawea during childbirth. Did Lewis think it actually worked?",
       "options": [
-        "He was certain it worked perfectly",
-        "He thought it was ridiculous",
-        "He was scientifically cautious — he wouldn't say whether it truly worked or not",
-        "He refused to allow it to be used"
+        "Yes, he said it definitely worked",
+        "He wasn’t sure — he wrote that he couldn’t say if it really helped or not",
+        "No, he said it was completely fake",
+        "He didn’t write anything about whether it worked"
       ],
-      "correct": 2,
-      "feedback_correct": "Exactly! Lewis wrote 'whether this medicine was truly the cause or not, I shall not undertake to determine.' He was observing like a scientist — recording what happened without making claims he couldn't prove.",
-      "feedback_incorrect": "Lewis actually wrote 'whether this medicine was truly the cause or not, I shall not undertake to determine' — he was being careful and scientific, not making claims he couldn't prove."
+      "correct": 1,
+      "feedback_correct": "That’s right! Lewis was honest about not knowing. He wrote that the baby came within 10 minutes, but he wouldn’t say for sure if the rattle was the reason.",
+      "feedback_incorrect": "Lewis actually said he ‘shall not undertake to determine’ whether it truly worked. He was being honest — he recorded what happened but didn’t claim the rattle was the cause."
     },
     "images": [
       {
@@ -189,16 +189,16 @@
     "reflection": "Lewis carefully avoids claiming the rattlesnake remedy actually worked, saying he “shall not undertake to determine” its effectiveness. Analyze this passage as a primary source: What does Lewis’s language reveal about Enlightenment-era attitudes toward scientific observation versus folk knowledge? How does Sacagawea’s story complicate the narrative of the expedition as a purely voluntary, heroic enterprise?",
     "challenge": {
       "type": "multiple_choice",
-      "question": "Lewis described a rattlesnake rattle being used during childbirth. What was his attitude toward this remedy?",
+      "question": "Lewis’s account of the rattlesnake rattle remedy reveals something about his approach to observation. What does his language tell us about Enlightenment-era scientific thinking?",
       "options": [
-        "He was certain it worked perfectly",
-        "He thought it was ridiculous",
-        "He was scientifically cautious — he wouldn't say whether it truly worked or not",
-        "He refused to allow it to be used"
+        "He rejected all folk remedies as superstition without testing them",
+        "He adopted a proto-scientific approach: recording observations without claiming causation when evidence was insufficient",
+        "He trusted the remedy completely because his interpreter recommended it",
+        "He was uninterested in medicine and only recorded the event as a curiosity"
       ],
-      "correct": 2,
-      "feedback_correct": "Exactly! Lewis wrote 'whether this medicine was truly the cause or not, I shall not undertake to determine.' He was observing like a scientist — recording what happened without making claims he couldn't prove.",
-      "feedback_incorrect": "Lewis actually wrote 'whether this medicine was truly the cause or not, I shall not undertake to determine' — he was being careful and scientific, not making claims he couldn't prove."
+      "correct": 1,
+      "feedback_correct": "Precisely. Lewis’s careful phrasing — ‘whether this medicine was truly the cause or not, I shall not undertake to determine’ — reflects Enlightenment empiricism: observe, record, but don’t assert causation without evidence. Jefferson chose Lewis partly for this scientific temperament.",
+      "feedback_incorrect": "Lewis’s language — ‘I shall not undertake to determine’ whether it worked — reflects the Enlightenment scientific method: observe and record without claiming causation. He was trained by Jefferson to be a careful empiricist, not a credulous believer or a dismissive skeptic."
     },
     "images": [
       {

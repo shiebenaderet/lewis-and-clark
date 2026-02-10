@@ -98,6 +98,98 @@ const DISCOVERIES = [
   { name: 'The Great Vote', icon: '\uD83D\uDDF3\uFE0F', desc: 'Everyone voted \u2014 including York and Sacagawea \u2014 decades ahead of their time' }
 ];
 
+// === FINAL EXPEDITION TEST (shown on completion screen) ===
+const FINAL_TEST = {
+  beginner: [
+    { q: 'What kind of big boat did the expedition use at the start of their journey?', o: ['A steamboat', 'A keelboat', 'A canoe', 'A sailboat'], c: 1 },
+    { q: 'Who was the young Shoshone woman who joined the expedition at Fort Mandan?', o: ['Pocahontas', 'Sacagawea', 'Sequoia', 'Malinche'], c: 1 },
+    { q: 'What river did the Corps of Discovery travel on for most of their journey west?', o: ['The Mississippi River', 'The Ohio River', 'The Missouri River', 'The Colorado River'], c: 2 },
+    { q: 'What did the expedition find when they reached the Pacific Ocean?', o: ['Gold and treasure', 'A rainy coast where they built Fort Clatsop', 'A warm tropical beach', 'Another group of explorers'], c: 1 },
+    { q: 'Why was the vote at Fort Clatsop special?', o: ['It was the first vote in America', 'Everyone voted, including York and Sacagawea', 'Only the captains voted', 'They voted to turn back'], c: 1 }
+  ],
+  standard: [
+    { q: 'Lewis compared their departure from Fort Mandan to the voyages of which famous explorers?', o: ['Magellan and Drake', 'Columbus and Captain Cook', 'Marco Polo and Zheng He', 'Hudson and Cabot'], c: 1 },
+    { q: 'What was Lewis\u2019s attitude toward the rattlesnake rattle remedy used during Sacagawea\u2019s labor?', o: ['He was certain it worked', 'He was scientifically cautious and wouldn\u2019t claim it worked', 'He refused to allow its use', 'He mocked it as superstition'], c: 1 },
+    { q: 'How did the expedition survive the brutal 11-day mountain crossing?', o: ['They found abundant game in the mountains', 'They ate horses and candles made of animal fat', 'They traded with mountain tribes for food', 'They had packed enough supplies to last'], c: 1 },
+    { q: 'Why did Native Americans on the Great Plains set controlled fires?', o: ['To signal other tribes', 'To manage prairie grass and attract buffalo herds', 'To clear land for farming', 'To drive away predators'], c: 1 },
+    { q: 'What made the Mandan villages unusual for Lewis and Clark to encounter?', o: ['They had never seen Native Americans before', 'The Mandan had been trading with Europeans since 1738', 'The Mandan refused to help them', 'The villages were abandoned'], c: 1 }
+  ],
+  advanced: [
+    { q: 'Lewis wrote that they were about to \u2018penetrate a country on which the foot of civilized man had never trod.\u2019 What assumption does this language reveal?', o: ['That the land was truly uninhabited', 'That Lewis equated \u2018civilized\u2019 with European/American, ignoring Indigenous peoples who had lived there for millennia', 'That Lewis believed the land was cursed', 'That no human had ever visited the area'], c: 1 },
+    { q: 'The democratic vote at Fort Clatsop \u2014 including York and Sacagawea \u2014 was remarkable because:', o: ['Voting was common on military expeditions', 'Enslaved people and women would not gain voting rights for decades, making this an extraordinary moment of inclusion', 'The captains were required by Jefferson to hold votes', 'It was a meaningless symbolic gesture'], c: 1 },
+    { q: 'Lewis\u2019s description of the Great Falls as a \u2018sublimely grand spectacle\u2019 reflects which intellectual tradition?', o: ['Classical Greek philosophy', 'Romantic-era aesthetics and the concept of the Sublime', 'Puritan moral philosophy', 'Enlightenment rationalism only'], c: 1 },
+    { q: 'The Mandan trade network that Lewis and Clark encountered reveals what about pre-contact North America?', o: ['Native peoples lived in isolated, self-sufficient communities', 'A vast continental trade system connected peoples from the Great Lakes to the Rockies long before European contact', 'Trade only began after European goods arrived', 'The Mandan were the only trading people in the region'], c: 1 },
+    { q: 'Why did Jefferson specifically choose Lewis to lead a scientific expedition?', o: ['Lewis was the most experienced frontiersman in America', 'Lewis had Enlightenment scientific training: he observed carefully, recorded data, and avoided unfounded claims', 'Lewis was the only officer willing to go', 'Lewis had previously explored the West'], c: 1 }
+  ]
+};
+
+function showFinalTest() {
+  const area = document.getElementById('final-test-area');
+  if (!area) return;
+  const questions = FINAL_TEST[state.level] || FINAL_TEST.standard;
+  let html = '<div class="final-test">';
+  html += '<h2 class="final-test-title">Expedition Knowledge Test</h2>';
+  html += '<p class="final-test-subtitle">How much did you learn on your journey? Answer 5 questions to find out.</p>';
+  html += '<div id="final-test-questions">';
+  questions.forEach((q, i) => {
+    html += `<div class="ft-question" id="ftq_${i}">`;
+    html += `<div class="ft-question-text">${i + 1}. ${q.q}</div>`;
+    html += '<div class="ft-options">';
+    q.o.forEach((opt, j) => {
+      html += `<button class="ft-option" onclick="answerFinalTest(${i},${j})" id="fto_${i}_${j}">${opt}</button>`;
+    });
+    html += '</div>';
+    html += `<div class="ft-feedback" id="ftf_${i}"></div>`;
+    html += '</div>';
+  });
+  html += '</div>';
+  html += '<div class="ft-result" id="ft-result" style="display:none;"></div>';
+  html += '</div>';
+  area.innerHTML = html;
+}
+
+let _ftScore = 0;
+let _ftAnswered = 0;
+
+function answerFinalTest(qIdx, choice) {
+  const questions = FINAL_TEST[state.level] || FINAL_TEST.standard;
+  const q = questions[qIdx];
+  const fb = document.getElementById(`ftf_${qIdx}`);
+  const isCorrect = choice === q.c;
+
+  // Disable all options for this question
+  q.o.forEach((_, j) => {
+    const btn = document.getElementById(`fto_${qIdx}_${j}`);
+    btn.disabled = true;
+    if (j === q.c) btn.classList.add('ft-correct');
+    if (j === choice && !isCorrect) btn.classList.add('ft-incorrect');
+  });
+
+  if (isCorrect) {
+    _ftScore++;
+    fb.textContent = 'Correct!';
+    fb.className = 'ft-feedback show correct';
+  } else {
+    fb.textContent = 'Not quite \u2014 the correct answer is highlighted above.';
+    fb.className = 'ft-feedback show incorrect';
+  }
+
+  _ftAnswered++;
+  if (_ftAnswered >= questions.length) {
+    const result = document.getElementById('ft-result');
+    const pct = Math.round((_ftScore / questions.length) * 100);
+    let grade = '';
+    if (pct === 100) grade = 'Perfect score! You\u2019re a true expedition scholar.';
+    else if (pct >= 80) grade = 'Excellent! You paid close attention on your journey.';
+    else if (pct >= 60) grade = 'Good work! You picked up a lot along the trail.';
+    else grade = 'Keep exploring! Try revisiting some stations to learn more.';
+    result.innerHTML = `<strong>${_ftScore} / ${questions.length}</strong> (${pct}%) \u2014 ${grade}`;
+    result.style.display = '';
+    state.score += _ftScore * 5;
+    updateScoreDisplay();
+  }
+}
+
 // === STATION RENDERING ===
 function renderStation(index) {
   if (index < 0 || index >= STATIONS.length) return;

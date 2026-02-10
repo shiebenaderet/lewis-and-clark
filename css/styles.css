@@ -1070,6 +1070,88 @@ body {
 }
 .completion-milestone-icon { font-size: 1.2rem; margin-right: 0.3rem; vertical-align: middle; }
 
+/* --- Final Expedition Test --- */
+.final-test {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(244,232,193,0.2);
+  border-radius: 8px;
+  text-align: left;
+}
+.final-test-title {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  color: var(--parchment);
+  margin-bottom: 0.25rem;
+  text-align: center;
+}
+.final-test-subtitle {
+  font-size: 0.85rem;
+  color: var(--parchment-dark);
+  opacity: 0.7;
+  margin-bottom: 1.25rem;
+  text-align: center;
+}
+.ft-question { margin-bottom: 1.25rem; }
+.ft-question-text {
+  font-size: 0.95rem;
+  color: var(--parchment);
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+.ft-options { display: flex; flex-direction: column; gap: 0.35rem; }
+.ft-option {
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(244,232,193,0.15);
+  border-radius: 6px;
+  color: var(--parchment-dark);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+.ft-option:hover:not(:disabled) {
+  background: rgba(244,232,193,0.1);
+  border-color: rgba(244,232,193,0.3);
+}
+.ft-option:disabled { cursor: default; opacity: 0.6; }
+.ft-option.ft-correct {
+  background: rgba(39,174,96,0.2) !important;
+  border-color: #27ae60 !important;
+  color: #27ae60 !important;
+  opacity: 1 !important;
+}
+.ft-option.ft-incorrect {
+  background: rgba(192,57,43,0.2) !important;
+  border-color: #c0392b !important;
+  color: #c0392b !important;
+  opacity: 1 !important;
+}
+.ft-feedback {
+  display: none;
+  font-size: 0.8rem;
+  margin-top: 0.35rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: 4px;
+}
+.ft-feedback.show { display: block; }
+.ft-feedback.correct { color: #27ae60; }
+.ft-feedback.incorrect { color: #c0392b; }
+.ft-result {
+  margin-top: 1.25rem;
+  padding: 1rem;
+  text-align: center;
+  font-size: 1rem;
+  color: var(--campfire-glow);
+  background: rgba(245,166,35,0.1);
+  border: 1px solid rgba(245,166,35,0.3);
+  border-radius: 8px;
+  animation: milestoneSlide 0.6s ease;
+}
+
 /* ============================================================
    STATION IMAGE GALLERY
    ============================================================ */

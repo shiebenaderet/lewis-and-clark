@@ -26,16 +26,16 @@
     "reflection": "Lewis describes wolves, rich soil, and fires on the plains. What do these details tell you about what the Great Plains were like in 1804?",
     "challenge": {
       "type": "multiple_choice",
-      "question": "Lewis wrote that the soil was 'parched with frequent fires.' Who was likely setting those fires, and why?",
+      "question": "Lewis noticed the land was burnt from fires. Who was most likely setting those fires?",
       "options": [
-        "Lightning strikes caused all the fires",
-        "Native Americans set controlled burns to manage the prairie and attract buffalo",
-        "The fires were caused by volcanic activity",
-        "European settlers had burned the land"
+        "Dinosaurs started the fires",
+        "Native Americans burned the land to help buffalo grow new grass",
+        "Lightning was the only cause of fires",
+        "The explorers accidentally started fires"
       ],
       "correct": 1,
-      "feedback_correct": "Excellent! Native Americans used controlled burns for thousands of years to manage grasslands, encourage new growth, and drive buffalo for hunting.",
-      "feedback_incorrect": "Think again. Native Americans used controlled burns for thousands of years to manage grasslands and attract buffalo herds."
+      "feedback_correct": "That’s right! Native Americans used fire as a tool to manage the prairie. Burning old grass helped new grass grow, which attracted buffalo herds for hunting.",
+      "feedback_incorrect": "Native Americans actually set controlled burns on purpose! Burning old grass helped new grass grow, which attracted buffalo. This is called ‘prescribed burning’ and people still do it today."
     },
     "images": [
       {
@@ -139,16 +139,16 @@
     "reflection": "Lewis notes that prairie fires have “parched” the soil, and Clark observes that the Indians are away hunting buffalo. What do these details suggest about how Native Americans managed and interacted with the Great Plains ecosystem? Research the concept of “controlled burns” — why might Native Americans have set deliberate fires?",
     "challenge": {
       "type": "multiple_choice",
-      "question": "Lewis wrote that the soil was 'parched with frequent fires.' Who was likely setting those fires, and why?",
+      "question": "Lewis observed ‘soil parched with frequent fires’ across the prairies. What does this observation reveal about the relationship between Plains Indians and their environment?",
       "options": [
-        "Lightning strikes caused all the fires",
-        "Native Americans set controlled burns to manage the prairie and attract buffalo",
-        "The fires were caused by volcanic activity",
-        "European settlers had burned the land"
+        "Plains Indians had no impact on the landscape and fires were entirely natural",
+        "Native Americans practiced deliberate landscape management through controlled burns to sustain buffalo herds and prairie ecosystems",
+        "The fires indicated that the land was too dry for agriculture",
+        "European diseases had already depopulated the area, leaving no one to control fires"
       ],
       "correct": 1,
-      "feedback_correct": "Excellent! Native Americans used controlled burns for thousands of years to manage grasslands, encourage new growth, and drive buffalo for hunting.",
-      "feedback_incorrect": "Think again. Native Americans used controlled burns for thousands of years to manage grasslands and attract buffalo herds."
+      "feedback_correct": "Exactly. Lewis was observing the result of thousands of years of sophisticated land management. Plains nations used fire to clear dead growth, stimulate new grass, and direct buffalo migration patterns — a practice that shaped the entire Great Plains ecosystem.",
+      "feedback_incorrect": "The fires Lewis observed were evidence of deliberate land management by Plains nations. They used controlled burns to regenerate prairie grass and direct buffalo herds — a sophisticated ecological practice spanning thousands of years."
     },
     "images": [
       {

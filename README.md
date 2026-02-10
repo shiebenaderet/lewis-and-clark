@@ -8,7 +8,7 @@ An interactive website that turns 10 classroom stations on the Lewis & Clark exp
 
 ## Version
 
-**v0.15.0** — Detailed geographic map and harder challenges
+**v0.16.0** — Level-differentiated challenges, end-of-expedition test, CC BY-NC 4.0 license
 
 ## What This Is
 
@@ -87,6 +87,17 @@ Then open `http://localhost:8000` in your browser.
 **Note:** Opening `index.html` directly as a file (`file://`) will not work because browsers block `fetch()` requests from local files. You need a web server.
 
 ## Changelog
+
+### v0.16.0
+- **Level-differentiated challenges** — all 10 station challenges now scale with the selected reading level:
+  - *Beginner:* simpler wording, more hints, fewer ordering items (3 instead of 5), larger map-click tolerances
+  - *Standard:* unchanged from v0.15.0 difficulty
+  - *Advanced:* deeper analytical questions, tighter map tolerances, harder fill-in-blank quotes, more precise ordering items
+- **End-of-expedition knowledge test** — a 5-question final test appears on the completion screen after all 10 stations:
+  - Questions scale with reading level (basic recall for beginner, moderate analysis for standard, deep thematic analysis for advanced)
+  - Immediate per-question feedback with correct/incorrect highlighting
+  - Final score summary with percentage and performance message
+- **License changed** from CC0 to CC BY-NC 4.0 (free for teachers and students; not for commercial use)
 
 ### v0.15.0
 - **Detailed geographic map** for map-click challenges: Pacific coastline, state/territory boundary lines, mountain range shading with peak symbols, 6 named rivers (Missouri, Columbia, Snake, Mississippi, Yellowstone, Platte), Great Lakes edge, 10 modern city reference labels (St. Louis, Omaha, Bismarck, Helena, Portland, etc.), and region labels
@@ -317,4 +328,4 @@ Then open `http://localhost:8000` in your browser.
 
 ## License
 
-CC0 1.0 Universal — Public domain. Use freely for any purpose.
+[CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) — Free for teachers and students to use, copy, and adapt. Not for commercial use.

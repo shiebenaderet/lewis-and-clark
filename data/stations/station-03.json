@@ -28,14 +28,12 @@
       "type": "ordering",
       "question": "Arrange these events from the council in the order they happened:",
       "items": [
-        "The Oto and Missouri Indians arrived at camp at sunset",
-        "Lewis and Clark gave out gifts based on each chief's importance",
-        "The captains gave a long speech about the U.S. government under a sail awning",
-        "The chiefs gave speeches back, promising to follow the advice",
-        "Captain Lewis fired the gun, and the Corps moved on"
+        "The Oto and Missouri Indians came to visit the camp",
+        "Lewis and Clark gave speeches and handed out gifts",
+        "The captains fired a gun and the Corps moved on"
       ],
-      "feedback_correct": "That's the right order! The council followed a careful diplomatic sequence: welcome, gift-giving, speeches from both sides, then a display of military power before departure.",
-      "feedback_incorrect": "Not quite. Re-read the journal entries: First the Indians arrived at sunset, then gifts were given by importance, then speeches under the sail, then the chiefs responded, and finally Lewis fired the gun before they left."
+      "feedback_correct": "That’s right! First the Indians arrived, then there were speeches and gifts, and finally the Corps moved on.",
+      "feedback_incorrect": "The order was: first the Indians visited, then speeches and gifts were exchanged, then the Corps departed."
     },
     "images": [
       {
@@ -191,14 +189,14 @@
       "type": "ordering",
       "question": "Arrange these events from the council in the order they happened:",
       "items": [
-        "The Oto and Missouri Indians arrived at camp at sunset",
-        "Lewis and Clark gave out gifts based on each chief's importance",
-        "The captains gave a long speech about the U.S. government under a sail awning",
-        "The chiefs gave speeches back, promising to follow the advice",
-        "Captain Lewis fired the gun, and the Corps moved on"
+        "The Oto and Missouri arrived at camp, and the Corps shared roasted meat and flour with them",
+        "Lewis and Clark distributed gifts, giving the most important chief a larger medal than the others",
+        "Under a sail awning, the captains delivered a speech about the new American government’s authority",
+        "The Indian chiefs responded with speeches promising to follow the captains’ advice",
+        "Lewis demonstrated the air gun, and the Corps proceeded upriver to the next bluff"
       ],
-      "feedback_correct": "That's the right order! The council followed a careful diplomatic sequence: welcome, gift-giving, speeches from both sides, then a display of military power before departure.",
-      "feedback_incorrect": "Not quite. Re-read the journal entries: First the Indians arrived at sunset, then gifts were given by importance, then speeches under the sail, then the chiefs responded, and finally Lewis fired the gun before they left."
+      "feedback_correct": "Excellent! You caught the specific details: the food sharing, the tiered gift system, the sail awning, the reciprocal speeches, and the air gun demonstration. This required careful reading of both journal entries.",
+      "feedback_incorrect": "Look at both journal entries (August 2 and August 3) for specific details. The sequence was: food sharing at sunset, tiered gift distribution, speeches under a sail awning, chiefs’ responses, then Lewis’s air gun and departure."
     },
     "images": [
       {

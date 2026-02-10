@@ -26,11 +26,11 @@
     "reflection": "Imagine you were Sacagawea, seeing your brother and your people again after years of being away. How would you feel? How might this moment have changed the rest of the expedition?",
     "challenge": {
       "type": "map_click",
-      "question": "Based on the journal entries, click on the map to show where the expedition met the Shoshone and obtained horses.",
-      "instruction": "Read the context and journals to figure out what part of the route the expedition had reached by August 1805.",
+      "question": "The expedition met the Shoshone Indians in the mountains. Click on the map to show where Camp Fortunate is.",
+      "instruction": "Hint: They were in the Rocky Mountains. Look for the mountain area on the western part of the route, before reaching the Pacific coast.",
       "correct_lat": 45.9,
       "correct_lon": -112.5,
-      "tolerance": 2.5,
+      "tolerance": 3.5,
       "location_name": "Camp Fortunate, in the Rocky Mountains",
       "feedback_correct": "That's right! Camp Fortunate was deep in the Rocky Mountains, near present-day Dillon, Montana. This is where Sacagawea's brother Cameahwait — the Shoshone chief — provided the horses needed to cross the Rockies.",
       "feedback_incorrect": "Not quite — Camp Fortunate was in the Rocky Mountains, in the western part of the map near present-day Montana/Idaho. Look for the mountain region between the Great Falls and the Lolo Trail."
@@ -175,11 +175,11 @@
     "reflection": "Lewis writes that each Shoshone individual “is his own sovereign master and acts from the dictates of his own mind.” This description of individual liberty resonates with Enlightenment political philosophy. Yet Lewis simultaneously characterizes the Shoshone as living in “a wretched state of poverty.” Analyze the tension between Lewis’s admiration for Shoshone character and his judgment of their material condition. What cultural assumptions underlie his definition of “poverty”? How might the Shoshone have assessed their own circumstances differently?",
     "challenge": {
       "type": "map_click",
-      "question": "Based on the journal entries, click on the map to show where the expedition met the Shoshone and obtained horses.",
-      "instruction": "Read the context and journals to figure out what part of the route the expedition had reached by August 1805.",
+      "question": "Using the context and journal entries, identify the precise location of the Shoshone encounter. Click the map.",
+      "instruction": "Consider the expedition’s route from Fort Mandan westward. Where along the Missouri headwaters would they have crossed into Shoshone territory?",
       "correct_lat": 45.9,
       "correct_lon": -112.5,
-      "tolerance": 2.5,
+      "tolerance": 1.8,
       "location_name": "Camp Fortunate, in the Rocky Mountains",
       "feedback_correct": "That's right! Camp Fortunate was deep in the Rocky Mountains, near present-day Dillon, Montana. This is where Sacagawea's brother Cameahwait — the Shoshone chief — provided the horses needed to cross the Rockies.",
       "feedback_incorrect": "Not quite — Camp Fortunate was in the Rocky Mountains, in the western part of the map near present-day Montana/Idaho. Look for the mountain region between the Great Falls and the Lolo Trail."
