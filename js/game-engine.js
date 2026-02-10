@@ -153,6 +153,8 @@ function completeExpedition() {
   _ftScore = 0;
   _ftAnswered = 0;
   showFinalTest();
+  // Show Jefferson's Cipher crossword puzzle
+  if (typeof renderFinalCipher === 'function') renderFinalCipher();
   unlockGame();
   clearSave();
 }

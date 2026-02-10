@@ -8,7 +8,7 @@ An interactive website that turns 10 classroom stations on the Lewis & Clark exp
 
 ## Version
 
-**v0.17.1** — Key figure portraits with character popup cards
+**v0.18.0** — Word Challenges & Vocabulary System
 
 ## What This Is
 
@@ -31,6 +31,9 @@ This project replaces a paper-based station activity (where students walk around
 - **Diverse knowledge checks** — 5 challenge types across 10 stations: map click, chronological ordering (drag-and-drop), fill-in-the-blank journal quotes, image matching, and multiple choice
 - **"What Would You Do?" scenarios** — 5 stations present a historical dilemma before revealing the journals; students choose what they'd do, then read what Lewis & Clark actually did, with journals fading in after the reveal
 - **Fort Mandan seasonal atmosphere** — stations 4-6 feature distinct seasonal theming (autumn amber, winter blue, spring green) with tinted headers, borders, journal entries, and labeled season banners
+- **Word challenges between stations** — Trail Cipher (Wheel of Fortune-style letter-guessing for phrases) and Expedition Word Puzzle (Wordle-style word-guessing for terms), with point wagering and vocabulary discovery
+- **Expedition Field Guide** — accumulating vocabulary reference in the Journal view, showing definitions and fun facts for terms discovered during word challenges
+- **Jefferson's Cipher** — final crossword puzzle on the completion screen where highlighted letters spell a secret message, earning 50 bonus points
 - **Interactive travel events** — 29 diverse encounters between stations: choice-based decisions and tap/swat mini-games covering weather, wildlife, navigation, health, Native encounters, and camp life
 - **Save/resume** — localStorage persistence so students can pick up where they left off; portable save codes for cross-device transfer
 - **Discoveries with clue fragments** — 10 collectible items unlocked by answering Knowledge Checks correctly, each with a narrative clue connecting to the expedition's bigger story. Progress tracker on every station with milestone achievements and synthesis messages at 5/10 (Junior Naturalist) and 10/10 (Master Explorer)
@@ -64,7 +67,8 @@ lewis-and-clark/
 │   │   ├── station-02.json     # Station 2 content
 │   │   ├── ...                 # Stations 3–9
 │   │   └── station-10.json     # Station 10 content
-│   └── trail-events.json       # Random encounter events
+│   ├── trail-events.json       # Random encounter events
+│   └── word-bank.json          # Vocabulary terms & phrases for word challenges
 ├── .nojekyll                   # GitHub Pages config (skip Jekyll)
 ├── README.md
 └── LICENSE
@@ -91,6 +95,30 @@ Then open `http://localhost:8000` in your browser.
 **Note:** Opening `index.html` directly as a file (`file://`) will not work because browsers block `fetch()` requests from local files. You need a web server.
 
 ## Changelog
+
+### v0.18.0 — Word Challenges & Vocabulary System
+- **Trail Cipher** (Wheel of Fortune-style) — between stations, phrases appear with blanked-out letters; students guess letters from an A-Z keyboard. Consonants are free, vowels cost nothing extra but wrong guesses deplete "supply" icons (7 for beginner, 6 standard, 5 advanced). A "Solve!" button lets students type the full answer. Physical keyboard support included. 13 expedition phrases (e.g. "OCEAN IN VIEW", "CORPS OF DISCOVERY", "CONTINENTAL DIVIDE")
+- **Expedition Word Puzzle** (Wordle-style) — clue shown, students guess the word letter by letter with color-coded feedback (green/amber/gray). 6 guesses for beginner, 5 standard, 4 advanced. On-screen QWERTY keyboard + physical keyboard support. 21 expedition terms (e.g. KEELBOAT, SACAGAWEA, PORTAGE)
+- **"Stake Your Supplies" wagering** — before each word challenge, students pick a confidence level:
+  - Safe Scout: +5 if correct, +2 if wrong (no risk)
+  - Confident Explorer: +15 if correct, -5 if wrong (requires 5+ points)
+  - Bold Captain: +25 if correct, -10 if wrong (requires 20+ points)
+- **Word bank** — `data/word-bank.json` with 34 entries (21 terms + 13 phrases), each with geographic leg restrictions, 3 reading-level clues, definitions, and fun facts
+- **Expedition Field Guide** — new vocabulary reference section in the Journal view. Terms unlock when encountered during word challenges. Shows term, definition, and fun fact for discovered terms; locked silhouettes for undiscovered ones. Count display: "X / 34 terms discovered"
+- **Jefferson's Cipher** — final crossword puzzle on the completion screen: 7 clues referencing expedition discoveries, each with a highlighted letter that together spell "EXPLORE". Clues scale by reading level. Awards 50 bonus points when all 7 words are solved
+- **Travel transition rebalancing** — reduced regular trail events from 2-3 to 1-2 per leg to make room for one word challenge, keeping total transition time similar
+- **Glossary persistence** — discovered terms and word challenge wins saved in localStorage and portable save codes
+
+### v0.17.3
+- **Geographically accurate trail events** — all 29 travel events now have `legs` ranges specifying which journey segments they can appear on:
+  - Prairie dog towns, buffalo herds, and thunderstorms only on the Great Plains (legs 1-3)
+  - Fort Mandan forge and bitter cold only during the winter stay (legs 4-5)
+  - Hailstorm, prickly pear cactus, portage, and river fork only near the Great Falls (leg 6)
+  - Shoshone meeting and fallen timber only in the Rocky Mountains (legs 7-8)
+  - Salmon run and Nez Perce welcome only near the Columbia/Pacific (leg 9)
+  - Universal events (sickness, journal writing, stargazing) can appear anywhere
+  - No more salmon fishing while still in St. Louis or blizzards on the Columbia
+- **Fix: fill-in-the-blank stations show journals** — stations 6 & 7 (fill-in-blank) no longer lock journals, since the challenge asks students to complete a quote from the very journal that was locked
 
 ### v0.17.1
 - **Key figure portrait cards** — 7 expedition figures (Lewis, Clark, Jefferson, Sacagawea, York, Charbonneau, Jean Baptiste) now appear as clickable portrait chips:

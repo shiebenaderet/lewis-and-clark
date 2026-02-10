@@ -1,0 +1,700 @@
+{
+  "terms": [
+    {
+      "key": "keelboat",
+      "word": "KEELBOAT",
+      "type": "word_puzzle",
+      "legs": [
+        1
+      ],
+      "station": 1,
+      "beginner": {
+        "clue": "The big 55-foot boat they traveled in"
+      },
+      "standard": {
+        "clue": "55-foot vessel that carried the Corps up the Missouri"
+      },
+      "advanced": {
+        "clue": "Lewis's primary upstream transport, capable of carrying 12 tons"
+      },
+      "definition": "A large, flat-bottomed boat designed for river travel, equipped with sail, oars, and tow rope",
+      "funFact": "The keelboat had a cannon mounted on the bow and could carry 12 tons of supplies!"
+    },
+    {
+      "key": "pirogue",
+      "word": "PIROGUE",
+      "type": "word_puzzle",
+      "legs": [
+        1,
+        2
+      ],
+      "station": 1,
+      "beginner": {
+        "clue": "Smaller boats like big canoes"
+      },
+      "standard": {
+        "clue": "Smaller flat-bottomed boats used alongside the keelboat"
+      },
+      "advanced": {
+        "clue": "French term for the expedition's auxiliary flat-bottomed craft"
+      },
+      "definition": "A long, narrow flat-bottomed boat, larger than a canoe, used on rivers",
+      "funFact": "The expedition had two pirogues -- one red and one white!"
+    },
+    {
+      "key": "corps",
+      "word": "CORPS",
+      "type": "word_puzzle",
+      "legs": [
+        1,
+        2
+      ],
+      "station": 1,
+      "beginner": {
+        "clue": "The name for their group of explorers"
+      },
+      "standard": {
+        "clue": "Short for Corps of Discovery -- their official name"
+      },
+      "advanced": {
+        "clue": "Military term for this unit of volunteer soldiers and explorers"
+      },
+      "definition": "A group of people working together on a special mission; the expedition was the Corps of Discovery",
+      "funFact": "The full name was the 'Corps of Volunteers for North Western Discovery'!"
+    },
+    {
+      "key": "plains",
+      "word": "PLAINS",
+      "type": "word_puzzle",
+      "legs": [
+        2,
+        3
+      ],
+      "station": 2,
+      "beginner": {
+        "clue": "The flat, open grassland they crossed"
+      },
+      "standard": {
+        "clue": "Treeless grasslands stretching endlessly west"
+      },
+      "advanced": {
+        "clue": "Ecosystem Native peoples managed with prescribed burning"
+      },
+      "definition": "Vast, flat grasslands stretching across the middle of North America",
+      "funFact": "Native Americans used controlled fires to manage the prairie and attract buffalo herds!"
+    },
+    {
+      "key": "buffalo",
+      "word": "BUFFALO",
+      "type": "word_puzzle",
+      "legs": [
+        1,
+        2,
+        3
+      ],
+      "station": 2,
+      "beginner": {
+        "clue": "Huge animals with thick fur that roamed the grasslands"
+      },
+      "standard": {
+        "clue": "Animals so numerous they 'darkened the plains'"
+      },
+      "advanced": {
+        "clue": "Bison herds managed by Indigenous fire practices for millennia"
+      },
+      "definition": "American bison -- massive herd animals that once numbered in the tens of millions",
+      "funFact": "Clark wrote the herds were 'so numerous they darkened the plains' -- some herds had millions of animals!"
+    },
+    {
+      "key": "specimen",
+      "word": "SPECIMEN",
+      "type": "word_puzzle",
+      "legs": [
+        1,
+        2,
+        3
+      ],
+      "station": 2,
+      "beginner": {
+        "clue": "A sample of a plant or animal to study"
+      },
+      "standard": {
+        "clue": "Scientific sample collected and sent to Jefferson"
+      },
+      "advanced": {
+        "clue": "Material evidence of undocumented species for classification"
+      },
+      "definition": "A sample of a plant, animal, or mineral collected for scientific study",
+      "funFact": "Lewis sent a live prairie dog all the way to President Jefferson in Washington!"
+    },
+    {
+      "key": "diplomacy",
+      "word": "DIPLOMACY",
+      "type": "word_puzzle",
+      "legs": [
+        3
+      ],
+      "station": 3,
+      "beginner": {
+        "clue": "Making friends and agreements with other groups"
+      },
+      "standard": {
+        "clue": "The art of building relationships between nations"
+      },
+      "advanced": {
+        "clue": "Jefferson's political strategy underlying the 'scientific' expedition"
+      },
+      "definition": "The practice of conducting negotiations and building relationships between nations",
+      "funFact": "Jefferson personally designed the peace medal ceremonies Lewis and Clark would use!"
+    },
+    {
+      "key": "council",
+      "word": "COUNCIL",
+      "type": "word_puzzle",
+      "legs": [
+        3
+      ],
+      "station": 3,
+      "beginner": {
+        "clue": "A big meeting with tribal leaders"
+      },
+      "standard": {
+        "clue": "Formal gathering for diplomatic exchange with Native chiefs"
+      },
+      "advanced": {
+        "clue": "Ceremonial protocol Jefferson designed for asserting sovereignty"
+      },
+      "definition": "A formal meeting between leaders to discuss important matters",
+      "funFact": "At each council, Lewis gave a long speech, handed out medals, and demonstrated his air gun!"
+    },
+    {
+      "key": "mandan",
+      "word": "MANDAN",
+      "type": "word_puzzle",
+      "legs": [
+        3,
+        4,
+        5
+      ],
+      "station": 4,
+      "beginner": {
+        "clue": "Native people who welcomed the Corps for winter"
+      },
+      "standard": {
+        "clue": "Agricultural nation at the center of the Plains trade network"
+      },
+      "advanced": {
+        "clue": "Hub of a vast continental trade network predating European contact by centuries"
+      },
+      "definition": "A Native American people living along the Missouri River in present-day North Dakota",
+      "funFact": "The Mandan had been trading with Europeans since 1738 -- they weren't 'undiscovered' at all!"
+    },
+    {
+      "key": "sacagawea",
+      "word": "SACAGAWEA",
+      "type": "word_puzzle",
+      "legs": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "station": 5,
+      "beginner": {
+        "clue": "The Shoshone woman who helped guide the expedition"
+      },
+      "standard": {
+        "clue": "Young Shoshone interpreter whose brother was chief"
+      },
+      "advanced": {
+        "clue": "Lemhi Shoshone woman whose presence signaled peaceful intentions to western tribes"
+      },
+      "definition": "A Lemhi Shoshone woman who joined the expedition as an interpreter and guide",
+      "funFact": "Sacagawea carried her baby on her back for thousands of miles across the continent!"
+    },
+    {
+      "key": "frostbite",
+      "word": "FROSTBITE",
+      "type": "word_puzzle",
+      "legs": [
+        4,
+        5
+      ],
+      "station": 5,
+      "beginner": {
+        "clue": "When extreme cold hurts your skin"
+      },
+      "standard": {
+        "clue": "Cold injury common at Fort Mandan in minus 45 degrees"
+      },
+      "advanced": {
+        "clue": "Tissue damage from temperatures Lewis recorded at -45 degrees Fahrenheit"
+      },
+      "definition": "Injury to body tissue caused by exposure to extreme cold",
+      "funFact": "At Fort Mandan, temperatures dropped to -45F -- so cold that whiskey froze solid!"
+    },
+    {
+      "key": "portage",
+      "word": "PORTAGE",
+      "type": "word_puzzle",
+      "legs": [
+        6
+      ],
+      "station": 7,
+      "beginner": {
+        "clue": "Carrying boats and supplies overland"
+      },
+      "standard": {
+        "clue": "18-mile overland haul around the Great Falls"
+      },
+      "advanced": {
+        "clue": "Grueling evidence that Jefferson's hoped-for water route did not exist"
+      },
+      "definition": "The act of carrying boats and supplies overland to bypass an obstacle in a waterway",
+      "funFact": "The Great Falls portage took 24 days to cover just 18 miles -- with cactus, rattlesnakes, and grizzly bears!"
+    },
+    {
+      "key": "grizzly",
+      "word": "GRIZZLY",
+      "type": "word_puzzle",
+      "legs": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "station": 7,
+      "beginner": {
+        "clue": "A very large and dangerous bear"
+      },
+      "standard": {
+        "clue": "Fearsome bear Lewis called 'most tremendous looking'"
+      },
+      "advanced": {
+        "clue": "Ursus arctos horribilis -- a species entirely new to American science"
+      },
+      "definition": "A large North American brown bear, known for its size and ferocity",
+      "funFact": "A grizzly once chased Lewis into the Missouri River! He wrote it was 'a most tremendous looking animal.'"
+    },
+    {
+      "key": "sextant",
+      "word": "SEXTANT",
+      "type": "word_puzzle",
+      "legs": [
+        1,
+        2,
+        3,
+        6
+      ],
+      "station": 7,
+      "beginner": {
+        "clue": "A tool for figuring out where you are using stars"
+      },
+      "standard": {
+        "clue": "Navigation instrument for measuring star positions"
+      },
+      "advanced": {
+        "clue": "Precision instrument for determining latitude from celestial observations"
+      },
+      "definition": "A navigation instrument used to measure the angle between a star and the horizon to determine position",
+      "funFact": "Lewis's celestial readings created the first accurate map of the American West!"
+    },
+    {
+      "key": "shoshone",
+      "word": "SHOSHONE",
+      "type": "word_puzzle",
+      "legs": [
+        7
+      ],
+      "station": 8,
+      "beginner": {
+        "clue": "Sacagawea's people who had the horses they needed"
+      },
+      "standard": {
+        "clue": "Mountain nation that provided the critical horses"
+      },
+      "advanced": {
+        "clue": "Lemhi band whose chief was Sacagawea's long-lost brother"
+      },
+      "definition": "A Native American people of the Rocky Mountain region",
+      "funFact": "When Sacagawea recognized Chief Cameahwait as her brother, she ran to him and threw her blanket over him, weeping!"
+    },
+    {
+      "key": "cameahwait",
+      "word": "CAMEAHWAIT",
+      "type": "word_puzzle",
+      "legs": [
+        7
+      ],
+      "station": 8,
+      "beginner": {
+        "clue": "Sacagawea's brother, the Shoshone chief"
+      },
+      "standard": {
+        "clue": "Chief who turned out to be Sacagawea's brother"
+      },
+      "advanced": {
+        "clue": "Lemhi Shoshone chief whose family reunion made the expedition possible"
+      },
+      "definition": "Chief of the Lemhi Shoshone and Sacagawea's brother, who provided horses for the mountain crossing",
+      "funFact": "Without Cameahwait's 29 horses, the expedition would have been stranded in the Rockies!"
+    },
+    {
+      "key": "divide",
+      "word": "DIVIDE",
+      "type": "word_puzzle",
+      "legs": [
+        7,
+        8
+      ],
+      "station": 9,
+      "beginner": {
+        "clue": "The mountain line separating rivers east from west"
+      },
+      "standard": {
+        "clue": "Continental ____: boundary between east- and west-flowing waters"
+      },
+      "advanced": {
+        "clue": "Geographic boundary that disproved Jefferson's theory of an easy water route"
+      },
+      "definition": "The Continental Divide -- the line of mountain peaks separating rivers that flow east from those flowing west",
+      "funFact": "Crossing the Divide proved there was no easy water route to the Pacific -- Jefferson's main hope was wrong!"
+    },
+    {
+      "key": "canoe",
+      "word": "CANOE",
+      "type": "word_puzzle",
+      "legs": [
+        8,
+        9
+      ],
+      "station": 9,
+      "beginner": {
+        "clue": "Boats they carved from logs to travel rivers"
+      },
+      "standard": {
+        "clue": "Dugout craft the Nez Perce taught them to build"
+      },
+      "advanced": {
+        "clue": "Vessels constructed using Indigenous fire-hollowing techniques"
+      },
+      "definition": "A narrow boat, pointed at both ends, propelled by paddling",
+      "funFact": "The Nez Perce taught the Corps to hollow logs with fire -- much faster than using axes!"
+    },
+    {
+      "key": "columbia",
+      "word": "COLUMBIA",
+      "type": "word_puzzle",
+      "legs": [
+        9
+      ],
+      "station": 10,
+      "beginner": {
+        "clue": "The big river that led them to the Pacific"
+      },
+      "standard": {
+        "clue": "River system that carried them to the coast"
+      },
+      "advanced": {
+        "clue": "Major waterway navigated using Nez Perce geographic intelligence"
+      },
+      "definition": "A major river flowing from the Rocky Mountains to the Pacific Ocean",
+      "funFact": "The Columbia's rapids were so dangerous that the Corps nearly lost everything running them!"
+    },
+    {
+      "key": "chinook",
+      "word": "CHINOOK",
+      "type": "word_puzzle",
+      "legs": [
+        9
+      ],
+      "station": 10,
+      "beginner": {
+        "clue": "Coastal people who were expert fishers"
+      },
+      "standard": {
+        "clue": "Pacific Northwest nation with superior fishing technology"
+      },
+      "advanced": {
+        "clue": "Maritime culture whose engineering Lewis openly admired"
+      },
+      "definition": "A Native American people of the Pacific Northwest coast, known for their fishing expertise",
+      "funFact": "The Chinook's fishing weirs could catch hundreds of salmon -- far more than any European method!"
+    },
+    {
+      "key": "vote",
+      "word": "VOTE",
+      "type": "word_puzzle",
+      "legs": [
+        9
+      ],
+      "station": 10,
+      "beginner": {
+        "clue": "When everyone got to choose where to camp"
+      },
+      "standard": {
+        "clue": "Democratic decision that included York and Sacagawea"
+      },
+      "advanced": {
+        "clue": "Extraordinary act of inclusion decades ahead of legal recognition"
+      },
+      "definition": "A formal expression of choice; at Fort Clatsop, everyone voted equally -- including York and Sacagawea",
+      "funFact": "York (an enslaved man) and Sacagawea (a Native woman) voted 60 years before the 15th and 19th Amendments!"
+    }
+  ],
+  "phrases": [
+    {
+      "key": "proceeded_on",
+      "phrase": "PROCEEDED ON",
+      "type": "trail_cipher",
+      "legs": [
+        1,
+        2,
+        3
+      ],
+      "station": 1,
+      "category": "Clark's Favorite Phrase",
+      "beginner": {
+        "clue": "Clark's two-word journal entry used almost every day"
+      },
+      "standard": {
+        "clue": "Clark's signature journal phrase, meaning 'we kept going'"
+      },
+      "advanced": {
+        "clue": "Clark's laconic daily summary -- perhaps the most repeated phrase in the journals"
+      }
+    },
+    {
+      "key": "corps_of_discovery",
+      "phrase": "CORPS OF DISCOVERY",
+      "type": "trail_cipher",
+      "legs": [
+        1
+      ],
+      "station": 1,
+      "category": "Expedition Name",
+      "beginner": {
+        "clue": "The official name of their exploring group"
+      },
+      "standard": {
+        "clue": "The expedition's official military designation"
+      },
+      "advanced": {
+        "clue": "The formal name Jefferson gave this unit of volunteer soldiers"
+      }
+    },
+    {
+      "key": "great_plains",
+      "phrase": "GREAT PLAINS",
+      "type": "trail_cipher",
+      "legs": [
+        2,
+        3
+      ],
+      "station": 2,
+      "category": "Geographic Region",
+      "beginner": {
+        "clue": "The huge flat grassland in the middle of America"
+      },
+      "standard": {
+        "clue": "Vast treeless grassland stretching west of the Missouri"
+      },
+      "advanced": {
+        "clue": "Continental grassland ecosystem managed by Native fire practices"
+      }
+    },
+    {
+      "key": "peace_and_friendship",
+      "phrase": "PEACE AND FRIENDSHIP",
+      "type": "trail_cipher",
+      "legs": [
+        3
+      ],
+      "station": 3,
+      "category": "Diplomacy",
+      "beginner": {
+        "clue": "What the peace medals promised to tribal leaders"
+      },
+      "standard": {
+        "clue": "The message engraved on Jefferson's silver medals"
+      },
+      "advanced": {
+        "clue": "The diplomatic promise on medals that asserted American sovereignty"
+      }
+    },
+    {
+      "key": "fort_mandan",
+      "phrase": "FORT MANDAN",
+      "type": "trail_cipher",
+      "legs": [
+        4,
+        5
+      ],
+      "station": 4,
+      "category": "Expedition Location",
+      "beginner": {
+        "clue": "The wooden fort they built for winter"
+      },
+      "standard": {
+        "clue": "Winter quarters built near the Mandan villages"
+      },
+      "advanced": {
+        "clue": "Cottonwood fort where the expedition spent five months gathering intelligence"
+      }
+    },
+    {
+      "key": "jean_baptiste",
+      "phrase": "JEAN BAPTISTE",
+      "type": "trail_cipher",
+      "legs": [
+        5
+      ],
+      "station": 5,
+      "category": "Expedition Member",
+      "beginner": {
+        "clue": "Sacagawea's baby, born at Fort Mandan"
+      },
+      "standard": {
+        "clue": "The youngest member of the expedition, born February 1805"
+      },
+      "advanced": {
+        "clue": "Sacagawea's son, whom Clark nicknamed 'Pomp' and later educated"
+      }
+    },
+    {
+      "key": "terra_incognita",
+      "phrase": "TERRA INCOGNITA",
+      "type": "trail_cipher",
+      "legs": [
+        6
+      ],
+      "station": 6,
+      "category": "Latin Phrase",
+      "beginner": {
+        "clue": "Latin for 'unknown land' -- what lay beyond Fort Mandan"
+      },
+      "standard": {
+        "clue": "'Unknown territory' -- the unmapped land west of Fort Mandan"
+      },
+      "advanced": {
+        "clue": "Cartographic term for the 2,000-mile blank on American maps"
+      }
+    },
+    {
+      "key": "sublimely_grand",
+      "phrase": "SUBLIMELY GRAND SPECTACLE",
+      "type": "trail_cipher",
+      "legs": [
+        6
+      ],
+      "station": 7,
+      "category": "Famous Journal Quote",
+      "beginner": {
+        "clue": "Lewis's words describing the amazing Great Falls"
+      },
+      "standard": {
+        "clue": "How Lewis described the Great Falls of the Missouri"
+      },
+      "advanced": {
+        "clue": "Lewis's Romantic-era description of the Great Falls, reflecting Sublime aesthetics"
+      }
+    },
+    {
+      "key": "camp_fortunate",
+      "phrase": "CAMP FORTUNATE",
+      "type": "trail_cipher",
+      "legs": [
+        7
+      ],
+      "station": 8,
+      "category": "Expedition Location",
+      "beginner": {
+        "clue": "Where Sacagawea found her brother -- they were 'fortunate'!"
+      },
+      "standard": {
+        "clue": "Named for the incredible luck of finding Sacagawea's brother"
+      },
+      "advanced": {
+        "clue": "Named by Lewis for the extraordinary coincidence of the Shoshone reunion"
+      }
+    },
+    {
+      "key": "continental_divide",
+      "phrase": "CONTINENTAL DIVIDE",
+      "type": "trail_cipher",
+      "legs": [
+        7,
+        8
+      ],
+      "station": 9,
+      "category": "Geographic Feature",
+      "beginner": {
+        "clue": "The mountain ridge separating rivers flowing east from west"
+      },
+      "standard": {
+        "clue": "Mountain boundary between Atlantic and Pacific watersheds"
+      },
+      "advanced": {
+        "clue": "Hydrological boundary whose crossing disproved the Northwest Passage theory"
+      }
+    },
+    {
+      "key": "lolo_trail",
+      "phrase": "LOLO TRAIL",
+      "type": "trail_cipher",
+      "legs": [
+        8
+      ],
+      "station": 9,
+      "category": "Expedition Route",
+      "beginner": {
+        "clue": "The scary mountain path through the Bitterroots"
+      },
+      "standard": {
+        "clue": "Ancient Nez Perce route through the Bitterroot Mountains"
+      },
+      "advanced": {
+        "clue": "The Nez Perce trail that nearly ended the expedition in starvation and snow"
+      }
+    },
+    {
+      "key": "ocean_in_view",
+      "phrase": "OCEAN IN VIEW",
+      "type": "trail_cipher",
+      "legs": [
+        9
+      ],
+      "station": 10,
+      "category": "Famous Journal Entry",
+      "beginner": {
+        "clue": "Clark's excited words when he first saw the Pacific!"
+      },
+      "standard": {
+        "clue": "Clark's famous journal entry upon spotting the Pacific"
+      },
+      "advanced": {
+        "clue": "Clark's triumphant exclamation, actually misspelled as 'Ocian in view!'"
+      }
+    },
+    {
+      "key": "fort_clatsop",
+      "phrase": "FORT CLATSOP",
+      "type": "trail_cipher",
+      "legs": [
+        9
+      ],
+      "station": 10,
+      "category": "Expedition Location",
+      "beginner": {
+        "clue": "Their winter camp near the Pacific Ocean"
+      },
+      "standard": {
+        "clue": "Winter quarters on the Pacific coast, named for the local tribe"
+      },
+      "advanced": {
+        "clue": "Pacific winter camp chosen by democratic vote, where the journals were compiled"
+      }
+    }
+  ]
+}

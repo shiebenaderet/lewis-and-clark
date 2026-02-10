@@ -14,7 +14,9 @@ let state = {
   challengesCompleted: new Set(),
   scenariosCompleted: new Set(),
   seenEvents: [],
-  discoveries: []
+  discoveries: [],
+  glossary: [],
+  wordChallengesWon: 0
 };
 
 function resetState() {
@@ -28,7 +30,9 @@ function resetState() {
     challengesCompleted: new Set(),
     scenariosCompleted: new Set(),
     seenEvents: [],
-    discoveries: []
+    discoveries: [],
+    glossary: [],
+    wordChallengesWon: 0
   };
   clearSave();
 }
@@ -60,6 +64,8 @@ function _buildSaveData() {
     scenariosCompleted: Array.from(state.scenariosCompleted),
     seenEvents: state.seenEvents || [],
     discoveries: state.discoveries || [],
+    glossary: state.glossary || [],
+    wordChallengesWon: state.wordChallengesWon || 0,
     savedAt: new Date().toISOString()
   };
 }
@@ -76,6 +82,8 @@ function _parseSaveData(data) {
     scenariosCompleted: new Set(data.scenariosCompleted || []),
     seenEvents: data.seenEvents || [],
     discoveries: data.discoveries || [],
+    glossary: data.glossary || [],
+    wordChallengesWon: data.wordChallengesWon || 0,
     savedAt: data.savedAt
   };
 }
