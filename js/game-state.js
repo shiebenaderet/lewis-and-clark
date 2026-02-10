@@ -41,6 +41,10 @@ function saveReflection(stationIndex, value) {
 function saveJournalField(stationIndex, field, value) {
   state.journalEntries[`${field}_${stationIndex}`] = value;
   saveGame();
+  // Check journal gating when summary is updated
+  if (field === 'summary' && typeof checkJournalGate === 'function') {
+    checkJournalGate(stationIndex);
+  }
 }
 
 // === LOCALSTORAGE PERSISTENCE ===
