@@ -18,17 +18,29 @@
     ],
     "reflection": "Why do you think Lewis and Clark decided to build a fort and stay for the winter instead of continuing their journey?",
     "challenge": {
-      "type": "multiple_choice",
-      "question": "The Mandan had been trading with Europeans since 1738. That's how many years before Lewis and Clark arrived?",
+      "type": "image_match",
+      "question": "Clark wrote about arriving at a village 'situated about 50 feet above the water in a handsome plain.' Which image best matches this description?",
       "options": [
-        "About 30 years",
-        "About 50 years",
-        "About 66 years",
-        "About 100 years"
+        {
+          "image": "data/images/station-04-d-fort-mandan-winter.jpg",
+          "caption": "A wooden fort in winter snow"
+        },
+        {
+          "image": "data/images/station-04-a-mandan-village.jpg",
+          "caption": "An earth lodge village on elevated ground"
+        },
+        {
+          "image": "data/images/station-04-c-mandan-chief.jpg",
+          "caption": "Portrait of a Native American chief"
+        },
+        {
+          "image": "data/images/station-04-e-village-arrival.jpg",
+          "caption": "Explorers arriving by river at a village"
+        }
       ],
-      "correct": 2,
-      "feedback_correct": "Correct! 1804 minus 1738 equals 66 years. The Mandan were experienced traders with Europeans long before Lewis and Clark showed up.",
-      "feedback_incorrect": "Let's do the math: 1804 - 1738 = 66 years. The Mandan had been trading with Europeans for generations!"
+      "correct": 1,
+      "feedback_correct": "That's the one! The Mandan earth lodge village sits elevated above the river on flat ground — exactly as Clark described: 'about 50 feet above the water in a handsome plain.'",
+      "feedback_incorrect": "Look for the image that shows a village on elevated, flat ground above a river — matching Clark's description of 'about 50 feet above the water in a handsome plain.' The earth lodge village best fits."
     },
     "images": [
       {
@@ -77,17 +89,29 @@
     ],
     "reflection": "The Mandan had been trading with Europeans since 1738 — over 65 years before Lewis and Clark arrived. How might this prior contact have shaped the encounter?",
     "challenge": {
-      "type": "multiple_choice",
-      "question": "The Mandan had been trading with Europeans since 1738. That's how many years before Lewis and Clark arrived?",
+      "type": "image_match",
+      "question": "Clark wrote about arriving at a village 'situated about 50 feet above the water in a handsome plain.' Which image best matches this description?",
       "options": [
-        "About 30 years",
-        "About 50 years",
-        "About 66 years",
-        "About 100 years"
+        {
+          "image": "data/images/station-04-d-fort-mandan-winter.jpg",
+          "caption": "A wooden fort in winter snow"
+        },
+        {
+          "image": "data/images/station-04-a-mandan-village.jpg",
+          "caption": "An earth lodge village on elevated ground"
+        },
+        {
+          "image": "data/images/station-04-c-mandan-chief.jpg",
+          "caption": "Portrait of a Native American chief"
+        },
+        {
+          "image": "data/images/station-04-e-village-arrival.jpg",
+          "caption": "Explorers arriving by river at a village"
+        }
       ],
-      "correct": 2,
-      "feedback_correct": "Correct! 1804 minus 1738 equals 66 years. The Mandan were experienced traders with Europeans long before Lewis and Clark showed up.",
-      "feedback_incorrect": "Let's do the math: 1804 - 1738 = 66 years. The Mandan had been trading with Europeans for generations!"
+      "correct": 1,
+      "feedback_correct": "That's the one! The Mandan earth lodge village sits elevated above the river on flat ground — exactly as Clark described: 'about 50 feet above the water in a handsome plain.'",
+      "feedback_incorrect": "Look for the image that shows a village on elevated, flat ground above a river — matching Clark's description of 'about 50 feet above the water in a handsome plain.' The earth lodge village best fits."
     },
     "images": [
       {
@@ -136,17 +160,29 @@
     ],
     "reflection": "The Mandan-Hidatsa villages functioned as a major trade hub of the Northern Plains, connecting peoples from the Rockies to the Great Lakes. How does understanding this existing network change the narrative that Lewis and Clark were exploring “unknown” territory? What does Clark’s hiring of a French interpreter tell us about who was already present in this region?",
     "challenge": {
-      "type": "multiple_choice",
-      "question": "The Mandan had been trading with Europeans since 1738. That's how many years before Lewis and Clark arrived?",
+      "type": "image_match",
+      "question": "Clark wrote about arriving at a village 'situated about 50 feet above the water in a handsome plain.' Which image best matches this description?",
       "options": [
-        "About 30 years",
-        "About 50 years",
-        "About 66 years",
-        "About 100 years"
+        {
+          "image": "data/images/station-04-d-fort-mandan-winter.jpg",
+          "caption": "A wooden fort in winter snow"
+        },
+        {
+          "image": "data/images/station-04-a-mandan-village.jpg",
+          "caption": "An earth lodge village on elevated ground"
+        },
+        {
+          "image": "data/images/station-04-c-mandan-chief.jpg",
+          "caption": "Portrait of a Native American chief"
+        },
+        {
+          "image": "data/images/station-04-e-village-arrival.jpg",
+          "caption": "Explorers arriving by river at a village"
+        }
       ],
-      "correct": 2,
-      "feedback_correct": "Correct! 1804 minus 1738 equals 66 years. The Mandan were experienced traders with Europeans long before Lewis and Clark showed up.",
-      "feedback_incorrect": "Let's do the math: 1804 - 1738 = 66 years. The Mandan had been trading with Europeans for generations!"
+      "correct": 1,
+      "feedback_correct": "That's the one! The Mandan earth lodge village sits elevated above the river on flat ground — exactly as Clark described: 'about 50 feet above the water in a handsome plain.'",
+      "feedback_incorrect": "Look for the image that shows a village on elevated, flat ground above a river — matching Clark's description of 'about 50 feet above the water in a handsome plain.' The earth lodge village best fits."
     },
     "images": [
       {

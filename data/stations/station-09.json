@@ -19,17 +19,17 @@
     ],
     "reflection": "The group almost starved crossing the mountains and were saved by the Nez Perce. How many times has the expedition been helped by Native Americans so far? What does that tell you?",
     "challenge": {
-      "type": "multiple_choice",
-      "question": "When the Corps crossed the Continental Divide, they left U.S. territory. What territory did they enter?",
-      "options": [
-        "British Canada",
-        "Spanish Mexico",
-        "Oregon Country (claimed by both the U.S. and Britain)",
-        "Russian Alaska"
+      "type": "ordering",
+      "question": "Arrange these events of the mountain crossing in the order they happened:",
+      "items": [
+        "The Corps traded with the Shoshone for horses and hired Old Toby as a guide",
+        "They crossed the Continental Divide at Lemhi Pass, leaving U.S. territory",
+        "The 11-day mountain crossing began — the men nearly starved and ate horses and candles",
+        "Friendly Nez Perce Indians gave them food and taught them to make dugout canoes",
+        "The Corps launched onto the rivers, speeding west toward the Pacific"
       ],
-      "correct": 2,
-      "feedback_correct": "Right! At Lemhi Pass, they crossed from the Louisiana Purchase into Oregon Country, which was jointly claimed by the U.S. and Britain. The expedition was now in disputed territory.",
-      "feedback_incorrect": "They entered Oregon Country, which was jointly claimed by both the U.S. and Britain. This reveals the expedition was partly about staking territorial claims."
+      "feedback_correct": "That's the right order! The mountain crossing was a desperate sequence: get horses, cross the divide, survive the brutal mountains, get rescued by the Nez Perce, then race downriver to the Pacific.",
+      "feedback_incorrect": "Not quite. The sequence was: first they got Shoshone horses, then crossed Lemhi Pass, then suffered through the 11-day mountain crossing, then the Nez Perce saved them with food and canoe-building skills, and finally they launched onto the rivers heading west."
     },
     "images": [
       {
@@ -78,17 +78,17 @@
     ],
     "reflection": "At Lemhi Pass, the Corps crossed from the Louisiana Purchase into Oregon Country — territory the U.S. did not own. What does this tell you about the expedition’s true purpose beyond just “exploring”?",
     "challenge": {
-      "type": "multiple_choice",
-      "question": "When the Corps crossed the Continental Divide, they left U.S. territory. What territory did they enter?",
-      "options": [
-        "British Canada",
-        "Spanish Mexico",
-        "Oregon Country (claimed by both the U.S. and Britain)",
-        "Russian Alaska"
+      "type": "ordering",
+      "question": "Arrange these events of the mountain crossing in the order they happened:",
+      "items": [
+        "The Corps traded with the Shoshone for horses and hired Old Toby as a guide",
+        "They crossed the Continental Divide at Lemhi Pass, leaving U.S. territory",
+        "The 11-day mountain crossing began — the men nearly starved and ate horses and candles",
+        "Friendly Nez Perce Indians gave them food and taught them to make dugout canoes",
+        "The Corps launched onto the rivers, speeding west toward the Pacific"
       ],
-      "correct": 2,
-      "feedback_correct": "Right! At Lemhi Pass, they crossed from the Louisiana Purchase into Oregon Country, which was jointly claimed by the U.S. and Britain. The expedition was now in disputed territory.",
-      "feedback_incorrect": "They entered Oregon Country, which was jointly claimed by both the U.S. and Britain. This reveals the expedition was partly about staking territorial claims."
+      "feedback_correct": "That's the right order! The mountain crossing was a desperate sequence: get horses, cross the divide, survive the brutal mountains, get rescued by the Nez Perce, then race downriver to the Pacific.",
+      "feedback_incorrect": "Not quite. The sequence was: first they got Shoshone horses, then crossed Lemhi Pass, then suffered through the 11-day mountain crossing, then the Nez Perce saved them with food and canoe-building skills, and finally they launched onto the rivers heading west."
     },
     "images": [
       {
@@ -138,17 +138,17 @@
     ],
     "reflection": "At Lemhi Pass, the expedition crossed from U.S. territory (the Louisiana Purchase) into Oregon Country, which was claimed by multiple nations. Analyze the expedition as an instrument of territorial expansion: How does the act of distributing medals, giving speeches about a “great father,” and mapping the territory serve as a form of sovereignty claim, even in territory the U.S. did not legally possess? How do the Nez Perce’s actions — feeding the starving explorers and teaching them canoe-building — complicate the narrative of American self-reliance?",
     "challenge": {
-      "type": "multiple_choice",
-      "question": "When the Corps crossed the Continental Divide, they left U.S. territory. What territory did they enter?",
-      "options": [
-        "British Canada",
-        "Spanish Mexico",
-        "Oregon Country (claimed by both the U.S. and Britain)",
-        "Russian Alaska"
+      "type": "ordering",
+      "question": "Arrange these events of the mountain crossing in the order they happened:",
+      "items": [
+        "The Corps traded with the Shoshone for horses and hired Old Toby as a guide",
+        "They crossed the Continental Divide at Lemhi Pass, leaving U.S. territory",
+        "The 11-day mountain crossing began — the men nearly starved and ate horses and candles",
+        "Friendly Nez Perce Indians gave them food and taught them to make dugout canoes",
+        "The Corps launched onto the rivers, speeding west toward the Pacific"
       ],
-      "correct": 2,
-      "feedback_correct": "Right! At Lemhi Pass, they crossed from the Louisiana Purchase into Oregon Country, which was jointly claimed by the U.S. and Britain. The expedition was now in disputed territory.",
-      "feedback_incorrect": "They entered Oregon Country, which was jointly claimed by both the U.S. and Britain. This reveals the expedition was partly about staking territorial claims."
+      "feedback_correct": "That's the right order! The mountain crossing was a desperate sequence: get horses, cross the divide, survive the brutal mountains, get rescued by the Nez Perce, then race downriver to the Pacific.",
+      "feedback_incorrect": "Not quite. The sequence was: first they got Shoshone horses, then crossed Lemhi Pass, then suffered through the 11-day mountain crossing, then the Nez Perce saved them with food and canoe-building skills, and finally they launched onto the rivers heading west."
     },
     "images": [
       {

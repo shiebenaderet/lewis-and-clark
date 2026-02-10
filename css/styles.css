@@ -1169,6 +1169,285 @@ body {
   color: #e8a0a0;
 }
 
+/* --- Challenge: Shared submit button --- */
+.challenge-submit-btn {
+  display: block;
+  margin: 0.75rem auto 0;
+  padding: 0.6rem 1.5rem;
+  background: var(--campfire-glow);
+  color: var(--parchment);
+  border: none;
+  border-radius: 6px;
+  font-family: Georgia, serif;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.challenge-submit-btn:hover {
+  background: #d4760a;
+}
+.challenge-instruction {
+  font-size: 0.85rem;
+  color: #b8a88a;
+  font-style: italic;
+  margin-bottom: 0.75rem;
+}
+
+/* --- Challenge: Map Click --- */
+.map-click-area {
+  width: 100%;
+  border: 2px solid var(--trail-brown);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+.map-click-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.map-click-completed {
+  padding: 0.75rem;
+  background: rgba(45, 80, 22, 0.15);
+  border: 1px solid rgba(74, 124, 46, 0.3);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+}
+.map-click-pin {
+  font-size: 1.2rem;
+  margin-right: 0.25rem;
+}
+
+/* --- Challenge: Ordering --- */
+.ordering-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 0.5rem;
+}
+.ordering-item {
+  display: flex;
+  align-items: center;
+  padding: 0.6rem 0.75rem;
+  background: rgba(107, 68, 35, 0.15);
+  border: 2px solid rgba(107, 68, 35, 0.3);
+  border-radius: 6px;
+  cursor: grab;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+  user-select: none;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+.ordering-item:hover {
+  background: rgba(107, 68, 35, 0.25);
+  border-color: rgba(107, 68, 35, 0.5);
+}
+.ordering-item.dragging {
+  opacity: 0.5;
+  transform: scale(0.98);
+}
+.ordering-item.correct {
+  background: rgba(45, 80, 22, 0.2);
+  border-color: rgba(74, 124, 46, 0.5);
+  cursor: default;
+}
+.ordering-item.incorrect {
+  background: rgba(139, 26, 26, 0.15);
+  border-color: rgba(139, 26, 26, 0.4);
+  cursor: default;
+}
+.ordering-handle {
+  margin-right: 0.6rem;
+  color: var(--trail-brown);
+  font-size: 1rem;
+  flex-shrink: 0;
+  cursor: grab;
+}
+.ordering-text {
+  flex: 1;
+}
+.ordering-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: var(--campfire-glow);
+  color: var(--parchment);
+  border-radius: 50%;
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin-right: 0.5rem;
+  flex-shrink: 0;
+}
+.ordering-arrows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin-left: 0.5rem;
+  flex-shrink: 0;
+}
+.ordering-arrow {
+  background: none;
+  border: 1px solid rgba(107, 68, 35, 0.3);
+  color: var(--trail-brown);
+  font-size: 0.65rem;
+  padding: 0.15rem 0.4rem;
+  cursor: pointer;
+  border-radius: 3px;
+  line-height: 1;
+}
+.ordering-arrow:hover {
+  background: rgba(107, 68, 35, 0.2);
+}
+.ordering-arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+/* --- Challenge: Fill in the Blank --- */
+.fill-blank-quote {
+  background: rgba(107, 68, 35, 0.1);
+  border-left: 3px solid var(--campfire-glow);
+  padding: 1rem 1.25rem;
+  margin-bottom: 0.75rem;
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--old-paper-text);
+}
+.quote-text {
+  color: inherit;
+}
+.fill-blank-input {
+  display: inline-block;
+  width: auto;
+  min-width: 180px;
+  max-width: 300px;
+  padding: 0.3rem 0.5rem;
+  margin: 0 0.15rem;
+  background: rgba(244, 232, 193, 0.2);
+  border: 2px dashed var(--campfire-glow);
+  border-radius: 4px;
+  font-family: Georgia, serif;
+  font-size: 1rem;
+  font-style: normal;
+  color: var(--old-paper-text);
+  text-align: center;
+  vertical-align: baseline;
+}
+.fill-blank-input:focus {
+  outline: none;
+  border-color: #f5a623;
+  background: rgba(244, 232, 193, 0.35);
+}
+.fill-blank-input.correct {
+  border-style: solid;
+  border-color: rgba(74, 124, 46, 0.6);
+  background: rgba(45, 80, 22, 0.15);
+  color: #b5e8a0;
+}
+.fill-blank-input.incorrect {
+  border-style: solid;
+  border-color: rgba(139, 26, 26, 0.5);
+  background: rgba(139, 26, 26, 0.1);
+}
+.fill-blank-answer.revealed {
+  display: inline;
+  padding: 0.2rem 0.5rem;
+  background: rgba(45, 80, 22, 0.15);
+  border: 2px solid rgba(74, 124, 46, 0.4);
+  border-radius: 4px;
+  font-style: normal;
+  font-weight: bold;
+  color: #b5e8a0;
+}
+.fill-blank-hint {
+  font-size: 0.85rem;
+  color: #b8a88a;
+  margin-bottom: 0.5rem;
+}
+.fill-blank-reveal {
+  margin-top: 0.4rem;
+  font-size: 0.9rem;
+  color: #b8a88a;
+  font-style: italic;
+}
+
+/* --- Challenge: Image Match --- */
+.image-match-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+.image-match-option {
+  border: 2px solid rgba(107, 68, 35, 0.3);
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.15s, opacity 0.3s;
+}
+.image-match-option:hover {
+  border-color: var(--campfire-glow);
+  transform: scale(1.02);
+}
+.image-match-option img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  display: block;
+}
+.image-match-option.correct {
+  border-color: rgba(74, 124, 46, 0.7);
+  border-width: 3px;
+  cursor: default;
+}
+.image-match-option.correct::after {
+  content: '\2713';
+  display: block;
+  text-align: center;
+  background: rgba(45, 80, 22, 0.3);
+  color: #b5e8a0;
+  font-size: 1.1rem;
+  padding: 0.2rem;
+}
+.image-match-option.incorrect {
+  border-color: rgba(139, 26, 26, 0.5);
+  cursor: default;
+}
+.image-match-option.incorrect::after {
+  content: '\2717';
+  display: block;
+  text-align: center;
+  background: rgba(139, 26, 26, 0.15);
+  color: #e8a0a0;
+  font-size: 1.1rem;
+  padding: 0.2rem;
+}
+.image-match-caption {
+  padding: 0.4rem 0.6rem;
+  font-size: 0.8rem;
+  text-align: center;
+  color: #b8a88a;
+}
+
+/* Responsive: Stack image match on small screens */
+@media (max-width: 480px) {
+  .image-match-grid {
+    grid-template-columns: 1fr;
+  }
+  .image-match-option img {
+    height: 120px;
+  }
+  .fill-blank-input {
+    min-width: 120px;
+    max-width: 200px;
+  }
+}
+
 /* --- Discovery Banner (shown on correct challenge) --- */
 .discovery-banner {
   margin-top: 0.75rem;

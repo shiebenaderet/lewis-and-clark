@@ -25,17 +25,17 @@
     ],
     "reflection": "Lewis and Clark gave speeches telling Native Americans they had a new “great father.” How do you think the Native Americans felt about this? Why?",
     "challenge": {
-      "type": "multiple_choice",
-      "question": "Lewis and Clark gave gifts 'in proportion to their consequence.' What does 'consequence' mean here?",
-      "options": [
-        "The results of their actions",
-        "Their importance or rank",
-        "Their age",
-        "How much they had to trade"
+      "type": "ordering",
+      "question": "Arrange these events from the council in the order they happened:",
+      "items": [
+        "The Oto and Missouri Indians arrived at camp at sunset",
+        "Lewis and Clark gave out gifts based on each chief's importance",
+        "The captains gave a long speech about the U.S. government under a sail awning",
+        "The chiefs gave speeches back, promising to follow the advice",
+        "Captain Lewis fired the gun, and the Corps moved on"
       ],
-      "correct": 1,
-      "feedback_correct": "Right! In 1804, 'consequence' meant importance or status. More important chiefs got bigger gifts — diplomacy through gift-giving.",
-      "feedback_incorrect": "In 1804 English, 'consequence' meant importance or status. The bigger the chief's rank, the bigger the gift."
+      "feedback_correct": "That's the right order! The council followed a careful diplomatic sequence: welcome, gift-giving, speeches from both sides, then a display of military power before departure.",
+      "feedback_incorrect": "Not quite. Re-read the journal entries: First the Indians arrived at sunset, then gifts were given by importance, then speeches under the sail, then the chiefs responded, and finally Lewis fired the gun before they left."
     },
     "images": [
       {
@@ -86,17 +86,17 @@
     ],
     "reflection": "Lewis and Clark claimed to represent a new “great father” for these tribes. How might the Oto and Missouri leaders have interpreted this message? What power dynamics are at play in this encounter?",
     "challenge": {
-      "type": "multiple_choice",
-      "question": "Lewis and Clark gave gifts 'in proportion to their consequence.' What does 'consequence' mean here?",
-      "options": [
-        "The results of their actions",
-        "Their importance or rank",
-        "Their age",
-        "How much they had to trade"
+      "type": "ordering",
+      "question": "Arrange these events from the council in the order they happened:",
+      "items": [
+        "The Oto and Missouri Indians arrived at camp at sunset",
+        "Lewis and Clark gave out gifts based on each chief's importance",
+        "The captains gave a long speech about the U.S. government under a sail awning",
+        "The chiefs gave speeches back, promising to follow the advice",
+        "Captain Lewis fired the gun, and the Corps moved on"
       ],
-      "correct": 1,
-      "feedback_correct": "Right! In 1804, 'consequence' meant importance or status. More important chiefs got bigger gifts — diplomacy through gift-giving.",
-      "feedback_incorrect": "In 1804 English, 'consequence' meant importance or status. The bigger the chief's rank, the bigger the gift."
+      "feedback_correct": "That's the right order! The council followed a careful diplomatic sequence: welcome, gift-giving, speeches from both sides, then a display of military power before departure.",
+      "feedback_incorrect": "Not quite. Re-read the journal entries: First the Indians arrived at sunset, then gifts were given by importance, then speeches under the sail, then the chiefs responded, and finally Lewis fired the gun before they left."
     },
     "images": [
       {
@@ -148,17 +148,17 @@
     ],
     "reflection": "Clark records that gifts were given “in proportion to their consequence” (importance). Analyze the power dynamics of this diplomatic encounter. How did Lewis and Clark use ceremony, technology, and gift-giving as tools of diplomacy? How might the Oto and Missouri chiefs have had their own strategic reasons for engaging with the Americans?",
     "challenge": {
-      "type": "multiple_choice",
-      "question": "Lewis and Clark gave gifts 'in proportion to their consequence.' What does 'consequence' mean here?",
-      "options": [
-        "The results of their actions",
-        "Their importance or rank",
-        "Their age",
-        "How much they had to trade"
+      "type": "ordering",
+      "question": "Arrange these events from the council in the order they happened:",
+      "items": [
+        "The Oto and Missouri Indians arrived at camp at sunset",
+        "Lewis and Clark gave out gifts based on each chief's importance",
+        "The captains gave a long speech about the U.S. government under a sail awning",
+        "The chiefs gave speeches back, promising to follow the advice",
+        "Captain Lewis fired the gun, and the Corps moved on"
       ],
-      "correct": 1,
-      "feedback_correct": "Right! In 1804, 'consequence' meant importance or status. More important chiefs got bigger gifts — diplomacy through gift-giving.",
-      "feedback_incorrect": "In 1804 English, 'consequence' meant importance or status. The bigger the chief's rank, the bigger the gift."
+      "feedback_correct": "That's the right order! The council followed a careful diplomatic sequence: welcome, gift-giving, speeches from both sides, then a display of military power before departure.",
+      "feedback_incorrect": "Not quite. Re-read the journal entries: First the Indians arrived at sunset, then gifts were given by importance, then speeches under the sail, then the chiefs responded, and finally Lewis fired the gun before they left."
     },
     "images": [
       {

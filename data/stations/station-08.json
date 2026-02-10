@@ -25,17 +25,15 @@
     ],
     "reflection": "Imagine you were Sacagawea, seeing your brother and your people again after years of being away. How would you feel? How might this moment have changed the rest of the expedition?",
     "challenge": {
-      "type": "multiple_choice",
-      "question": "Why was this meeting place named 'Camp Fortunate'?",
-      "options": [
-        "They found gold there",
-        "The weather was perfect that day",
-        "The Shoshone chief turned out to be Sacagawea's brother — a lucky coincidence that got them the horses they needed",
-        "They found an easy mountain pass"
-      ],
-      "correct": 2,
-      "feedback_correct": "Exactly! What an incredible coincidence. Sacagawea's brother Cameahwait was the chief, which meant the Corps could negotiate for the horses they desperately needed to cross the Rockies.",
-      "feedback_incorrect": "It was named Camp Fortunate because of an amazing coincidence: the Shoshone chief Cameahwait turned out to be Sacagawea's brother. This personal connection helped them get the horses they needed."
+      "type": "map_click",
+      "question": "The expedition just met the Shoshone and got horses! Click on the map to show where Camp Fortunate is located.",
+      "instruction": "Click in the Rocky Mountains area of present-day Montana/Idaho — where the expedition met the Shoshone.",
+      "correct_lat": 45.9,
+      "correct_lon": -112.5,
+      "tolerance": 3.0,
+      "location_name": "Camp Fortunate, in the Rocky Mountains",
+      "feedback_correct": "That's right! Camp Fortunate was deep in the Rocky Mountains, near present-day Dillon, Montana. This is where Sacagawea's brother Cameahwait — the Shoshone chief — provided the horses needed to cross the Rockies.",
+      "feedback_incorrect": "Not quite — Camp Fortunate was in the Rocky Mountains, in the western part of the map near present-day Montana/Idaho. Look for the mountain region between the Great Falls and the Lolo Trail."
     },
     "images": [
       {
@@ -81,17 +79,15 @@
     ],
     "reflection": "Lewis describes the Shoshone as living in poverty yet being cheerful, generous, and honest. What values does Lewis seem to admire? What biases might be shaping his observations?",
     "challenge": {
-      "type": "multiple_choice",
-      "question": "Why was this meeting place named 'Camp Fortunate'?",
-      "options": [
-        "They found gold there",
-        "The weather was perfect that day",
-        "The Shoshone chief turned out to be Sacagawea's brother — a lucky coincidence that got them the horses they needed",
-        "They found an easy mountain pass"
-      ],
-      "correct": 2,
-      "feedback_correct": "Exactly! What an incredible coincidence. Sacagawea's brother Cameahwait was the chief, which meant the Corps could negotiate for the horses they desperately needed to cross the Rockies.",
-      "feedback_incorrect": "It was named Camp Fortunate because of an amazing coincidence: the Shoshone chief Cameahwait turned out to be Sacagawea's brother. This personal connection helped them get the horses they needed."
+      "type": "map_click",
+      "question": "The expedition just met the Shoshone and got horses! Click on the map to show where Camp Fortunate is located.",
+      "instruction": "Click in the Rocky Mountains area of present-day Montana/Idaho — where the expedition met the Shoshone.",
+      "correct_lat": 45.9,
+      "correct_lon": -112.5,
+      "tolerance": 3.0,
+      "location_name": "Camp Fortunate, in the Rocky Mountains",
+      "feedback_correct": "That's right! Camp Fortunate was deep in the Rocky Mountains, near present-day Dillon, Montana. This is where Sacagawea's brother Cameahwait — the Shoshone chief — provided the horses needed to cross the Rockies.",
+      "feedback_incorrect": "Not quite — Camp Fortunate was in the Rocky Mountains, in the western part of the map near present-day Montana/Idaho. Look for the mountain region between the Great Falls and the Lolo Trail."
     },
     "images": [
       {
@@ -138,17 +134,15 @@
     ],
     "reflection": "Lewis writes that each Shoshone individual “is his own sovereign master and acts from the dictates of his own mind.” This description of individual liberty resonates with Enlightenment political philosophy. Yet Lewis simultaneously characterizes the Shoshone as living in “a wretched state of poverty.” Analyze the tension between Lewis’s admiration for Shoshone character and his judgment of their material condition. What cultural assumptions underlie his definition of “poverty”? How might the Shoshone have assessed their own circumstances differently?",
     "challenge": {
-      "type": "multiple_choice",
-      "question": "Why was this meeting place named 'Camp Fortunate'?",
-      "options": [
-        "They found gold there",
-        "The weather was perfect that day",
-        "The Shoshone chief turned out to be Sacagawea's brother — a lucky coincidence that got them the horses they needed",
-        "They found an easy mountain pass"
-      ],
-      "correct": 2,
-      "feedback_correct": "Exactly! What an incredible coincidence. Sacagawea's brother Cameahwait was the chief, which meant the Corps could negotiate for the horses they desperately needed to cross the Rockies.",
-      "feedback_incorrect": "It was named Camp Fortunate because of an amazing coincidence: the Shoshone chief Cameahwait turned out to be Sacagawea's brother. This personal connection helped them get the horses they needed."
+      "type": "map_click",
+      "question": "The expedition just met the Shoshone and got horses! Click on the map to show where Camp Fortunate is located.",
+      "instruction": "Click in the Rocky Mountains area of present-day Montana/Idaho — where the expedition met the Shoshone.",
+      "correct_lat": 45.9,
+      "correct_lon": -112.5,
+      "tolerance": 3.0,
+      "location_name": "Camp Fortunate, in the Rocky Mountains",
+      "feedback_correct": "That's right! Camp Fortunate was deep in the Rocky Mountains, near present-day Dillon, Montana. This is where Sacagawea's brother Cameahwait — the Shoshone chief — provided the horses needed to cross the Rockies.",
+      "feedback_incorrect": "Not quite — Camp Fortunate was in the Rocky Mountains, in the western part of the map near present-day Montana/Idaho. Look for the mountain region between the Great Falls and the Lolo Trail."
     },
     "images": [
       {

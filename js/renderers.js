@@ -272,20 +272,51 @@ function renderStation(index) {
 
   document.getElementById('station-content').innerHTML = html;
   window.scrollTo(0, 0);
+
+  // Initialize interactive challenge types after DOM is populated
+  if (data.challenge && !challengeCompleted) {
+    if (data.challenge.type === 'map_click') {
+      initMapClickChallenge(index);
+    } else if (data.challenge.type === 'ordering') {
+      initOrderingChallenge(index);
+    }
+  }
 }
 
 // === CHALLENGE RENDERING ===
 function renderChallenge(challenge, stationIndex, alreadyCompleted) {
-  const challengeId = `challenge_${stationIndex}`;
+  // Dispatch to type-specific renderer
+  switch (challenge.type) {
+    case 'map_click':
+      return renderMapClickChallenge(challenge, stationIndex, alreadyCompleted);
+    case 'ordering':
+      return renderOrderingChallenge(challenge, stationIndex, alreadyCompleted);
+    case 'fill_in_blank':
+      return renderFillInBlankChallenge(challenge, stationIndex, alreadyCompleted);
+    case 'image_match':
+      return renderImageMatchChallenge(challenge, stationIndex, alreadyCompleted);
+    default:
+      return renderMultipleChoiceChallenge(challenge, stationIndex, alreadyCompleted);
+  }
+}
+
+// --- Challenge header (shared) ---
+function challengeHeader(challengeId, label) {
   let html = `<div class="challenge-box" id="${challengeId}">`;
   html += '<div class="challenge-header">';
   html += '<span class="challenge-icon">&#x1F9ED;</span>';
-  html += '<span class="challenge-label">Knowledge Check</span>';
+  html += `<span class="challenge-label">${label || 'Knowledge Check'}</span>`;
   html += '</div>';
+  return html;
+}
+
+// --- MULTIPLE CHOICE (stations 2, 5) ---
+function renderMultipleChoiceChallenge(challenge, stationIndex, alreadyCompleted) {
+  const challengeId = `challenge_${stationIndex}`;
+  let html = challengeHeader(challengeId, 'Knowledge Check');
   html += `<p class="challenge-question">${challenge.question}</p>`;
 
   if (alreadyCompleted) {
-    // Already answered — show completed state
     html += '<div class="challenge-options">';
     challenge.options.forEach((opt, i) => {
       const isCorrect = i === challenge.correct;
@@ -306,28 +337,388 @@ function renderChallenge(challenge, stationIndex, alreadyCompleted) {
   return html;
 }
 
-function answerChallenge(stationIndex, choiceIndex) {
+// --- MAP CLICK (stations 1, 8) ---
+function renderMapClickChallenge(challenge, stationIndex, alreadyCompleted) {
+  const challengeId = `challenge_${stationIndex}`;
+  let html = challengeHeader(challengeId, 'Map Challenge');
+  html += `<p class="challenge-question">${challenge.question}</p>`;
+  html += `<p class="challenge-instruction">${challenge.instruction}</p>`;
+
+  if (alreadyCompleted) {
+    html += `<div class="map-click-completed"><span class="map-click-pin">&#x1F4CD;</span> ${challenge.location_name}</div>`;
+    html += `<div class="challenge-feedback show correct">${challenge.feedback_correct}</div>`;
+  } else {
+    html += `<div class="map-click-area" id="mapclick_${stationIndex}"></div>`;
+    html += `<div class="challenge-feedback" id="feedback_${stationIndex}"></div>`;
+  }
+
+  html += '</div>';
+  return html;
+}
+
+function initMapClickChallenge(stationIndex) {
+  const container = document.getElementById(`mapclick_${stationIndex}`);
+  if (!container) return;
+  const station = STATIONS[stationIndex];
+  const data = station[state.level] || station.standard;
+  const challenge = data.challenge;
+
+  // Projection constants (same as main map)
+  const latMin = 36.5, latMax = 49.5, lonMin = -126.5, lonMax = -87.5;
+  const midLat = (latMin + latMax) / 2;
+  const cosLat = Math.cos(midLat * Math.PI / 180);
+  const svgW = 900;
+  const lonRange = (lonMax - lonMin) * cosLat;
+  const latRange = latMax - latMin;
+  const svgH = Math.round(svgW * (latRange / lonRange));
+
+  function proj(lat, lon) {
+    const x = ((lon - lonMin) * cosLat / lonRange) * svgW;
+    const y = ((latMax - lat) / latRange) * svgH;
+    return { x: Math.round(x * 10) / 10, y: Math.round(y * 10) / 10 };
+  }
+  function unproj(px, py) {
+    const lon = (px / svgW) * lonRange / cosLat + lonMin;
+    const lat = latMax - (py / svgH) * latRange;
+    return { lat, lon };
+  }
+
+  // Station coordinates for reference dots
+  const mapStations = [
+    { lat: 38.8, lon: -90.1 }, { lat: 41.0, lon: -96.0 }, { lat: 41.3, lon: -96.0 },
+    { lat: 47.3, lon: -101.4 }, { lat: 47.3, lon: -101.4 }, { lat: 47.3, lon: -101.4 },
+    { lat: 47.5, lon: -111.3 }, { lat: 45.9, lon: -112.5 }, { lat: 46.5, lon: -115.5 },
+    { lat: 46.1, lon: -123.9 }
+  ];
+
+  // Build mini SVG map
+  let svg = `<svg viewBox="0 0 ${svgW} ${svgH}" xmlns="http://www.w3.org/2000/svg" class="map-click-svg" style="font-family:Georgia,serif;">`;
+  svg += `<rect width="${svgW}" height="${svgH}" fill="#f4e8c1"/>`;
+
+  // Rivers (simplified)
+  const missouri = [[38.8,-90.1],[39.5,-92.5],[41.0,-96.0],[43.0,-98.5],[46.0,-100.5],[47.3,-101.4],[47.5,-111.3]];
+  const columbia = [[45.9,-112.5],[46.5,-115.5],[46.2,-119.0],[46.1,-123.9]];
+  [missouri, columbia].forEach(river => {
+    const pts = river.map(c => proj(c[0], c[1]));
+    svg += `<polyline points="${pts.map(p => p.x+','+p.y).join(' ')}" fill="none" stroke="#7bafd4" stroke-width="2.5" stroke-dasharray="6,3" opacity="0.6"/>`;
+  });
+
+  // Mountain ridgeline
+  const mtns = [[44.5,-109],[45.5,-111],[46.5,-113],[47,-114.5],[46.5,-115.5],[45.5,-116]];
+  const mtnPts = mtns.map(c => proj(c[0], c[1]));
+  svg += `<polyline points="${mtnPts.map(p => p.x+','+p.y).join(' ')}" fill="none" stroke="#8b7355" stroke-width="2" opacity="0.5"/>`;
+
+  // Labels
+  const labP = proj(42, -100);
+  svg += `<text x="${labP.x}" y="${labP.y}" text-anchor="middle" font-size="16" fill="#8b7355" font-style="italic" opacity="0.6">Great Plains</text>`;
+  const labM = proj(46, -113.5);
+  svg += `<text x="${labM.x}" y="${labM.y}" text-anchor="middle" font-size="14" fill="#6b4423" font-style="italic" opacity="0.5" transform="rotate(-15,${labM.x},${labM.y})">Rocky Mountains</text>`;
+
+  // Station dots (dimmed reference)
+  mapStations.forEach((s, i) => {
+    const p = proj(s.lat, s.lon);
+    svg += `<circle cx="${p.x}" cy="${p.y}" r="5" fill="#6b4423" opacity="0.25"/>`;
+  });
+
+  // Click target (invisible, full coverage)
+  svg += `<rect width="${svgW}" height="${svgH}" fill="transparent" class="map-click-target" id="maptarget_${stationIndex}" style="cursor:crosshair;"/>`;
+
+  // Pin placeholder
+  svg += `<g id="mappin_${stationIndex}" style="display:none;"><circle r="8" fill="#c0392b" stroke="#fff" stroke-width="2"/><text dy="4" text-anchor="middle" fill="#fff" font-size="10" font-weight="bold">X</text></g>`;
+
+  // Correct location marker (hidden until answer)
+  const cp = proj(challenge.correct_lat, challenge.correct_lon);
+  svg += `<g id="mapcorrect_${stationIndex}" style="display:none;"><circle cx="${cp.x}" cy="${cp.y}" r="10" fill="none" stroke="#27ae60" stroke-width="3"/><circle cx="${cp.x}" cy="${cp.y}" r="3" fill="#27ae60"/></g>`;
+
+  svg += '</svg>';
+  container.innerHTML = svg;
+
+  // Add click handler
+  const target = document.getElementById(`maptarget_${stationIndex}`);
+  target.addEventListener('click', function(e) {
+    const svgEl = target.closest('svg');
+    const rect = svgEl.getBoundingClientRect();
+    const scaleX = svgW / rect.width;
+    const scaleY = svgH / rect.height;
+    const px = (e.clientX - rect.left) * scaleX;
+    const py = (e.clientY - rect.top) * scaleY;
+
+    // Show pin
+    const pin = document.getElementById(`mappin_${stationIndex}`);
+    pin.setAttribute('transform', `translate(${px},${py})`);
+    pin.style.display = '';
+
+    // Calculate distance
+    const clicked = unproj(px, py);
+    const dLat = clicked.lat - challenge.correct_lat;
+    const dLon = (clicked.lon - challenge.correct_lon) * cosLat;
+    const dist = Math.sqrt(dLat * dLat + dLon * dLon);
+    const isCorrect = dist <= challenge.tolerance;
+
+    // Show correct location
+    document.getElementById(`mapcorrect_${stationIndex}`).style.display = '';
+
+    // Disable further clicks
+    target.style.pointerEvents = 'none';
+
+    // Complete challenge
+    completeChallengeResult(stationIndex, isCorrect, challenge);
+  });
+}
+
+// --- ORDERING (stations 3, 9) ---
+function renderOrderingChallenge(challenge, stationIndex, alreadyCompleted) {
+  const challengeId = `challenge_${stationIndex}`;
+  let html = challengeHeader(challengeId, 'Put It In Order');
+  html += `<p class="challenge-question">${challenge.question}</p>`;
+
+  if (alreadyCompleted) {
+    html += '<div class="ordering-items completed">';
+    challenge.items.forEach((item, i) => {
+      html += `<div class="ordering-item correct"><span class="ordering-number">${i + 1}</span> ${item}</div>`;
+    });
+    html += '</div>';
+    html += `<div class="challenge-feedback show correct">${challenge.feedback_correct}</div>`;
+  } else {
+    html += `<div class="ordering-items" id="ordering_${stationIndex}"></div>`;
+    html += `<button class="challenge-submit-btn" id="ordersubmit_${stationIndex}" onclick="checkOrdering(${stationIndex})">Check My Order</button>`;
+    html += `<div class="challenge-feedback" id="feedback_${stationIndex}"></div>`;
+  }
+
+  html += '</div>';
+  return html;
+}
+
+function initOrderingChallenge(stationIndex) {
+  const container = document.getElementById(`ordering_${stationIndex}`);
+  if (!container) return;
+  const station = STATIONS[stationIndex];
+  const data = station[state.level] || station.standard;
+  const challenge = data.challenge;
+
+  // Shuffle items (store correct order as data attribute)
+  const indices = challenge.items.map((_, i) => i);
+  for (let i = indices.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [indices[i], indices[j]] = [indices[j], indices[i]];
+  }
+
+  let html = '';
+  indices.forEach((origIdx) => {
+    html += `<div class="ordering-item" draggable="true" data-correct="${origIdx}" tabindex="0">`;
+    html += `<span class="ordering-handle">&#x2630;</span>`;
+    html += `<span class="ordering-text">${challenge.items[origIdx]}</span>`;
+    html += `<span class="ordering-arrows">`;
+    html += `<button class="ordering-arrow up" onclick="moveOrderItem(this, -1)" title="Move up" aria-label="Move up">&#x25B2;</button>`;
+    html += `<button class="ordering-arrow down" onclick="moveOrderItem(this, 1)" title="Move down" aria-label="Move down">&#x25BC;</button>`;
+    html += `</span>`;
+    html += '</div>';
+  });
+  container.innerHTML = html;
+
+  // Drag-and-drop support
+  let dragItem = null;
+  container.addEventListener('dragstart', (e) => {
+    dragItem = e.target.closest('.ordering-item');
+    if (dragItem) {
+      dragItem.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+    }
+  });
+  container.addEventListener('dragend', () => {
+    if (dragItem) dragItem.classList.remove('dragging');
+    dragItem = null;
+  });
+  container.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    const afterEl = getDragAfterElement(container, e.clientY);
+    if (dragItem) {
+      if (afterEl == null) {
+        container.appendChild(dragItem);
+      } else {
+        container.insertBefore(dragItem, afterEl);
+      }
+    }
+  });
+}
+
+function getDragAfterElement(container, y) {
+  const elements = [...container.querySelectorAll('.ordering-item:not(.dragging)')];
+  return elements.reduce((closest, child) => {
+    const box = child.getBoundingClientRect();
+    const offset = y - box.top - box.height / 2;
+    if (offset < 0 && offset > closest.offset) {
+      return { offset, element: child };
+    }
+    return closest;
+  }, { offset: Number.NEGATIVE_INFINITY }).element;
+}
+
+function moveOrderItem(btn, direction) {
+  const item = btn.closest('.ordering-item');
+  const container = item.parentElement;
+  const items = [...container.querySelectorAll('.ordering-item')];
+  const idx = items.indexOf(item);
+  if (direction === -1 && idx > 0) {
+    container.insertBefore(item, items[idx - 1]);
+  } else if (direction === 1 && idx < items.length - 1) {
+    container.insertBefore(items[idx + 1], item);
+  }
+}
+
+function checkOrdering(stationIndex) {
+  const container = document.getElementById(`ordering_${stationIndex}`);
+  const items = [...container.querySelectorAll('.ordering-item')];
+  const station = STATIONS[stationIndex];
+  const data = station[state.level] || station.standard;
+  const challenge = data.challenge;
+
+  const isCorrect = items.every((item, i) => parseInt(item.dataset.correct) === i);
+
+  // Mark items
+  items.forEach((item, i) => {
+    item.setAttribute('draggable', 'false');
+    item.classList.add(parseInt(item.dataset.correct) === i ? 'correct' : 'incorrect');
+    // Remove interactivity
+    item.querySelectorAll('.ordering-arrow').forEach(b => b.disabled = true);
+    item.querySelector('.ordering-handle').style.cursor = 'default';
+  });
+
+  // Hide submit button
+  document.getElementById(`ordersubmit_${stationIndex}`).style.display = 'none';
+
+  completeChallengeResult(stationIndex, isCorrect, challenge);
+}
+
+// --- FILL IN BLANK (stations 6, 7) ---
+function renderFillInBlankChallenge(challenge, stationIndex, alreadyCompleted) {
+  const challengeId = `challenge_${stationIndex}`;
+  let html = challengeHeader(challengeId, 'Complete the Quote');
+  html += `<p class="challenge-question">${challenge.question}</p>`;
+
+  html += '<div class="fill-blank-quote">';
+  html += `<span class="quote-text">"${challenge.quote_before} </span>`;
+
+  if (alreadyCompleted) {
+    html += `<span class="fill-blank-answer revealed">${challenge.blank_answer}</span>`;
+    html += `<span class="quote-text">${challenge.quote_after}"</span>`;
+    html += '</div>';
+    html += `<div class="challenge-feedback show correct">${challenge.feedback_correct}</div>`;
+  } else {
+    html += `<input type="text" class="fill-blank-input" id="blankinput_${stationIndex}" placeholder="fill in the blank…" autocomplete="off" onkeydown="if(event.key==='Enter')checkFillBlank(${stationIndex})">`;
+    html += `<span class="quote-text">${challenge.quote_after}"</span>`;
+    html += '</div>';
+    if (challenge.hint) {
+      html += `<p class="fill-blank-hint"><em>Hint: ${challenge.hint}</em></p>`;
+    }
+    html += `<button class="challenge-submit-btn" onclick="checkFillBlank(${stationIndex})">Check Answer</button>`;
+    html += `<div class="challenge-feedback" id="feedback_${stationIndex}"></div>`;
+  }
+
+  html += '</div>';
+  return html;
+}
+
+function checkFillBlank(stationIndex) {
+  const input = document.getElementById(`blankinput_${stationIndex}`);
+  if (!input) return;
+  const station = STATIONS[stationIndex];
+  const data = station[state.level] || station.standard;
+  const challenge = data.challenge;
+
+  const userAnswer = input.value.trim().toLowerCase().replace(/[.,;:!?'"]/g, '');
+  const isCorrect = challenge.accepted_answers.some(a => {
+    const accepted = a.toLowerCase().replace(/[.,;:!?'"]/g, '');
+    // Check for exact match or if user answer contains the accepted answer
+    return userAnswer === accepted || userAnswer.includes(accepted) || accepted.includes(userAnswer);
+  });
+
+  // Show the correct answer
+  input.disabled = true;
+  if (isCorrect) {
+    input.value = challenge.blank_answer;
+    input.classList.add('correct');
+  } else {
+    input.classList.add('incorrect');
+    // Show correct answer after the input
+    const reveal = document.createElement('div');
+    reveal.className = 'fill-blank-reveal';
+    reveal.innerHTML = `The answer: <strong>${challenge.blank_answer}</strong>`;
+    input.parentNode.insertBefore(reveal, input.nextSibling);
+  }
+
+  // Hide submit button
+  const btn = input.closest('.challenge-box').querySelector('.challenge-submit-btn');
+  if (btn) btn.style.display = 'none';
+
+  completeChallengeResult(stationIndex, isCorrect, challenge);
+}
+
+// --- IMAGE MATCH (stations 4, 10) ---
+function renderImageMatchChallenge(challenge, stationIndex, alreadyCompleted) {
+  const challengeId = `challenge_${stationIndex}`;
+  let html = challengeHeader(challengeId, 'Image Match');
+  html += `<p class="challenge-question">${challenge.question}</p>`;
+
+  if (alreadyCompleted) {
+    html += '<div class="image-match-grid">';
+    challenge.options.forEach((opt, i) => {
+      const isCorrect = i === challenge.correct;
+      html += `<div class="image-match-option ${isCorrect ? 'correct' : ''}" ${!isCorrect ? 'style="opacity:0.4"' : ''}>`;
+      html += `<img src="${opt.image}" alt="${opt.caption}" loading="lazy">`;
+      html += `<div class="image-match-caption">${opt.caption}</div>`;
+      html += '</div>';
+    });
+    html += '</div>';
+    html += `<div class="challenge-feedback show correct">${challenge.feedback_correct}</div>`;
+  } else {
+    html += '<div class="image-match-grid">';
+    challenge.options.forEach((opt, i) => {
+      html += `<div class="image-match-option" onclick="answerImageMatch(${stationIndex}, ${i})" tabindex="0" role="button">`;
+      html += `<img src="${opt.image}" alt="${opt.caption}" loading="lazy" onerror="this.parentElement.style.display='none'">`;
+      html += `<div class="image-match-caption">${opt.caption}</div>`;
+      html += '</div>';
+    });
+    html += '</div>';
+    html += `<div class="challenge-feedback" id="feedback_${stationIndex}"></div>`;
+  }
+
+  html += '</div>';
+  return html;
+}
+
+function answerImageMatch(stationIndex, choiceIndex) {
   const station = STATIONS[stationIndex];
   const data = station[state.level] || station.standard;
   const challenge = data.challenge;
   const challengeId = `challenge_${stationIndex}`;
   const isCorrect = choiceIndex === challenge.correct;
 
-  // Disable all buttons
+  // Mark all options
   const box = document.getElementById(challengeId);
-  const buttons = box.querySelectorAll('.challenge-option');
-  buttons.forEach((btn, i) => {
-    btn.disabled = true;
-    btn.onclick = null;
+  const options = box.querySelectorAll('.image-match-option');
+  options.forEach((opt, i) => {
+    opt.onclick = null;
+    opt.style.cursor = 'default';
+    opt.removeAttribute('tabindex');
     if (i === challenge.correct) {
-      btn.classList.add('correct');
+      opt.classList.add('correct');
     } else if (i === choiceIndex && !isCorrect) {
-      btn.classList.add('incorrect');
+      opt.classList.add('incorrect');
+    }
+    if (i !== challenge.correct) {
+      opt.style.opacity = '0.4';
     }
   });
 
-  // Show feedback
+  completeChallengeResult(stationIndex, isCorrect, challenge);
+}
+
+// --- SHARED: Complete challenge result (all types) ---
+function completeChallengeResult(stationIndex, isCorrect, challenge) {
+  const challengeId = `challenge_${stationIndex}`;
   const feedback = document.getElementById(`feedback_${stationIndex}`);
+
   if (isCorrect) {
     feedback.textContent = challenge.feedback_correct;
     feedback.className = 'challenge-feedback show correct';
@@ -336,7 +727,6 @@ function answerChallenge(stationIndex, choiceIndex) {
     if (!state.discoveries.includes(stationIndex) && DISCOVERIES[stationIndex]) {
       state.discoveries.push(stationIndex);
       const d = DISCOVERIES[stationIndex];
-      // Show discovery banner below feedback
       const banner = document.createElement('div');
       banner.className = 'discovery-banner';
       banner.innerHTML = `<span class="discovery-banner-icon">${d.icon}</span> <strong>Discovery Unlocked:</strong> ${d.name} <span class="discovery-banner-desc">&mdash; ${d.desc}</span>`;
@@ -377,6 +767,30 @@ function answerChallenge(stationIndex, choiceIndex) {
       navEl.parentNode.insertBefore(clueEl, navEl);
     }
   }
+}
+
+// --- Legacy wrapper for multiple-choice onclick ---
+function answerChallenge(stationIndex, choiceIndex) {
+  const station = STATIONS[stationIndex];
+  const data = station[state.level] || station.standard;
+  const challenge = data.challenge;
+  const challengeId = `challenge_${stationIndex}`;
+  const isCorrect = choiceIndex === challenge.correct;
+
+  // Disable all buttons
+  const box = document.getElementById(challengeId);
+  const buttons = box.querySelectorAll('.challenge-option');
+  buttons.forEach((btn, i) => {
+    btn.disabled = true;
+    btn.onclick = null;
+    if (i === challenge.correct) {
+      btn.classList.add('correct');
+    } else if (i === choiceIndex && !isCorrect) {
+      btn.classList.add('incorrect');
+    }
+  });
+
+  completeChallengeResult(stationIndex, isCorrect, challenge);
 }
 
 function autoFillJournal(stationIndex, field, value) {
