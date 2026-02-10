@@ -8,7 +8,7 @@ An interactive website that turns 10 classroom stations on the Lewis & Clark exp
 
 ## Version
 
-**v0.10.2** — Modern road trip comparison on end screens
+**v0.10.3** — Home navigation and resume improvements
 
 ## What This Is
 
@@ -85,6 +85,10 @@ Then open `http://localhost:8000` in your browser.
 **Note:** Opening `index.html` directly as a file (`file://`) will not work because browsers block `fetch()` requests from local files. You need a web server.
 
 ## Changelog
+
+### v0.10.3
+- **Home button in top bar:** "The Lost Expedition" title in the navigation bar is now clickable — returns to the title screen with progress auto-saved. Students can leave and come back anytime
+- **Save code unlocks game:** Loading a teacher save code with all 10 stations visited automatically unlocks the Corps of Discovery game button on the title screen
 
 ### v0.10.2
 - **"What would this trip look like today?"** — Collapsible modern road trip comparison on both victory and game-over screens. Shows the same St. Louis-to-Astoria route on today's highways (I-70 → I-29 → I-80 → I-84 → US-30), with driving time (~4 days / 31 hours), estimated cost breakdown (gas $206, motels $225, food $180 = ~$611 total), and fun comparisons (speed: 5–15 mi/day vs. 65 mph, dangers: grizzlies vs. construction zones). Notes that the original expedition cost ~$2,500 (≈$70,000 today)
