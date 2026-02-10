@@ -33,28 +33,28 @@
     "reflection": "York and Sacagawea both got to vote on where to camp. Why is this surprising for the year 1805? What does it tell you about life on the expedition compared to life in the rest of America?",
     "challenge": {
       "type": "image_match",
-      "question": "The expedition spent a miserable winter at Fort Clatsop. Examine all four images carefully — which one is a primary source document actually created by the expedition, not a modern image?",
+      "question": "Clark drew a picture of Fort Clatsop during the winter. Which image shows a drawing that Clark made himself, not a modern photo?",
       "options": [
         {
           "image": "data/images/station-10-c-fort-clatsop.jpg",
-          "caption": "Image A"
+          "caption": "A modern building"
         },
         {
           "image": "data/images/station-10-b-lower-columbia.jpg",
-          "caption": "Image B"
+          "caption": "A river scene"
         },
         {
           "image": "data/images/station-10-e-fort-clatsop-sketch.jpg",
-          "caption": "Image C"
+          "caption": "An old drawing"
         },
         {
           "image": "data/images/station-10-a-chinook-canoe.jpg",
-          "caption": "Image D"
+          "caption": "A boat on water"
         }
       ],
       "correct": 2,
-      "feedback_correct": "That’s Clark’s original sketch! He drew the floor plan of Fort Clatsop showing the layout of rooms. This is an actual primary source from the expedition — not a modern photograph, painting, or reconstruction. Everyone — including York and Sacagawea — voted on this location.",
-      "feedback_incorrect": "Think about what makes something a primary source — it was created during the time period, not afterward. Look for something that could have been drawn by Clark himself in 1805–1806, not a modern photograph or reconstruction."
+      "feedback_correct": "That’s Clark’s drawing! He sketched the floor plan of Fort Clatsop to show how the rooms were set up. This is an actual drawing from over 200 years ago!",
+      "feedback_incorrect": "Look for the oldest-looking image — the one that looks hand-drawn, not photographed. Clark drew the floor plan of Fort Clatsop during the winter of 1805–1806."
     },
     "images": [
       {
@@ -252,7 +252,7 @@
     "reflection": "The vote at the Columbia — in which York and Sacagawea participated equally — is often cited as a remarkable moment in American democratic history. Evaluate this claim critically: Was this genuine democratic principle, or practical necessity born of extreme circumstances? Consider that upon returning to St. Louis, York remained enslaved and Sacagawea received no compensation. What does the contrast between the expedition’s egalitarianism and the society it returned to reveal about the limits of frontier democracy?",
     "challenge": {
       "type": "image_match",
-      "question": "The expedition spent a miserable winter at Fort Clatsop. Examine all four images carefully — which one is a primary source document actually created by the expedition, not a modern image?",
+      "question": "One of these images is a primary source document — created during the expedition itself, not afterward. Considering what you know about the expedition’s winter at Fort Clatsop, identify the primary source.",
       "options": [
         {
           "image": "data/images/station-10-c-fort-clatsop.jpg",
@@ -272,8 +272,8 @@
         }
       ],
       "correct": 2,
-      "feedback_correct": "That’s Clark’s original sketch! He drew the floor plan of Fort Clatsop showing the layout of rooms. This is an actual primary source from the expedition — not a modern photograph, painting, or reconstruction. Everyone — including York and Sacagawea — voted on this location.",
-      "feedback_incorrect": "Think about what makes something a primary source — it was created during the time period, not afterward. Look for something that could have been drawn by Clark himself in 1805–1806, not a modern photograph or reconstruction."
+      "feedback_correct": "Correct. Clark’s floor plan sketch of Fort Clatsop is a primary source — a document created during the historical period being studied. The reconstructed fort, the river photo, and the canoe image are all secondary or modern representations.",
+      "feedback_incorrect": "A primary source was created during the time period being studied. Photographs of reconstructed forts and modern landscapes are secondary sources. Look for the document that could have been created by Clark himself in 1805–1806."
     },
     "images": [
       {

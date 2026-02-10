@@ -20,16 +20,14 @@
     "reflection": "The group almost starved crossing the mountains and were saved by the Nez Perce. How many times has the expedition been helped by Native Americans so far? What does that tell you?",
     "challenge": {
       "type": "ordering",
-      "question": "Based on the context and Clark’s journal, arrange these events in the order they happened:",
+      "question": "Put these three events from the mountain crossing in order:",
       "items": [
-        "The Corps negotiated with the Shoshone for horses and hired a guide they called ‘Old Toby’",
-        "Old Toby and Sacagawea helped them cross the Continental Divide at Lemhi Pass",
-        "The 11-day mountain crossing began — the men ate horses and candles to survive",
-        "The Nez Perce taught them to hollow out logs with fire to make dugout canoes",
-        "Clark reached the junction of the Snake and Columbia Rivers and met with Indian chiefs"
+        "They got horses from the Shoshone and started climbing the mountains",
+        "The men were so hungry they ate their horses and candles to survive",
+        "Friendly Nez Perce Indians gave them food and helped them make canoes"
       ],
-      "feedback_correct": "That’s the right sequence! First they got Shoshone horses and hired Old Toby, then crossed the Continental Divide, endured the brutal 11-day mountain crossing, were rescued by the Nez Perce who taught them canoe-building, and finally reached the Snake-Columbia junction.",
-      "feedback_incorrect": "Read the context paragraphs carefully for the chronological clues. The sequence was: Shoshone horses and Old Toby first, then Lemhi Pass, then the 11-day mountain crossing, then Nez Perce canoe lessons, and finally Clark’s journal describes reaching the Snake-Columbia junction."
+      "feedback_correct": "That’s right! First they got horses, then they struggled through the mountains starving, and finally the Nez Perce rescued them.",
+      "feedback_incorrect": "The order was: first they got Shoshone horses, then they nearly starved crossing the mountains, then the Nez Perce saved them with food and canoe-building skills."
     },
     "images": [
       {
@@ -139,16 +137,16 @@
     "reflection": "At Lemhi Pass, the expedition crossed from U.S. territory (the Louisiana Purchase) into Oregon Country, which was claimed by multiple nations. Analyze the expedition as an instrument of territorial expansion: How does the act of distributing medals, giving speeches about a “great father,” and mapping the territory serve as a form of sovereignty claim, even in territory the U.S. did not legally possess? How do the Nez Perce’s actions — feeding the starving explorers and teaching them canoe-building — complicate the narrative of American self-reliance?",
     "challenge": {
       "type": "ordering",
-      "question": "Based on the context and Clark’s journal, arrange these events in the order they happened:",
+      "question": "Arrange these events precisely as they occurred, using both the context and Clark’s October 17 journal entry:",
       "items": [
-        "The Corps negotiated with the Shoshone for horses and hired a guide they called ‘Old Toby’",
-        "Old Toby and Sacagawea helped them cross the Continental Divide at Lemhi Pass",
-        "The 11-day mountain crossing began — the men ate horses and candles to survive",
-        "The Nez Perce taught them to hollow out logs with fire to make dugout canoes",
-        "Clark reached the junction of the Snake and Columbia Rivers and met with Indian chiefs"
+        "The Corps hired the Shoshone guide Pikee Queenah (‘Old Toby’) and acquired horses for the mountain passage",
+        "They crossed the Continental Divide at Lemhi Pass, leaving the Louisiana Purchase and entering disputed Oregon Country",
+        "During 11 days of mountain crossing, the starving men resorted to eating horses and candles made of animal fat",
+        "The Nez Perce taught them to hollow out logs with fire to build dugout canoes for river travel",
+        "Clark’s journal records reaching the junction of the Snake and Columbia Rivers, where Indians ‘collected in great numbers to view us’"
       ],
-      "feedback_correct": "That’s the right sequence! First they got Shoshone horses and hired Old Toby, then crossed the Continental Divide, endured the brutal 11-day mountain crossing, were rescued by the Nez Perce who taught them canoe-building, and finally reached the Snake-Columbia junction.",
-      "feedback_incorrect": "Read the context paragraphs carefully for the chronological clues. The sequence was: Shoshone horses and Old Toby first, then Lemhi Pass, then the 11-day mountain crossing, then Nez Perce canoe lessons, and finally Clark’s journal describes reaching the Snake-Columbia junction."
+      "feedback_correct": "Excellent. Note the political detail at Lemhi Pass — crossing from U.S. territory into disputed Oregon Country. Clark’s October 17 entry specifically describes the Snake-Columbia junction, confirming they’d completed the overland crossing.",
+      "feedback_incorrect": "Pay attention to geographic and political details. The sequence: Shoshone horses and Old Toby, Lemhi Pass (leaving U.S. territory), 11-day mountain ordeal, Nez Perce canoe-building, then Clark’s journal at the Snake-Columbia junction."
     },
     "images": [
       {

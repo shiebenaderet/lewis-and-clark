@@ -137,6 +137,10 @@ function completeExpedition() {
     <em>"We were now about to penetrate a country at least 2,000 miles in width, on which the foot of civilized man had never trod."</em> &mdash; Captain Meriwether Lewis
   `;
   showScreen('completion-screen');
+  // Show final knowledge test
+  _ftScore = 0;
+  _ftAnswered = 0;
+  showFinalTest();
   unlockGame();
   clearSave();
 }
