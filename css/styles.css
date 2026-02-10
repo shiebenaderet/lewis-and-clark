@@ -514,6 +514,78 @@ body {
   display: block;
 }
 
+/* ============================================================
+   FORT MANDAN SEASONAL ATMOSPHERE (Stations 4-6)
+   ============================================================ */
+
+/* --- Season banner --- */
+.season-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.5rem;
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.season-banner .season-icon { font-size: 1.1rem; }
+
+/* --- Autumn (Station 4 — Arriving at Mandan, October 1804) --- */
+.season-autumn { border-color: #b8860b; }
+.season-autumn .station-header {
+  background: linear-gradient(135deg, #8b5e14, #b8860b);
+}
+.season-autumn .season-banner {
+  background: linear-gradient(90deg, rgba(184,134,11,0.12), rgba(205,133,63,0.08));
+  color: #8b5e14;
+  border-bottom: 1px solid rgba(184,134,11,0.2);
+}
+.season-autumn .journal-entry {
+  border-left-color: #b8860b;
+  background: linear-gradient(135deg, #fdf6e3, #faf0d0);
+}
+.season-autumn .station-body {
+  background: linear-gradient(180deg, rgba(205,133,63,0.04) 0%, transparent 40%);
+}
+
+/* --- Winter (Station 5 — Meeting Sacagawea, February 1805) --- */
+.season-winter { border-color: #4a7a9b; }
+.season-winter .station-header {
+  background: linear-gradient(135deg, #2c4a6e, #4a7a9b);
+}
+.season-winter .season-banner {
+  background: linear-gradient(90deg, rgba(74,122,155,0.1), rgba(135,180,210,0.06));
+  color: #2c4a6e;
+  border-bottom: 1px solid rgba(74,122,155,0.2);
+}
+.season-winter .journal-entry {
+  border-left-color: #4a7a9b;
+  background: linear-gradient(135deg, #f0f4f8, #e8eef4);
+}
+.season-winter .station-body {
+  background: linear-gradient(180deg, rgba(74,122,155,0.04) 0%, transparent 40%);
+}
+
+/* --- Spring (Station 6 — Heading West Again, April 1805) --- */
+.season-spring { border-color: #4a8c3f; }
+.season-spring .station-header {
+  background: linear-gradient(135deg, #2d5a1e, #4a8c3f);
+}
+.season-spring .season-banner {
+  background: linear-gradient(90deg, rgba(74,140,63,0.1), rgba(120,180,90,0.06));
+  color: #2d5a1e;
+  border-bottom: 1px solid rgba(74,140,63,0.2);
+}
+.season-spring .journal-entry {
+  border-left-color: #4a8c3f;
+  background: linear-gradient(135deg, #f2f8f0, #e8f4e4);
+}
+.season-spring .station-body {
+  background: linear-gradient(180deg, rgba(74,140,63,0.04) 0%, transparent 40%);
+}
+
 /* Journal entry styling */
 .journal-entry {
   background: linear-gradient(135deg, #fdf6e3, #f5eed5);

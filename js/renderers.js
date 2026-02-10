@@ -114,7 +114,14 @@ function renderStation(index) {
   const challengeId = `challenge_${index}`;
   const challengeCompleted = state.challengesCompleted.has(challengeId);
 
-  let html = '<div class="station-card">';
+  // Fort Mandan seasonal atmosphere (stations 4-6)
+  const SEASON_THEMES = {
+    3: { cls: 'season-autumn', icon: '\u{1F342}', label: 'Autumn 1804 \u2014 Fort Mandan' },
+    4: { cls: 'season-winter', icon: '\u{2744}\uFE0F', label: 'Winter 1805 \u2014 Fort Mandan' },
+    5: { cls: 'season-spring', icon: '\u{1F331}', label: 'Spring 1805 \u2014 Fort Mandan' }
+  };
+  const season = SEASON_THEMES[index];
+  let html = `<div class="station-card${season ? ' ' + season.cls : ''}">`;
 
   // Image gallery (supports both single image and images array)
   const images = data.images || (data.image ? [data.image] : []);
@@ -159,6 +166,11 @@ function renderStation(index) {
   html += `<h2 class="station-title">${data.title}</h2>`;
   html += `<div class="station-date">${data.dates}</div>`;
   html += '</div>';
+
+  // Seasonal banner for Fort Mandan stations
+  if (season) {
+    html += `<div class="season-banner"><span class="season-icon">${season.icon}</span> ${season.label}</div>`;
+  }
 
   // Body
   html += '<div class="station-body">';

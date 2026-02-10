@@ -8,7 +8,7 @@ An interactive website that turns 10 classroom stations on the Lewis & Clark exp
 
 ## Version
 
-**v0.12.0** — "What Would You Do?" scenario decisions before journal reveals
+**v0.13.0** — Fort Mandan seasonal atmosphere for stations 4-6
 
 ## What This Is
 
@@ -30,6 +30,7 @@ This project replaces a paper-based station activity (where students walk around
 - **Image galleries** at each station with 2–3 images (scene paintings, portraits, artifacts) from Wikimedia Commons, with carousel navigation
 - **Diverse knowledge checks** — 5 challenge types across 10 stations: map click, chronological ordering (drag-and-drop), fill-in-the-blank journal quotes, image matching, and multiple choice
 - **"What Would You Do?" scenarios** — 5 stations present a historical dilemma before revealing the journals; students choose what they'd do, then read what Lewis & Clark actually did, with journals fading in after the reveal
+- **Fort Mandan seasonal atmosphere** — stations 4-6 feature distinct seasonal theming (autumn amber, winter blue, spring green) with tinted headers, borders, journal entries, and labeled season banners
 - **Interactive travel events** — 29 diverse encounters between stations: choice-based decisions and tap/swat mini-games covering weather, wildlife, navigation, health, Native encounters, and camp life
 - **Save/resume** — localStorage persistence so students can pick up where they left off; portable save codes for cross-device transfer
 - **Discoveries** — 10 collectible items unlocked by answering Knowledge Checks correctly, logged in journal and PDF export
@@ -86,6 +87,14 @@ Then open `http://localhost:8000` in your browser.
 **Note:** Opening `index.html` directly as a file (`file://`) will not work because browsers block `fetch()` requests from local files. You need a web server.
 
 ## Changelog
+
+### v0.13.0
+- **Fort Mandan seasonal atmosphere** for stations 4-6: the three Fort Mandan stations now reflect the season in which they take place
+  - **Station 4** (October 1804 arrival): warm autumn amber header, golden-tinted journal entries, fall leaf icon
+  - **Station 5** (February 1805 winter): cool winter blue header, frost-tinted journal entries, snowflake icon
+  - **Station 6** (April 1805 departure): fresh spring green header, green-tinted journal entries, seedling icon
+  - Seasonal banner between header and body labels the time period (e.g. "Winter 1805 — Fort Mandan")
+  - Subtle body background gradients reinforce each season's color
 
 ### v0.12.0
 - **"What Would You Do?" scenario decisions** at 5 stations (3, 5, 7, 8, 10): students face the same dilemma Lewis & Clark faced before reading the journals
