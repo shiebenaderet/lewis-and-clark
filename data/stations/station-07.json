@@ -20,19 +20,18 @@
     "reflection": "Lewis uses very descriptive words to tell us about the Great Falls. What words or phrases help you picture what the falls looked like?",
     "challenge": {
       "type": "fill_in_blank",
-      "question": "Complete Lewis's famous description when he first saw the Great Falls:",
-      "quote_before": "I hurried down the hill … to gaze on this sublimely grand spectacle … the",
-      "blank_answer": "grandest sight I ever beheld",
-      "quote_after": ".",
-      "hint": "Lewis was amazed by what he saw. What would you call the most amazing thing you’ve ever seen? He uses a word that means ‘biggest’ or ‘most impressive.’",
+      "question": "Complete what Lewis saw when sunlight hit the mist from the falls:",
+      "quote_before": "The sun shining on the mist from the falls made a beautiful",
+      "blank_answer": "rainbow",
+      "quote_after": ", which made the whole scene even more spectacular.",
+      "hint": "What forms when sunlight shines through water mist?",
       "accepted_answers": [
-        "grandest sight i ever beheld",
-        "grandest sight i ever saw",
-        "grandest sight",
-        "grandest sight i had ever beheld"
+        "rainbow",
+        "a rainbow",
+        "rainbows"
       ],
-      "feedback_correct": "That's the quote! Lewis called the Great Falls 'the grandest sight I ever beheld.' His poetic description stands out as one of the most literary passages in the entire journal.",
-      "feedback_incorrect": "Lewis called it 'the grandest sight I ever beheld.' This dramatic moment inspired some of his most poetic writing in the entire journal."
+      "feedback_correct": "That’s right! Lewis saw a rainbow in the mist of the Great Falls. He thought it made the scene even more beautiful. This is one of the most poetic moments in his entire journal.",
+      "feedback_incorrect": "The answer is ‘rainbow.’ When sunlight shines through mist, it creates a rainbow — and that’s exactly what Lewis saw at the Great Falls. Read his journal description again!"
     },
     "images": [
       {
@@ -92,19 +91,18 @@
     "reflection": "Lewis calls the Great Falls “the grandest sight I ever beheld.” His writing becomes unusually poetic here. Why might this natural wonder have affected him so strongly? What literary techniques does he use to convey the experience?",
     "challenge": {
       "type": "fill_in_blank",
-      "question": "Complete Lewis's famous description when he first saw the Great Falls:",
-      "quote_before": "I hurried down the hill … to gaze on this sublimely grand spectacle … the",
-      "blank_answer": "grandest sight I ever beheld",
-      "quote_after": ".",
-      "hint": "Lewis used a superlative to describe what he saw — the greatest _____ of his life.",
+      "question": "Complete Lewis’s description of how he first spotted the Great Falls from a distance:",
+      "quote_before": "I saw the spray arise above the plain like a column of",
+      "blank_answer": "smoke",
+      "quote_after": "which would frequently disappear again in an instant.",
+      "hint": "Lewis compares the rising spray to something you might see rising from a campfire.",
       "accepted_answers": [
-        "grandest sight i ever beheld",
-        "grandest sight i ever saw",
-        "grandest sight",
-        "grandest sight i had ever beheld"
+        "smoke",
+        "smoke,",
+        "smoke "
       ],
-      "feedback_correct": "That's the quote! Lewis called the Great Falls 'the grandest sight I ever beheld.' His poetic description stands out as one of the most literary passages in the entire journal.",
-      "feedback_incorrect": "Lewis called it 'the grandest sight I ever beheld.' This dramatic moment inspired some of his most poetic writing in the entire journal."
+      "feedback_correct": "That’s the simile! Lewis compared the mist rising from the falls to a column of smoke. This is one of his most vivid descriptions — he could see the spray from miles away before he ever saw the falls themselves.",
+      "feedback_incorrect": "The answer is ‘smoke.’ Lewis wrote that the spray rose above the plain ‘like a column of smoke.’ The comparison captures how the mist was visible from miles away, long before he could see the actual waterfall."
     },
     "images": [
       {

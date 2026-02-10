@@ -8,7 +8,7 @@ An interactive website that turns 10 classroom stations on the Lewis & Clark exp
 
 ## Version
 
-**v0.16.1** — Contrast and legibility fixes
+**v0.16.2** — Redesigned fill-in-the-blank quotes
 
 ## What This Is
 
@@ -87,6 +87,13 @@ Then open `http://localhost:8000` in your browser.
 **Note:** Opening `index.html` directly as a file (`file://`) will not work because browsers block `fetch()` requests from local files. You need a web server.
 
 ## Changelog
+
+### v0.16.2
+- **Redesigned fill-in-the-blank quotes** (station 7) so the blank is answerable from surrounding context:
+  - *Beginner:* "The sun shining on the mist made a beautiful ___" → rainbow (sun + mist = contextually constrained)
+  - *Standard:* "the spray arise above the plain like a column of ___" → smoke (simile completion)
+  - *Advanced:* kept "sublimely grand spectacle" (surrounding phrase "to gaze on this ___" gives strong context)
+  - Previous quotes used ellipses skipping large chunks, making the blank effectively unguessable without memorization
 
 ### v0.16.1
 - **Contrast and legibility fixes** across the entire site:
