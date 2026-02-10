@@ -19,28 +19,28 @@
     "reflection": "Why do you think Lewis and Clark decided to build a fort and stay for the winter instead of continuing their journey?",
     "challenge": {
       "type": "image_match",
-      "question": "Clark wrote about arriving at a village 'situated about 50 feet above the water in a handsome plain.' Which image best matches this description?",
+      "question": "Based on Clark’s journal description of the village they arrived at, which image best matches what he saw?",
       "options": [
         {
           "image": "data/images/station-04-d-fort-mandan-winter.jpg",
-          "caption": "A wooden fort in winter snow"
+          "caption": "Image A"
         },
         {
           "image": "data/images/station-04-a-mandan-village.jpg",
-          "caption": "An earth lodge village on elevated ground"
+          "caption": "Image B"
         },
         {
           "image": "data/images/station-04-c-mandan-chief.jpg",
-          "caption": "Portrait of a Native American chief"
+          "caption": "Image C"
         },
         {
           "image": "data/images/station-04-e-village-arrival.jpg",
-          "caption": "Explorers arriving by river at a village"
+          "caption": "Image D"
         }
       ],
       "correct": 1,
-      "feedback_correct": "That's the one! The Mandan earth lodge village sits elevated above the river on flat ground — exactly as Clark described: 'about 50 feet above the water in a handsome plain.'",
-      "feedback_incorrect": "Look for the image that shows a village on elevated, flat ground above a river — matching Clark's description of 'about 50 feet above the water in a handsome plain.' The earth lodge village best fits."
+      "feedback_correct": "That’s right! The Mandan earth lodge village sits elevated above the river on flat ground — exactly as Clark described: ‘about 50 feet above the water in a handsome plain.’ You had to read his journal to identify the right scene.",
+      "feedback_incorrect": "Read Clark’s journal entry carefully — he describes the village as ‘situated about 50 feet above the water in a handsome plain.’ Look for the image showing a village on elevated, flat ground above a river."
     },
     "images": [
       {
@@ -90,28 +90,28 @@
     "reflection": "The Mandan had been trading with Europeans since 1738 — over 65 years before Lewis and Clark arrived. How might this prior contact have shaped the encounter?",
     "challenge": {
       "type": "image_match",
-      "question": "Clark wrote about arriving at a village 'situated about 50 feet above the water in a handsome plain.' Which image best matches this description?",
+      "question": "Based on Clark’s journal description of the village they arrived at, which image best matches what he saw?",
       "options": [
         {
           "image": "data/images/station-04-d-fort-mandan-winter.jpg",
-          "caption": "A wooden fort in winter snow"
+          "caption": "Image A"
         },
         {
           "image": "data/images/station-04-a-mandan-village.jpg",
-          "caption": "An earth lodge village on elevated ground"
+          "caption": "Image B"
         },
         {
           "image": "data/images/station-04-c-mandan-chief.jpg",
-          "caption": "Portrait of a Native American chief"
+          "caption": "Image C"
         },
         {
           "image": "data/images/station-04-e-village-arrival.jpg",
-          "caption": "Explorers arriving by river at a village"
+          "caption": "Image D"
         }
       ],
       "correct": 1,
-      "feedback_correct": "That's the one! The Mandan earth lodge village sits elevated above the river on flat ground — exactly as Clark described: 'about 50 feet above the water in a handsome plain.'",
-      "feedback_incorrect": "Look for the image that shows a village on elevated, flat ground above a river — matching Clark's description of 'about 50 feet above the water in a handsome plain.' The earth lodge village best fits."
+      "feedback_correct": "That’s right! The Mandan earth lodge village sits elevated above the river on flat ground — exactly as Clark described: ‘about 50 feet above the water in a handsome plain.’ You had to read his journal to identify the right scene.",
+      "feedback_incorrect": "Read Clark’s journal entry carefully — he describes the village as ‘situated about 50 feet above the water in a handsome plain.’ Look for the image showing a village on elevated, flat ground above a river."
     },
     "images": [
       {
@@ -161,28 +161,28 @@
     "reflection": "The Mandan-Hidatsa villages functioned as a major trade hub of the Northern Plains, connecting peoples from the Rockies to the Great Lakes. How does understanding this existing network change the narrative that Lewis and Clark were exploring “unknown” territory? What does Clark’s hiring of a French interpreter tell us about who was already present in this region?",
     "challenge": {
       "type": "image_match",
-      "question": "Clark wrote about arriving at a village 'situated about 50 feet above the water in a handsome plain.' Which image best matches this description?",
+      "question": "Based on Clark’s journal description of the village they arrived at, which image best matches what he saw?",
       "options": [
         {
           "image": "data/images/station-04-d-fort-mandan-winter.jpg",
-          "caption": "A wooden fort in winter snow"
+          "caption": "Image A"
         },
         {
           "image": "data/images/station-04-a-mandan-village.jpg",
-          "caption": "An earth lodge village on elevated ground"
+          "caption": "Image B"
         },
         {
           "image": "data/images/station-04-c-mandan-chief.jpg",
-          "caption": "Portrait of a Native American chief"
+          "caption": "Image C"
         },
         {
           "image": "data/images/station-04-e-village-arrival.jpg",
-          "caption": "Explorers arriving by river at a village"
+          "caption": "Image D"
         }
       ],
       "correct": 1,
-      "feedback_correct": "That's the one! The Mandan earth lodge village sits elevated above the river on flat ground — exactly as Clark described: 'about 50 feet above the water in a handsome plain.'",
-      "feedback_incorrect": "Look for the image that shows a village on elevated, flat ground above a river — matching Clark's description of 'about 50 feet above the water in a handsome plain.' The earth lodge village best fits."
+      "feedback_correct": "That’s right! The Mandan earth lodge village sits elevated above the river on flat ground — exactly as Clark described: ‘about 50 feet above the water in a handsome plain.’ You had to read his journal to identify the right scene.",
+      "feedback_incorrect": "Read Clark’s journal entry carefully — he describes the village as ‘situated about 50 feet above the water in a handsome plain.’ Look for the image showing a village on elevated, flat ground above a river."
     },
     "images": [
       {

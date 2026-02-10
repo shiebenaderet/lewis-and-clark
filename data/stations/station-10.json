@@ -33,28 +33,28 @@
     "reflection": "York and Sacagawea both got to vote on where to camp. Why is this surprising for the year 1805? What does it tell you about life on the expedition compared to life in the rest of America?",
     "challenge": {
       "type": "image_match",
-      "question": "Clark sketched the floor plan of their winter quarters. Which image shows Clark's sketch of Fort Clatsop?",
+      "question": "The expedition spent a miserable winter at Fort Clatsop. Examine all four images carefully — which one is a primary source document actually created by the expedition, not a modern image?",
       "options": [
         {
           "image": "data/images/station-10-c-fort-clatsop.jpg",
-          "caption": "A reconstructed wooden fort"
+          "caption": "Image A"
         },
         {
           "image": "data/images/station-10-b-lower-columbia.jpg",
-          "caption": "A wide river landscape"
+          "caption": "Image B"
         },
         {
           "image": "data/images/station-10-e-fort-clatsop-sketch.jpg",
-          "caption": "A hand-drawn floor plan"
+          "caption": "Image C"
         },
         {
           "image": "data/images/station-10-a-chinook-canoe.jpg",
-          "caption": "A large canoe on the water"
+          "caption": "Image D"
         }
       ],
       "correct": 2,
-      "feedback_correct": "That's Clark's sketch! He drew the floor plan of Fort Clatsop showing the layout of rooms where the Corps spent a miserable, rainy winter near the Pacific. Everyone — including York and Sacagawea — voted on this location.",
-      "feedback_incorrect": "Look for the hand-drawn floor plan — that's Clark's original sketch of Fort Clatsop. The other images show the reconstructed fort, the Columbia River, and a Chinook canoe."
+      "feedback_correct": "That’s Clark’s original sketch! He drew the floor plan of Fort Clatsop showing the layout of rooms. This is an actual primary source from the expedition — not a modern photograph, painting, or reconstruction. Everyone — including York and Sacagawea — voted on this location.",
+      "feedback_incorrect": "Think about what makes something a primary source — it was created during the time period, not afterward. Look for something that could have been drawn by Clark himself in 1805–1806, not a modern photograph or reconstruction."
     },
     "images": [
       {
@@ -142,28 +142,28 @@
     "reflection": "The vote at the Columbia included York (an enslaved man) and Sacagawea (a Native American woman). Neither could legally vote anywhere in America at this time. What does this tell us about how the expedition’s experience differed from mainstream American society?",
     "challenge": {
       "type": "image_match",
-      "question": "Clark sketched the floor plan of their winter quarters. Which image shows Clark's sketch of Fort Clatsop?",
+      "question": "The expedition spent a miserable winter at Fort Clatsop. Examine all four images carefully — which one is a primary source document actually created by the expedition, not a modern image?",
       "options": [
         {
           "image": "data/images/station-10-c-fort-clatsop.jpg",
-          "caption": "A reconstructed wooden fort"
+          "caption": "Image A"
         },
         {
           "image": "data/images/station-10-b-lower-columbia.jpg",
-          "caption": "A wide river landscape"
+          "caption": "Image B"
         },
         {
           "image": "data/images/station-10-e-fort-clatsop-sketch.jpg",
-          "caption": "A hand-drawn floor plan"
+          "caption": "Image C"
         },
         {
           "image": "data/images/station-10-a-chinook-canoe.jpg",
-          "caption": "A large canoe on the water"
+          "caption": "Image D"
         }
       ],
       "correct": 2,
-      "feedback_correct": "That's Clark's sketch! He drew the floor plan of Fort Clatsop showing the layout of rooms where the Corps spent a miserable, rainy winter near the Pacific. Everyone — including York and Sacagawea — voted on this location.",
-      "feedback_incorrect": "Look for the hand-drawn floor plan — that's Clark's original sketch of Fort Clatsop. The other images show the reconstructed fort, the Columbia River, and a Chinook canoe."
+      "feedback_correct": "That’s Clark’s original sketch! He drew the floor plan of Fort Clatsop showing the layout of rooms. This is an actual primary source from the expedition — not a modern photograph, painting, or reconstruction. Everyone — including York and Sacagawea — voted on this location.",
+      "feedback_incorrect": "Think about what makes something a primary source — it was created during the time period, not afterward. Look for something that could have been drawn by Clark himself in 1805–1806, not a modern photograph or reconstruction."
     },
     "images": [
       {
@@ -252,28 +252,28 @@
     "reflection": "The vote at the Columbia — in which York and Sacagawea participated equally — is often cited as a remarkable moment in American democratic history. Evaluate this claim critically: Was this genuine democratic principle, or practical necessity born of extreme circumstances? Consider that upon returning to St. Louis, York remained enslaved and Sacagawea received no compensation. What does the contrast between the expedition’s egalitarianism and the society it returned to reveal about the limits of frontier democracy?",
     "challenge": {
       "type": "image_match",
-      "question": "Clark sketched the floor plan of their winter quarters. Which image shows Clark's sketch of Fort Clatsop?",
+      "question": "The expedition spent a miserable winter at Fort Clatsop. Examine all four images carefully — which one is a primary source document actually created by the expedition, not a modern image?",
       "options": [
         {
           "image": "data/images/station-10-c-fort-clatsop.jpg",
-          "caption": "A reconstructed wooden fort"
+          "caption": "Image A"
         },
         {
           "image": "data/images/station-10-b-lower-columbia.jpg",
-          "caption": "A wide river landscape"
+          "caption": "Image B"
         },
         {
           "image": "data/images/station-10-e-fort-clatsop-sketch.jpg",
-          "caption": "A hand-drawn floor plan"
+          "caption": "Image C"
         },
         {
           "image": "data/images/station-10-a-chinook-canoe.jpg",
-          "caption": "A large canoe on the water"
+          "caption": "Image D"
         }
       ],
       "correct": 2,
-      "feedback_correct": "That's Clark's sketch! He drew the floor plan of Fort Clatsop showing the layout of rooms where the Corps spent a miserable, rainy winter near the Pacific. Everyone — including York and Sacagawea — voted on this location.",
-      "feedback_incorrect": "Look for the hand-drawn floor plan — that's Clark's original sketch of Fort Clatsop. The other images show the reconstructed fort, the Columbia River, and a Chinook canoe."
+      "feedback_correct": "That’s Clark’s original sketch! He drew the floor plan of Fort Clatsop showing the layout of rooms. This is an actual primary source from the expedition — not a modern photograph, painting, or reconstruction. Everyone — including York and Sacagawea — voted on this location.",
+      "feedback_incorrect": "Think about what makes something a primary source — it was created during the time period, not afterward. Look for something that could have been drawn by Clark himself in 1805–1806, not a modern photograph or reconstruction."
     },
     "images": [
       {
