@@ -1792,13 +1792,13 @@ body {
   background: linear-gradient(135deg, rgba(245,166,35,0.15), rgba(212,118,10,0.1));
   border: 2px solid var(--campfire-glow);
   border-radius: 8px;
-  color: var(--ink);
+  color: var(--parchment);
   font-size: 0.9rem;
   animation: discoveryPop 0.5s ease;
 }
 
 .discovery-banner-icon { font-size: 1.3rem; vertical-align: middle; margin-right: 0.3rem; }
-.discovery-banner-desc { font-size: 0.8rem; color: var(--ink-light); }
+.discovery-banner-desc { font-size: 0.8rem; color: var(--parchment-dark); }
 
 @keyframes discoveryPop {
   0% { transform: scale(0.9); opacity: 0; }
@@ -1907,7 +1907,7 @@ body {
 
 .milestone-popup-desc {
   font-size: 0.85rem;
-  color: var(--ink-light);
+  color: var(--parchment-dark);
 }
 
 @keyframes milestoneSlide {
