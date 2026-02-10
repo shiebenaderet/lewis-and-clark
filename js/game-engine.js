@@ -114,12 +114,24 @@ function completeExpedition() {
   const completionText = document.getElementById('completion-text');
   const visited = state.visitedStations.size;
   const challengesDone = state.challengesCompleted.size;
+  const discCount = state.discoveries.length;
+  let milestoneHtml = '';
+  if (discCount >= 10) {
+    milestoneHtml = '<div class="completion-milestone master"><span class="completion-milestone-icon">\u{1F3C6}</span> Master Explorer &mdash; All 10 discoveries unlocked!</div>';
+  } else if (discCount >= 5) {
+    milestoneHtml = '<div class="completion-milestone junior"><span class="completion-milestone-icon">\u{1F3C5}</span> Junior Naturalist &mdash; ' + discCount + ' of 10 discoveries unlocked</div>';
+  } else if (discCount > 0) {
+    milestoneHtml = '<div class="completion-milestone">' + discCount + ' of 10 discoveries unlocked. Answer more Knowledge Checks correctly to earn milestones!</div>';
+  }
+
   completionText.innerHTML = `
     You've retraced the entire journey of the Corps of Discovery, from Camp Dubois to the Pacific Ocean and back through history!
     <br><br>
     You visited <strong>${visited} of ${STATIONS.length}</strong> stations and completed <strong>${challengesDone}</strong> knowledge checks.
+    <br>Discoveries: <strong>${discCount} of 10</strong>
     <br>Your score: <strong>${state.score} points</strong>
-    <br><br>
+    ${milestoneHtml}
+    <br>
     The expedition covered over 8,000 miles in 2 years, 4 months, and 10 days. They documented 178 plants and 122 animals previously unknown to science, established relations with dozens of Native American nations, and proved that an overland route to the Pacific was possible.
     <br><br>
     <em>"We were now about to penetrate a country at least 2,000 miles in width, on which the foot of civilized man had never trod."</em> &mdash; Captain Meriwether Lewis

@@ -514,6 +514,78 @@ body {
   display: block;
 }
 
+/* ============================================================
+   FORT MANDAN SEASONAL ATMOSPHERE (Stations 4-6)
+   ============================================================ */
+
+/* --- Season banner --- */
+.season-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.5rem;
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.season-banner .season-icon { font-size: 1.1rem; }
+
+/* --- Autumn (Station 4 — Arriving at Mandan, October 1804) --- */
+.season-autumn { border-color: #b8860b; }
+.season-autumn .station-header {
+  background: linear-gradient(135deg, #8b5e14, #b8860b);
+}
+.season-autumn .season-banner {
+  background: linear-gradient(90deg, rgba(184,134,11,0.12), rgba(205,133,63,0.08));
+  color: #8b5e14;
+  border-bottom: 1px solid rgba(184,134,11,0.2);
+}
+.season-autumn .journal-entry {
+  border-left-color: #b8860b;
+  background: linear-gradient(135deg, #fdf6e3, #faf0d0);
+}
+.season-autumn .station-body {
+  background: linear-gradient(180deg, rgba(205,133,63,0.04) 0%, transparent 40%);
+}
+
+/* --- Winter (Station 5 — Meeting Sacagawea, February 1805) --- */
+.season-winter { border-color: #4a7a9b; }
+.season-winter .station-header {
+  background: linear-gradient(135deg, #2c4a6e, #4a7a9b);
+}
+.season-winter .season-banner {
+  background: linear-gradient(90deg, rgba(74,122,155,0.1), rgba(135,180,210,0.06));
+  color: #2c4a6e;
+  border-bottom: 1px solid rgba(74,122,155,0.2);
+}
+.season-winter .journal-entry {
+  border-left-color: #4a7a9b;
+  background: linear-gradient(135deg, #f0f4f8, #e8eef4);
+}
+.season-winter .station-body {
+  background: linear-gradient(180deg, rgba(74,122,155,0.04) 0%, transparent 40%);
+}
+
+/* --- Spring (Station 6 — Heading West Again, April 1805) --- */
+.season-spring { border-color: #4a8c3f; }
+.season-spring .station-header {
+  background: linear-gradient(135deg, #2d5a1e, #4a8c3f);
+}
+.season-spring .season-banner {
+  background: linear-gradient(90deg, rgba(74,140,63,0.1), rgba(120,180,90,0.06));
+  color: #2d5a1e;
+  border-bottom: 1px solid rgba(74,140,63,0.2);
+}
+.season-spring .journal-entry {
+  border-left-color: #4a8c3f;
+  background: linear-gradient(135deg, #f2f8f0, #e8f4e4);
+}
+.season-spring .station-body {
+  background: linear-gradient(180deg, rgba(74,140,63,0.04) 0%, transparent 40%);
+}
+
 /* Journal entry styling */
 .journal-entry {
   background: linear-gradient(135deg, #fdf6e3, #f5eed5);
@@ -974,6 +1046,29 @@ body {
 .btn-restart.btn-secondary:hover {
   background: rgba(244, 232, 193, 0.1);
 }
+
+/* --- Completion screen milestone badges --- */
+.completion-milestone {
+  margin: 1rem auto;
+  padding: 0.6rem 1.25rem;
+  border-radius: 8px;
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  color: var(--parchment-dark);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.completion-milestone.junior {
+  background: linear-gradient(135deg, rgba(192,192,192,0.15), rgba(160,160,160,0.08));
+  border-color: rgba(192,192,192,0.4);
+  color: #d4d4d4;
+}
+.completion-milestone.master {
+  background: linear-gradient(135deg, rgba(245,166,35,0.15), rgba(212,118,10,0.1));
+  border-color: var(--campfire-glow);
+  color: var(--campfire-glow);
+}
+.completion-milestone-icon { font-size: 1.2rem; margin-right: 0.3rem; vertical-align: middle; }
 
 /* ============================================================
    STATION IMAGE GALLERY
@@ -1608,18 +1703,127 @@ body {
   background: linear-gradient(135deg, rgba(245,166,35,0.15), rgba(212,118,10,0.1));
   border: 2px solid var(--campfire-glow);
   border-radius: 8px;
-  color: var(--parchment);
+  color: var(--ink);
   font-size: 0.9rem;
   animation: discoveryPop 0.5s ease;
 }
 
 .discovery-banner-icon { font-size: 1.3rem; vertical-align: middle; margin-right: 0.3rem; }
-.discovery-banner-desc { font-size: 0.8rem; opacity: 0.8; }
+.discovery-banner-desc { font-size: 0.8rem; color: var(--ink-light); }
 
 @keyframes discoveryPop {
   0% { transform: scale(0.9); opacity: 0; }
   60% { transform: scale(1.02); }
   100% { transform: scale(1); opacity: 1; }
+}
+
+/* --- Discovery Progress Tracker (shown on every station) --- */
+.discovery-tracker {
+  margin-top: 1.5rem;
+  padding: 1rem 1.25rem;
+  background: linear-gradient(135deg, rgba(212,118,10,0.06), rgba(245,166,35,0.04));
+  border: 1.5px solid rgba(212,118,10,0.2);
+  border-radius: 8px;
+}
+
+.discovery-tracker-label {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--campfire);
+  margin-bottom: 0.5rem;
+}
+
+.discovery-tracker-bar {
+  height: 8px;
+  background: rgba(0,0,0,0.08);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0.6rem;
+}
+
+.discovery-tracker-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--campfire), var(--campfire-glow));
+  border-radius: 4px;
+  transition: width 0.6s ease;
+}
+
+.discovery-tracker-icons {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.discovery-tracker-icon {
+  font-size: 1.1rem;
+  opacity: 0.3;
+  transition: opacity 0.4s ease, transform 0.3s ease;
+}
+
+.discovery-tracker-icon.unlocked {
+  opacity: 1;
+  animation: discoveryPop 0.5s ease;
+}
+
+/* --- Milestone Badges (in tracker) --- */
+.milestone-badge {
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  margin-top: 0.25rem;
+}
+
+.milestone-badge.junior {
+  background: linear-gradient(135deg, rgba(192,192,192,0.2), rgba(160,160,160,0.1));
+  border: 1px solid rgba(140,140,140,0.4);
+  color: #5c5c5c;
+}
+
+.milestone-badge.master {
+  background: linear-gradient(135deg, rgba(245,166,35,0.2), rgba(212,118,10,0.12));
+  border: 1px solid rgba(212,118,10,0.5);
+  color: var(--campfire);
+}
+
+/* --- Milestone Popup (appears on hitting 5 or 10) --- */
+.milestone-popup {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  padding: 1rem 1.25rem;
+  border-radius: 8px;
+  border: 2px solid var(--campfire-glow);
+  background: linear-gradient(135deg, rgba(245,166,35,0.12), rgba(212,118,10,0.06));
+  animation: milestoneSlide 0.6s ease;
+}
+
+.milestone-popup-icon { font-size: 2rem; flex-shrink: 0; }
+
+.milestone-popup-title {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  color: var(--campfire);
+  margin-bottom: 0.15rem;
+}
+
+.milestone-popup-desc {
+  font-size: 0.85rem;
+  color: var(--ink-light);
+}
+
+@keyframes milestoneSlide {
+  0% { transform: translateY(10px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
 }
 
 /* --- Discoveries Grid (journal tracker) --- */
@@ -1638,11 +1842,11 @@ body {
   border: 1px solid rgba(212, 118, 10, 0.3);
   border-radius: 6px;
   font-size: 0.8rem;
-  color: var(--parchment);
+  color: var(--ink);
 }
 
 .discovery-item-icon { font-size: 1.4rem; flex-shrink: 0; }
-.discovery-item-desc { font-size: 0.75rem; opacity: 0.7; }
+.discovery-item-desc { font-size: 0.75rem; color: var(--ink-light); }
 
 /* ============================================================
    SCORE DISPLAY
