@@ -8,7 +8,7 @@ An interactive website that turns 10 classroom stations on the Lewis & Clark exp
 
 ## Version
 
-**v0.13.0** — Fort Mandan seasonal atmosphere for stations 4-6
+**v0.14.0** — Discovery milestones and progress tracker
 
 ## What This Is
 
@@ -33,7 +33,7 @@ This project replaces a paper-based station activity (where students walk around
 - **Fort Mandan seasonal atmosphere** — stations 4-6 feature distinct seasonal theming (autumn amber, winter blue, spring green) with tinted headers, borders, journal entries, and labeled season banners
 - **Interactive travel events** — 29 diverse encounters between stations: choice-based decisions and tap/swat mini-games covering weather, wildlife, navigation, health, Native encounters, and camp life
 - **Save/resume** — localStorage persistence so students can pick up where they left off; portable save codes for cross-device transfer
-- **Discoveries** — 10 collectible items unlocked by answering Knowledge Checks correctly, logged in journal and PDF export
+- **Discoveries** — 10 collectible items unlocked by answering Knowledge Checks correctly, logged in journal and PDF export, with a progress tracker on every station and milestone achievements (Junior Naturalist at 5/10, Master Explorer at 10/10)
 - **Random trail events** between stations (grizzly bears, storms, mosquitoes, etc.)
 - **Reflection questions** at each station
 - **Primary source links** at each station to real digitized journal entries (University of Nebraska) and the Corps of Discovery Online Atlas (Lewis & Clark College)
@@ -87,6 +87,14 @@ Then open `http://localhost:8000` in your browser.
 **Note:** Opening `index.html` directly as a file (`file://`) will not work because browsers block `fetch()` requests from local files. You need a web server.
 
 ## Changelog
+
+### v0.14.0
+- **Discovery progress tracker** on every station: visual progress bar, 10 icon slots that fill in as discoveries are unlocked, and live updates when a new discovery is earned
+- **Milestone achievements**: "Junior Naturalist" badge at 5/10 discoveries, "Master Explorer" badge at 10/10
+  - Animated milestone popup appears inline when the threshold is reached
+  - Milestone badges shown in the station progress tracker and on the completion screen
+- **Completion screen** now shows discovery count and milestone ranking
+- **Fix:** Discovery banner and discovery grid text now legible (was parchment-on-parchment)
 
 ### v0.13.0
 - **Fort Mandan seasonal atmosphere** for stations 4-6: the three Fort Mandan stations now reflect the season in which they take place

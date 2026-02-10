@@ -275,6 +275,26 @@ function renderStation(index) {
     html += '</div>';
   }
 
+  // Discovery progress tracker
+  const discCount = state.discoveries.length;
+  html += '<div class="discovery-tracker">';
+  html += `<div class="discovery-tracker-label">Discoveries: ${discCount} / ${DISCOVERIES.length}</div>`;
+  html += '<div class="discovery-tracker-bar"><div class="discovery-tracker-fill" style="width:' + (discCount / DISCOVERIES.length * 100) + '%"></div></div>';
+  html += '<div class="discovery-tracker-icons">';
+  for (let i = 0; i < DISCOVERIES.length; i++) {
+    const unlocked = state.discoveries.includes(i);
+    html += `<span class="discovery-tracker-icon${unlocked ? ' unlocked' : ''}" title="${unlocked ? DISCOVERIES[i].name : 'Station ' + (i+1) + ' — Not yet discovered'}">${unlocked ? DISCOVERIES[i].icon : '\u{1F512}'}</span>`;
+  }
+  html += '</div>';
+  // Milestone badges
+  if (discCount >= 5) {
+    html += '<div class="milestone-badge junior">Junior Naturalist</div>';
+  }
+  if (discCount >= 10) {
+    html += '<div class="milestone-badge master">Master Explorer</div>';
+  }
+  html += '</div>';
+
   // Navigation (gated behind challenge completion)
   html += '<div class="station-nav">';
   html += `<button class="btn-station-nav" onclick="goToStation(${index - 1})" ${index === 0 ? 'disabled' : ''}>&larr; Previous Station</button>`;
@@ -846,6 +866,31 @@ function completeChallengeResult(stationIndex, isCorrect, challenge) {
       banner.className = 'discovery-banner';
       banner.innerHTML = `<span class="discovery-banner-icon">${d.icon}</span> <strong>Discovery Unlocked:</strong> ${d.name} <span class="discovery-banner-desc">&mdash; ${d.desc}</span>`;
       feedback.parentNode.insertBefore(banner, feedback.nextSibling);
+      // Check for milestone achievements
+      const count = state.discoveries.length;
+      if (count === 5 || count === 10) {
+        const milestone = count === 5
+          ? { title: 'Junior Naturalist', desc: 'You\'ve uncovered 5 of 10 discoveries \u2014 halfway to Master Explorer!', icon: '\u{1F3C5}' }
+          : { title: 'Master Explorer', desc: 'All 10 discoveries unlocked! You\'ve mastered the trail of Lewis & Clark.', icon: '\u{1F3C6}' };
+        const mEl = document.createElement('div');
+        mEl.className = 'milestone-popup';
+        mEl.innerHTML = `<span class="milestone-popup-icon">${milestone.icon}</span><div><strong class="milestone-popup-title">${milestone.title}</strong><div class="milestone-popup-desc">${milestone.desc}</div></div>`;
+        feedback.parentNode.insertBefore(mEl, banner.nextSibling);
+      }
+      // Update the discovery tracker if visible
+      const tracker = document.querySelector('.discovery-tracker');
+      if (tracker) {
+        const fill = tracker.querySelector('.discovery-tracker-fill');
+        const label = tracker.querySelector('.discovery-tracker-label');
+        if (fill) fill.style.width = (state.discoveries.length / DISCOVERIES.length * 100) + '%';
+        if (label) label.textContent = 'Discoveries: ' + state.discoveries.length + ' / ' + DISCOVERIES.length;
+        const icons = tracker.querySelectorAll('.discovery-tracker-icon');
+        if (icons[stationIndex]) {
+          icons[stationIndex].classList.add('unlocked');
+          icons[stationIndex].textContent = d.icon;
+          icons[stationIndex].title = d.name;
+        }
+      }
     }
   } else {
     feedback.textContent = challenge.feedback_incorrect;
