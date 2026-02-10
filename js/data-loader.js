@@ -4,6 +4,7 @@
 
 const STATIONS = [];
 const TRAIL_EVENTS = [];
+let WORD_BANK = { terms: [], phrases: [] };
 
 const TOTAL_STATIONS = 10;
 
@@ -26,16 +27,25 @@ async function loadAllData() {
       return r.json();
     });
 
+  const wordBankPromise = fetch('data/word-bank.json')
+    .then(r => {
+      if (!r.ok) throw new Error(`Word bank: ${r.status}`);
+      return r.json();
+    });
+
   try {
-    const [stationData, eventData] = await Promise.all([
+    const [stationData, eventData, wordBankData] = await Promise.all([
       Promise.all(stationPromises),
-      eventsPromise
+      eventsPromise,
+      wordBankPromise
     ]);
 
     stationData.forEach(s => STATIONS.push(s));
     eventData.forEach(e => TRAIL_EVENTS.push(e));
+    WORD_BANK.terms = wordBankData.terms || [];
+    WORD_BANK.phrases = wordBankData.phrases || [];
 
-    console.log(`Loaded ${STATIONS.length} stations, ${TRAIL_EVENTS.length} trail events`);
+    console.log(`Loaded ${STATIONS.length} stations, ${TRAIL_EVENTS.length} trail events, ${WORD_BANK.terms.length + WORD_BANK.phrases.length} word bank entries`);
     return true;
   } catch (err) {
     console.error('Failed to load game data:', err);

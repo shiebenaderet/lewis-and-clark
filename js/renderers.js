@@ -1975,6 +1975,9 @@ function renderJournalTracker() {
       discPanel.innerHTML = dhtml;
     }
   }
+
+  // Render Field Guide below discoveries
+  renderFieldGuide();
 }
 
 // === INTERACTIVE TRAVEL TRANSITION ===
@@ -1985,9 +1988,9 @@ function renderTravelTransition(fromIndex, toIndex, callback) {
   const distances = [0, 600, 25, 400, 0, 0, 350, 200, 150, 300, 250];
   const miles = distances[toIndex] || 200;
 
-  // Pick 2-3 random events (no repeats until all have been shown)
+  // Pick 1-2 trail events + 1 word challenge (reduced from 2-3 to make room)
   // Filter by geographic leg — events have a "legs" array specifying valid toIndex values
-  const numEvents = 2 + Math.floor(Math.random() * 2);
+  const numEvents = 1 + Math.floor(Math.random() * 2);
 
   // Filter to events valid for this leg, excluding already-seen
   let available = TRAIL_EVENTS.filter(e =>
@@ -2012,6 +2015,16 @@ function renderTravelTransition(fromIndex, toIndex, callback) {
 
   // Track which events have been shown
   journeyEvents.forEach(e => state.seenEvents.push(e.title));
+
+  // Insert a word challenge between trail events
+  const wordChallenge = pickWordChallenge(toIndex);
+  if (wordChallenge) {
+    if (journeyEvents.length >= 1) {
+      journeyEvents.splice(1, 0, wordChallenge);
+    } else {
+      journeyEvents.push(wordChallenge);
+    }
+  }
   saveGame();
 
   const stationNames = [
@@ -2070,7 +2083,15 @@ function travelShowEvent() {
 
   const evt = events[step];
 
-  if (evt.action === 'tap_swat') {
+  if (evt.action === 'trail_cipher' || evt.action === 'word_puzzle') {
+    renderWagerPanel(evt, container, function(wager) {
+      if (evt.action === 'trail_cipher') {
+        renderTrailCipher(evt, container, wager);
+      } else {
+        renderWordPuzzle(evt, container, wager);
+      }
+    });
+  } else if (evt.action === 'tap_swat') {
     renderTapChallenge(evt, container);
   } else {
     renderChoiceEvent(evt, container);
@@ -2240,4 +2261,487 @@ function finishTravel() {
     window._travelCallback();
     window._travelCallback = null;
   }
+}
+
+// ============================================================
+// WORD CHALLENGE SYSTEM
+// ============================================================
+
+// Pick a word challenge appropriate for this travel leg
+function pickWordChallenge(toIndex) {
+  const allEntries = [...WORD_BANK.terms, ...WORD_BANK.phrases];
+  let candidates = allEntries.filter(e => e.legs && e.legs.includes(toIndex));
+  // Prefer terms not yet in glossary
+  const unseen = candidates.filter(e => !state.glossary.includes(e.key));
+  if (unseen.length > 0) candidates = unseen;
+  if (candidates.length === 0) return null;
+  const entry = candidates[Math.floor(Math.random() * candidates.length)];
+  return { action: entry.type, entry: entry };
+}
+
+// --- Wager Panel ---
+function renderWagerPanel(evt, container, onWager) {
+  const totalScore = state.score + (window._travelPoints || 0);
+  let html = '<div class="travel-event wager-event">';
+  html += '<div class="travel-event-emoji">\uD83D\uDCDC</div>';
+  html += '<div class="travel-event-msg"><strong>Word Challenge Ahead!</strong></div>';
+  html += '<div class="travel-event-desc">A vocabulary challenge awaits on the trail. How confident are you?</div>';
+  html += '<div class="wager-panel">';
+  html += '<div class="wager-label">Stake Your Supplies:</div>';
+  html += '<div class="wager-options">';
+  html += '<button class="wager-btn wager-safe" onclick="window._selectWager(0)">';
+  html += '<span class="wager-name">\uD83D\uDD0D Safe Scout</span>';
+  html += '<span class="wager-detail">+5 if correct, +2 if wrong</span></button>';
+  html += '<button class="wager-btn wager-confident" onclick="window._selectWager(5)"' + (totalScore < 5 ? ' disabled' : '') + '>';
+  html += '<span class="wager-name">\uD83E\uDDED Confident Explorer</span>';
+  html += '<span class="wager-detail">+15 if correct, \u22125 if wrong</span></button>';
+  html += '<button class="wager-btn wager-bold" onclick="window._selectWager(10)"' + (totalScore < 20 ? ' disabled' : '') + '>';
+  html += '<span class="wager-name">\u2694\uFE0F Bold Captain</span>';
+  html += '<span class="wager-detail">+25 if correct, \u221210 if wrong</span></button>';
+  html += '</div></div></div>';
+  container.innerHTML = html;
+  window._selectWager = function(amount) { onWager(amount); };
+}
+
+// --- Trail Cipher (Wheel of Fortune-style) ---
+function renderTrailCipher(evt, container, wager) {
+  var entry = evt.entry;
+  var phrase = (entry.phrase || '').toUpperCase();
+  var clue = (entry[state.level] || entry.standard || {}).clue || '';
+  var category = entry.category || 'Expedition Term';
+  var maxWrong = state.level === 'beginner' ? 7 : state.level === 'advanced' ? 5 : 6;
+  var letters = {};
+  for (var i = 0; i < phrase.length; i++) {
+    var ch = phrase[i];
+    if (ch >= 'A' && ch <= 'Z') letters[ch] = true;
+  }
+  var guessed = {};
+  var wrongCount = 0;
+  var showingSolve = false;
+
+  function buildBoard() {
+    var h = '<div class="cipher-board">';
+    for (var i = 0; i < phrase.length; i++) {
+      var c = phrase[i];
+      if (c === ' ') { h += '<span class="cipher-space"></span>'; }
+      else if (!(c >= 'A' && c <= 'Z')) { h += '<span class="cipher-cell cipher-punct">' + c + '</span>'; }
+      else if (guessed[c]) { h += '<span class="cipher-cell cipher-revealed">' + c + '</span>'; }
+      else { h += '<span class="cipher-cell cipher-blank">_</span>'; }
+    }
+    h += '</div>';
+    return h;
+  }
+
+  function buildKeyboard() {
+    var vowels = {A:1,E:1,I:1,O:1,U:1};
+    var h = '<div class="cipher-keyboard">';
+    var abc = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    for (var i = 0; i < abc.length; i++) {
+      var c = abc[i];
+      var used = !!guessed[c];
+      var inPhrase = !!letters[c];
+      var cls = 'cipher-key';
+      if (used) cls += inPhrase ? ' key-hit' : ' key-miss';
+      if (vowels[c] && !used) cls += ' key-vowel';
+      h += '<button class="' + cls + '"' + (used ? ' disabled' : '') + ' onclick="window._cipherGuess(\'' + c + '\')">' + c + '</button>';
+    }
+    h += '</div>';
+    return h;
+  }
+
+  function buildSupplies() {
+    var h = '<div class="cipher-supplies">';
+    for (var i = 0; i < maxWrong; i++) {
+      h += i < (maxWrong - wrongCount) ? '<span class="supply-icon">\uD83C\uDF92</span>' : '<span class="supply-icon supply-lost">\uD83D\uDC80</span>';
+    }
+    h += '</div>';
+    return h;
+  }
+
+  function allRevealed() {
+    for (var k in letters) { if (!guessed[k]) return false; }
+    return true;
+  }
+
+  function render() {
+    var h = '<div class="travel-event cipher-event">';
+    h += '<div class="cipher-category">' + escapeHtml(category) + '</div>';
+    h += '<div class="cipher-clue">' + escapeHtml(clue) + '</div>';
+    h += buildSupplies();
+    h += buildBoard();
+    h += buildKeyboard();
+    if (showingSolve) {
+      h += '<div class="cipher-solve-area">';
+      h += '<input type="text" class="cipher-solve-input" id="cipher-solve-input" placeholder="Type the full answer..." autocomplete="off">';
+      h += '<button class="cipher-solve-submit" onclick="window._cipherSubmitSolve()">Submit</button>';
+      h += '<button class="cipher-solve-cancel" onclick="window._cipherCancelSolve()">Cancel</button>';
+      h += '</div>';
+    } else {
+      h += '<button class="cipher-solve-btn" onclick="window._cipherShowSolve()">Solve!</button>';
+    }
+    h += '</div>';
+    container.innerHTML = h;
+    if (showingSolve) {
+      var inp = document.getElementById('cipher-solve-input');
+      if (inp) {
+        inp.focus();
+        inp.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter') { e.preventDefault(); window._cipherSubmitSolve(); }
+        });
+      }
+    }
+  }
+
+  function endGame(won) {
+    if (window._cipherKbCleanup) { window._cipherKbCleanup(); window._cipherKbCleanup = null; }
+    if (!state.glossary.includes(entry.key)) {
+      state.glossary.push(entry.key);
+      saveGame();
+    }
+    var pts;
+    if (won) {
+      pts = wager === 0 ? 5 : wager === 5 ? 15 : 25;
+      state.wordChallengesWon = (state.wordChallengesWon || 0) + 1;
+    } else {
+      pts = wager === 0 ? 2 : -wager;
+    }
+    window._travelPoints += pts;
+    if (state.score + window._travelPoints < 0) window._travelPoints = -state.score;
+
+    var rh = '<div class="travel-event cipher-result">';
+    rh += '<div class="cipher-board cipher-board-final">';
+    for (var i = 0; i < phrase.length; i++) {
+      var c = phrase[i];
+      if (c === ' ') { rh += '<span class="cipher-space"></span>'; }
+      else { rh += '<span class="cipher-cell cipher-revealed">' + c + '</span>'; }
+    }
+    rh += '</div>';
+    rh += '<div class="travel-result ' + (won ? 'result-good' : 'result-bad') + '">';
+    rh += '<span class="result-points">' + (pts >= 0 ? '+' + pts : pts) + '</span> ';
+    rh += won ? 'Excellent! You decoded the cipher!' : 'The answer was: ' + phrase;
+    rh += '</div>';
+    if (entry.definition) rh += '<div class="cipher-definition"><strong>' + (entry.word || entry.phrase) + ':</strong> ' + entry.definition + '</div>';
+    if (entry.funFact) rh += '<div class="cipher-funfact">\uD83D\uDCA1 ' + entry.funFact + '</div>';
+    rh += '</div>';
+    container.innerHTML = rh;
+    var scoreLine = document.getElementById('travel-score-line');
+    if (scoreLine) scoreLine.textContent = 'Trail points this leg: ' + window._travelPoints;
+    window._travelStep++;
+    setTimeout(function() { travelShowEvent(); }, 3500);
+  }
+
+  window._cipherGuess = function(ch) {
+    if (guessed[ch]) return;
+    guessed[ch] = true;
+    if (letters[ch]) {
+      if (allRevealed()) { render(); setTimeout(function() { endGame(true); }, 800); return; }
+    } else {
+      wrongCount++;
+      if (wrongCount >= maxWrong) { render(); setTimeout(function() { endGame(false); }, 800); return; }
+    }
+    render();
+  };
+
+  window._cipherShowSolve = function() { showingSolve = true; render(); };
+  window._cipherCancelSolve = function() { showingSolve = false; render(); };
+  window._cipherSubmitSolve = function() {
+    var inp = document.getElementById('cipher-solve-input');
+    if (!inp) return;
+    var answer = inp.value.trim().toUpperCase();
+    showingSolve = false;
+    if (answer === phrase) {
+      for (var k in letters) guessed[k] = true;
+      render();
+      setTimeout(function() { endGame(true); }, 800);
+    } else {
+      wrongCount += 2;
+      if (wrongCount >= maxWrong) { render(); setTimeout(function() { endGame(false); }, 800); return; }
+      render();
+    }
+  };
+
+  // Physical keyboard support
+  function cipherKeyHandler(e) {
+    if (document.activeElement && document.activeElement.tagName === 'INPUT') return;
+    var k = e.key.toUpperCase();
+    if (k.length === 1 && k >= 'A' && k <= 'Z') window._cipherGuess(k);
+  }
+  document.addEventListener('keydown', cipherKeyHandler);
+  window._cipherKbCleanup = function() { document.removeEventListener('keydown', cipherKeyHandler); };
+
+  render();
+}
+
+// --- Word Puzzle (Wordle-style) ---
+function renderWordPuzzle(evt, container, wager) {
+  var entry = evt.entry;
+  var word = (entry.word || '').toUpperCase();
+  var wordLen = word.length;
+  var clue = (entry[state.level] || entry.standard || {}).clue || '';
+  var maxGuesses = state.level === 'beginner' ? 6 : state.level === 'advanced' ? 4 : 5;
+  var guesses = [];
+  var currentGuess = '';
+  var gameOver = false;
+  var keyStates = {};
+
+  function getColors(guess, answer) {
+    var colors = [];
+    var ansArr = answer.split('');
+    var gArr = guess.split('');
+    for (var i = 0; i < wordLen; i++) colors[i] = 'absent';
+    for (var i = 0; i < wordLen; i++) {
+      if (gArr[i] === ansArr[i]) { colors[i] = 'correct'; ansArr[i] = null; gArr[i] = null; }
+    }
+    for (var i = 0; i < wordLen; i++) {
+      if (gArr[i] === null) continue;
+      var idx = ansArr.indexOf(gArr[i]);
+      if (idx !== -1) { colors[i] = 'present'; ansArr[idx] = null; }
+    }
+    return colors;
+  }
+
+  function buildGrid() {
+    var h = '<div class="wordle-grid">';
+    for (var r = 0; r < maxGuesses; r++) {
+      h += '<div class="wordle-row">';
+      if (r < guesses.length) {
+        var g = guesses[r]; var cols = getColors(g, word);
+        for (var c = 0; c < wordLen; c++) h += '<div class="wordle-cell ' + cols[c] + '">' + g[c] + '</div>';
+      } else if (r === guesses.length && !gameOver) {
+        for (var c = 0; c < wordLen; c++) { var ch = currentGuess[c] || ''; h += '<div class="wordle-cell' + (ch ? ' filled' : '') + '">' + ch + '</div>'; }
+      } else {
+        for (var c = 0; c < wordLen; c++) h += '<div class="wordle-cell"></div>';
+      }
+      h += '</div>';
+    }
+    h += '</div>';
+    return h;
+  }
+
+  function buildKeyboard() {
+    var rows = ['QWERTYUIOP', 'ASDFGHJKL', '!ZXCVBNM@'];
+    var h = '<div class="wordle-keyboard">';
+    for (var ri = 0; ri < rows.length; ri++) {
+      h += '<div class="wordle-kb-row">';
+      for (var ci = 0; ci < rows[ri].length; ci++) {
+        var key = rows[ri][ci];
+        if (key === '!') { h += '<button class="wordle-key key-special" onclick="window._wordleKey(\'ENTER\')">ENTER</button>'; continue; }
+        if (key === '@') { h += '<button class="wordle-key key-special" onclick="window._wordleKey(\'DEL\')">\u232B</button>'; continue; }
+        var ks = keyStates[key] || '';
+        h += '<button class="wordle-key ' + ks + '" onclick="window._wordleKey(\'' + key + '\')">' + key + '</button>';
+      }
+      h += '</div>';
+    }
+    h += '</div>';
+    return h;
+  }
+
+  function updateKeyStates(guess, colors) {
+    for (var i = 0; i < guess.length; i++) {
+      var c = guess[i]; var col = colors[i];
+      if (keyStates[c] === 'correct') continue;
+      if (keyStates[c] === 'present' && col !== 'correct') continue;
+      keyStates[c] = col;
+    }
+  }
+
+  function render() {
+    var h = '<div class="travel-event wordle-event">';
+    h += '<div class="wordle-clue">' + escapeHtml(clue) + '</div>';
+    h += '<div class="wordle-guesses-left">' + (maxGuesses - guesses.length) + ' guesses remaining</div>';
+    h += buildGrid();
+    if (!gameOver) h += buildKeyboard();
+    h += '</div>';
+    container.innerHTML = h;
+  }
+
+  function endGame(won) {
+    gameOver = true;
+    if (window._wordleKbCleanup) { window._wordleKbCleanup(); window._wordleKbCleanup = null; }
+    if (!state.glossary.includes(entry.key)) {
+      state.glossary.push(entry.key);
+      saveGame();
+    }
+    var pts;
+    if (won) {
+      pts = wager === 0 ? 5 : wager === 5 ? 15 : 25;
+      state.wordChallengesWon = (state.wordChallengesWon || 0) + 1;
+    } else {
+      pts = wager === 0 ? 2 : -wager;
+    }
+    window._travelPoints += pts;
+    if (state.score + window._travelPoints < 0) window._travelPoints = -state.score;
+
+    var rh = '<div class="travel-event wordle-result">';
+    rh += '<div class="wordle-answer">The word was: <strong>' + word + '</strong></div>';
+    rh += '<div class="travel-result ' + (won ? 'result-good' : 'result-bad') + '">';
+    rh += '<span class="result-points">' + (pts >= 0 ? '+' + pts : pts) + '</span> ';
+    rh += won ? 'Great work! Solved in ' + guesses.length + (guesses.length === 1 ? ' guess!' : ' guesses!') : 'Better luck next time!';
+    rh += '</div>';
+    if (entry.definition) rh += '<div class="cipher-definition"><strong>' + entry.word + ':</strong> ' + entry.definition + '</div>';
+    if (entry.funFact) rh += '<div class="cipher-funfact">\uD83D\uDCA1 ' + entry.funFact + '</div>';
+    rh += '</div>';
+    container.innerHTML = rh;
+    var scoreLine = document.getElementById('travel-score-line');
+    if (scoreLine) scoreLine.textContent = 'Trail points this leg: ' + window._travelPoints;
+    window._travelStep++;
+    setTimeout(function() { travelShowEvent(); }, 3500);
+  }
+
+  window._wordleKey = function(key) {
+    if (gameOver) return;
+    if (key === 'DEL') { currentGuess = currentGuess.slice(0, -1); render(); return; }
+    if (key === 'ENTER') {
+      if (currentGuess.length !== wordLen) return;
+      var guess = currentGuess.toUpperCase();
+      var colors = getColors(guess, word);
+      updateKeyStates(guess, colors);
+      guesses.push(guess);
+      currentGuess = '';
+      if (guess === word) { render(); setTimeout(function() { endGame(true); }, 1000); return; }
+      if (guesses.length >= maxGuesses) { render(); setTimeout(function() { endGame(false); }, 1000); return; }
+      render(); return;
+    }
+    if (currentGuess.length < wordLen && key.length === 1 && key >= 'A' && key <= 'Z') {
+      currentGuess += key;
+      render();
+    }
+  };
+
+  // Physical keyboard support
+  function wordleKeyHandler(e) {
+    if (gameOver) return;
+    if (e.key === 'Enter') { e.preventDefault(); window._wordleKey('ENTER'); }
+    else if (e.key === 'Backspace') { e.preventDefault(); window._wordleKey('DEL'); }
+    else if (e.key.length === 1 && e.key.match(/[a-zA-Z]/)) window._wordleKey(e.key.toUpperCase());
+  }
+  document.addEventListener('keydown', wordleKeyHandler);
+  window._wordleKbCleanup = function() { document.removeEventListener('keydown', wordleKeyHandler); };
+
+  render();
+}
+
+// --- Field Guide (vocabulary reference in Journal view) ---
+function renderFieldGuide() {
+  var panel = document.getElementById('field-guide-panel');
+  if (!panel) return;
+  var allEntries = (WORD_BANK.terms || []).concat(WORD_BANK.phrases || []);
+  if (allEntries.length === 0) { panel.innerHTML = ''; return; }
+  var totalCount = allEntries.length;
+  var discoveredCount = (state.glossary || []).length;
+  var h = '<div class="field-guide-count">' + discoveredCount + ' / ' + totalCount + ' terms discovered</div>';
+  h += '<div class="field-guide-grid">';
+  allEntries.forEach(function(entry) {
+    var discovered = state.glossary && state.glossary.includes(entry.key);
+    if (discovered) {
+      var def = entry.definition || ((entry[state.level] || entry.standard || {}).clue || '');
+      h += '<div class="field-guide-card discovered">';
+      h += '<div class="fg-term">' + escapeHtml(entry.word || entry.phrase) + '</div>';
+      h += '<div class="fg-definition">' + escapeHtml(def) + '</div>';
+      if (entry.funFact) h += '<div class="fg-funfact">\uD83D\uDCA1 ' + escapeHtml(entry.funFact) + '</div>';
+      h += '</div>';
+    } else {
+      h += '<div class="field-guide-card locked">';
+      h += '<div class="fg-term">???</div>';
+      h += '<div class="fg-definition">Travel the trail to discover this term!</div>';
+      h += '</div>';
+    }
+  });
+  h += '</div>';
+  panel.innerHTML = h;
+}
+
+// --- Jefferson's Cipher (final crossword puzzle) ---
+var FINAL_CIPHER_DATA = {
+  message: 'EXPLORE',
+  subtitle: 'The spirit of exploration lives on in everyone who asks "What lies beyond the next horizon?"',
+  words: [
+    { word: 'KEELBOAT', highlight: 1, beginner: '55-foot boat that started the expedition (Station 1)', standard: '55-foot vessel that began the expedition (Station 1)', advanced: 'Lewis\'s primary upstream transport, capable of carrying 12 tons (Station 1)' },
+    { word: 'SEXTANT', highlight: 2, beginner: 'Tool for figuring out where you are using stars (Station 7)', standard: 'Navigation tool for measuring star positions (Station 7)', advanced: 'Precision instrument for celestial observation and latitude (Station 7)' },
+    { word: 'PORTAGE', highlight: 0, beginner: 'Carrying boats and supplies overland (Station 7)', standard: '18-mile overland carry around the Great Falls (Station 7)', advanced: 'Grueling evidence that the Northwest Passage did not exist (Station 7)' },
+    { word: 'COLUMBIA', highlight: 2, beginner: 'The big river that led them to the Pacific (Station 10)', standard: 'River that carried the Corps to the coast (Station 10)', advanced: 'Major waterway navigated using Nez Perce intelligence (Station 10)' },
+    { word: 'SHOSHONE', highlight: 2, beginner: 'Sacagawea\'s people who had the horses they needed (Station 8)', standard: 'Mountain nation that provided the critical horses (Station 8)', advanced: 'Lemhi band whose chief was Sacagawea\'s brother (Station 8)' },
+    { word: 'GRIZZLY', highlight: 1, beginner: 'A very large and dangerous bear (Station 7)', standard: 'Fearsome bear that chased Lewis into the river (Station 7)', advanced: 'Ursus arctos horribilis, a species new to science (Station 7)' },
+    { word: 'CANOE', highlight: 4, beginner: 'Boats they carved from logs (Station 9)', standard: 'Dugout craft the Nez Perce taught them to build (Station 9)', advanced: 'Vessels built using Indigenous fire-hollowing techniques (Station 9)' }
+  ]
+};
+
+function renderFinalCipher() {
+  var area = document.getElementById('final-cipher-area');
+  if (!area) return;
+  var data = FINAL_CIPHER_DATA;
+  var solved = [];
+  for (var i = 0; i < data.words.length; i++) solved[i] = false;
+  var totalSolved = 0;
+
+  function render() {
+    var h = '<div class="final-cipher">';
+    h += '<h3 class="final-cipher-title">\uD83D\uDD10 Jefferson\'s Cipher</h3>';
+    h += '<p class="final-cipher-intro">Solve each clue to reveal the secret message! The <span class="highlight-hint">highlighted letter</span> from each word spells a final message for President Jefferson.</p>';
+    // Secret message display
+    h += '<div class="cipher-message">';
+    for (var i = 0; i < data.words.length; i++) {
+      if (solved[i]) {
+        h += '<span class="cipher-msg-letter revealed">' + data.message[i] + '</span>';
+      } else {
+        h += '<span class="cipher-msg-letter hidden">?</span>';
+      }
+    }
+    h += '</div>';
+    // Clue rows
+    h += '<div class="cipher-clues">';
+    for (var i = 0; i < data.words.length; i++) {
+      var w = data.words[i];
+      var clueText = w[state.level] || w.standard;
+      h += '<div class="cipher-row' + (solved[i] ? ' cipher-row-solved' : '') + '">';
+      h += '<div class="cipher-clue-num">' + (i + 1) + '</div>';
+      h += '<div class="cipher-clue-body">';
+      h += '<div class="cipher-clue-text">' + escapeHtml(clueText) + '</div>';
+      if (solved[i]) {
+        h += '<div class="cipher-word-solved">';
+        for (var ci = 0; ci < w.word.length; ci++) {
+          h += '<span class="cipher-letter' + (ci === w.highlight ? ' cipher-highlight' : '') + '">' + w.word[ci] + '</span>';
+        }
+        h += '</div>';
+      } else {
+        h += '<div class="cipher-input-wrap">';
+        h += '<input type="text" class="cipher-input" maxlength="' + (w.word.length + 3) + '" placeholder="' + w.word.length + ' letters" id="cipher-input-' + i + '" onkeydown="if(event.key===\'Enter\')window._checkCipherWord(' + i + ')">';
+        h += '<button class="cipher-check-btn" onclick="window._checkCipherWord(' + i + ')">Check</button>';
+        h += '</div>';
+      }
+      h += '</div></div>';
+    }
+    h += '</div>';
+    if (totalSolved === data.words.length) {
+      h += '<div class="cipher-complete">';
+      h += '<div class="cipher-complete-msg">\uD83C\uDFC6 The secret message is: <strong>' + data.message + '</strong>!</div>';
+      h += '<div class="cipher-complete-text">' + data.subtitle + '</div>';
+      h += '<div class="cipher-bonus">+50 bonus points!</div>';
+      h += '</div>';
+    }
+    h += '</div>';
+    area.innerHTML = h;
+  }
+
+  window._checkCipherWord = function(idx) {
+    if (solved[idx]) return;
+    var input = document.getElementById('cipher-input-' + idx);
+    if (!input) return;
+    var guess = input.value.trim().toUpperCase();
+    if (guess === data.words[idx].word) {
+      solved[idx] = true;
+      totalSolved++;
+      if (totalSolved === data.words.length) {
+        state.score += 50;
+        updateScoreDisplay();
+        saveGame();
+      }
+      render();
+    } else {
+      input.classList.add('cipher-input-wrong');
+      setTimeout(function() { input.classList.remove('cipher-input-wrong'); }, 600);
+    }
+  };
+
+  render();
 }
