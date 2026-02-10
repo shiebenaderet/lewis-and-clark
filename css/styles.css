@@ -1183,6 +1183,145 @@ body {
   color: #e8a0a0;
 }
 
+/* --- Scenario: "What Would You Do?" --- */
+.scenario-box {
+  margin: 1.5rem 0;
+  padding: 1.25rem;
+  background: linear-gradient(135deg, rgba(139, 69, 19, 0.12), rgba(107, 68, 35, 0.08));
+  border: 2px solid rgba(210, 160, 60, 0.4);
+  border-radius: 10px;
+}
+.scenario-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+.scenario-icon {
+  font-size: 1.4rem;
+}
+.scenario-label {
+  font-family: Georgia, serif;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--campfire-glow);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.scenario-situation {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  color: var(--old-paper-text);
+}
+.scenario-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+.scenario-choice {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: rgba(107, 68, 35, 0.1);
+  border: 2px solid rgba(107, 68, 35, 0.25);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, transform 0.15s;
+}
+.scenario-choice:hover {
+  border-color: var(--campfire-glow);
+  background: rgba(245, 166, 35, 0.1);
+  transform: translateX(4px);
+}
+.scenario-choice-letter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  background: rgba(107, 68, 35, 0.3);
+  color: var(--old-paper-text);
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+.scenario-choice-text {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  flex: 1;
+}
+.scenario-choice.correct {
+  border-color: rgba(74, 124, 46, 0.6);
+  background: rgba(45, 80, 22, 0.15);
+  cursor: default;
+}
+.scenario-choice.correct .scenario-choice-letter {
+  background: rgba(74, 124, 46, 0.5);
+  color: #b5e8a0;
+}
+.scenario-choice.chosen {
+  border-color: rgba(210, 160, 60, 0.5);
+  background: rgba(210, 160, 60, 0.1);
+  cursor: default;
+}
+.scenario-feedback {
+  display: none;
+  margin-top: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+.scenario-feedback.show {
+  display: block;
+}
+.scenario-feedback.historical {
+  background: rgba(45, 80, 22, 0.2);
+  border: 1px solid rgba(74, 124, 46, 0.4);
+  color: #b5e8a0;
+}
+.scenario-feedback.alternate {
+  background: rgba(210, 160, 60, 0.12);
+  border: 1px solid rgba(210, 160, 60, 0.3);
+  color: #e8d5a0;
+}
+.scenario-reveal {
+  display: none;
+  margin-top: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: rgba(139, 69, 19, 0.1);
+  border-left: 3px solid var(--campfire-glow);
+  border-radius: 0 6px 6px 0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--old-paper-text);
+}
+.scenario-reveal.show {
+  display: block;
+}
+
+/* Journal entries reveal transition */
+.journal-reveal-label {
+  font-family: Georgia, serif;
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: var(--campfire-glow);
+  margin-bottom: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px dashed rgba(210, 160, 60, 0.3);
+}
+.journal-entries-wrap.fade-in {
+  animation: journalFadeIn 0.8s ease-out;
+}
+@keyframes journalFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* --- Challenge: Shared submit button --- */
 .challenge-submit-btn {
   display: block;

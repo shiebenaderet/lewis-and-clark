@@ -25,7 +25,12 @@
       "blank_answer": "grandest sight I ever beheld",
       "quote_after": ".",
       "hint": "Lewis used a superlative to describe what he saw — the greatest _____ of his life.",
-      "accepted_answers": ["grandest sight i ever beheld", "grandest sight i ever saw", "grandest sight", "grandest sight i had ever beheld"],
+      "accepted_answers": [
+        "grandest sight i ever beheld",
+        "grandest sight i ever saw",
+        "grandest sight",
+        "grandest sight i had ever beheld"
+      ],
       "feedback_correct": "That's the quote! Lewis called the Great Falls 'the grandest sight I ever beheld.' His poetic description stands out as one of the most literary passages in the entire journal.",
       "feedback_incorrect": "Lewis called it 'the grandest sight I ever beheld.' This dramatic moment inspired some of his most poetic writing in the entire journal."
     },
@@ -45,7 +50,27 @@
         "alt": "Captain Lewis discovering the Great Falls",
         "caption": "Captain Lewis at the Great Falls — the 16-mile portage took nearly a month"
       }
-    ]
+    ],
+    "scenario": {
+      "title": "What Would You Do?",
+      "situation": "You’ve found the Great Falls — a series of massive waterfalls stretching for miles. Your boats can’t go over them, and all your supplies are loaded on those boats. The nearest passable river is 16 miles away. What do you do?",
+      "choices": [
+        {
+          "text": "Abandon the heavy boats and walk with just what you can carry on your backs",
+          "feedback": "You’d travel faster, but you’d lose the boats, supplies, and trade goods you need for the rest of the 2,000-mile journey. The expedition would likely fail."
+        },
+        {
+          "text": "Build crude wagons from tree trunks and haul everything overland around the falls",
+          "feedback": "This is exactly what the Corps did! They cut cottonwood trees, made wheels from the trunks, and hauled the boats and supplies 16 miles overland. It was brutal — but it worked."
+        },
+        {
+          "text": "Try to lower the boats down the falls with ropes",
+          "feedback": "The falls drop nearly 190 feet across five cascades — the force of the water would destroy the boats and possibly kill anyone attempting it."
+        }
+      ],
+      "correct": 1,
+      "reveal": "The Corps built crude wagons from cottonwood rounds and spent nearly a MONTH hauling heavy boats and supplies 16 miles overland. They dealt with grizzly bears, prickly pear cactus that shredded their moccasins, swarming mosquitoes, and 100°F heat. It was the most physically grueling stretch of the entire expedition."
+    }
   },
   "standard": {
     "title": "The Great Falls of the Missouri",
@@ -72,7 +97,12 @@
       "blank_answer": "grandest sight I ever beheld",
       "quote_after": ".",
       "hint": "Lewis used a superlative to describe what he saw — the greatest _____ of his life.",
-      "accepted_answers": ["grandest sight i ever beheld", "grandest sight i ever saw", "grandest sight", "grandest sight i had ever beheld"],
+      "accepted_answers": [
+        "grandest sight i ever beheld",
+        "grandest sight i ever saw",
+        "grandest sight",
+        "grandest sight i had ever beheld"
+      ],
       "feedback_correct": "That's the quote! Lewis called the Great Falls 'the grandest sight I ever beheld.' His poetic description stands out as one of the most literary passages in the entire journal.",
       "feedback_incorrect": "Lewis called it 'the grandest sight I ever beheld.' This dramatic moment inspired some of his most poetic writing in the entire journal."
     },
@@ -92,7 +122,27 @@
         "alt": "Captain Lewis discovering the Great Falls",
         "caption": "Captain Lewis at the Great Falls — the 16-mile portage took nearly a month"
       }
-    ]
+    ],
+    "scenario": {
+      "title": "What Would You Do?",
+      "situation": "You’ve found the Great Falls — a series of massive waterfalls stretching for miles. Your boats can’t go over them, and all your supplies are loaded on those boats. The nearest passable river is 16 miles away. What do you do?",
+      "choices": [
+        {
+          "text": "Abandon the heavy boats and walk with just what you can carry on your backs",
+          "feedback": "You’d travel faster, but you’d lose the boats, supplies, and trade goods you need for the rest of the 2,000-mile journey. The expedition would likely fail."
+        },
+        {
+          "text": "Build crude wagons from tree trunks and haul everything overland around the falls",
+          "feedback": "This is exactly what the Corps did! They cut cottonwood trees, made wheels from the trunks, and hauled the boats and supplies 16 miles overland. It was brutal — but it worked."
+        },
+        {
+          "text": "Try to lower the boats down the falls with ropes",
+          "feedback": "The falls drop nearly 190 feet across five cascades — the force of the water would destroy the boats and possibly kill anyone attempting it."
+        }
+      ],
+      "correct": 1,
+      "reveal": "The Corps built crude wagons from cottonwood rounds and spent nearly a MONTH hauling heavy boats and supplies 16 miles overland. They dealt with grizzly bears, prickly pear cactus that shredded their moccasins, swarming mosquitoes, and 100°F heat. It was the most physically grueling stretch of the entire expedition."
+    }
   },
   "advanced": {
     "title": "The Great Falls — Sublime Spectacle and Brutal Portage",
@@ -121,7 +171,12 @@
       "blank_answer": "grandest sight I ever beheld",
       "quote_after": ".",
       "hint": "Lewis used a superlative to describe what he saw — the greatest _____ of his life.",
-      "accepted_answers": ["grandest sight i ever beheld", "grandest sight i ever saw", "grandest sight", "grandest sight i had ever beheld"],
+      "accepted_answers": [
+        "grandest sight i ever beheld",
+        "grandest sight i ever saw",
+        "grandest sight",
+        "grandest sight i had ever beheld"
+      ],
       "feedback_correct": "That's the quote! Lewis called the Great Falls 'the grandest sight I ever beheld.' His poetic description stands out as one of the most literary passages in the entire journal.",
       "feedback_incorrect": "Lewis called it 'the grandest sight I ever beheld.' This dramatic moment inspired some of his most poetic writing in the entire journal."
     },
@@ -141,6 +196,26 @@
         "alt": "Captain Lewis discovering the Great Falls",
         "caption": "Captain Lewis at the Great Falls — the 16-mile portage took nearly a month"
       }
-    ]
+    ],
+    "scenario": {
+      "title": "What Would You Do?",
+      "situation": "You’ve found the Great Falls — a series of massive waterfalls stretching for miles. Your boats can’t go over them, and all your supplies are loaded on those boats. The nearest passable river is 16 miles away. What do you do?",
+      "choices": [
+        {
+          "text": "Abandon the heavy boats and walk with just what you can carry on your backs",
+          "feedback": "You’d travel faster, but you’d lose the boats, supplies, and trade goods you need for the rest of the 2,000-mile journey. The expedition would likely fail."
+        },
+        {
+          "text": "Build crude wagons from tree trunks and haul everything overland around the falls",
+          "feedback": "This is exactly what the Corps did! They cut cottonwood trees, made wheels from the trunks, and hauled the boats and supplies 16 miles overland. It was brutal — but it worked."
+        },
+        {
+          "text": "Try to lower the boats down the falls with ropes",
+          "feedback": "The falls drop nearly 190 feet across five cascades — the force of the water would destroy the boats and possibly kill anyone attempting it."
+        }
+      ],
+      "correct": 1,
+      "reveal": "The Corps built crude wagons from cottonwood rounds and spent nearly a MONTH hauling heavy boats and supplies 16 miles overland. They dealt with grizzly bears, prickly pear cactus that shredded their moccasins, swarming mosquitoes, and 100°F heat. It was the most physically grueling stretch of the entire expedition."
+    }
   }
 }

@@ -170,7 +170,20 @@ function renderStation(index) {
   });
   html += '</div>';
 
+  // "What Would You Do?" scenario (Stage 2 — appears before journals)
+  const scenarioId = `scenario_${index}`;
+  const scenarioCompleted = state.scenariosCompleted.has(scenarioId);
+  if (data.scenario) {
+    html += renderScenario(data.scenario, index, scenarioCompleted);
+  }
+
   // Journal entries (dates and authors are clickable to auto-fill journal)
+  // If scenario exists and not yet completed, journals start hidden
+  const journalHidden = data.scenario && !scenarioCompleted ? ' style="display:none"' : '';
+  html += `<div class="journal-entries-wrap" id="journals_${index}"${journalHidden}>`;
+  if (data.scenario) {
+    html += '<div class="journal-reveal-label">Now read what they actually wrote...</div>';
+  }
   if (data.journals && data.journals.length > 0) {
     data.journals.forEach(j => {
       const safeDate = j.date.replace(/'/g, "\\'");
@@ -186,6 +199,7 @@ function renderStation(index) {
       html += '</div>';
     });
   }
+  html += '</div>';
 
   // Interactive challenge
   if (data.challenge) {
@@ -280,6 +294,95 @@ function renderStation(index) {
     } else if (data.challenge.type === 'ordering') {
       initOrderingChallenge(index);
     }
+  }
+}
+
+// === SCENARIO RENDERING ("What Would You Do?") ===
+function renderScenario(scenario, stationIndex, alreadyCompleted) {
+  const scenarioId = `scenario_${stationIndex}`;
+  let html = `<div class="scenario-box" id="${scenarioId}">`;
+  html += '<div class="scenario-header">';
+  html += '<span class="scenario-icon">&#x1F914;</span>';
+  html += `<span class="scenario-label">${scenario.title}</span>`;
+  html += '</div>';
+  html += `<p class="scenario-situation">${scenario.situation}</p>`;
+
+  if (alreadyCompleted) {
+    // Show completed state — all choices visible, correct highlighted
+    html += '<div class="scenario-choices completed">';
+    scenario.choices.forEach((choice, i) => {
+      const isCorrect = i === scenario.correct;
+      html += `<div class="scenario-choice ${isCorrect ? 'correct' : ''}" ${!isCorrect ? 'style="opacity:0.5"' : ''}>`;
+      html += `<span class="scenario-choice-letter">${String.fromCharCode(65 + i)}</span>`;
+      html += `<span class="scenario-choice-text">${choice.text}</span>`;
+      html += '</div>';
+    });
+    html += '</div>';
+    html += `<div class="scenario-reveal show">${scenario.reveal}</div>`;
+  } else {
+    html += '<div class="scenario-choices">';
+    scenario.choices.forEach((choice, i) => {
+      html += `<div class="scenario-choice" onclick="answerScenario(${stationIndex}, ${i})" tabindex="0" role="button">`;
+      html += `<span class="scenario-choice-letter">${String.fromCharCode(65 + i)}</span>`;
+      html += `<span class="scenario-choice-text">${choice.text}</span>`;
+      html += '</div>';
+    });
+    html += '</div>';
+    html += `<div class="scenario-feedback" id="scenariofb_${stationIndex}"></div>`;
+    html += `<div class="scenario-reveal" id="scenarioreveal_${stationIndex}"></div>`;
+  }
+
+  html += '</div>';
+  return html;
+}
+
+function answerScenario(stationIndex, choiceIndex) {
+  const station = STATIONS[stationIndex];
+  const data = station[state.level] || station.standard;
+  const scenario = data.scenario;
+  const scenarioId = `scenario_${stationIndex}`;
+  const isHistorical = choiceIndex === scenario.correct;
+
+  // Mark completed
+  state.scenariosCompleted.add(scenarioId);
+  state.score += isHistorical ? 5 : 2;
+  updateScoreDisplay();
+  saveGame();
+
+  // Disable all choices and highlight
+  const box = document.getElementById(scenarioId);
+  const choices = box.querySelectorAll('.scenario-choice');
+  choices.forEach((el, i) => {
+    el.onclick = null;
+    el.style.cursor = 'default';
+    el.removeAttribute('tabindex');
+    if (i === scenario.correct) {
+      el.classList.add('correct');
+    } else if (i === choiceIndex && !isHistorical) {
+      el.classList.add('chosen');
+    }
+    if (i !== scenario.correct && i !== choiceIndex) {
+      el.style.opacity = '0.4';
+    }
+  });
+
+  // Show feedback for the chosen option
+  const feedback = document.getElementById(`scenariofb_${stationIndex}`);
+  feedback.innerHTML = `<strong>${isHistorical ? 'That matches history!' : 'Interesting choice!'}</strong> ${scenario.choices[choiceIndex].feedback}`;
+  feedback.className = `scenario-feedback show ${isHistorical ? 'historical' : 'alternate'}`;
+
+  // Show the historical reveal
+  const reveal = document.getElementById(`scenarioreveal_${stationIndex}`);
+  reveal.innerHTML = '<strong>What actually happened:</strong> ' + scenario.reveal;
+  reveal.classList.add('show');
+
+  // Fade in the journal entries
+  const journals = document.getElementById(`journals_${stationIndex}`);
+  if (journals) {
+    setTimeout(() => {
+      journals.style.display = '';
+      journals.classList.add('fade-in');
+    }, 800);
   }
 }
 

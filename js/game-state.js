@@ -12,6 +12,7 @@ let state = {
   currentView: 'station',
   score: 0,
   challengesCompleted: new Set(),
+  scenariosCompleted: new Set(),
   seenEvents: [],
   discoveries: []
 };
@@ -25,6 +26,7 @@ function resetState() {
     currentView: 'station',
     score: 0,
     challengesCompleted: new Set(),
+    scenariosCompleted: new Set(),
     seenEvents: [],
     discoveries: []
   };
@@ -51,6 +53,7 @@ function _buildSaveData() {
     currentView: state.currentView,
     score: state.score,
     challengesCompleted: Array.from(state.challengesCompleted),
+    scenariosCompleted: Array.from(state.scenariosCompleted),
     seenEvents: state.seenEvents || [],
     discoveries: state.discoveries || [],
     savedAt: new Date().toISOString()
@@ -66,6 +69,7 @@ function _parseSaveData(data) {
     currentView: data.currentView || 'station',
     score: data.score || 0,
     challengesCompleted: new Set(data.challengesCompleted || []),
+    scenariosCompleted: new Set(data.scenariosCompleted || []),
     seenEvents: data.seenEvents || [],
     discoveries: data.discoveries || [],
     savedAt: data.savedAt

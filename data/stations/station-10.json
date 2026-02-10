@@ -87,7 +87,27 @@
         "alt": "Trading with the Clatsop people",
         "caption": "Trading with the Clatsop people near the Pacific coast"
       }
-    ]
+    ],
+    "scenario": {
+      "title": "What Would You Do?",
+      "situation": "You’ve finally reached the Pacific coast! Now you need to choose where to build a winter camp. You have soldiers, an enslaved man (York), and a Native American woman (Sacagawea) in your group. How should the decision be made?",
+      "choices": [
+        {
+          "text": "The captains should decide — they’re the officers in charge",
+          "feedback": "This would be the normal military approach. But the captains recognized that everyone had valuable knowledge about terrain, weather, and resources — and that buy-in from the whole group mattered."
+        },
+        {
+          "text": "Only the soldiers should vote — they do the hardest physical work",
+          "feedback": "This excludes people with valuable perspectives. Sacagawea knew about local plants and food sources, and York had proven himself throughout the journey."
+        },
+        {
+          "text": "Let everyone vote equally — including York and Sacagawea",
+          "feedback": "This is exactly what Lewis and Clark did! Every single person got an equal vote. In 1805 America, neither York (enslaved) nor Sacagawea (Native American woman) could legally vote anywhere. This was extraordinary."
+        }
+      ],
+      "correct": 2,
+      "reveal": "Lewis and Clark held a democratic vote in which EVERY member of the Corps participated equally — including York and Sacagawea. This was decades before abolition and over a century before women or Native Americans gained voting rights. They voted to camp on the south side of the Columbia River, where they built Fort Clatsop."
+    }
   },
   "standard": {
     "title": "Ocean in View! Fort Clatsop and the Pacific",
@@ -176,7 +196,27 @@
         "alt": "Trading with the Clatsop people",
         "caption": "Trading with the Clatsop people near the Pacific coast"
       }
-    ]
+    ],
+    "scenario": {
+      "title": "What Would You Do?",
+      "situation": "You’ve finally reached the Pacific coast! Now you need to choose where to build a winter camp. You have soldiers, an enslaved man (York), and a Native American woman (Sacagawea) in your group. How should the decision be made?",
+      "choices": [
+        {
+          "text": "The captains should decide — they’re the officers in charge",
+          "feedback": "This would be the normal military approach. But the captains recognized that everyone had valuable knowledge about terrain, weather, and resources — and that buy-in from the whole group mattered."
+        },
+        {
+          "text": "Only the soldiers should vote — they do the hardest physical work",
+          "feedback": "This excludes people with valuable perspectives. Sacagawea knew about local plants and food sources, and York had proven himself throughout the journey."
+        },
+        {
+          "text": "Let everyone vote equally — including York and Sacagawea",
+          "feedback": "This is exactly what Lewis and Clark did! Every single person got an equal vote. In 1805 America, neither York (enslaved) nor Sacagawea (Native American woman) could legally vote anywhere. This was extraordinary."
+        }
+      ],
+      "correct": 2,
+      "reveal": "Lewis and Clark held a democratic vote in which EVERY member of the Corps participated equally — including York and Sacagawea. This was decades before abolition and over a century before women or Native Americans gained voting rights. They voted to camp on the south side of the Columbia River, where they built Fort Clatsop."
+    }
   },
   "advanced": {
     "title": "“Ocian in View!” — The Pacific, Fort Clatsop, and the Democratic Vote",
@@ -266,6 +306,26 @@
         "alt": "Trading with the Clatsop people",
         "caption": "Trading with the Clatsop people near the Pacific coast"
       }
-    ]
+    ],
+    "scenario": {
+      "title": "What Would You Do?",
+      "situation": "You’ve finally reached the Pacific coast! Now you need to choose where to build a winter camp. You have soldiers, an enslaved man (York), and a Native American woman (Sacagawea) in your group. How should the decision be made?",
+      "choices": [
+        {
+          "text": "The captains should decide — they’re the officers in charge",
+          "feedback": "This would be the normal military approach. But the captains recognized that everyone had valuable knowledge about terrain, weather, and resources — and that buy-in from the whole group mattered."
+        },
+        {
+          "text": "Only the soldiers should vote — they do the hardest physical work",
+          "feedback": "This excludes people with valuable perspectives. Sacagawea knew about local plants and food sources, and York had proven himself throughout the journey."
+        },
+        {
+          "text": "Let everyone vote equally — including York and Sacagawea",
+          "feedback": "This is exactly what Lewis and Clark did! Every single person got an equal vote. In 1805 America, neither York (enslaved) nor Sacagawea (Native American woman) could legally vote anywhere. This was extraordinary."
+        }
+      ],
+      "correct": 2,
+      "reveal": "Lewis and Clark held a democratic vote in which EVERY member of the Corps participated equally — including York and Sacagawea. This was decades before abolition and over a century before women or Native Americans gained voting rights. They voted to camp on the south side of the Columbia River, where they built Fort Clatsop."
+    }
   }
 }

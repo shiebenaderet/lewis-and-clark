@@ -58,7 +58,27 @@
         "alt": "Chief Blackbird's burial site near the Missouri River",
         "caption": "The burial site of Chief Blackbird overlooking the Missouri River"
       }
-    ]
+    ],
+    "scenario": {
+      "title": "What Would You Do?",
+      "situation": "You’ve just arrived at the camp of the Oto and Missouri Indians — this is the FIRST official meeting between the U.S. government and western Native Americans. Six chiefs are watching you. How do you begin?",
+      "choices": [
+        {
+          "text": "Fire your guns to show military power, then demand a meeting",
+          "feedback": "This aggressive approach could easily be taken as a threat by people you’ve never met. It might start a fight instead of a friendship."
+        },
+        {
+          "text": "Share food and gifts tonight, then hold a formal council tomorrow",
+          "feedback": "This is exactly what Lewis and Clark did! They sent roasted meat and flour, received watermelons in return, and held the formal speeches the next day. Building trust first worked."
+        },
+        {
+          "text": "Immediately launch into a speech about the U.S. government",
+          "feedback": "Jumping straight to politics without building any relationship first would likely confuse or offend your hosts. Diplomacy needs patience."
+        }
+      ],
+      "correct": 1,
+      "reveal": "Clark wrote that they met the chiefs, told them they were glad to see them, and would ‘speak to them tomorrow.’ They shared food both ways — the Corps gave roasted meat, and the Indians gave watermelons. The formal speeches came the next day, after trust was established."
+    }
   },
   "standard": {
     "title": "First Council with Western Indians",
@@ -119,7 +139,27 @@
         "alt": "Chief Blackbird's burial site near the Missouri River",
         "caption": "The burial site of Chief Blackbird overlooking the Missouri River"
       }
-    ]
+    ],
+    "scenario": {
+      "title": "What Would You Do?",
+      "situation": "You’ve just arrived at the camp of the Oto and Missouri Indians — this is the FIRST official meeting between the U.S. government and western Native Americans. Six chiefs are watching you. How do you begin?",
+      "choices": [
+        {
+          "text": "Fire your guns to show military power, then demand a meeting",
+          "feedback": "This aggressive approach could easily be taken as a threat by people you’ve never met. It might start a fight instead of a friendship."
+        },
+        {
+          "text": "Share food and gifts tonight, then hold a formal council tomorrow",
+          "feedback": "This is exactly what Lewis and Clark did! They sent roasted meat and flour, received watermelons in return, and held the formal speeches the next day. Building trust first worked."
+        },
+        {
+          "text": "Immediately launch into a speech about the U.S. government",
+          "feedback": "Jumping straight to politics without building any relationship first would likely confuse or offend your hosts. Diplomacy needs patience."
+        }
+      ],
+      "correct": 1,
+      "reveal": "Clark wrote that they met the chiefs, told them they were glad to see them, and would ‘speak to them tomorrow.’ They shared food both ways — the Corps gave roasted meat, and the Indians gave watermelons. The formal speeches came the next day, after trust was established."
+    }
   },
   "advanced": {
     "title": "First Diplomatic Council with Western Nations",
@@ -181,6 +221,26 @@
         "alt": "Chief Blackbird's burial site near the Missouri River",
         "caption": "The burial site of Chief Blackbird overlooking the Missouri River"
       }
-    ]
+    ],
+    "scenario": {
+      "title": "What Would You Do?",
+      "situation": "You’ve just arrived at the camp of the Oto and Missouri Indians — this is the FIRST official meeting between the U.S. government and western Native Americans. Six chiefs are watching you. How do you begin?",
+      "choices": [
+        {
+          "text": "Fire your guns to show military power, then demand a meeting",
+          "feedback": "This aggressive approach could easily be taken as a threat by people you’ve never met. It might start a fight instead of a friendship."
+        },
+        {
+          "text": "Share food and gifts tonight, then hold a formal council tomorrow",
+          "feedback": "This is exactly what Lewis and Clark did! They sent roasted meat and flour, received watermelons in return, and held the formal speeches the next day. Building trust first worked."
+        },
+        {
+          "text": "Immediately launch into a speech about the U.S. government",
+          "feedback": "Jumping straight to politics without building any relationship first would likely confuse or offend your hosts. Diplomacy needs patience."
+        }
+      ],
+      "correct": 1,
+      "reveal": "Clark wrote that they met the chiefs, told them they were glad to see them, and would ‘speak to them tomorrow.’ They shared food both ways — the Corps gave roasted meat, and the Indians gave watermelons. The formal speeches came the next day, after trust was established."
+    }
   }
 }
