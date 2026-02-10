@@ -8,7 +8,7 @@ An interactive website that turns 10 classroom stations on the Lewis & Clark exp
 
 ## Version
 
-**v0.17.1** — Key figure portraits with character popup cards
+**v0.17.3** — Geographically accurate trail events
 
 ## What This Is
 
@@ -91,6 +91,17 @@ Then open `http://localhost:8000` in your browser.
 **Note:** Opening `index.html` directly as a file (`file://`) will not work because browsers block `fetch()` requests from local files. You need a web server.
 
 ## Changelog
+
+### v0.17.3
+- **Geographically accurate trail events** — all 29 travel events now have `legs` ranges specifying which journey segments they can appear on:
+  - Prairie dog towns, buffalo herds, and thunderstorms only on the Great Plains (legs 1-3)
+  - Fort Mandan forge and bitter cold only during the winter stay (legs 4-5)
+  - Hailstorm, prickly pear cactus, portage, and river fork only near the Great Falls (leg 6)
+  - Shoshone meeting and fallen timber only in the Rocky Mountains (legs 7-8)
+  - Salmon run and Nez Perce welcome only near the Columbia/Pacific (leg 9)
+  - Universal events (sickness, journal writing, stargazing) can appear anywhere
+  - No more salmon fishing while still in St. Louis or blizzards on the Columbia
+- **Fix: fill-in-the-blank stations show journals** — stations 6 & 7 (fill-in-blank) no longer lock journals, since the challenge asks students to complete a quote from the very journal that was locked
 
 ### v0.17.1
 - **Key figure portrait cards** — 7 expedition figures (Lewis, Clark, Jefferson, Sacagawea, York, Charbonneau, Jean Baptiste) now appear as clickable portrait chips:

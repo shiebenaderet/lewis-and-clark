@@ -1985,13 +1985,20 @@ function renderTravelTransition(fromIndex, toIndex, callback) {
   const distances = [0, 600, 25, 400, 0, 0, 350, 200, 150, 300, 250];
   const miles = distances[toIndex] || 200;
 
-  // Pick 2-3 random events (no repeats until all 29 have been shown)
+  // Pick 2-3 random events (no repeats until all have been shown)
+  // Filter by geographic leg — events have a "legs" array specifying valid toIndex values
   const numEvents = 2 + Math.floor(Math.random() * 2);
 
-  // Filter out already-seen events; reset if all have been seen
-  let available = TRAIL_EVENTS.filter(e => !state.seenEvents.includes(e.title));
+  // Filter to events valid for this leg, excluding already-seen
+  let available = TRAIL_EVENTS.filter(e =>
+    (!e.legs || e.legs.includes(toIndex)) && !state.seenEvents.includes(e.title)
+  );
+  // If not enough leg-appropriate unseen events, allow seen ones for this leg
   if (available.length < numEvents) {
-    state.seenEvents = [];
+    available = TRAIL_EVENTS.filter(e => !e.legs || e.legs.includes(toIndex));
+  }
+  // Last resort: all events (shouldn't happen with 8+ events per leg)
+  if (available.length < numEvents) {
     available = [...TRAIL_EVENTS];
   }
 
