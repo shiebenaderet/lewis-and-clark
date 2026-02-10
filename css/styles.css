@@ -1330,6 +1330,116 @@ body {
   margin-right: 0.3rem;
 }
 
+/* --- Key Figure Portraits --- */
+.portrait-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(139, 69, 19, 0.1);
+  border: 1px solid rgba(139, 69, 19, 0.25);
+  border-radius: 2rem;
+  padding: 0.2rem 0.6rem 0.2rem 0.2rem;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  font-size: 0.85rem;
+  color: var(--ink);
+  vertical-align: middle;
+  margin-bottom: 0.3rem;
+}
+.portrait-chip:hover {
+  background: rgba(139, 69, 19, 0.2);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+}
+.portrait-chip-img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid var(--leather);
+}
+.portrait-chip-name {
+  font-weight: 600;
+  font-family: var(--font-ui);
+  white-space: nowrap;
+}
+.narrative-figures {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+.figure-popup {
+  position: relative;
+  background: var(--parchment);
+  border: 2px solid var(--leather);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-top: 0.75rem;
+  display: flex;
+  gap: 1rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  animation: popupFade 0.3s ease;
+  z-index: 10;
+}
+@keyframes popupFade {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.figure-popup-close {
+  position: absolute;
+  top: 0.3rem;
+  right: 0.5rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--ink-light);
+  line-height: 1;
+}
+.figure-popup-close:hover { color: var(--ink); }
+.figure-popup-portrait {
+  flex-shrink: 0;
+}
+.figure-popup-portrait img {
+  width: 80px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 0.3rem;
+  border: 2px solid var(--leather);
+}
+.figure-popup-info {
+  flex: 1;
+  min-width: 0;
+}
+.figure-popup-name {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.15rem;
+}
+.figure-popup-role {
+  font-size: 0.8rem;
+  color: var(--leather);
+  font-family: var(--font-ui);
+  margin-bottom: 0.4rem;
+}
+.figure-popup-bio {
+  font-size: 0.85rem;
+  color: var(--ink);
+  line-height: 1.5;
+}
+.final-test-header {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+.final-test-header .portrait-chip {
+  font-size: 1rem;
+  padding: 0.3rem 0.8rem 0.3rem 0.3rem;
+}
+.final-test-header .portrait-chip-img {
+  width: 36px;
+  height: 36px;
+}
+
 /* --- Final Expedition Test --- */
 .final-test {
   margin-top: 2rem;

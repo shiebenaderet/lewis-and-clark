@@ -8,7 +8,7 @@ An interactive website that turns 10 classroom stations on the Lewis & Clark exp
 
 ## Version
 
-**v0.17.0** — Stage 5: Narrative Immersion Overhaul
+**v0.17.1** — Key figure portraits with character popup cards
 
 ## What This Is
 
@@ -37,6 +37,7 @@ This project replaces a paper-based station activity (where students walk around
 - **Journal recovery mechanic** — journal entries are locked behind challenges, revealed with animation on completion, creating a genuine "discovery" moment
 - **Narrative variation** — key emotional stations (Sacagawea's baby, Shoshone reunion, Pacific arrival) get special visual framing and historical callouts
 - **Narrative completion screen** — "The Recovered Journal" timeline and "Report to President Jefferson" final test with narrative feedback
+- **Key figure portraits** — clickable portrait chips for Lewis, Clark, Jefferson, Sacagawea, York, Charbonneau, and Jean Baptiste, with detailed biographical popup cards
 - **Random trail events** between stations (grizzly bears, storms, mosquitoes, etc.)
 - **Reflection questions** at each station
 - **Primary source links** at each station to real digitized journal entries (University of Nebraska) and the Corps of Discovery Online Atlas (Lewis & Clark College)
@@ -90,6 +91,14 @@ Then open `http://localhost:8000` in your browser.
 **Note:** Opening `index.html` directly as a file (`file://`) will not work because browsers block `fetch()` requests from local files. You need a web server.
 
 ## Changelog
+
+### v0.17.1
+- **Key figure portrait cards** — 7 expedition figures (Lewis, Clark, Jefferson, Sacagawea, York, Charbonneau, Jean Baptiste) now appear as clickable portrait chips:
+  - Portrait chips on journal entries identify the author (Lewis or Clark) with a small circular portrait
+  - Narrative variation stations feature relevant figure chips (Sacagawea at stations 5 & 8, York at station 10)
+  - Jefferson portrait on the "Report to President Jefferson" final test
+  - Clicking any portrait chip opens a detailed popup card with portrait, role, dates, and historical biography
+  - Placeholder portrait images included; run `data/images/portraits/download-portraits.sh` with unrestricted internet to replace with actual Wikimedia Commons paintings
 
 ### v0.17.0 — Narrative Immersion Overhaul
 - **Journal Recovery Mechanic** — journal entries are now locked behind a "Lost Journal Page" visual until the station challenge is completed:

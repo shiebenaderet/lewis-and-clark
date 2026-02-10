@@ -1,0 +1,125 @@
+Lewis & Clark Expedition - Portrait Image Attributions
+======================================================
+
+All portrait images are public domain works sourced from Wikimedia Commons.
+To download the actual images, run: bash download-portraits.sh
+
+
+1. lewis-portrait.jpg
+   Title:    Portrait of Meriwether Lewis
+   Artist:   Charles Willson Peale (1741-1827)
+   Date:     1807
+   Medium:   Oil on wood panel, 25 x 20 in.
+   Source:   Independence National Historic Park Collection, Philadelphia, PA
+   License:  Public domain (artist died 1827; work created before 1928)
+   Commons:  https://commons.wikimedia.org/wiki/File:Meriwether_Lewis-Charles_Willson_Peale.jpg
+   Download: https://upload.wikimedia.org/wikipedia/commons/b/be/Meriwether_Lewis-Charles_Willson_Peale.jpg
+
+2. clark-portrait.jpg
+   Title:    Portrait of William Clark
+   Artist:   Charles Willson Peale (1741-1827)
+   Date:     1807
+   Medium:   Oil on paper mounted on canvas, 25 x 21.25 in.
+   Source:   Independence National Historic Park Collection, Philadelphia, PA
+   License:  Public domain (artist died 1827; work created before 1928)
+   Commons:  https://commons.wikimedia.org/wiki/File:William_Clark-Charles_Willson_Peale.jpg
+   Download: https://upload.wikimedia.org/wikipedia/commons/6/66/William_Clark-Charles_Willson_Peale.jpg
+
+3. jefferson-portrait.jpg
+   Title:    Official Presidential Portrait of Thomas Jefferson
+   Artist:   Rembrandt Peale (1778-1860)
+   Date:     1800
+   Medium:   Oil on canvas, 23 x 19 in.
+   Source:   White House Collection (gift of Mr. and Mrs. Paul Mellon)
+   License:  Public domain (artist died 1860; work created before 1928)
+   Commons:  https://commons.wikimedia.org/wiki/File:Official_Presidential_portrait_of_Thomas_Jefferson_(by_Rembrandt_Peale,_1800).jpg
+   Download: https://upload.wikimedia.org/wikipedia/commons/0/07/Official_Presidential_portrait_of_Thomas_Jefferson_%28by_Rembrandt_Peale%2C_1800%29.jpg
+
+4. sacagawea-portrait.jpg
+   Title:    Sakakawea by Bruno Zimm
+   Artist:   Bruno Louis Zimm (1876-1943)
+   Date:     1904
+   Medium:   Sculpture/relief
+   Note:     No contemporary portrait of Sacagawea exists. This 1904 sculptural
+             depiction is one of the earliest and most well-known representations.
+   License:  Public domain (artist died 1943; work created before 1928)
+   Commons:  https://commons.wikimedia.org/wiki/File:Sakakawea_by_Bruno_Zimm_1904.jpg
+   Download: https://upload.wikimedia.org/wikipedia/commons/9/97/Sakakawea_by_Bruno_Zimm_1904.jpg
+
+5. york-portrait.jpg
+   Title:    York
+   Artist:   Charles Marion Russell (1864-1926)
+   Date:     1908
+   Medium:   Watercolor
+   Note:     No contemporary portrait of York exists. This painting by C.M. Russell
+             depicts York meeting members of the Hidatsa tribe during the expedition.
+             York was an enslaved man who was the only African-American member of
+             the Lewis and Clark Expedition (1804-1806).
+   License:  Public domain (artist died 1926; work created before 1928)
+   Commons:  https://commons.wikimedia.org/wiki/File:Charles_M_Russell_York_1908.jpg
+   Download: https://upload.wikimedia.org/wikipedia/commons/1/14/Charles_M_Russell_York_1908.jpg
+
+6. charbonneau-portrait.jpg
+   Title:    Charbonneau Painting (Cropped)
+   Artist:   Unknown
+   Note:     No contemporary portrait of Toussaint Charbonneau is known to exist.
+             This is an artistic rendering.
+   License:  Public domain
+   Commons:  https://commons.wikimedia.org/wiki/File:Charbonneau_Painting_Cropped.jpg
+   Download: https://upload.wikimedia.org/wikipedia/commons/f/f5/Charbonneau_Painting_Cropped.jpg
+
+7. jean-baptiste-portrait.jpg
+   Title:    'Baptiste', a Native American
+   Source:   Wellcome Library, London
+   Note:     Historical portrait; attribution to Jean Baptiste Charbonneau is
+             not certain. Jean Baptiste ("Pomp") was Sacagawea's son, born
+             during the expedition in 1805.
+   License:  CC-BY 4.0 (Wellcome Library)
+   Commons:  https://commons.wikimedia.org/wiki/File:%27Baptiste%27,_a_Native_American_Wellcome_L0046606.jpg
+   Download: https://upload.wikimedia.org/wikipedia/commons/a/a1/%27Baptiste%27%2C_a_Native_American_Wellcome_L0046606.jpg
+
+8. floyd-monument.jpg
+   Title:    Sergeant Floyd Monument
+   Location: Floyd's Bluff, Sioux City, Iowa
+   Note:     No portrait of Sgt. Charles Floyd exists. This 100-foot sandstone
+             obelisk (1901) was the first National Historic Landmark (1960).
+             Floyd was the only expedition member to die during the journey
+             (August 20, 1804, likely of a ruptured appendix).
+   License:  CC-BY-SA 4.0
+   Commons:  https://commons.wikimedia.org/wiki/File:Sgt_Floyd_Monument_PA140783.JPG
+   Download: https://upload.wikimedia.org/wikipedia/commons/c/c6/Sgt_Floyd_Monument_PA140783.JPG
+
+9. drouillard-portrait (NO IMAGE AVAILABLE)
+   Note:     No known portrait of George Drouillard exists. Drouillard (c. 1773-1810)
+             was of French-Canadian and Shawnee descent, served as the expedition's
+             primary interpreter, hunter, and scout. Lewis called him "the most
+             important person on the expedition, after Lewis and Clark themselves."
+
+10. cameahwait-portrait (NO IMAGE AVAILABLE)
+    Note:     No known standalone portrait of Chief Cameahwait exists.
+              Cameahwait was the chief of the Lemhi Shoshone and Sacagawea's brother.
+              He appears in Edgar Samuel Paxson's murals at the Montana State Capitol,
+              but no standalone portrait file is available on Wikimedia Commons.
+
+
+SUPPLEMENTARY IMAGES
+====================
+
+sacagawea-portrait-alt.png
+   Title:    Sacajawea (from Nixon book)
+   Source:   Historical book illustration
+   License:  Public domain (published before 1928)
+   Commons:  https://commons.wikimedia.org/wiki/File:Sacajawea_from_Nixon_book.png
+   Download: https://upload.wikimedia.org/wikipedia/commons/0/0b/Sacajawea_from_Nixon_book.png
+
+expedition-group.jpg
+   Title:    Lewis and Clark on the Lower Columbia
+   Artist:   Charles Marion Russell (1864-1926)
+   Date:     1905
+   Medium:   Watercolor on paper
+   Source:   Amon Carter Museum of Art, Fort Worth, Texas
+   Note:     Group scene showing Clark, Sacagawea, York, and others meeting
+             Chinook people on the Lower Columbia River, October 1805.
+   License:  Public domain (artist died 1926; work created before 1928)
+   Commons:  https://commons.wikimedia.org/wiki/File:Lewis_and_clark-expedition.jpg
+   Download: https://upload.wikimedia.org/wikipedia/commons/e/e0/Lewis_and_clark-expedition.jpg

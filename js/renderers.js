@@ -111,6 +111,64 @@ const STATION_NARRATIVE = {
   9: { type: 'climax', label: 'Ocean in View!', tagline: 'After 4,000 miles and 18 months, they finally reached the end of the continent.' }
 };
 
+// === KEY FIGURES — portrait cards for journal authors and historical figures ===
+const KEY_FIGURES = {
+  'Lewis': { name: 'Meriwether Lewis', portrait: 'data/images/portraits/lewis.jpg', years: '1774\u20131809', role: 'Expedition Co-Leader', bio: 'Captain in the U.S. Army, personal secretary to President Jefferson, and co-leader of the Corps of Discovery. A trained naturalist who meticulously documented new species, geography, and Native peoples.' },
+  'Clark': { name: 'William Clark', portrait: 'data/images/portraits/clark.jpg', years: '1770\u20131838', role: 'Expedition Co-Leader', bio: 'Second Lieutenant and co-leader of the expedition. An expert mapmaker whose charts of the West remained the best available for decades. Later served as Superintendent of Indian Affairs.' },
+  'Jefferson': { name: 'Thomas Jefferson', portrait: 'data/images/portraits/jefferson.jpg', years: '1743\u20131826', role: 'President of the United States', bio: 'Third President and architect of the Louisiana Purchase. Personally planned the expedition, trained Lewis in scientific observation, and awaited reports on the Northwest Passage, new species, and Native nations.' },
+  'Sacagawea': { name: 'Sacagawea', portrait: 'data/images/portraits/sacagawea.jpg', years: 'c. 1788\u20131812', role: 'Interpreter & Guide', bio: 'Lemhi Shoshone woman who joined the expedition at Fort Mandan with her husband Charbonneau and infant son. Her knowledge of terrain, plants, and languages proved invaluable. Her recognition of her brother Cameahwait secured the horses that saved the expedition.' },
+  'York': { name: 'York', portrait: 'data/images/portraits/york.jpg', years: 'c. 1770\u2013after 1815', role: 'Member, Corps of Discovery', bio: 'An enslaved Black man owned by William Clark. York was a full working member of the expedition and voted equally in the Fort Clatsop decision. Native peoples along the route were fascinated by him. Despite his contributions, Clark did not free him for years after the journey.' },
+  'Charbonneau': { name: 'Toussaint Charbonneau', portrait: 'data/images/portraits/charbonneau.jpg', years: '1767\u20131843', role: 'Interpreter', bio: 'French-Canadian fur trader and interpreter who joined the expedition at Fort Mandan. Husband of Sacagawea. Though sometimes unreliable, his knowledge of Native languages and customs aided diplomacy with several nations.' },
+  'Jean Baptiste': { name: 'Jean Baptiste Charbonneau', portrait: 'data/images/portraits/jean-baptiste.jpg', years: '1805\u20131866', role: 'Youngest Expedition Member', bio: 'Born at Fort Mandan on February 11, 1805 to Sacagawea and Toussaint Charbonneau. Clark nicknamed him "Pomp" and later funded his education. He became a mountain man, world traveler, and guide who spoke several languages.' }
+};
+
+// Match journal authors to KEY_FIGURES keys
+function matchFigureKey(authorStr) {
+  if (!authorStr) return null;
+  const lower = authorStr.toLowerCase();
+  if (lower.includes('lewis') && lower.includes('clark')) return null; // Both — don't pick one
+  if (lower.includes('lewis')) return 'Lewis';
+  if (lower.includes('clark')) return 'Clark';
+  return null;
+}
+
+// Render a small portrait chip (inline, clickable to show popup)
+function renderPortraitChip(figureKey) {
+  const fig = KEY_FIGURES[figureKey];
+  if (!fig) return '';
+  return '<span class="portrait-chip" onclick="showFigurePopup(\'' + figureKey + '\', this)">' +
+    '<img class="portrait-chip-img" src="' + fig.portrait + '" alt="' + escapeHtml(fig.name) + '" onerror="this.style.display=\'none\'">' +
+    '<span class="portrait-chip-name">' + fig.name + '</span></span>';
+}
+
+// Show a figure popup card
+function showFigurePopup(figureKey, anchorEl) {
+  // Remove any existing popup
+  const existing = document.querySelector('.figure-popup');
+  if (existing) existing.remove();
+
+  const fig = KEY_FIGURES[figureKey];
+  if (!fig) return;
+
+  const popup = document.createElement('div');
+  popup.className = 'figure-popup';
+  popup.innerHTML =
+    '<div class="figure-popup-close" onclick="this.parentNode.remove()">&times;</div>' +
+    '<div class="figure-popup-portrait"><img src="' + fig.portrait + '" alt="' + escapeHtml(fig.name) + '" onerror="this.parentNode.style.display=\'none\'"></div>' +
+    '<div class="figure-popup-info">' +
+    '<div class="figure-popup-name">' + escapeHtml(fig.name) + '</div>' +
+    '<div class="figure-popup-role">' + escapeHtml(fig.role) + ' &middot; ' + fig.years + '</div>' +
+    '<div class="figure-popup-bio">' + escapeHtml(fig.bio) + '</div>' +
+    '</div>';
+
+  // Position near anchor element
+  if (anchorEl) {
+    anchorEl.closest('.journal-entry, .narrative-banner, .station-card, .discovery-intro').appendChild(popup);
+  } else {
+    document.getElementById('station-content').appendChild(popup);
+  }
+}
+
 // === FINAL EXPEDITION TEST (shown on completion screen) ===
 const FINAL_TEST = {
   beginner: [
@@ -141,6 +199,7 @@ function showFinalTest() {
   if (!area) return;
   const questions = FINAL_TEST[state.level] || FINAL_TEST.standard;
   let html = '<div class="final-test">';
+  html += '<div class="final-test-header">' + renderPortraitChip('Jefferson') + '</div>';
   html += '<h2 class="final-test-title">Your Report to President Jefferson</h2>';
   html += '<p class="final-test-subtitle">The President wants to know what you\u2019ve learned. Answer his questions about the expedition.</p>';
   html += '<div id="final-test-questions">';
@@ -293,6 +352,14 @@ function renderStation(index) {
     html += `<div class="narrative-banner narrative-${narrative.type}">`;
     html += `<div class="narrative-banner-label">${narrative.label}</div>`;
     html += `<div class="narrative-banner-text">${narrative.tagline}</div>`;
+    // Key figures featured at this station
+    const NARRATIVE_FIGURES = { 4: ['Sacagawea', 'Jean Baptiste'], 7: ['Sacagawea'], 9: ['York'] };
+    const figures = NARRATIVE_FIGURES[index];
+    if (figures && figures.length) {
+      html += '<div class="narrative-figures">';
+      figures.forEach(k => { html += renderPortraitChip(k); });
+      html += '</div>';
+    }
     html += '</div>';
   }
 
@@ -322,7 +389,9 @@ function renderStation(index) {
       data.journals.forEach(j => {
         const safeDate = j.date.replace(/'/g, "\\'");
         const safeAuthor = j.author.replace(/'/g, "\\'");
+        const figKey = matchFigureKey(j.author);
         html += '<div class="journal-entry">';
+        if (figKey) html += renderPortraitChip(figKey);
         html += `<div class="journal-date clickable-fill" onclick="autoFillJournal(${index}, 'date', '${safeDate}')" title="Tap to add to your journal">${j.date} <span class="fill-hint">tap to add</span></div>`;
         html += '<div class="journal-text">';
         j.text.forEach(p => {
@@ -1172,7 +1241,9 @@ function completeChallengeResult(stationIndex, isCorrect, challenge) {
         data.journals.forEach(j => {
           const sd = j.date.replace(/'/g, "\\'");
           const sa = j.author.replace(/'/g, "\\'");
+          const fk = matchFigureKey(j.author);
           jhtml += '<div class="journal-entry fade-in">';
+          if (fk) jhtml += renderPortraitChip(fk);
           jhtml += '<div class="journal-date clickable-fill" onclick="autoFillJournal(' + stationIndex + ', \'date\', \'' + sd + '\')" title="Tap to add to your journal">' + j.date + ' <span class="fill-hint">tap to add</span></div>';
           jhtml += '<div class="journal-text">';
           j.text.forEach(p => { jhtml += '<p>' + p + '</p>'; });
