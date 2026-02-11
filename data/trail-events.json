@@ -64,13 +64,25 @@
   {
     "icon": "🐍",
     "title": "Rattlesnake Nest!",
-    "text": "You've stumbled onto a rocky ledge alive with prairie rattlesnakes! Their buzzing rattles fill the air. Clark counted 'no fewer than 10 snakes in a single afternoon.' Clear a safe path!",
-    "action": "tap_swat",
-    "swat_target": "🐍",
-    "swat_count": 7,
-    "swat_time": 10,
-    "success_text": "You drove the rattlers back with sticks and stones! The Corps used long poles to sweep snakes off rocky trails. Lewis carefully preserved several specimens to send back to Jefferson.",
-    "fail_text": "One snake strikes at a moccasin! Luckily it hits leather, not skin. The men of the Corps were bitten several times — they treated bites with bark poultices.",
+    "text": "You’ve stumbled onto a rocky ledge alive with prairie rattlesnakes! Clark counted ‘no fewer than 10 snakes in a single afternoon.’ Based on the expedition journals, how did the Corps handle snake encounters?",
+    "action": "quick_choice",
+    "choices": [
+      {
+        "text": "🪵 Use long poles to sweep them aside and move carefully through",
+        "result": "That’s what the Corps did! They used long sticks to clear snakes from the trail. Lewis carefully preserved several specimens to send back to Jefferson — even danger became science.",
+        "good": true
+      },
+      {
+        "text": "💥 Shoot them all — we have plenty of ammunition",
+        "result": "Wasting ammunition on snakes would be reckless. The Corps needed every bullet for hunting and defense. Powder and lead were irreplaceable — they couldn’t resupply until they returned to St. Louis.",
+        "good": false
+      },
+      {
+        "text": "🛑 Turn back and find a completely different route",
+        "result": "On narrow mountain trails, detours could cost days. The Corps pushed through hazards when they could, saving their limited time and energy. They treated snake bites with bark poultices when needed.",
+        "good": false
+      }
+    ],
     "legs": [
       1,
       2,
@@ -171,13 +183,25 @@
   {
     "icon": "🌨️",
     "title": "Hailstorm at the Great Falls!",
-    "text": "Enormous hailstones the size of apples crash down from the sky! Clark's actual journal entry describes hail 'seven inches in circumference' that knocked men to the ground. Take cover!",
-    "action": "tap_swat",
-    "swat_target": "🧊",
-    "swat_count": 10,
-    "swat_time": 12,
-    "success_text": "You deflected the worst of it with packs and buffalo hides! Clark's group sheltered under a rock ledge during the real storm, nearly drowning in the flash flood that followed.",
-    "fail_text": "The hail batters the party badly — bruises everywhere and one man is nearly knocked unconscious. Clark wrote that the hailstones left 'the men bleeding and their bodies much battered.'",
+    "text": "Hailstones the size of apples crash down! Clark’s journal describes hail ‘seven inches in circumference’ that knocked men to the ground. He and Sacagawea barely survived — where did they shelter?",
+    "action": "quick_choice",
+    "choices": [
+      {
+        "text": "🏔️ Under rock ledges along the bluffs",
+        "result": "That’s where Clark took cover — but a flash flood nearly drowned them in the ravine below the ledge! He pushed Sacagawea and baby Jean Baptiste up the cliff as water rose to his waist. The hailstorm and flood together nearly ended the expedition.",
+        "good": true
+      },
+      {
+        "text": "⬇️ In the ravine below — it’s sheltered from the wind",
+        "result": "Deadly mistake! A flash flood roared through that exact ravine during this storm. Clark, Sacagawea, and her baby were nearly swept away. Low ground near the Great Falls is a death trap during storms.",
+        "good": false
+      },
+      {
+        "text": "🛶 Under the overturned boats for protection",
+        "result": "The boats provided some cover from the hail, and the men who stayed with the boats were bruised but safe. Clark wrote the hailstones left ‘the men bleeding and their bodies much battered.’",
+        "good": true
+      }
+    ],
     "legs": [
       6
     ]
@@ -241,13 +265,25 @@
   {
     "icon": "🦟",
     "title": "Mosquito Swarm!",
-    "text": "Clouds of mosquitoes descend on camp at dusk! Clark wrote he 'could not keep them off my gun long enough to take aim.' The buzzing is maddening. Fight them off!",
-    "action": "tap_swat",
-    "swat_target": "🦟",
-    "swat_count": 9,
-    "swat_time": 12,
-    "success_text": "You swatted enough to get some relief! The Corps burned green wood to create smoke screens — it was the only thing that helped against the relentless swarms.",
-    "fail_text": "The mosquitoes win this round. Your arms are covered in welts. The Corps endured this torment every single night on the plains. Clark called them 'the most tormenting insect.'",
+    "text": "Clouds of mosquitoes descend on camp at dusk! Clark wrote he ‘could not keep them off my gun long enough to take aim.’ Lewis called them ‘the most tormenting of all insects.’ How did the Corps actually fight back?",
+    "action": "quick_choice",
+    "choices": [
+      {
+        "text": "🔥 Burn green wood to create thick smoke screens",
+        "result": "Exactly right! Smudge fires using green wood were the Corps’ primary defense. The smoke drove mosquitoes away just enough for the men to eat and sleep. Lewis noted this was the ONLY effective remedy.",
+        "good": true
+      },
+      {
+        "text": "🧴 Smear animal grease on all exposed skin",
+        "result": "The Corps did use bear grease as a repellent! It helped somewhat, though it attracted its own problems. Combined with the smoke fires, it gave partial relief from what Lewis called an ‘almost intolerable’ torment.",
+        "good": true
+      },
+      {
+        "text": "🤷 Endure them — there’s nothing anyone can do",
+        "result": "The Corps were resourceful survivors, not passive victims! They tried smoke fires, animal grease, netting, and sleeping in shifts. Giving up wasn’t in their nature — they adapted to every challenge.",
+        "good": false
+      }
+    ],
     "legs": [
       1,
       2,
@@ -260,13 +296,25 @@
   {
     "icon": "🌵",
     "title": "Prickly Pear Cactus Field!",
-    "text": "The portage trail is carpeted with prickly pear cactus for miles. Needle-sharp spines punch clean through double-soled moccasins! The men are limping and cursing. Clear the way!",
-    "action": "tap_swat",
-    "swat_target": "🌵",
-    "swat_count": 6,
-    "swat_time": 10,
-    "success_text": "You kicked aside the worst patches! Lewis called prickly pear 'one of the beauties as well as the greatest pests of the plains.' The men went through dozens of moccasins during the portage.",
-    "fail_text": "Your moccasins are shredded and your feet are bleeding. The Great Falls portage was 18 miles of cactus, sharp rocks, and rattlesnakes — the men called it the worst stretch of the entire journey.",
+    "text": "The portage trail is carpeted with prickly pear cactus. Spines punch through double-soled moccasins! Lewis called them ‘one of the greatest pests of the plains.’ What made the Great Falls portage uniquely terrible?",
+    "action": "quick_choice",
+    "choices": [
+      {
+        "text": "🏜️ Cactus, sharp rocks, AND rattlesnakes — all at once across 18 brutal miles",
+        "result": "Exactly. The portage combined every hazard at once: thorns piercing moccasins, jagged rocks cutting feet, rattlesnakes in the path, scorching heat, and grizzly bears nearby. The men went through dozens of moccasins and called it the worst stretch of the entire journey.",
+        "good": true
+      },
+      {
+        "text": "🐻 The men were already weakened from fighting grizzly bears",
+        "result": "While grizzlies were a danger throughout, the portage’s real challenge was the 18-mile gauntlet of cactus, rocks, and extreme heat. The men hauled thousands of pounds of gear on crude cottonwood-wheel carts through it all.",
+        "good": false
+      },
+      {
+        "text": "🥾 They had no footwear left at all",
+        "result": "They had moccasins, but nothing was thick enough! The men doubled and tripled their moccasin soles and still bled. They went through so many pairs that Sacagawea and the other camp members sewed constantly to keep up with demand.",
+        "good": false
+      }
+    ],
     "legs": [
       6
     ]
@@ -449,13 +497,25 @@
   {
     "icon": "🪵",
     "title": "Fallen Timber Everywhere!",
-    "text": "A massive blowdown of tangled dead trees blocks the mountain trail for hundreds of yards. The horses cannot pass and axes are dull. Hack through the deadfall!",
-    "action": "tap_swat",
-    "swat_target": "🪵",
-    "swat_count": 8,
-    "swat_time": 12,
-    "success_text": "You hacked and hauled enough timber to clear a narrow path! The Bitterroot crossing was choked with deadfall. Clark wrote they made 'only 12 miles in a full day' through the fallen trees.",
-    "fail_text": "The deadfall wins. You have to backtrack and find another route, losing a full day. The men's hands are blistered and bleeding from swinging dull axes on frozen wood.",
+    "text": "The Lolo Trail through the Bitterroot Mountains is choked with tangled deadfall. Clark wrote they made ‘only 12 miles in a full day.’ The horses are starving and men are eating candle tallow. What ultimately saved the expedition?",
+    "action": "quick_choice",
+    "choices": [
+      {
+        "text": "🐴 They killed and ate some horses to survive the crossing",
+        "result": "Tragically true. The Corps killed colts for food, naming one camp ‘Killed Colt Creek.’ It was the expedition’s darkest hour. But ultimately, reaching the Nez Perce villages on the other side is what truly saved them.",
+        "good": true
+      },
+      {
+        "text": "🏕️ The Nez Perce people fed them on the far side of the mountains",
+        "result": "Yes! After 11 days of near-starvation, the Corps stumbled into a Nez Perce village. Chief Twisted Hair’s people fed them — though the sudden change to camas root and salmon made nearly everyone violently sick. Once again, Native generosity saved the expedition.",
+        "good": true
+      },
+      {
+        "text": "🦌 They found a valley full of deer and elk",
+        "result": "Game was almost nonexistent in the Bitterroots — that was the whole problem. The mountains were too dense and snowy for large animals. The Corps' hunters came back empty-handed day after day, which forced the terrible decision to eat their horses.",
+        "good": false
+      }
+    ],
     "legs": [
       7,
       8
@@ -464,13 +524,25 @@
   {
     "icon": "🏜️",
     "title": "Quicksand on the River!",
-    "text": "While pulling the keelboat upstream, three men sink into sucking quicksand along the Missouri's bank! The sandy riverbed is swallowing them to their knees. Pull them free!",
-    "action": "tap_swat",
-    "swat_target": "🏜️",
-    "swat_count": 5,
-    "swat_time": 10,
-    "success_text": "You hauled them out with ropes and poles! The Missouri's shifting sandbars were a constant hazard. Lewis noted the men were 'frequently up to their armpits in quicksand and water.'",
-    "fail_text": "One man sinks to his waist before being dragged free. He loses both moccasins in the muck. The Missouri's quicksand trapped men, horses, and boats throughout the journey upstream.",
+    "text": "Men are sinking in the Missouri’s shifting sandbars! Lewis noted the men were ‘frequently up to their armpits in quicksand and water.’ What was the Corps’ main method for moving the heavy keelboat upstream?",
+    "action": "quick_choice",
+    "choices": [
+      {
+        "text": "🚣 Rowing with long oars against the current",
+        "result": "Rowing helped, but it wasn’t the primary method. The Missouri’s powerful current made rowing upstream nearly impossible for the 55-foot keelboat. The Corps mainly relied on cordelling — pulling the boat with ropes from shore.",
+        "good": false
+      },
+      {
+        "text": "🚶 Walking along the bank and pulling the boat with ropes",
+        "result": "That’s cordelling — the backbreaking reality of upstream travel! Men waded through mud, quicksand, and cold water while hauling ropes attached to the 12-ton keelboat. They cordelled for months, covering just 10–15 miles on a good day.",
+        "good": true
+      },
+      {
+        "text": "⛵ Sailing with favorable winds when possible",
+        "result": "They did raise sails when the wind cooperated, but winds on the Missouri were unreliable. Cordelling — pulling the boat with ropes from shore — was the exhausting daily reality. The men’s feet were constantly raw from the rocky riverbed.",
+        "good": false
+      }
+    ],
     "legs": [
       1,
       2,
@@ -646,13 +718,25 @@
   {
     "icon": "🐺",
     "title": "Wolves Circling Camp!",
-    "text": "As darkness falls, dozens of wolves howl from every direction. Their eyes gleam at the edges of the firelight. Clark noted 'a great number of wolves about us all night.' Guard the provisions!",
-    "action": "tap_swat",
-    "swat_target": "🐺",
-    "swat_count": 6,
-    "swat_time": 10,
-    "success_text": "You drove the wolves back with fire and noise! The Corps always posted sentries through the night. In wolf country, the guards kept fires blazing until dawn.",
-    "fail_text": "The wolves snatched a sack of dried meat from the edge of camp! You lost three days of provisions. The Corps learned to hang food from high branches and keep armed guards on watch.",
+    "text": "Wolves howl from every direction as darkness falls! Clark noted ‘a great number of wolves about us all night.’ Lewis, always the scientist, observed wolves closely following the buffalo herds. Why was this observation important?",
+    "action": "quick_choice",
+    "choices": [
+      {
+        "text": "🏫 It revealed the ecological relationship between predator and prey on the plains",
+        "result": "Lewis was doing early ecology! His observations of wolves trailing buffalo herds documented the predator-prey balance that sustained the Great Plains ecosystem. Jefferson valued these scientific insights as much as maps and routes.",
+        "good": true
+      },
+      {
+        "text": "⚠️ It proved wolves were dangerous predators that threatened the expedition",
+        "result": "Actually, wolves almost never attacked the Corps. Lewis noted they were surprisingly tolerant of humans. His real interest was scientific: understanding how wolves, buffalo, and the prairie ecosystem worked together. Science was always half the mission.",
+        "good": false
+      },
+      {
+        "text": "💡 It gave them the idea to follow wolf packs to find buffalo for food",
+        "result": "Practical thinking! Tracking wolves could lead to buffalo herds. But Lewis’s deeper observation was ecological — he was documenting how species interacted in ways unknown to Eastern science. His notes foreshadowed modern ecology by decades.",
+        "good": true
+      }
+    ],
     "legs": [
       1,
       2,
