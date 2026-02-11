@@ -2267,6 +2267,69 @@ function finishTravel() {
 // WORD CHALLENGE SYSTEM
 // ============================================================
 
+// Build a collapsible "Trail Notes" reference panel for use during word challenges
+function buildTrailNotes() {
+  var glossaryEntries = state.glossary || [];
+  var allEntries = (WORD_BANK.terms || []).concat(WORD_BANK.phrases || []);
+  var discoveredTerms = allEntries.filter(function(e) { return glossaryEntries.includes(e.key); });
+  var discoveryItems = (state.discoveries || []).map(function(idx) { return DISCOVERIES[idx]; }).filter(Boolean);
+
+  // Gather brief station context for visited stations
+  var stationNotes = [];
+  for (var i = 0; i < STATIONS.length; i++) {
+    if (!state.visitedStations.has(i)) continue;
+    var s = STATIONS[i];
+    var d = s[state.level] || s.standard;
+    if (d && d.title) {
+      var summary = state.journalEntries['summary_' + i] || '';
+      stationNotes.push({ num: i + 1, title: d.title, dates: d.dates || '', summary: summary });
+    }
+  }
+
+  var h = '<div class="trail-notes">';
+  h += '<button class="trail-notes-toggle" onclick="this.parentElement.classList.toggle(\'open\')">';
+  h += '\uD83D\uDCD6 Trail Notes <span class="trail-notes-arrow">\u25B6</span></button>';
+  h += '<div class="trail-notes-body">';
+
+  // Glossary terms
+  if (discoveredTerms.length > 0) {
+    h += '<div class="tn-section"><div class="tn-section-title">Vocabulary (' + discoveredTerms.length + ' terms)</div>';
+    discoveredTerms.forEach(function(entry) {
+      var def = entry.definition || ((entry[state.level] || entry.standard || {}).clue || '');
+      h += '<div class="tn-term"><strong>' + escapeHtml(entry.word || entry.phrase) + '</strong> — ' + escapeHtml(def) + '</div>';
+    });
+    h += '</div>';
+  }
+
+  // Discoveries
+  if (discoveryItems.length > 0) {
+    h += '<div class="tn-section"><div class="tn-section-title">Discoveries (' + discoveryItems.length + '/10)</div>';
+    discoveryItems.forEach(function(d) {
+      h += '<div class="tn-discovery">' + d.icon + ' <strong>' + escapeHtml(d.name) + '</strong> — ' + escapeHtml(d.desc) + '</div>';
+    });
+    h += '</div>';
+  }
+
+  // Station notes
+  if (stationNotes.length > 0) {
+    h += '<div class="tn-section"><div class="tn-section-title">Visited Stations</div>';
+    stationNotes.forEach(function(sn) {
+      h += '<div class="tn-station"><strong>' + sn.num + '. ' + escapeHtml(sn.title) + '</strong>';
+      if (sn.dates) h += ' <span class="tn-dates">(' + escapeHtml(sn.dates) + ')</span>';
+      if (sn.summary) h += '<div class="tn-summary">&ldquo;' + escapeHtml(sn.summary.substring(0, 120)) + (sn.summary.length > 120 ? '&hellip;' : '') + '&rdquo;</div>';
+      h += '</div>';
+    });
+    h += '</div>';
+  }
+
+  if (discoveredTerms.length === 0 && discoveryItems.length === 0 && stationNotes.length === 0) {
+    h += '<div class="tn-empty">No notes yet. Visit stations and complete challenges to build your trail notes!</div>';
+  }
+
+  h += '</div></div>';
+  return h;
+}
+
 // Pick a word challenge appropriate for this travel leg
 function pickWordChallenge(toIndex) {
   const allEntries = [...WORD_BANK.terms, ...WORD_BANK.phrases];
@@ -2379,6 +2442,7 @@ function renderTrailCipher(evt, container, wager) {
     } else {
       h += '<button class="cipher-solve-btn" onclick="window._cipherShowSolve()">Solve!</button>';
     }
+    h += buildTrailNotes();
     h += '</div>';
     container.innerHTML = h;
     if (showingSolve) {
@@ -2551,6 +2615,7 @@ function renderWordPuzzle(evt, container, wager) {
     h += '<div class="wordle-guesses-left">' + (maxGuesses - guesses.length) + ' guesses remaining</div>';
     h += buildGrid();
     if (!gameOver) h += buildKeyboard();
+    h += buildTrailNotes();
     h += '</div>';
     container.innerHTML = h;
   }
