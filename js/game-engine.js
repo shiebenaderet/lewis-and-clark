@@ -155,6 +155,32 @@ function completeExpedition() {
   showFinalTest();
   // Show Jefferson's Cipher crossword puzzle
   if (typeof renderFinalCipher === 'function') renderFinalCipher();
+
+  // Level encouragement
+  var encourageEl = document.getElementById('level-encouragement');
+  if (encourageEl) {
+    if (state.level === 'beginner') {
+      encourageEl.innerHTML = '<div class="level-encourage">' +
+        '<strong>Ready for a bigger challenge?</strong><br>' +
+        'You completed the expedition on the Explorer level. ' +
+        'Try the <em>Trailblazer</em> level next for deeper questions, tougher word puzzles, and richer journal entries!' +
+        '<br><button class="btn-restart" style="margin-top:0.75rem;" onclick="restartAtLevel(\'standard\')">Try Trailblazer Level</button>' +
+        '</div>';
+    } else if (state.level === 'standard') {
+      encourageEl.innerHTML = '<div class="level-encourage">' +
+        '<strong>Think you can handle more?</strong><br>' +
+        'You conquered the Trailblazer level! ' +
+        'The <em>Cartographer</em> level has the hardest challenges, advanced vocabulary, and expects detailed journal writing.' +
+        '<br><button class="btn-restart" style="margin-top:0.75rem;" onclick="restartAtLevel(\'advanced\')">Try Cartographer Level</button>' +
+        '</div>';
+    } else {
+      encourageEl.innerHTML = '<div class="level-encourage">' +
+        '<strong>You\u2019ve mastered the trail!</strong><br>' +
+        'You completed the expedition at the highest level. You\u2019re a true Cartographer of discovery!' +
+        '</div>';
+    }
+  }
+
   unlockGame();
   clearSave();
 }
@@ -163,6 +189,13 @@ function restartGame() {
   resetState();
   updateTitleContinueButton();
   showScreen('title-screen');
+}
+
+function restartAtLevel(level) {
+  resetState();
+  state.level = level;
+  updateTitleContinueButton();
+  startGame();
 }
 
 // === SAVE CODE SYSTEM ===

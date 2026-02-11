@@ -8,7 +8,7 @@ An interactive website that turns 10 classroom stations on the Lewis & Clark exp
 
 ## Version
 
-**v0.18.0** — Word Challenges & Vocabulary System
+**v0.19.0** — Educational Quality Pass
 
 ## What This Is
 
@@ -34,7 +34,7 @@ This project replaces a paper-based station activity (where students walk around
 - **Word challenges between stations** — Trail Cipher (Wheel of Fortune-style letter-guessing for phrases) and Expedition Word Puzzle (Wordle-style word-guessing for terms), with point wagering and vocabulary discovery
 - **Expedition Field Guide** — accumulating vocabulary reference in the Journal view, showing definitions and fun facts for terms discovered during word challenges
 - **Jefferson's Cipher** — final crossword puzzle on the completion screen where highlighted letters spell a secret message, earning 50 bonus points
-- **Interactive travel events** — 29 diverse encounters between stations: choice-based decisions and tap/swat mini-games covering weather, wildlife, navigation, health, Native encounters, and camp life
+- **Interactive travel events** — 29 content-based encounters between stations covering weather, wildlife, navigation, health, Native encounters, and camp life — each with educational questions and detailed feedback
 - **Save/resume** — localStorage persistence so students can pick up where they left off; portable save codes for cross-device transfer
 - **Discoveries with clue fragments** — 10 collectible items unlocked by answering Knowledge Checks correctly, each with a narrative clue connecting to the expedition's bigger story. Progress tracker on every station with milestone achievements and synthesis messages at 5/10 (Junior Naturalist) and 10/10 (Master Explorer)
 - **Journal recovery mechanic** — journal entries are locked behind challenges, revealed with animation on completion, creating a genuine "discovery" moment
@@ -78,7 +78,7 @@ lewis-and-clark/
 
 **To update station text:** Edit the JSON files in `data/stations/`. Each file has three objects (`beginner`, `standard`, `advanced`) with `title`, `dates`, `context`, `journals`, `reflection`, `images` (array), `challenge`, and optional `scenario` fields.
 
-**To add trail events:** Edit `data/trail-events.json`. Each event has `icon`, `title`, `text`, `action` (`quick_choice` or `tap_swat`), and type-specific fields (`choices` array or `swat_target`/`swat_count`/`swat_time`).
+**To add trail events:** Edit `data/trail-events.json`. Each event has `icon`, `title`, `text`, `action` (`quick_choice`), and a `choices` array with `text`, `correct`, and `result` fields.
 
 **To change styles:** Edit `css/styles.css`. Color variables are at the top in `:root`.
 
@@ -95,6 +95,15 @@ Then open `http://localhost:8000` in your browser.
 **Note:** Opening `index.html` directly as a file (`file://`) will not work because browsers block `fetch()` requests from local files. You need a web server.
 
 ## Changelog
+
+### v0.19.0 — Educational Quality Pass
+- **Content-based trail events** — replaced all 7 arcade-style "tap/swat" mini-games with knowledge questions that teach real expedition facts (e.g. how did the Corps handle rattlesnakes? Where did Clark shelter from hailstorms?)
+- **Continue buttons everywhere** — trail events, Trail Cipher results, and Word Puzzle results now show a "Continue" button instead of auto-advancing on a timer, giving students time to read feedback
+- **Level-scaled journal gating** — journal writing requirements adjust by reading level: Explorer (10 chars, 20s skip), Trailblazer (20 chars, 25s skip), Cartographer (30 chars, 45s skip)
+- **Tighter fill-in-blank matching** — answers must be at least 60% the length of the accepted answer before substring matching applies, preventing single-letter guesses from being accepted
+- **Trail Cipher solve improvements** — "Solve!" button only appears after 4+ letter guesses (preventing blind guessing); wrong solve penalty increased from 2 to 3 supplies
+- **Word Puzzle hint system** — "Show Hint" button costs 1 guess but reveals the first letter and shows the term's definition, helping struggling students without giving away the answer
+- **Post-completion level encouragement** — after finishing the expedition, students on Explorer or Trailblazer level see a prompt to try the next difficulty level, with a one-click restart button
 
 ### v0.18.0 — Word Challenges & Vocabulary System
 - **Trail Cipher** (Wheel of Fortune-style) — between stations, phrases appear with blanked-out letters; students guess letters from an A-Z keyboard. Consonants are free, vowels cost nothing extra but wrong guesses deplete "supply" icons (7 for beginner, 6 standard, 5 advanced). A "Solve!" button lets students type the full answer. Physical keyboard support included. 13 expedition phrases (e.g. "OCEAN IN VIEW", "CORPS OF DISCOVERY", "CONTINENTAL DIVIDE")

@@ -511,8 +511,9 @@ function renderStation(index) {
   }
   html += '</div>';
 
-  // Navigation (gated behind challenge completion + journal nudge)
-  const hasSummary = (state.journalEntries[`summary_${index}`] || '').trim().length >= 20;
+  // Navigation (gated behind challenge completion + journal nudge, scaled by level)
+  const journalMinChars = state.level === 'beginner' ? 10 : state.level === 'advanced' ? 30 : 20;
+  const hasSummary = (state.journalEntries[`summary_${index}`] || '').trim().length >= journalMinChars;
   html += '<div class="station-nav">';
   html += `<button class="btn-station-nav" onclick="goToStation(${index - 1})" ${index === 0 ? 'disabled' : ''}>&larr; Previous Station</button>`;
   if (index < STATIONS.length - 1) {
@@ -551,10 +552,11 @@ function renderStation(index) {
     }
   }
 
-  // Show "skip for now" link after 10 seconds if journal gate is active
+  // Show "skip for now" link after delay (longer for advanced to encourage reflection)
+  const skipDelay = state.level === 'beginner' ? 20000 : state.level === 'advanced' ? 45000 : 25000;
   const skipHint = document.getElementById(`journal-skip-${index}`);
   if (skipHint) {
-    setTimeout(() => { skipHint.style.display = ''; }, 10000);
+    setTimeout(() => { skipHint.style.display = ''; }, skipDelay);
   }
 }
 
@@ -1055,8 +1057,10 @@ function checkFillBlank(stationIndex) {
   const userAnswer = input.value.trim().toLowerCase().replace(/[.,;:!?'"]/g, '');
   const isCorrect = challenge.accepted_answers.some(a => {
     const accepted = a.toLowerCase().replace(/[.,;:!?'"]/g, '');
-    // Check for exact match or if user answer contains the accepted answer
-    return userAnswer === accepted || userAnswer.includes(accepted) || accepted.includes(userAnswer);
+    if (userAnswer === accepted) return true;
+    // Require substantial match — answer must be at least 60% of accepted length
+    if (userAnswer.length < accepted.length * 0.6) return false;
+    return userAnswer.includes(accepted) || accepted.includes(userAnswer);
   });
 
   // Show the correct answer
@@ -1203,7 +1207,8 @@ function completeChallengeResult(stationIndex, isCorrect, challenge) {
   // Enable Continue West button (with journal gate check)
   const continueBtn = document.getElementById('btn-continue-west');
   if (continueBtn) {
-    const summaryWritten = (state.journalEntries[`summary_${stationIndex}`] || '').trim().length >= 20;
+    const summaryMinChars = state.level === 'beginner' ? 10 : state.level === 'advanced' ? 30 : 20;
+    const summaryWritten = (state.journalEntries[`summary_${stationIndex}`] || '').trim().length >= summaryMinChars;
     if (summaryWritten) {
       continueBtn.classList.remove('locked');
       continueBtn.disabled = false;
@@ -1226,7 +1231,8 @@ function completeChallengeResult(stationIndex, isCorrect, challenge) {
         skipEl.style.display = 'none';
         skipEl.innerHTML = '<a href="#" onclick="event.preventDefault();enableContinueWest(' + stationIndex + ')">skip for now</a>';
         navEl.appendChild(skipEl);
-        setTimeout(() => { skipEl.style.display = ''; }, 10000);
+        const skipDelay = state.level === 'beginner' ? 20000 : state.level === 'advanced' ? 45000 : 25000;
+        setTimeout(() => { skipEl.style.display = ''; }, skipDelay);
       }
     }
 
@@ -1273,8 +1279,9 @@ function completeChallengeResult(stationIndex, isCorrect, challenge) {
 
 // --- Journal gating helpers ---
 function checkJournalGate(stationIndex) {
+  const minChars = state.level === 'beginner' ? 10 : state.level === 'advanced' ? 30 : 20;
   const summary = (state.journalEntries[`summary_${stationIndex}`] || '').trim();
-  if (summary.length >= 20) {
+  if (summary.length >= minChars) {
     const btn = document.getElementById('btn-continue-west');
     if (btn && btn.disabled) {
       btn.classList.remove('locked');
@@ -2101,8 +2108,6 @@ function travelShowEvent() {
         renderWordPuzzle(evt, container, wager);
       }
     });
-  } else if (evt.action === 'tap_swat') {
-    renderTapChallenge(evt, container);
   } else {
     renderChoiceEvent(evt, container);
   }
@@ -2144,7 +2149,7 @@ function handleTravelChoice(choiceIndex) {
   const pts = choice.good ? 5 : 1;
   window._travelPoints += pts;
 
-  // Show result
+  // Show result with Continue button (let students read the feedback)
   const resultDiv = document.createElement('div');
   resultDiv.className = 'travel-result ' + (choice.good ? 'result-good' : 'result-bad');
   resultDiv.innerHTML = `<span class="result-points">${choice.good ? '+5' : '+1'}</span> ${choice.result}`;
@@ -2153,116 +2158,13 @@ function handleTravelChoice(choiceIndex) {
   // Update score line
   document.getElementById('travel-score-line').textContent = `Trail points this leg: ${window._travelPoints}`;
 
-  // Advance to next after pause
+  // Show Continue button instead of auto-advance
   window._travelStep++;
-  setTimeout(() => travelShowEvent(), 2500);
-}
-
-// --- Tap/swat mini-game ---
-function renderTapChallenge(evt, container) {
-  const count = evt.swat_count || 6;
-  const timeLimit = evt.swat_time || 5;
-
-  let html = `<div class="travel-event">`;
-  html += `<div class="travel-event-emoji">${evt.icon}</div>`;
-  html += `<div class="travel-event-msg"><strong>${evt.title}</strong></div>`;
-  html += `<div class="travel-event-desc">${evt.text}</div>`;
-  html += `<div class="swat-arena" id="swat-arena">`;
-  html += `<div class="swat-timer" id="swat-timer">${timeLimit}s</div>`;
-  html += `<div class="swat-counter" id="swat-counter">0 / ${count}</div>`;
-  html += `<div class="swat-field" id="swat-field"></div>`;
-  html += `</div></div>`;
-  container.innerHTML = html;
-
-  // Start spawning targets
-  window._swatData = { target: evt.swat_target, needed: count, hit: 0, timeLeft: timeLimit, active: true };
-  window._swatResult = { success: evt.success_text, fail: evt.fail_text };
-  spawnSwatTarget();
-  startSwatTimer();
-}
-
-function spawnSwatTarget() {
-  if (!window._swatData || !window._swatData.active) return;
-  const field = document.getElementById('swat-field');
-  if (!field) return;
-
-  const target = document.createElement('button');
-  target.className = 'swat-target';
-  target.textContent = window._swatData.target;
-  target.style.left = Math.floor(Math.random() * 80) + '%';
-  target.style.top = Math.floor(Math.random() * 70) + '%';
-  target.onclick = function() {
-    hitSwatTarget(this);
-  };
-
-  field.appendChild(target);
-
-  // Remove target if not tapped within 2.5s
-  setTimeout(() => {
-    if (target.parentNode) {
-      target.classList.add('swat-miss');
-      setTimeout(() => { if (target.parentNode) target.remove(); }, 300);
-    }
-  }, 2500);
-
-  // Spawn next target
-  if (window._swatData.active) {
-    const delay = 400 + Math.random() * 600;
-    setTimeout(spawnSwatTarget, delay);
-  }
-}
-
-function hitSwatTarget(el) {
-  if (!window._swatData || !window._swatData.active) return;
-  el.classList.add('swat-hit');
-  el.onclick = null;
-  setTimeout(() => { if (el.parentNode) el.remove(); }, 200);
-
-  window._swatData.hit++;
-  const counter = document.getElementById('swat-counter');
-  if (counter) counter.textContent = `${window._swatData.hit} / ${window._swatData.needed}`;
-
-  // Check win
-  if (window._swatData.hit >= window._swatData.needed) {
-    window._swatData.active = false;
-    endSwatChallenge(true);
-  }
-}
-
-function startSwatTimer() {
-  const interval = setInterval(() => {
-    if (!window._swatData || !window._swatData.active) { clearInterval(interval); return; }
-    window._swatData.timeLeft--;
-    const timer = document.getElementById('swat-timer');
-    if (timer) timer.textContent = window._swatData.timeLeft + 's';
-
-    if (window._swatData.timeLeft <= 0) {
-      clearInterval(interval);
-      window._swatData.active = false;
-      endSwatChallenge(window._swatData.hit >= window._swatData.needed);
-    }
-  }, 1000);
-}
-
-function endSwatChallenge(success) {
-  const field = document.getElementById('swat-field');
-  if (field) field.innerHTML = '';
-
-  const pts = success ? 5 : 2;
-  window._travelPoints += pts;
-
-  const resultText = success ? window._swatResult.success : window._swatResult.fail;
-  const container = document.getElementById('travel-events');
-  const resultDiv = document.createElement('div');
-  resultDiv.className = 'travel-result ' + (success ? 'result-good' : 'result-bad');
-  resultDiv.innerHTML = `<span class="result-points">${success ? '+5' : '+2'}</span> ${resultText}`;
-  const evtEl = container.querySelector('.travel-event');
-  if (evtEl) evtEl.appendChild(resultDiv);
-
-  document.getElementById('travel-score-line').textContent = `Trail points this leg: ${window._travelPoints}`;
-
-  window._travelStep++;
-  setTimeout(() => travelShowEvent(), 2500);
+  const continueBtn = document.createElement('button');
+  continueBtn.className = 'travel-continue-btn';
+  continueBtn.textContent = 'Continue \u2192';
+  continueBtn.onclick = function() { travelShowEvent(); };
+  container.querySelector('.travel-event').appendChild(continueBtn);
 }
 
 function finishTravel() {
@@ -2450,7 +2352,12 @@ function renderTrailCipher(evt, container, wager) {
       h += '<button class="cipher-solve-cancel" onclick="window._cipherCancelSolve()">Cancel</button>';
       h += '</div>';
     } else {
-      h += '<button class="cipher-solve-btn" onclick="window._cipherShowSolve()">Solve!</button>';
+      // Only show Solve button after 4+ letter guesses to encourage learning
+      var guessCount = 0;
+      for (var gc in guessed) guessCount++;
+      if (guessCount >= 4) {
+        h += '<button class="cipher-solve-btn" onclick="window._cipherShowSolve()">Solve! <span style="font-size:0.75em;opacity:0.7">(-3 supplies if wrong)</span></button>';
+      }
     }
     h += buildTrailNotes();
     h += '</div>';
@@ -2496,12 +2403,12 @@ function renderTrailCipher(evt, container, wager) {
     rh += '</div>';
     if (entry.definition) rh += '<div class="cipher-definition"><strong>' + (entry.word || entry.phrase) + ':</strong> ' + entry.definition + '</div>';
     if (entry.funFact) rh += '<div class="cipher-funfact">\uD83D\uDCA1 ' + entry.funFact + '</div>';
+    rh += '<button class="travel-continue-btn" onclick="travelShowEvent()">Continue \u2192</button>';
     rh += '</div>';
     container.innerHTML = rh;
     var scoreLine = document.getElementById('travel-score-line');
     if (scoreLine) scoreLine.textContent = 'Trail points this leg: ' + window._travelPoints;
     window._travelStep++;
-    setTimeout(function() { travelShowEvent(); }, 3500);
   }
 
   window._cipherGuess = function(ch) {
@@ -2528,7 +2435,7 @@ function renderTrailCipher(evt, container, wager) {
       render();
       setTimeout(function() { endGame(true); }, 800);
     } else {
-      wrongCount += 2;
+      wrongCount += 3;
       if (wrongCount >= maxWrong) { render(); setTimeout(function() { endGame(false); }, 800); return; }
       render();
     }
@@ -2557,6 +2464,7 @@ function renderWordPuzzle(evt, container, wager) {
   var currentGuess = '';
   var gameOver = false;
   var keyStates = {};
+  var hintUsed = false;
 
   function getColors(guess, answer) {
     var colors = [];
@@ -2622,9 +2530,17 @@ function renderWordPuzzle(evt, container, wager) {
   function render() {
     var h = '<div class="travel-event wordle-event">';
     h += '<div class="wordle-clue">' + escapeHtml(clue) + '</div>';
+    if (hintUsed && entry.definition) {
+      h += '<div class="wordle-hint-text">Hint: ' + escapeHtml(entry.definition) + '</div>';
+    }
     h += '<div class="wordle-guesses-left">' + (maxGuesses - guesses.length) + ' guesses remaining</div>';
     h += buildGrid();
-    if (!gameOver) h += buildKeyboard();
+    if (!gameOver) {
+      if (!hintUsed && guesses.length < maxGuesses - 1) {
+        h += '<button class="wordle-hint-btn" onclick="window._wordleHint()">Show Hint <span style="font-size:0.75em;opacity:0.7">(-1 guess)</span></button>';
+      }
+      h += buildKeyboard();
+    }
     h += buildTrailNotes();
     h += '</div>';
     container.innerHTML = h;
@@ -2655,13 +2571,21 @@ function renderWordPuzzle(evt, container, wager) {
     rh += '</div>';
     if (entry.definition) rh += '<div class="cipher-definition"><strong>' + entry.word + ':</strong> ' + entry.definition + '</div>';
     if (entry.funFact) rh += '<div class="cipher-funfact">\uD83D\uDCA1 ' + entry.funFact + '</div>';
+    rh += '<button class="travel-continue-btn" onclick="travelShowEvent()">Continue \u2192</button>';
     rh += '</div>';
     container.innerHTML = rh;
     var scoreLine = document.getElementById('travel-score-line');
     if (scoreLine) scoreLine.textContent = 'Trail points this leg: ' + window._travelPoints;
     window._travelStep++;
-    setTimeout(function() { travelShowEvent(); }, 3500);
   }
+
+  window._wordleHint = function() {
+    if (hintUsed || gameOver) return;
+    hintUsed = true;
+    maxGuesses--;
+    currentGuess = word[0];
+    render();
+  };
 
   window._wordleKey = function(key) {
     if (gameOver) return;
