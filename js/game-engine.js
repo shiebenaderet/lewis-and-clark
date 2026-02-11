@@ -47,6 +47,63 @@ function startGame() {
   state.score = 0;
   state.challengesCompleted = new Set();
   state.seenEvents = [];
+  showSplashScreen();
+}
+
+function showSplashScreen() {
+  var level = state.level || 'standard';
+  var body = document.getElementById('splash-body');
+  if (!body) { launchExpedition(); return; }
+
+  var h = '';
+
+  // Section 1: Louisiana Purchase
+  h += '<div class="splash-section">';
+  h += '<img class="splash-img" src="data/images/splash/louisiana-purchase.jpg" alt="Map of the Louisiana Purchase, 1803">';
+  if (level === 'beginner') {
+    h += '<p>In 1803, President Thomas Jefferson made the biggest land deal in history. The United States bought a <strong>huge piece of land</strong> from France called the <strong>Louisiana Purchase</strong>. It doubled the size of the country overnight &mdash; but nobody knew what was out there.</p>';
+  } else if (level === 'advanced') {
+    h += '<p>In 1803, the United States purchased 828,000 square miles of territory from Napoleonic France for $15 million &mdash; roughly 4 cents per acre. The <strong>Louisiana Purchase</strong> doubled the nation&rsquo;s size, but it also deepened a geopolitical crisis: Britain, Spain, and dozens of sovereign Native nations all had claims on the land west of the Mississippi. Jefferson needed intelligence &mdash; maps, resources, diplomacy &mdash; and he needed it fast.</p>';
+  } else {
+    h += '<p>In 1803, President Thomas Jefferson purchased a vast territory from France called the <strong>Louisiana Purchase</strong>. For $15 million, the United States doubled in size &mdash; but almost nothing was known about this enormous new land. What rivers flowed through it? What peoples lived there? Was there a water route to the Pacific Ocean?</p>';
+  }
+  h += '</div>';
+
+  // Section 2: The Mission
+  h += '<div class="splash-section">';
+  h += '<img class="splash-img splash-img-letter" src="data/images/splash/jefferson-letter.jpg" alt="Jefferson\'s letter to Captain Meriwether Lewis, 1803">';
+  if (level === 'beginner') {
+    h += '<p>Jefferson chose <strong>Captain Meriwether Lewis</strong> and <strong>William Clark</strong> to lead a team of explorers called the <strong>Corps of Discovery</strong>. Their job: travel up the Missouri River, cross the mountains, and find a way to the Pacific Ocean. Along the way, they were to draw maps, write about the animals and plants they found, and meet the Native peoples who lived on the land.</p>';
+  } else if (level === 'advanced') {
+    h += '<p>Jefferson personally trained <strong>Captain Meriwether Lewis</strong> in botany, medicine, celestial navigation, and ethnography, then sent him to recruit <strong>William Clark</strong> as co-commander. Their orders were precise: map the Missouri River to its source, find the most direct water route to the Pacific, document every species and mineral, record the languages and customs of Native nations, and establish trade relationships. The letter above is Jefferson&rsquo;s personal letter of credit &mdash; a guarantee that the United States government would repay anyone who helped them.</p>';
+  } else {
+    h += '<p>Jefferson chose <strong>Captain Meriwether Lewis</strong> and <strong>William Clark</strong> to lead a group of about 45 soldiers, boatmen, and explorers called the <strong>Corps of Discovery</strong>. Their mission: follow the Missouri River west, cross the Rocky Mountains, and reach the Pacific Ocean. Jefferson wanted them to make maps, record new plants and animals, and build peaceful relationships with Native American nations along the route.</p>';
+  }
+  h += '</div>';
+
+  // Section 3: The Journey Ahead
+  h += '<div class="splash-section">';
+  h += '<img class="splash-img" src="data/images/splash/departure.jpg" alt="The Departure from Wood River, May 14, 1804 &mdash; painting by Gary Lucy">';
+  if (level === 'beginner') {
+    h += '<p>On <strong>May 14, 1804</strong>, the Corps of Discovery set off from Camp Wood River near St. Louis. They had a big boat called a <strong>keelboat</strong> and two smaller boats called pirogues. The journey ahead would take over two years and cover 8,000 miles of rivers, prairies, mountains, and coastline that no American had ever mapped.</p>';
+  } else if (level === 'advanced') {
+    h += '<p>On <strong>May 14, 1804</strong>, the expedition launched from Camp Dubois on the Wood River &mdash; a 55-foot keelboat and two pirogues carrying 8 tons of supplies into territory where the best existing maps were blank. Over the next 28 months, they would travel roughly 8,000 miles, cross the Continental Divide, nearly starve in the Bitterroot Mountains, and reach the Pacific &mdash; guided at critical moments by <strong>Sacagawea</strong>, a Lemhi Shoshone woman, and the knowledge of Native peoples whose homelands they crossed.</p>';
+  } else {
+    h += '<p>On <strong>May 14, 1804</strong>, the expedition launched from Camp Wood River near St. Louis. They loaded a 55-foot keelboat and two smaller boats with supplies and pushed off into the unknown. The journey would take over <strong>two years</strong> and cover <strong>8,000 miles</strong>. They would face grizzly bears, blizzards, starvation, and mountains no American had ever crossed &mdash; but also encounter extraordinary people, places, and wildlife along the way.</p>';
+  }
+  h += '</div>';
+
+  // Your role
+  h += '<div class="splash-role">';
+  h += '<p><strong>200 years later, a lost expedition journal has been found in fragments along the trail.</strong></p>';
+  h += '<p>Your mission: retrace the route of the Corps of Discovery, recover every lost journal page, and piece together the full story of America&rsquo;s greatest exploration.</p>';
+  h += '</div>';
+
+  body.innerHTML = h;
+  showScreen('splash-screen');
+}
+
+function launchExpedition() {
   showScreen('game-screen');
   showView('station');
   renderStation(0);
