@@ -8,7 +8,7 @@ An interactive website that turns 10 classroom stations on the Lewis & Clark exp
 
 ## Version
 
-**v0.19.0** — Educational Quality Pass
+**v0.20.0** — Mission Briefing Splash Screen
 
 ## What This Is
 
@@ -18,6 +18,7 @@ This project replaces a paper-based station activity (where students walk around
 
 ## Features
 
+- **Mission briefing splash screen** — before the expedition begins, students read about the Louisiana Purchase, Jefferson's orders, and the Corps of Discovery's departure, with images and text that adapt to their reading level
 - **10 stations** with historical context and actual journal entries from Lewis & Clark
 - **3 reading levels** togglable at any time:
   - *Easier Vocabulary* — 4th grade reading level, simplified text, vocabulary tooltips
@@ -95,6 +96,16 @@ Then open `http://localhost:8000` in your browser.
 **Note:** Opening `index.html` directly as a file (`file://`) will not work because browsers block `fetch()` requests from local files. You need a web server.
 
 ## Changelog
+
+### v0.20.0 — Mission Briefing Splash Screen
+- **"The Mission" splash screen** — after clicking "Begin the Expedition," students see a 3-section historical briefing before starting Station 1:
+  - **The Louisiana Purchase** — map image, explanation of the 1803 land deal and why it mattered
+  - **The Orders** — Jefferson's actual letter to Lewis, description of the Corps of Discovery's mission objectives
+  - **The Departure** — Gary Lucy's painting of the keelboat launch, the scale of the journey ahead
+  - **Your Role** — framing as a modern historian recovering the lost journal
+- All text adapts to reading level: Explorer gets simple language, Trailblazer gets moderate detail, Cartographer gets geopolitical context, specific figures, and primary source references
+- Splash images resized and optimized (11MB originals down to 279KB total)
+- Splash screen skipped when resuming from a save (only shown on fresh starts)
 
 ### v0.19.0 — Educational Quality Pass
 - **Content-based trail events** — replaced all 7 arcade-style "tap/swat" mini-games with knowledge questions that teach real expedition facts (e.g. how did the Corps handle rattlesnakes? Where did Clark shelter from hailstorms?)
