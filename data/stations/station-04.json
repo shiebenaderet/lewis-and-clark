@@ -23,19 +23,19 @@
       "options": [
         {
           "image": "data/images/station-04-d-fort-mandan-winter.jpg",
-          "caption": "A snowy fort"
+          "caption": "A wooden fort covered in snow"
         },
         {
           "image": "data/images/station-04-a-mandan-village.jpg",
-          "caption": "Round houses on a hill"
+          "caption": "Round earth houses on flat ground above a river"
         },
         {
           "image": "data/images/station-04-c-mandan-chief.jpg",
-          "caption": "A person’s face"
+          "caption": "A portrait of a Native American leader"
         },
         {
           "image": "data/images/station-04-e-village-arrival.jpg",
-          "caption": "Boats on a river"
+          "caption": "Boats arriving on a river with people watching"
         }
       ],
       "correct": 1,
@@ -94,19 +94,19 @@
       "options": [
         {
           "image": "data/images/station-04-d-fort-mandan-winter.jpg",
-          "caption": "Image A"
+          "caption": "A log stockade in winter snow"
         },
         {
           "image": "data/images/station-04-a-mandan-village.jpg",
-          "caption": "Image B"
+          "caption": "Dome-shaped earth lodges on an elevated plain"
         },
         {
           "image": "data/images/station-04-c-mandan-chief.jpg",
-          "caption": "Image C"
+          "caption": "Portrait of a tribal leader in ceremonial dress"
         },
         {
           "image": "data/images/station-04-e-village-arrival.jpg",
-          "caption": "Image D"
+          "caption": "Expedition boats approaching a riverside settlement"
         }
       ],
       "correct": 1,
@@ -165,19 +165,19 @@
       "options": [
         {
           "image": "data/images/station-04-d-fort-mandan-winter.jpg",
-          "caption": "Image A"
+          "caption": "Cottonwood stockade — an American-built structure"
         },
         {
           "image": "data/images/station-04-a-mandan-village.jpg",
-          "caption": "Image B"
+          "caption": "Earth lodge settlement on elevated terrain above a waterway"
         },
         {
           "image": "data/images/station-04-c-mandan-chief.jpg",
-          "caption": "Image C"
+          "caption": "Portrait study of a Plains leader"
         },
         {
           "image": "data/images/station-04-e-village-arrival.jpg",
-          "caption": "Image D"
+          "caption": "Watercraft arriving at an inhabited riverbank"
         }
       ],
       "correct": 1,

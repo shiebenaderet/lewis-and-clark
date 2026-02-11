@@ -288,29 +288,39 @@ function renderStation(index) {
   let html = `<div class="station-card${season ? ' ' + season.cls : ''}">`;
 
   // Image gallery (supports both single image and images array)
+  // For image_match challenges, hide gallery until challenge is completed to avoid spoilers
+  const isImageMatch = data.challenge && data.challenge.type === 'image_match';
+  const hideGallery = isImageMatch && !challengeCompleted;
   const images = data.images || (data.image ? [data.image] : []);
   if (images.length > 0) {
-    html += `<div class="station-gallery" id="gallery-${index}">`;
-    images.forEach((img, imgIdx) => {
-      html += `<div class="gallery-slide ${imgIdx === 0 ? 'active' : ''}" data-slide="${imgIdx}">`;
-      html += `<div class="gallery-img-wrap">`;
-      html += `<img src="${img.url}" alt="${escapeHtml(img.alt)}" loading="${imgIdx === 0 ? 'eager' : 'lazy'}" onerror="galleryImgError(this, ${index})">`;
-      html += `</div>`;
-      if (img.caption) {
-        html += `<div class="gallery-caption">${escapeHtml(img.caption)}</div>`;
-      }
-      html += `</div>`;
-    });
-    if (images.length > 1) {
-      html += `<div class="gallery-nav">`;
-      html += `<button class="gallery-arrow gallery-prev" onclick="galleryNav(${index}, -1)">&lsaquo;</button>`;
-      html += `<div class="gallery-dots">`;
-      images.forEach((_, imgIdx) => {
-        html += `<button class="gallery-dot ${imgIdx === 0 ? 'active' : ''}" onclick="galleryGo(${index}, ${imgIdx})"></button>`;
+    html += `<div class="station-gallery${hideGallery ? ' gallery-locked' : ''}" id="gallery-${index}">`;
+    if (hideGallery) {
+      html += '<div class="gallery-locked-msg">';
+      html += '<span class="gallery-lock-icon">\uD83D\uDDBC\uFE0F</span>';
+      html += '<span class="gallery-lock-text">Complete the Image Match challenge below to unlock the gallery</span>';
+      html += '</div>';
+    } else {
+      images.forEach((img, imgIdx) => {
+        html += `<div class="gallery-slide ${imgIdx === 0 ? 'active' : ''}" data-slide="${imgIdx}">`;
+        html += `<div class="gallery-img-wrap">`;
+        html += `<img src="${img.url}" alt="${escapeHtml(img.alt)}" loading="${imgIdx === 0 ? 'eager' : 'lazy'}" onerror="galleryImgError(this, ${index})">`;
+        html += `</div>`;
+        if (img.caption) {
+          html += `<div class="gallery-caption">${escapeHtml(img.caption)}</div>`;
+        }
+        html += `</div>`;
       });
-      html += `</div>`;
-      html += `<button class="gallery-arrow gallery-next" onclick="galleryNav(${index}, 1)">&rsaquo;</button>`;
-      html += `</div>`;
+      if (images.length > 1) {
+        html += `<div class="gallery-nav">`;
+        html += `<button class="gallery-arrow gallery-prev" onclick="galleryNav(${index}, -1)">&lsaquo;</button>`;
+        html += `<div class="gallery-dots">`;
+        images.forEach((_, imgIdx) => {
+          html += `<button class="gallery-dot ${imgIdx === 0 ? 'active' : ''}" onclick="galleryGo(${index}, ${imgIdx})"></button>`;
+        });
+        html += `</div>`;
+        html += `<button class="gallery-arrow gallery-next" onclick="galleryNav(${index}, 1)">&rsaquo;</button>`;
+        html += `</div>`;
+      }
     }
     html += `</div>`;
   }

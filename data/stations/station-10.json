@@ -37,19 +37,19 @@
       "options": [
         {
           "image": "data/images/station-10-c-fort-clatsop.jpg",
-          "caption": "A modern building"
+          "caption": "A wooden building in a forest clearing"
         },
         {
           "image": "data/images/station-10-b-lower-columbia.jpg",
-          "caption": "A river scene"
+          "caption": "A wide river with forests on both sides"
         },
         {
           "image": "data/images/station-10-e-fort-clatsop-sketch.jpg",
-          "caption": "An old drawing"
+          "caption": "A hand-drawn floor plan with writing on it"
         },
         {
           "image": "data/images/station-10-a-chinook-canoe.jpg",
-          "caption": "A boat on water"
+          "caption": "A large canoe with people in it"
         }
       ],
       "correct": 2,
@@ -146,19 +146,19 @@
       "options": [
         {
           "image": "data/images/station-10-c-fort-clatsop.jpg",
-          "caption": "Image A"
+          "caption": "A reconstructed log building in a forest"
         },
         {
           "image": "data/images/station-10-b-lower-columbia.jpg",
-          "caption": "Image B"
+          "caption": "A river landscape photographed from above"
         },
         {
           "image": "data/images/station-10-e-fort-clatsop-sketch.jpg",
-          "caption": "Image C"
+          "caption": "A hand-drawn diagram with handwritten labels"
         },
         {
           "image": "data/images/station-10-a-chinook-canoe.jpg",
-          "caption": "Image D"
+          "caption": "An ornately carved wooden canoe on water"
         }
       ],
       "correct": 2,
@@ -256,19 +256,19 @@
       "options": [
         {
           "image": "data/images/station-10-c-fort-clatsop.jpg",
-          "caption": "Image A"
+          "caption": "Modern reconstruction of a frontier structure"
         },
         {
           "image": "data/images/station-10-b-lower-columbia.jpg",
-          "caption": "Image B"
+          "caption": "Contemporary aerial photograph of a river system"
         },
         {
           "image": "data/images/station-10-e-fort-clatsop-sketch.jpg",
-          "caption": "Image C"
+          "caption": "Period document with hand-drawn schematic and annotations"
         },
         {
           "image": "data/images/station-10-a-chinook-canoe.jpg",
-          "caption": "Image D"
+          "caption": "Indigenous watercraft of Pacific Northwest design"
         }
       ],
       "correct": 2,
