@@ -3257,6 +3257,82 @@ body {
 }
 .cipher-funfact { opacity: 0.85; font-style: italic; }
 
+/* --- Trail Notes (reference panel during word challenges) --- */
+.trail-notes {
+  margin-top: 0.75rem;
+  border: 1px solid rgba(244,232,193,0.15);
+  border-radius: 8px;
+  background: rgba(0,0,0,0.25);
+  overflow: hidden;
+}
+.trail-notes-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background: rgba(244,232,193,0.06);
+  border: none;
+  color: var(--campfire-glow);
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.trail-notes-toggle:hover { background: rgba(244,232,193,0.12); }
+.trail-notes-arrow {
+  font-size: 0.65rem;
+  transition: transform 0.25s;
+  display: inline-block;
+}
+.trail-notes.open .trail-notes-arrow { transform: rotate(90deg); }
+.trail-notes-body {
+  display: none;
+  padding: 0.6rem 0.75rem;
+  max-height: 220px;
+  overflow-y: auto;
+}
+.trail-notes.open .trail-notes-body { display: block; }
+.tn-section { margin-bottom: 0.6rem; }
+.tn-section:last-child { margin-bottom: 0; }
+.tn-section-title {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--campfire-glow);
+  border-bottom: 1px solid rgba(244,232,193,0.1);
+  padding-bottom: 0.2rem;
+  margin-bottom: 0.3rem;
+}
+.tn-term, .tn-discovery, .tn-station {
+  font-size: 0.78rem;
+  color: rgba(244,232,193,0.8);
+  padding: 0.15rem 0;
+  line-height: 1.35;
+}
+.tn-term strong, .tn-discovery strong, .tn-station strong {
+  color: var(--parchment);
+}
+.tn-dates { font-size: 0.72rem; opacity: 0.6; }
+.tn-summary {
+  font-size: 0.72rem;
+  font-style: italic;
+  opacity: 0.7;
+  margin-top: 1px;
+}
+.tn-empty {
+  font-size: 0.8rem;
+  color: rgba(244,232,193,0.5);
+  text-align: center;
+  font-style: italic;
+  padding: 0.5rem;
+}
+.trail-notes-body::-webkit-scrollbar { width: 5px; }
+.trail-notes-body::-webkit-scrollbar-track { background: transparent; }
+.trail-notes-body::-webkit-scrollbar-thumb { background: rgba(244,232,193,0.2); border-radius: 3px; }
+
 /* --- Word Puzzle (Wordle-style) --- */
 .wordle-event { text-align: center; }
 .wordle-clue {
