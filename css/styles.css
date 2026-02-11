@@ -2747,6 +2747,23 @@ body {
   background: linear-gradient(135deg, rgba(45,80,22,0.5), rgba(74,124,46,0.3));
 }
 
+.start-over-link {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: rgba(244,232,193,0.4);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.start-over-link:hover {
+  color: rgba(244,232,193,0.6);
+}
+.start-over-link.confirming {
+  color: #e8a0a0;
+  font-weight: bold;
+}
+
 .save-info {
   font-family: var(--font-ui);
   font-size: 0.75rem;

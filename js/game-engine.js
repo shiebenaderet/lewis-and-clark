@@ -340,12 +340,34 @@ function updateTitleContinueButton() {
     const saved = loadSave();
     const stationNum = saved ? saved.currentStation + 1 : 1;
     html += `<button class="btn-continue" onclick="continueGame()">Continue Expedition (Station ${stationNum})</button>`;
+    html += `<a class="start-over-link" href="#" onclick="confirmStartOver(); return false;">Start over from the beginning</a>`;
   }
   if (isGameUnlocked()) {
     html += `<button class="btn-continue btn-game-unlocked" onclick="TrailGame.launch()">Play the Corps of Discovery Game</button>`;
   }
   container.innerHTML = html;
   container.style.display = html ? 'block' : 'none';
+}
+
+function confirmStartOver() {
+  var el = document.querySelector('.start-over-link');
+  if (!el) return;
+  if (el.dataset.confirming) {
+    resetState();
+    updateTitleContinueButton();
+    startGame();
+    return;
+  }
+  el.dataset.confirming = 'true';
+  el.textContent = 'Are you sure? All progress will be lost.';
+  el.classList.add('confirming');
+  setTimeout(function() {
+    if (el.dataset.confirming) {
+      delete el.dataset.confirming;
+      el.textContent = 'Start over from the beginning';
+      el.classList.remove('confirming');
+    }
+  }, 5000);
 }
 
 // === JOURNAL PDF EXPORT ===
