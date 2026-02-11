@@ -3,8 +3,8 @@
     "title": "Crossing the Rocky Mountains",
     "dates": "September–October 1805",
     "context": [
-      "Lewis and Clark traded with the Shoshone for horses and supplies. They also hired a Shoshone guide they nicknamed “Old Toby.” He and Sacagawea helped them cross the <span class='vocab-word' tabindex='0'>Continental Divide<span class='vocab-tooltip'>The line of mountain peaks that separates rivers flowing east from rivers flowing west</span></span>.",
-      "Crossing the Rocky Mountains was terrible. It started on September 11 and took 11 days. They were so hungry that they had to eat some of their horses and even candles made from animal fat!",
+      "Lewis and Clark traded with the Shoshone for horses and supplies. They also hired a Shoshone guide they nicknamed “Old Toby.” He and Sacagawea helped them cross the <span class='vocab-word' tabindex='0'>Continental Divide<span class='vocab-tooltip'>The line of mountain peaks that separates rivers flowing east from rivers flowing west</span></span> at a place called Lemhi Pass.",
+      "But the hardest part was still ahead. On September 11, the Corps entered the Bitterroot Mountains — an even more rugged range. The crossing took 11 days. They were so hungry that they had to eat some of their horses and even candles made from animal fat!",
       "When they finally made it through, friendly <span class='vocab-word' tabindex='0'>Nez Perce<span class='vocab-tooltip'>A Native American tribe from the Pacific Northwest</span></span> Indians gave them food and taught them how to make canoes by burning out the inside of logs. Then they sped down the Snake River to the Columbia River."
     ],
     "journals": [
@@ -62,7 +62,8 @@
     "dates": "September–October 1805",
     "context": [
       "Lewis and Clark successfully negotiated with the Shoshone for horses and supplies to help their passage over the Rocky Mountains. They also hired a Shoshone guide Pikee Queenah (Swooping Eagle), who they nicknamed “Old Toby.” He and Sacagawea helped them cross the Continental Divide at Lemhi Pass, at which point they left the Louisiana Purchase territory into disputed Oregon Country.",
-      "The Corps started climbing the Rocky Mountains on September 11 and it took them 11 days to get across. To stay alive, they ate a few of their horses and candles made of animal fat. Nez Perce Indians gave them new supplies and taught them how to hollow out logs with fire to make new canoes. The Corps then sped down the Snake River to the Columbia River."
+      "But the most brutal stretch lay ahead. On September 11, the Corps entered the Bitterroot Mountains along the Lolo Trail — an 11-day crossing that nearly killed them. To stay alive, they ate a few of their horses and candles made of animal fat.",
+      "When they emerged from the mountains, Nez Perce Indians gave them new supplies and taught them how to hollow out logs with fire to make new canoes. The Corps then sped down the Snake River to the Columbia River."
     ],
     "journals": [
       {
@@ -81,12 +82,12 @@
       "items": [
         "The Corps negotiated with the Shoshone for horses and hired a guide they called ‘Old Toby’",
         "Old Toby and Sacagawea helped them cross the Continental Divide at Lemhi Pass",
-        "The 11-day mountain crossing began — the men ate horses and candles to survive",
+        "The 11-day Bitterroot Mountain crossing began — the men ate horses and candles to survive",
         "The Nez Perce taught them to hollow out logs with fire to make dugout canoes",
         "Clark reached the junction of the Snake and Columbia Rivers and met with Indian chiefs"
       ],
-      "feedback_correct": "That’s the right sequence! First they got Shoshone horses and hired Old Toby, then crossed the Continental Divide, endured the brutal 11-day mountain crossing, were rescued by the Nez Perce who taught them canoe-building, and finally reached the Snake-Columbia junction.",
-      "feedback_incorrect": "Read the context paragraphs carefully for the chronological clues. The sequence was: Shoshone horses and Old Toby first, then Lemhi Pass, then the 11-day mountain crossing, then Nez Perce canoe lessons, and finally Clark’s journal describes reaching the Snake-Columbia junction."
+      "feedback_correct": "That’s the right sequence! First they got Shoshone horses and hired Old Toby, then crossed the Continental Divide at Lemhi Pass, endured the brutal 11-day Bitterroot crossing, were rescued by the Nez Perce who taught them canoe-building, and finally reached the Snake-Columbia junction.",
+      "feedback_incorrect": "Read the context paragraphs carefully for the chronological clues. The sequence was: Shoshone horses and Old Toby first, then Lemhi Pass, then the 11-day Bitterroot crossing, then Nez Perce canoe lessons, and finally Clark’s journal describes reaching the Snake-Columbia junction."
     },
     "images": [
       {
@@ -121,7 +122,7 @@
     "dates": "September–October 1805",
     "context": [
       "The expedition’s most physically punishing phase began with the crossing of the Bitterroot Range of the Rocky Mountains via the Lolo Trail, guided by the Shoshone guide Pikee Queenah (“Old Toby”). At Lemhi Pass on the Continental Divide, the Corps crossed out of the Louisiana Purchase — the territory the United States had legal claim to — and into the disputed Oregon Country, claimed by both the U.S. and Britain.",
-      "The 11-day mountain crossing (September 11–22) brought the expedition to the brink of starvation. Deep snow, fallen timber, and treacherous mountain paths killed several horses. The men resorted to eating horsemeat and candles made of animal tallow. Clark, who scouted ahead, reached a Nez Perce village and secured food that likely saved the party.",
+      "The subsequent 11-day Bitterroot crossing (September 11–22) brought the expedition to the brink of starvation. Deep snow, fallen timber, and treacherous mountain paths killed several horses. The men resorted to eating horsemeat and candles made of animal tallow. Clark, who scouted ahead, reached a Nez Perce village and secured food that likely saved the party.",
       "The Nez Perce (Nimiipuu) not only provided food but taught the Corps to construct dugout canoes using controlled fire — a technique far more efficient than European methods. From here, the expedition launched onto the Clearwater River, then the Snake, and finally the Columbia, racing westward toward the Pacific with the current for the first time in the journey."
     ],
     "journals": [
@@ -141,7 +142,7 @@
       "items": [
         "The Corps hired the Shoshone guide Pikee Queenah (‘Old Toby’) and acquired horses for the mountain passage",
         "They crossed the Continental Divide at Lemhi Pass, leaving the Louisiana Purchase and entering disputed Oregon Country",
-        "During 11 days of mountain crossing, the starving men resorted to eating horses and candles made of animal fat",
+        "During the 11-day Bitterroot crossing, the starving men resorted to eating horses and candles made of animal fat",
         "The Nez Perce taught them to hollow out logs with fire to build dugout canoes for river travel",
         "Clark’s journal records reaching the junction of the Snake and Columbia Rivers, where Indians ‘collected in great numbers to view us’"
       ],
