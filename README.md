@@ -8,7 +8,7 @@ An interactive website that turns 10 classroom stations on the Lewis & Clark exp
 
 ## Version
 
-**v0.20.0** — Mission Briefing Splash Screen
+**v0.21.0** — Pre-Launch Bug Fixes, Accessibility & Journal Improvements
 
 ## What This Is
 
@@ -36,6 +36,7 @@ This project replaces a paper-based station activity (where students walk around
 - **Expedition Field Guide** — accumulating vocabulary reference in the Journal view, showing definitions and fun facts for terms discovered during word challenges
 - **Jefferson's Cipher** — final crossword puzzle on the completion screen where highlighted letters spell a secret message, earning 50 bonus points
 - **Interactive travel events** — 29 content-based encounters between stations covering weather, wildlife, navigation, health, Native encounters, and camp life — each with educational questions and detailed feedback
+- **OpenDyslexic font toggle** — dyslexia-friendly font available on title screen and in-game top bar, with self-hosted font files and localStorage persistence
 - **Save/resume** — localStorage persistence so students can pick up where they left off; portable save codes for cross-device transfer
 - **Discoveries with clue fragments** — 10 collectible items unlocked by answering Knowledge Checks correctly, each with a narrative clue connecting to the expedition's bigger story. Progress tracker on every station with milestone achievements and synthesis messages at 5/10 (Junior Naturalist) and 10/10 (Master Explorer)
 - **Journal recovery mechanic** — journal entries are locked behind challenges, revealed with animation on completion, creating a genuine "discovery" moment
@@ -54,8 +55,10 @@ This project replaces a paper-based station activity (where students walk around
 lewis-and-clark/
 ├── index.html                  # Main page (HTML structure only)
 ├── css/
-│   └── styles.css              # All styles (theme, layout, responsive)
+│   ├── styles.css              # All styles (theme, layout, responsive)
+│   └── trail-game.css          # Corps of Discovery bonus game styles
 ├── js/
+│   ├── accessibility.js        # OpenDyslexic font toggle & a11y preferences
 │   ├── data-loader.js          # Fetches station & event JSON data
 │   ├── game-state.js           # State management (level, progress, journal)
 │   ├── renderers.js            # DOM rendering (stations, map, tracker)
@@ -70,6 +73,8 @@ lewis-and-clark/
 │   │   └── station-10.json     # Station 10 content
 │   ├── trail-events.json       # Random encounter events
 │   └── word-bank.json          # Vocabulary terms & phrases for word challenges
+├── fonts/
+│   └── opendyslexic/           # Self-hosted OpenDyslexic font (Regular + Bold)
 ├── .nojekyll                   # GitHub Pages config (skip Jekyll)
 ├── README.md
 └── LICENSE
@@ -96,6 +101,38 @@ Then open `http://localhost:8000` in your browser.
 **Note:** Opening `index.html` directly as a file (`file://`) will not work because browsers block `fetch()` requests from local files. You need a web server.
 
 ## Changelog
+
+### v0.21.0 — Pre-Launch Bug Fixes, Accessibility & Journal Improvements
+
+**Accessibility:**
+- **OpenDyslexic font toggle** — "Aa Dyslexia-Friendly Font" button on title screen and compact "Aa" button in the in-game top bar. Self-hosted font files (no external dependencies). Preference persists in localStorage across sessions. Overrides all font declarations including trail game
+- **Escape key dismisses overlays** — trail event overlay, figure popup cards, and map info panel can all be closed with the Escape key
+- **Gallery navigation aria-labels** — previous/next arrows and dot indicators now have proper `aria-label` attributes for screen readers
+- **Home link keyboard-accessible** — added `href` and `role="button"` so keyboard users can navigate to it
+
+**Journal improvements:**
+- **Summary field marked as "required"** with writing reminders: "Write at least one complete sentence. Remember: start with a capital letter, capitalize place names (Fort Mandan, Missouri River), and end with punctuation."
+- **Historian's Analysis marked as "extra credit"** — green badge, reflection question separated into its own styled prompt paragraph below the label
+- **Hint about PDF export** — journal prompt section now mentions entries "can be exported as a PDF at the end"
+
+**Completion screen:**
+- **Clear PDF instructions** — dedicated section with step-by-step instructions: "Click below to create a printable PDF... then use Ctrl+P (or Cmd+P on Mac) to print or save it"
+- **Reordered buttons** — "Export Journal as Printable PDF" is primary, "Review & Edit Journal Entries" is secondary
+
+**Bug fixes:**
+- **Firefox crash fixed** — `autoFillJournal()` used implicit `event` variable (Chrome/Safari-only); now passes element explicitly
+- **Save/load state restoration** — `scenariosCompleted`, `glossary`, and `wordChallengesWon` are now properly restored when continuing from localStorage save or save codes
+- **Game unlock persistence** — `continueGame()` now calls `unlockGame()` when all 10 stations have been visited, preventing loss of bonus game access if browser was closed before clicking "Complete the Expedition"
+- **Mixed content fixed** — all LC Atlas URLs changed from `http://` to `https://` (12 occurrences across HTML and JS)
+- **Map river rendering stable** — replaced `Math.random()` in Missouri River curve control points with deterministic values, eliminating visual jitter when switching to/from the map view
+- **CSS font variable fixed** — removed invalid `italic` from `--font-journal` font-family declaration
+- **Console version corrected** — was logging `v0.9.0`, now matches UI version
+- **Data load error visible** — error message now appears on the title screen (which is visible at load time), not just the hidden game screen
+- **Portage distance standardized** — changed all "16 miles" references in station 7 to "18 miles" to match DISCOVERIES, SEGMENT_DATA, and word-bank (18 miles is the more commonly cited historical figure)
+- **Splash image fallback** — all 3 mission briefing images hide gracefully on load failure instead of showing broken image placeholders
+- **Clipboard copy modernized** — removed deprecated `document.execCommand('copy')` fallback
+- **localStorage quota warning** — visual indicator on score display when storage is full
+- **PDF popup blocker feedback** — alert message when browser blocks the export window
 
 ### v0.20.0 — Mission Briefing Splash Screen
 - **"The Mission" splash screen** — after clicking "Begin the Expedition," students see a 3-section historical briefing before starting Station 1:
