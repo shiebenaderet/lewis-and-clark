@@ -17,3 +17,23 @@ function closeTrailEvent() {
     window._trailEventCallback = null;
   }
 }
+
+// Escape key to dismiss overlays
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    // Trail event overlay
+    if (document.getElementById('trail-event-overlay').classList.contains('active')) {
+      closeTrailEvent();
+      return;
+    }
+    // Figure popup
+    var popup = document.querySelector('.figure-popup');
+    if (popup) { popup.remove(); return; }
+    // Map info panel
+    var mapPanel = document.getElementById('map-info-panel');
+    if (mapPanel && mapPanel.classList.contains('active')) {
+      if (typeof closeMapInfo === 'function') closeMapInfo();
+      return;
+    }
+  }
+});

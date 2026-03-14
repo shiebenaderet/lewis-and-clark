@@ -312,13 +312,13 @@ function renderStation(index) {
       });
       if (images.length > 1) {
         html += `<div class="gallery-nav">`;
-        html += `<button class="gallery-arrow gallery-prev" onclick="galleryNav(${index}, -1)">&lsaquo;</button>`;
+        html += `<button class="gallery-arrow gallery-prev" onclick="galleryNav(${index}, -1)" aria-label="Previous image">&lsaquo;</button>`;
         html += `<div class="gallery-dots">`;
         images.forEach((_, imgIdx) => {
-          html += `<button class="gallery-dot ${imgIdx === 0 ? 'active' : ''}" onclick="galleryGo(${index}, ${imgIdx})"></button>`;
+          html += `<button class="gallery-dot ${imgIdx === 0 ? 'active' : ''}" onclick="galleryGo(${index}, ${imgIdx})" aria-label="Image ${imgIdx + 1}"></button>`;
         });
         html += `</div>`;
-        html += `<button class="gallery-arrow gallery-next" onclick="galleryNav(${index}, 1)">&rsaquo;</button>`;
+        html += `<button class="gallery-arrow gallery-next" onclick="galleryNav(${index}, 1)" aria-label="Next image">&rsaquo;</button>`;
         html += `</div>`;
       }
     }
@@ -406,13 +406,13 @@ function renderStation(index) {
         const figKey = matchFigureKey(j.author);
         html += '<div class="journal-entry">';
         if (figKey) html += renderPortraitChip(figKey);
-        html += `<div class="journal-date clickable-fill" onclick="autoFillJournal(${index}, 'date', '${safeDate}')" title="Tap to add to your journal">${j.date} <span class="fill-hint">tap to add</span></div>`;
+        html += `<div class="journal-date clickable-fill" onclick="autoFillJournal(${index}, 'date', '${safeDate}', this)" title="Tap to add to your journal">${j.date} <span class="fill-hint">tap to add</span></div>`;
         html += '<div class="journal-text">';
         j.text.forEach(p => {
           html += `<p>${p}</p>`;
         });
         html += '</div>';
-        html += `<div class="journal-author clickable-fill" onclick="autoFillJournal(${index}, 'author', '${safeAuthor}')" title="Tap to add to your journal">&mdash; ${j.author} <span class="fill-hint">tap to add</span></div>`;
+        html += `<div class="journal-author clickable-fill" onclick="autoFillJournal(${index}, 'author', '${safeAuthor}', this)" title="Tap to add to your journal">&mdash; ${j.author} <span class="fill-hint">tap to add</span></div>`;
         html += '</div>';
       });
     } else {
@@ -442,7 +442,7 @@ function renderStation(index) {
 
   html += '<div class="journal-prompts">';
   html += '<div class="journal-prompts-label">Your Expedition Journal Entry</div>';
-  html += '<p class="journal-prompts-hint">Fill in these fields to complete your journal for this station. Your entries appear in the Journal tab.</p>';
+  html += '<p class="journal-prompts-hint">Fill in these fields to complete your journal for this station. Your entries appear in the Journal tab and can be exported as a PDF at the end.</p>';
 
   html += '<div class="journal-field">';
   html += `<label class="journal-field-label" for="jf-date-${index}">Date(s) covered at this station</label>`;
@@ -454,14 +454,16 @@ function renderStation(index) {
   html += `<input type="text" id="jf-author-${index}" class="journal-field-input" placeholder="e.g. Captain Clark, Captain Lewis" value="${escapeHtml(savedAuthor)}" onchange="saveJournalField(${index}, 'author', this.value)">`;
   html += '</div>';
 
-  html += '<div class="journal-field">';
-  html += `<label class="journal-field-label" for="jf-summary-${index}">Summarize what happened at this station</label>`;
-  html += `<textarea id="jf-summary-${index}" class="journal-field-textarea" placeholder="In your own words, describe the key events..." onchange="saveJournalField(${index}, 'summary', this.value)">${escapeHtml(savedSummary)}</textarea>`;
+  html += '<div class="journal-field journal-field-required">';
+  html += `<label class="journal-field-label" for="jf-summary-${index}">Summarize what happened at this station <span class="field-required-tag">required</span></label>`;
+  html += '<p class="journal-field-reminder">Write at least one complete sentence. Remember: start with a capital letter, capitalize place names (Fort Mandan, Missouri River), and end with punctuation.</p>';
+  html += `<textarea id="jf-summary-${index}" class="journal-field-textarea" placeholder="In your own words, describe the key events at this station..." onchange="saveJournalField(${index}, 'summary', this.value)">${escapeHtml(savedSummary)}</textarea>`;
   html += '</div>';
 
   if (data.reflection) {
-    html += '<div class="journal-field">';
-    html += `<label class="journal-field-label" for="jf-reflection-${index}">Historian's Analysis: ${data.reflection}</label>`;
+    html += '<div class="journal-field journal-field-optional">';
+    html += `<label class="journal-field-label" for="jf-reflection-${index}">Historian's Analysis <span class="field-extra-credit-tag">extra credit</span></label>`;
+    html += `<p class="journal-field-reflection-prompt">${data.reflection}</p>`;
     html += `<textarea id="jf-reflection-${index}" class="journal-field-textarea" placeholder="Think critically and write your analysis..." onchange="saveReflection(${index}, this.value)">${escapeHtml(savedReflection)}</textarea>`;
     html += '</div>';
   }
@@ -1264,11 +1266,11 @@ function completeChallengeResult(stationIndex, isCorrect, challenge) {
           const fk = matchFigureKey(j.author);
           jhtml += '<div class="journal-entry fade-in">';
           if (fk) jhtml += renderPortraitChip(fk);
-          jhtml += '<div class="journal-date clickable-fill" onclick="autoFillJournal(' + stationIndex + ', \'date\', \'' + sd + '\')" title="Tap to add to your journal">' + j.date + ' <span class="fill-hint">tap to add</span></div>';
+          jhtml += '<div class="journal-date clickable-fill" onclick="autoFillJournal(' + stationIndex + ', \'date\', \'' + sd + '\', this)" title="Tap to add to your journal">' + j.date + ' <span class="fill-hint">tap to add</span></div>';
           jhtml += '<div class="journal-text">';
           j.text.forEach(p => { jhtml += '<p>' + p + '</p>'; });
           jhtml += '</div>';
-          jhtml += '<div class="journal-author clickable-fill" onclick="autoFillJournal(' + stationIndex + ', \'author\', \'' + sa + '\')" title="Tap to add to your journal">&mdash; ' + j.author + ' <span class="fill-hint">tap to add</span></div>';
+          jhtml += '<div class="journal-author clickable-fill" onclick="autoFillJournal(' + stationIndex + ', \'author\', \'' + sa + '\', this)" title="Tap to add to your journal">&mdash; ' + j.author + ' <span class="fill-hint">tap to add</span></div>';
           jhtml += '</div>';
         });
         locked.outerHTML = jhtml;
@@ -1338,7 +1340,7 @@ function answerChallenge(stationIndex, choiceIndex) {
   completeChallengeResult(stationIndex, isCorrect, challenge);
 }
 
-function autoFillJournal(stationIndex, field, value) {
+function autoFillJournal(stationIndex, field, value, clickedEl) {
   // Auto-fill the journal field and save
   const inputId = `jf-${field}-${stationIndex}`;
   const el = document.getElementById(inputId);
@@ -1356,8 +1358,10 @@ function autoFillJournal(stationIndex, field, value) {
     setTimeout(() => el.classList.remove('field-filled'), 1200);
   }
   // Update the clicked element's hint
-  const hint = event.currentTarget.querySelector('.fill-hint');
-  if (hint) { hint.textContent = 'added!'; setTimeout(() => { hint.textContent = 'tap to add'; }, 1500); }
+  if (clickedEl) {
+    const hint = clickedEl.querySelector('.fill-hint');
+    if (hint) { hint.textContent = 'added!'; setTimeout(() => { hint.textContent = 'tap to add'; }, 1500); }
+  }
 }
 
 function updateScoreDisplay() {
@@ -1428,14 +1432,14 @@ const STATION_RESOURCES = [
     journals: [
       { date: "May 14, 1804", url: "https://lewisandclarkjournals.unl.edu/item/lc.jrn.1804-05-14" }
     ],
-    atlas: "http://lcatlas.lclark.edu/",
+    atlas: "https://lcatlas.lclark.edu/",
     nps: "https://www.nps.gov/lecl/planyourvisit/maps.htm"
   },
   { // Station 2: July 20, 1804
     journals: [
       { date: "July 20, 1804", url: "https://lewisandclarkjournals.unl.edu/item/lc.jrn.1804-07-20" }
     ],
-    atlas: "http://lcatlas.lclark.edu/",
+    atlas: "https://lcatlas.lclark.edu/",
     nps: "https://www.nps.gov/lecl/planyourvisit/maps.htm"
   },
   { // Station 3: August 2-3, 1804
@@ -1443,42 +1447,42 @@ const STATION_RESOURCES = [
       { date: "August 2, 1804", url: "https://lewisandclarkjournals.unl.edu/item/lc.jrn.1804-08-02" },
       { date: "August 3, 1804", url: "https://lewisandclarkjournals.unl.edu/item/lc.jrn.1804-08-03" }
     ],
-    atlas: "http://lcatlas.lclark.edu/",
+    atlas: "https://lcatlas.lclark.edu/",
     nps: "https://www.nps.gov/lecl/planyourvisit/maps.htm"
   },
   { // Station 4: October 28, 1804
     journals: [
       { date: "October 28, 1804", url: "https://lewisandclarkjournals.unl.edu/item/lc.jrn.1804-10-28" }
     ],
-    atlas: "http://lcatlas.lclark.edu/",
+    atlas: "https://lcatlas.lclark.edu/",
     nps: "https://www.nps.gov/lecl/planyourvisit/maps.htm"
   },
   { // Station 5: February 11, 1805
     journals: [
       { date: "February 11, 1805", url: "https://lewisandclarkjournals.unl.edu/item/lc.jrn.1805-02-11" }
     ],
-    atlas: "http://lcatlas.lclark.edu/",
+    atlas: "https://lcatlas.lclark.edu/",
     nps: "https://www.nps.gov/lecl/planyourvisit/maps.htm"
   },
   { // Station 6: April 7, 1805
     journals: [
       { date: "April 7, 1805", url: "https://lewisandclarkjournals.unl.edu/item/lc.jrn.1805-04-07" }
     ],
-    atlas: "http://lcatlas.lclark.edu/",
+    atlas: "https://lcatlas.lclark.edu/",
     nps: "https://www.nps.gov/lecl/planyourvisit/maps.htm"
   },
   { // Station 7: June 13, 1805
     journals: [
       { date: "June 13, 1805", url: "https://lewisandclarkjournals.unl.edu/item/lc.jrn.1805-06-13" }
     ],
-    atlas: "http://lcatlas.lclark.edu/",
+    atlas: "https://lcatlas.lclark.edu/",
     nps: "https://www.nps.gov/lecl/planyourvisit/maps.htm"
   },
   { // Station 8: August 17, 1805
     journals: [
       { date: "August 17, 1805", url: "https://lewisandclarkjournals.unl.edu/item/lc.jrn.1805-08-17" }
     ],
-    atlas: "http://lcatlas.lclark.edu/",
+    atlas: "https://lcatlas.lclark.edu/",
     nps: "https://www.nps.gov/lecl/planyourvisit/maps.htm"
   },
   { // Station 9: September-October 1805
@@ -1486,14 +1490,14 @@ const STATION_RESOURCES = [
       { date: "September 16, 1805", url: "https://lewisandclarkjournals.unl.edu/item/lc.jrn.1805-09-16" },
       { date: "October 1, 1805", url: "https://lewisandclarkjournals.unl.edu/item/lc.jrn.1805-10-01" }
     ],
-    atlas: "http://lcatlas.lclark.edu/",
+    atlas: "https://lcatlas.lclark.edu/",
     nps: "https://www.nps.gov/lecl/planyourvisit/maps.htm"
   },
   { // Station 10: November 1805
     journals: [
       { date: "November 7, 1805", url: "https://lewisandclarkjournals.unl.edu/item/lc.jrn.1805-11-07" }
     ],
-    atlas: "http://lcatlas.lclark.edu/",
+    atlas: "https://lcatlas.lclark.edu/",
     nps: "https://www.nps.gov/lecl/planyourvisit/maps.htm"
   }
 ];
@@ -1676,8 +1680,8 @@ function renderMap() {
   for (let i = 1; i < missouri.length; i++) {
     const prev = missouri[i-1];
     const curr = missouri[i];
-    const cx = (prev.x + curr.x) / 2 + (Math.random() - 0.5) * 3;
-    const cy = (prev.y + curr.y) / 2 + (Math.random() - 0.5) * 3;
+    const cx = (prev.x + curr.x) / 2 + ((i * 7 % 11) / 11 - 0.5) * 3;
+    const cy = (prev.y + curr.y) / 2 + ((i * 13 % 11) / 11 - 0.5) * 3;
     riverPath += ` Q ${cx},${cy} ${curr.x},${curr.y}`;
   }
   svg += `<path d="${riverPath}" fill="none" stroke="#5a9bbc" stroke-width="2.5" stroke-dasharray="6,2" opacity="0.55"/>`;

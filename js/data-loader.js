@@ -49,12 +49,21 @@ async function loadAllData() {
     return true;
   } catch (err) {
     console.error('Failed to load game data:', err);
-    document.getElementById('station-content').innerHTML =
-      '<div class="station-card"><div class="station-body" style="padding:2rem;text-align:center;">' +
-      '<p style="color:#8b1a1a;font-size:1.1rem;">Error loading expedition data.</p>' +
-      '<p style="margin-top:0.5rem;">This site must be served from a web server (not opened as a local file). ' +
-      'Try using GitHub Pages, or run a local server with: <code>python3 -m http.server</code></p>' +
-      '</div></div>';
+    // Show error on title screen (which is visible at load time)
+    var titleContent = document.querySelector('.title-content');
+    if (titleContent) {
+      var errorDiv = document.createElement('div');
+      errorDiv.style.cssText = 'padding:1.5rem;text-align:center;color:#f4e8c1;max-width:500px;margin:1rem auto;';
+      var errorP = document.createElement('p');
+      errorP.style.cssText = 'color:#e07070;font-size:1.1rem;margin-bottom:0.5rem;';
+      errorP.textContent = 'Error loading expedition data.';
+      var helpP = document.createElement('p');
+      helpP.style.cssText = 'font-size:0.9rem;opacity:0.8;';
+      helpP.textContent = 'This site must be served from a web server (not opened as a local file). Try using GitHub Pages, or run a local server with: python3 -m http.server';
+      errorDiv.appendChild(errorP);
+      errorDiv.appendChild(helpP);
+      titleContent.insertBefore(errorDiv, titleContent.firstChild);
+    }
     return false;
   }
 }

@@ -3,7 +3,7 @@
     "title": "The Great Falls",
     "dates": "June 13, 1805",
     "context": [
-      "The Corps of Discovery found the Great Falls of the Missouri River — a series of huge waterfalls! They couldn’t take their boats over the falls, so they had to carry everything overland for 16 miles. This took almost a whole month!",
+      "The Corps of Discovery found the Great Falls of the Missouri River — a series of huge waterfalls! They couldn’t take their boats over the falls, so they had to carry everything overland for 18 miles. This took almost a whole month!",
       "During this time, they had lots of problems: <span class='vocab-word' tabindex='0'>grizzly bears<span class='vocab-tooltip'>Very large, dangerous bears found in western North America</span></span> kept bothering them, sharp cactus poked through their shoes, and clouds of mosquitoes swarmed them constantly."
     ],
     "journals": [
@@ -47,12 +47,12 @@
       {
         "url": "data/images/station-07-c-lewis-at-falls.jpg",
         "alt": "Captain Lewis discovering the Great Falls",
-        "caption": "Captain Lewis at the Great Falls — the 16-mile portage took nearly a month"
+        "caption": "Captain Lewis at the Great Falls — the 18-mile portage took nearly a month"
       }
     ],
     "scenario": {
       "title": "What Would You Do?",
-      "situation": "You’ve found the Great Falls — a series of massive waterfalls stretching for miles. Your boats can’t go over them, and all your supplies are loaded on those boats. The nearest passable river is 16 miles away. What do you do?",
+      "situation": "You’ve found the Great Falls — a series of massive waterfalls stretching for miles. Your boats can’t go over them, and all your supplies are loaded on those boats. The nearest passable river is 18 miles away. What do you do?",
       "choices": [
         {
           "text": "Abandon the heavy boats and walk with just what you can carry on your backs",
@@ -60,7 +60,7 @@
         },
         {
           "text": "Build crude wagons from tree trunks and haul everything overland around the falls",
-          "feedback": "This is exactly what the Corps did! They cut cottonwood trees, made wheels from the trunks, and hauled the boats and supplies 16 miles overland. It was brutal — but it worked."
+          "feedback": "This is exactly what the Corps did! They cut cottonwood trees, made wheels from the trunks, and hauled the boats and supplies 18 miles overland. It was brutal — but it worked."
         },
         {
           "text": "Try to lower the boats down the falls with ropes",
@@ -68,14 +68,14 @@
         }
       ],
       "correct": 1,
-      "reveal": "The Corps built crude wagons from cottonwood rounds and spent nearly a MONTH hauling heavy boats and supplies 16 miles overland. They dealt with grizzly bears, prickly pear cactus that shredded their moccasins, swarming mosquitoes, and 100°F heat. It was the most physically grueling stretch of the entire expedition."
+      "reveal": "The Corps built crude wagons from cottonwood rounds and spent nearly a MONTH hauling heavy boats and supplies 18 miles overland. They dealt with grizzly bears, prickly pear cactus that shredded their moccasins, swarming mosquitoes, and 100°F heat. It was the most physically grueling stretch of the entire expedition."
     }
   },
   "standard": {
     "title": "The Great Falls of the Missouri",
     "dates": "June 13, 1805",
     "context": [
-      "The Corps of Discovery reaches the Great Falls of the Missouri River. They must travel overland for 16 miles before continuing, an arduous task that took nearly a month. During that time, grizzly bears bothered the men, prickly pear cactus pierced their moccasins, and mosquitoes swarmed them constantly."
+      "The Corps of Discovery reaches the Great Falls of the Missouri River. They must travel overland for 18 miles before continuing, an arduous task that took nearly a month. During that time, grizzly bears bothered the men, prickly pear cactus pierced their moccasins, and mosquitoes swarmed them constantly."
     ],
     "journals": [
       {
@@ -118,12 +118,12 @@
       {
         "url": "data/images/station-07-c-lewis-at-falls.jpg",
         "alt": "Captain Lewis discovering the Great Falls",
-        "caption": "Captain Lewis at the Great Falls — the 16-mile portage took nearly a month"
+        "caption": "Captain Lewis at the Great Falls — the 18-mile portage took nearly a month"
       }
     ],
     "scenario": {
       "title": "What Would You Do?",
-      "situation": "You’ve found the Great Falls — a series of massive waterfalls stretching for miles. Your boats can’t go over them, and all your supplies are loaded on those boats. The nearest passable river is 16 miles away. What do you do?",
+      "situation": "You’ve found the Great Falls — a series of massive waterfalls stretching for miles. Your boats can’t go over them, and all your supplies are loaded on those boats. The nearest passable river is 18 miles away. What do you do?",
       "choices": [
         {
           "text": "Abandon the heavy boats and walk with just what you can carry on your backs",
@@ -131,7 +131,7 @@
         },
         {
           "text": "Build crude wagons from tree trunks and haul everything overland around the falls",
-          "feedback": "This is exactly what the Corps did! They cut cottonwood trees, made wheels from the trunks, and hauled the boats and supplies 16 miles overland. It was brutal — but it worked."
+          "feedback": "This is exactly what the Corps did! They cut cottonwood trees, made wheels from the trunks, and hauled the boats and supplies 18 miles overland. It was brutal — but it worked."
         },
         {
           "text": "Try to lower the boats down the falls with ropes",
@@ -139,7 +139,7 @@
         }
       ],
       "correct": 1,
-      "reveal": "The Corps built crude wagons from cottonwood rounds and spent nearly a MONTH hauling heavy boats and supplies 16 miles overland. They dealt with grizzly bears, prickly pear cactus that shredded their moccasins, swarming mosquitoes, and 100°F heat. It was the most physically grueling stretch of the entire expedition."
+      "reveal": "The Corps built crude wagons from cottonwood rounds and spent nearly a MONTH hauling heavy boats and supplies 18 miles overland. They dealt with grizzly bears, prickly pear cactus that shredded their moccasins, swarming mosquitoes, and 100°F heat. It was the most physically grueling stretch of the entire expedition."
     }
   },
   "advanced": {
@@ -192,12 +192,12 @@
       {
         "url": "data/images/station-07-c-lewis-at-falls.jpg",
         "alt": "Captain Lewis discovering the Great Falls",
-        "caption": "Captain Lewis at the Great Falls — the 16-mile portage took nearly a month"
+        "caption": "Captain Lewis at the Great Falls — the 18-mile portage took nearly a month"
       }
     ],
     "scenario": {
       "title": "What Would You Do?",
-      "situation": "You’ve found the Great Falls — a series of massive waterfalls stretching for miles. Your boats can’t go over them, and all your supplies are loaded on those boats. The nearest passable river is 16 miles away. What do you do?",
+      "situation": "You’ve found the Great Falls — a series of massive waterfalls stretching for miles. Your boats can’t go over them, and all your supplies are loaded on those boats. The nearest passable river is 18 miles away. What do you do?",
       "choices": [
         {
           "text": "Abandon the heavy boats and walk with just what you can carry on your backs",
@@ -205,7 +205,7 @@
         },
         {
           "text": "Build crude wagons from tree trunks and haul everything overland around the falls",
-          "feedback": "This is exactly what the Corps did! They cut cottonwood trees, made wheels from the trunks, and hauled the boats and supplies 16 miles overland. It was brutal — but it worked."
+          "feedback": "This is exactly what the Corps did! They cut cottonwood trees, made wheels from the trunks, and hauled the boats and supplies 18 miles overland. It was brutal — but it worked."
         },
         {
           "text": "Try to lower the boats down the falls with ropes",
@@ -213,7 +213,7 @@
         }
       ],
       "correct": 1,
-      "reveal": "The Corps built crude wagons from cottonwood rounds and spent nearly a MONTH hauling heavy boats and supplies 16 miles overland. They dealt with grizzly bears, prickly pear cactus that shredded their moccasins, swarming mosquitoes, and 100°F heat. It was the most physically grueling stretch of the entire expedition."
+      "reveal": "The Corps built crude wagons from cottonwood rounds and spent nearly a MONTH hauling heavy boats and supplies 18 miles overland. They dealt with grizzly bears, prickly pear cactus that shredded their moccasins, swarming mosquitoes, and 100°F heat. It was the most physically grueling stretch of the entire expedition."
     }
   }
 }

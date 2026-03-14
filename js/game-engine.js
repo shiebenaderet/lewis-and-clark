@@ -59,7 +59,7 @@ function showSplashScreen() {
 
   // Section 1: Louisiana Purchase
   h += '<div class="splash-section">';
-  h += '<img class="splash-img" src="data/images/splash/louisiana-purchase.jpg" alt="Map of the Louisiana Purchase, 1803">';
+  h += '<img class="splash-img" src="data/images/splash/louisiana-purchase.jpg" alt="Map of the Louisiana Purchase, 1803" onerror="this.style.display=\'none\'">';
   if (level === 'beginner') {
     h += '<p>In 1803, President Thomas Jefferson made the biggest land deal in history. The United States bought a <strong>huge piece of land</strong> from France called the <strong>Louisiana Purchase</strong>. It doubled the size of the country overnight &mdash; but nobody knew what was out there.</p>';
   } else if (level === 'advanced') {
@@ -71,7 +71,7 @@ function showSplashScreen() {
 
   // Section 2: The Mission
   h += '<div class="splash-section">';
-  h += '<img class="splash-img splash-img-letter" src="data/images/splash/jefferson-letter.jpg" alt="Jefferson\'s letter to Captain Meriwether Lewis, 1803">';
+  h += '<img class="splash-img splash-img-letter" src="data/images/splash/jefferson-letter.jpg" alt="Jefferson\'s letter to Captain Meriwether Lewis, 1803" onerror="this.style.display=\'none\'">';
   if (level === 'beginner') {
     h += '<p>Jefferson chose <strong>Captain Meriwether Lewis</strong> and <strong>William Clark</strong> to lead a team of explorers called the <strong>Corps of Discovery</strong>. Their job: travel up the Missouri River, cross the mountains, and find a way to the Pacific Ocean. Along the way, they were to draw maps, write about the animals and plants they found, and meet the Native peoples who lived on the land.</p>';
   } else if (level === 'advanced') {
@@ -83,7 +83,7 @@ function showSplashScreen() {
 
   // Section 3: The Journey Ahead
   h += '<div class="splash-section">';
-  h += '<img class="splash-img" src="data/images/splash/departure.jpg" alt="The Departure from Wood River, May 14, 1804 &mdash; painting by Gary Lucy">';
+  h += '<img class="splash-img" src="data/images/splash/departure.jpg" alt="The Departure from Wood River, May 14, 1804 &mdash; painting by Gary Lucy" onerror="this.style.display=\'none\'">';
   if (level === 'beginner') {
     h += '<p>On <strong>May 14, 1804</strong>, the Corps of Discovery set off from Camp Wood River near St. Louis. They had a big boat called a <strong>keelboat</strong> and two smaller boats called pirogues. The journey ahead would take over two years and cover 8,000 miles of rivers, prairies, mountains, and coastline that no American had ever mapped.</p>';
   } else if (level === 'advanced') {
@@ -129,11 +129,17 @@ function continueGame() {
   state.challengesCompleted = saved.challengesCompleted || new Set();
   state.seenEvents = saved.seenEvents || [];
   state.discoveries = saved.discoveries || [];
+  state.scenariosCompleted = saved.scenariosCompleted || new Set();
+  state.glossary = saved.glossary || [];
+  state.wordChallengesWon = saved.wordChallengesWon || 0;
 
   // Update level buttons to reflect saved level
   document.querySelectorAll('.level-btn, .level-toggle button').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.level === state.level);
   });
+
+  // Unlock bonus game if all stations have been visited
+  if (state.visitedStations.size >= 10) unlockGame();
 
   showScreen('game-screen');
   showView(state.currentView);
@@ -274,13 +280,18 @@ function copySaveCode() {
   const ta = document.getElementById('save-code-output');
   if (!ta) return;
   ta.select();
-  try {
-    navigator.clipboard.writeText(ta.value).then(() => {
-      const btn = ta.nextElementSibling;
-      if (btn) { btn.textContent = 'Copied!'; setTimeout(() => { btn.textContent = 'Copy Code'; }, 2000); }
+  const showCopied = () => {
+    const btn = ta.nextElementSibling;
+    if (btn) { btn.textContent = 'Copied!'; setTimeout(() => { btn.textContent = 'Copy Code'; }, 2000); }
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(ta.value).then(showCopied).catch(() => {
+      // Fallback: selection is already active from ta.select(), user can Ctrl+C
+      showCopied();
     });
-  } catch (e) {
-    document.execCommand('copy');
+  } else {
+    // Legacy fallback — text is already selected
+    showCopied();
   }
 }
 
@@ -316,6 +327,9 @@ function applySaveCode() {
   state.challengesCompleted = saved.challengesCompleted || new Set();
   state.seenEvents = saved.seenEvents || [];
   state.discoveries = saved.discoveries || [];
+  state.scenariosCompleted = saved.scenariosCompleted || new Set();
+  state.glossary = saved.glossary || [];
+  state.wordChallengesWon = saved.wordChallengesWon || 0;
   saveGame(); // persist to localStorage
   // If all 10 stations visited, unlock the game
   if (state.visitedStations.size >= 10) unlockGame();
@@ -481,6 +495,8 @@ function exportJournalPDF() {
     win.document.write(html);
     win.document.close();
     setTimeout(() => win.print(), 500);
+  } else {
+    alert('Your browser blocked the PDF window. Please allow pop-ups for this site and try again.');
   }
 }
 
@@ -489,6 +505,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   const loaded = await loadAllData();
   if (loaded) {
     updateTitleContinueButton();
-    console.log('The Lost Expedition v0.9.0: Ready');
+    console.log('The Lost Expedition v0.20.0: Ready');
   }
 });

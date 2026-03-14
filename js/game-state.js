@@ -92,7 +92,15 @@ function saveGame() {
   try {
     localStorage.setItem(SAVE_KEY, JSON.stringify(_buildSaveData()));
   } catch (e) {
-    // localStorage may be unavailable (private browsing, etc.)
+    console.warn('Could not save game:', e.name);
+    if (e.name === 'QuotaExceededError') {
+      var indicator = document.getElementById('score-display');
+      if (indicator && !indicator.dataset.saveWarned) {
+        indicator.dataset.saveWarned = '1';
+        indicator.title = 'Warning: Storage full — use Save Codes to preserve progress';
+        indicator.style.outline = '2px solid #c44';
+      }
+    }
   }
 }
 
