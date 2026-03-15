@@ -39,6 +39,53 @@ function showView(view) {
   saveGame();
 }
 
+// === STUDENT NAME PROMPT ===
+function showNamePrompt(callback) {
+  var overlay = document.getElementById('name-prompt-overlay');
+  var nameInput = document.getElementById('student-name-input');
+  var periodInput = document.getElementById('student-period-input');
+  var errorEl = document.getElementById('name-prompt-error');
+  var submitBtn = document.getElementById('name-prompt-submit');
+
+  if (state.studentName) nameInput.value = state.studentName;
+  if (state.period) periodInput.value = state.period;
+
+  overlay.classList.add('active');
+  nameInput.focus();
+
+  function submit() {
+    var name = nameInput.value.trim();
+    var period = periodInput.value.trim();
+    if (!name) {
+      errorEl.textContent = 'Please enter your name.';
+      nameInput.focus();
+      return;
+    }
+    if (!period) {
+      errorEl.textContent = 'Please enter your period.';
+      periodInput.focus();
+      return;
+    }
+    errorEl.textContent = '';
+    state.studentName = name;
+    state.period = period;
+    saveGame();
+    overlay.classList.remove('active');
+    submitBtn.removeEventListener('click', submit);
+    nameInput.removeEventListener('keydown', keyHandler);
+    periodInput.removeEventListener('keydown', keyHandler);
+    callback();
+  }
+
+  function keyHandler(e) {
+    if (e.key === 'Enter') { e.preventDefault(); submit(); }
+  }
+
+  submitBtn.addEventListener('click', submit);
+  nameInput.addEventListener('keydown', keyHandler);
+  periodInput.addEventListener('keydown', keyHandler);
+}
+
 // === START GAME ===
 function startGame() {
   state.currentStation = 0;
@@ -47,7 +94,11 @@ function startGame() {
   state.score = 0;
   state.challengesCompleted = new Set();
   state.seenEvents = [];
-  showSplashScreen();
+  if (!state.studentName) {
+    showNamePrompt(function() { showSplashScreen(); });
+  } else {
+    showSplashScreen();
+  }
 }
 
 function showSplashScreen() {
@@ -132,20 +183,33 @@ function continueGame() {
   state.scenariosCompleted = saved.scenariosCompleted || new Set();
   state.glossary = saved.glossary || [];
   state.wordChallengesWon = saved.wordChallengesWon || 0;
-
-  // Update level buttons to reflect saved level
-  document.querySelectorAll('.level-btn, .level-toggle button').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.level === state.level);
-  });
+  state.studentName = saved.studentName || '';
+  state.period = saved.period || '';
 
   // Unlock bonus game if all stations have been visited
   if (state.visitedStations.size >= 10) unlockGame();
 
-  showScreen('game-screen');
-  showView(state.currentView);
-  renderStation(state.currentStation);
-  updateStationIndicator();
-  updateScoreDisplay();
+  if (!state.studentName) {
+    showNamePrompt(function() {
+      document.querySelectorAll('.level-btn, .level-toggle button').forEach(function(btn) {
+        btn.classList.toggle('active', btn.dataset.level === state.level);
+      });
+      showScreen('game-screen');
+      showView(state.currentView);
+      renderStation(state.currentStation);
+      updateStationIndicator();
+      updateScoreDisplay();
+    });
+  } else {
+    document.querySelectorAll('.level-btn, .level-toggle button').forEach(function(btn) {
+      btn.classList.toggle('active', btn.dataset.level === state.level);
+    });
+    showScreen('game-screen');
+    showView(state.currentView);
+    renderStation(state.currentStation);
+    updateStationIndicator();
+    updateScoreDisplay();
+  }
 }
 
 // === STATION NAVIGATION (gated — only visited stations) ===
