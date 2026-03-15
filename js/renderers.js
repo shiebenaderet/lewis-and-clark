@@ -1376,6 +1376,10 @@ function updateScoreDisplay() {
   const el = document.getElementById('score-display');
   if (el) {
     el.textContent = `${state.score} pts`;
+    var nameEl = document.getElementById('student-name-display');
+    if (nameEl && state.studentName) {
+      nameEl.textContent = state.studentName;
+    }
     el.classList.remove('score-updated');
     void el.offsetWidth;
     el.classList.add('score-updated');

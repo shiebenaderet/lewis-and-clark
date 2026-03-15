@@ -2729,6 +2729,17 @@ body {
   border: 1px solid rgba(212, 118, 10, 0.25);
 }
 
+.student-name-display {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  color: var(--parchment-dark);
+  opacity: 0.7;
+  margin-left: 0.5rem;
+}
+@media (max-width: 500px) {
+  .student-name-display { display: none; }
+}
+
 /* ============================================================
    TRAVEL TRANSITION SCREEN
    ============================================================ */
