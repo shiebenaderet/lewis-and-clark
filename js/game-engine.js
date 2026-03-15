@@ -449,6 +449,7 @@ function exportJournalPDF() {
       <div class="entry ${i > 0 ? 'page-break' : ''}">
         <div class="entry-header">
           <div class="entry-station">Station ${i + 1}</div>
+          <div style="font-size:9pt;color:#8b4513;text-align:right;float:right;">${state.studentName || ''}${state.period ? ' — Period ' + state.period : ''}</div>
           <h2 class="entry-title">${stationNames[i]}</h2>
           ${date ? `<div class="entry-date">${date}</div>` : ''}
         </div>
@@ -547,7 +548,7 @@ function exportJournalPDF() {
       <div class="cover-sub">Retracing the Journey of Lewis &amp; Clark</div>
       <div class="cover-divider"></div>
       <div class="cover-by">Recorded by</div>
-      <div class="cover-name">&nbsp;</div>
+      <div class="cover-name">${state.studentName || ''}${state.period ? ' &mdash; Period ' + state.period : ''}</div>
       <div class="cover-stats">${state.visitedStations.size} stations visited &bull; ${state.challengesCompleted.size} knowledge checks completed &bull; ${(state.discoveries || []).length} discoveries &bull; ${state.score} points earned</div>
     </div>
   </div>
