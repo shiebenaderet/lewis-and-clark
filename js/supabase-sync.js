@@ -9,8 +9,11 @@ let _supabase = null;
 let _syncStatus = 'idle'; // idle, syncing, synced, error
 
 function getSupabase() {
-  if (!_supabase && window.supabase) {
-    _supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  if (!_supabase) {
+    // Supabase v2 CDN exposes supabase.createClient at top level
+    if (window.supabase && typeof window.supabase.createClient === 'function') {
+      _supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    }
   }
   return _supabase;
 }
@@ -133,7 +136,10 @@ async function hashPassword(password) {
 // === TEACHER: CREATE CLASS ===
 async function createClass(teacherName, teacherEmail, password) {
   var sb = getSupabase();
-  if (!sb) return { error: 'Supabase not available' };
+  if (!sb) {
+    console.error('Supabase client not initialized');
+    return { error: 'Cloud service not available. Please refresh and try again.' };
+  }
 
   if (!teacherEmail.endsWith('@edmonds.wednet.edu')) {
     return { error: 'Email must end with @edmonds.wednet.edu' };
@@ -157,8 +163,9 @@ async function createClass(teacherName, teacherEmail, password) {
     if (!resp.error) {
       return { classCode: code };
     }
+    console.warn('Class creation attempt failed:', resp.error);
     if (resp.error.code === '23505') continue; // unique violation, retry
-    return { error: resp.error.message };
+    return { error: resp.error.message || 'Failed to create class. Check your email and try again.' };
   }
   return { error: 'Could not generate unique class code. Try again.' };
 }
