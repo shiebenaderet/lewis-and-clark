@@ -214,6 +214,17 @@ async function teacherLogin(classCode, password) {
   };
 }
 
+// === TEACHER: FETCH ALL CLASSES FOR AN EMAIL ===
+async function fetchTeacherClasses(teacherEmail) {
+  var sb = getSupabase();
+  if (!sb) return [];
+  var resp = await sb.from('lc_classes')
+    .select('class_code, teacher_name, created_at')
+    .eq('teacher_email', teacherEmail.toLowerCase())
+    .order('created_at', { ascending: false });
+  return resp.data || [];
+}
+
 // === TEACHER: FETCH ALL SAVES FOR DASHBOARD ===
 async function fetchClassSaves(classCode) {
   var sb = getSupabase();

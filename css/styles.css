@@ -1510,6 +1510,37 @@ body {
 }
 .dash-journal-entry strong { color: var(--parchment); }
 .dash-journal-entry p { margin: 0.25rem 0; }
+.dash-class-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.dash-class-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(139,69,19,0.2);
+  border-radius: 8px;
+  background: rgba(139,69,19,0.04);
+  transition: all 0.2s;
+}
+.dash-class-item:hover {
+  background: rgba(139,69,19,0.12);
+  border-color: var(--leather);
+}
+.dash-class-item-code {
+  font-family: var(--font-ui);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--leather-dark);
+}
+.dash-class-item-info {
+  font-size: 0.75rem;
+  color: var(--ink-light);
+}
 @media (max-width: 600px) {
   .dash-stats { grid-template-columns: repeat(2, 1fr); }
   .dash-header { flex-direction: column; align-items: flex-start; }

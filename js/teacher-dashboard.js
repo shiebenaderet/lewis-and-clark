@@ -123,6 +123,7 @@ var TeacherDashboard = (function() {
       h += '<option value="' + escapeHtml(p) + '">Period ' + escapeHtml(p) + '</option>';
     });
     h += '</select>';
+    h += '<button class="btn-save-code" onclick="TeacherDashboard.myClasses()">My Classes</button>';
     h += '<button class="btn-save-code" onclick="TeacherDashboard.refresh()">Refresh</button>';
     h += '<button class="btn-save-code" onclick="TeacherDashboard.toggleView()">Toggle View</button>';
     h += '</div>';
@@ -306,6 +307,30 @@ var TeacherDashboard = (function() {
     return h;
   }
 
+  // === RENDER: Class Picker (multi-class teachers) ===
+  function renderClassPicker(classes, teacherName, teacherEmail, password) {
+    var el = getEl();
+    var h = '';
+    h += '<div class="dash-card">';
+    h += '<h2 class="dash-title">Your Classes</h2>';
+    h += '<p class="dash-subtitle">Select a class to view its dashboard, or create a new one.</p>';
+    h += '<div class="dash-class-list">';
+    classes.forEach(function(c) {
+      var created = c.created_at ? new Date(c.created_at).toLocaleDateString() : '';
+      h += '<div class="dash-class-item" onclick="TeacherDashboard.selectClass(\'' + escapeHtml(c.class_code) + '\')" style="cursor:pointer;">';
+      h += '<div class="dash-class-item-code">' + escapeHtml(c.class_code) + '</div>';
+      h += '<div class="dash-class-item-info">Created ' + created + '</div>';
+      h += '</div>';
+    });
+    h += '</div>';
+    h += '<div class="dash-divider"></div>';
+    h += '<button class="btn-start" onclick="TeacherDashboard.quickCreateClass()" style="width:100%;">Create Another Class</button>';
+    h += '<div id="quick-create-status" style="text-align:center;margin-top:0.5rem;font-size:0.8rem;color:var(--ink-light);"></div>';
+    h += '</div>';
+    el.textContent = '';
+    el.insertAdjacentHTML('afterbegin', h);
+  }
+
   // === PUBLIC API ===
   return {
     show: function() {
@@ -321,9 +346,36 @@ var TeacherDashboard = (function() {
       if (!code || !pass) { errEl.textContent = 'Please enter class code and password.'; return; }
       errEl.textContent = 'Signing in...';
       teacherLogin(code, pass).then(function(result) {
-        if (result.error) { errEl.textContent = result.error; }
-        else { _session = result; TeacherDashboard.refresh(); }
+        if (result.error) { errEl.textContent = result.error; return; }
+        _session = result;
+        // Check if teacher has multiple classes
+        fetchTeacherClasses(result.teacherEmail).then(function(classes) {
+          if (classes.length > 1) {
+            renderClassPicker(classes, result.teacherName, result.teacherEmail, pass);
+          } else {
+            TeacherDashboard.refresh();
+          }
+        });
       });
+    },
+
+    selectClass: function(classCode) {
+      if (_session) {
+        _session.classCode = classCode;
+        TeacherDashboard.refresh();
+      }
+    },
+
+    showCreateFromPicker: function() {
+      // Go back to login screen with register section visible
+      renderLogin();
+      // Pre-fill teacher info if we have it
+      if (_session) {
+        var nameEl = document.getElementById('dash-reg-name');
+        var emailEl = document.getElementById('dash-reg-email');
+        if (nameEl && _session.teacherName) nameEl.value = _session.teacherName;
+        if (emailEl && _session.teacherEmail) emailEl.value = _session.teacherEmail;
+      }
     },
 
     register: function() {
@@ -344,6 +396,32 @@ var TeacherDashboard = (function() {
     goToDashboard: function() {
       if (_session) { TeacherDashboard.refresh(); }
       else { renderLogin(); }
+    },
+
+    myClasses: function() {
+      if (!_session || !_session.teacherEmail) { renderLogin(); return; }
+      fetchTeacherClasses(_session.teacherEmail).then(function(classes) {
+        renderClassPicker(classes, _session.teacherName, _session.teacherEmail);
+      });
+    },
+
+    quickCreateClass: function() {
+      if (!_session) return;
+      var el = getEl();
+      var statusEl = document.getElementById('quick-create-status');
+      if (statusEl) statusEl.textContent = 'Creating...';
+      // Reuse the teacher's stored password hash by creating with same credentials
+      // We need the password for hashing, so prompt for it
+      var pass = prompt('Enter your teacher password to create a new class:');
+      if (!pass) return;
+      createClass(_session.teacherName, _session.teacherEmail, pass).then(function(result) {
+        if (result.error) {
+          alert('Error: ' + result.error);
+        } else {
+          alert('New class created! Code: ' + result.classCode);
+          TeacherDashboard.myClasses();
+        }
+      });
     },
 
     refresh: function() {
