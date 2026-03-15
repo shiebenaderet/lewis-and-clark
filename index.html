@@ -221,6 +221,26 @@
 </div>
 
 <!-- ============================================================
+     STUDENT NAME PROMPT
+     ============================================================ -->
+<div class="name-prompt-overlay" id="name-prompt-overlay">
+  <div class="name-prompt-box">
+    <h2 class="name-prompt-title">Identify Yourself, Explorer</h2>
+    <p class="name-prompt-subtitle">Your name will appear on your expedition journal.</p>
+    <div class="name-prompt-field">
+      <label for="student-name-input">Your name (first name, last initial)</label>
+      <input type="text" id="student-name-input" class="name-prompt-input" placeholder="e.g. Sarah T." autocomplete="off" maxlength="40">
+    </div>
+    <div class="name-prompt-field">
+      <label for="student-period-input">Period</label>
+      <input type="text" id="student-period-input" class="name-prompt-input" placeholder="e.g. 3" autocomplete="off" maxlength="10">
+    </div>
+    <div class="name-prompt-error" id="name-prompt-error"></div>
+    <button class="btn-start name-prompt-btn" id="name-prompt-submit">Begin</button>
+  </div>
+</div>
+
+<!-- ============================================================
      JAVASCRIPT (loaded in dependency order)
      ============================================================ -->
 <script src="js/accessibility.js"></script>

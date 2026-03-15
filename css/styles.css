@@ -1236,6 +1236,80 @@ body {
   background: var(--leather-dark);
 }
 
+/* --- Student name prompt modal --- */
+.name-prompt-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+.name-prompt-overlay.active {
+  display: flex;
+}
+.name-prompt-box {
+  background: linear-gradient(160deg, var(--parchment) 0%, var(--parchment-dark) 100%);
+  border: 2px solid var(--leather);
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  animation: fadeIn 0.4s ease;
+}
+.name-prompt-title {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  color: var(--ink);
+  margin-bottom: 0.3rem;
+}
+.name-prompt-subtitle {
+  font-size: 0.85rem;
+  color: var(--ink-light);
+  margin-bottom: 1.25rem;
+  font-style: italic;
+}
+.name-prompt-field {
+  text-align: left;
+  margin-bottom: 0.75rem;
+}
+.name-prompt-field label {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ink-light);
+  margin-bottom: 0.25rem;
+}
+.name-prompt-input {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  border: 1px solid var(--parchment-dark);
+  border-radius: 6px;
+  background: rgba(255,255,255,0.6);
+  color: var(--ink);
+}
+.name-prompt-input:focus-visible {
+  outline: 3px solid var(--leather);
+  outline-offset: 0;
+  border-color: var(--leather);
+}
+.name-prompt-error {
+  font-size: 0.8rem;
+  color: var(--danger);
+  min-height: 1.2em;
+  margin-bottom: 0.5rem;
+}
+.name-prompt-btn {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
 /* ============================================================
    COMPLETION SCREEN
    ============================================================ */
