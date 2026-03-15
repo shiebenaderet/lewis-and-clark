@@ -53,6 +53,12 @@ function showNamePrompt(callback) {
   if (state.period) periodInput.value = state.period;
   if (state.classCode && classCodeInput) classCodeInput.value = state.classCode;
 
+  // Show backup button if student already has save data
+  var backupDiv = document.getElementById('name-prompt-backup');
+  if (backupDiv) {
+    backupDiv.style.display = state.studentName ? '' : 'none';
+  }
+
   overlay.classList.add('active');
   nameInput.focus();
 
@@ -139,6 +145,31 @@ function showNamePrompt(callback) {
   submitBtn.addEventListener('click', submit);
   nameInput.addEventListener('keydown', keyHandler);
   periodInput.addEventListener('keydown', keyHandler);
+}
+
+function downloadSaveBackup() {
+  var saveData = _buildSaveData();
+  var json = JSON.stringify(saveData, null, 2);
+  var blob = new Blob([json], { type: 'application/json' });
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  var name = (state.studentName || 'student').replace(/\s+/g, '-').toLowerCase();
+  a.download = 'expedition-save-' + name + '.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+function editStudentInfo() {
+  showNamePrompt(function() {
+    // Re-render current station to update display
+    renderStation(state.currentStation);
+    updateStationIndicator();
+    updateScoreDisplay();
+    // Trigger a cloud sync with new info
+    if (state.classCode && typeof syncToCloud === 'function') {
+      syncToCloud();
+    }
+  });
 }
 
 function updateIdentityDisplay() {

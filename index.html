@@ -85,7 +85,7 @@
       <a class="home-link" href="#" onclick="event.preventDefault();goHome()" title="Return to title screen" role="button">The Lost Expedition</a>
       <span class="station-indicator" id="station-indicator">Station 1 of 10</span>
       <span class="score-display" id="score-display">0 pts</span>
-      <span class="student-name-display" id="student-name-display"></span>
+      <span class="student-name-display" id="student-name-display" onclick="editStudentInfo()" title="Click to update your name, period, or class code"></span>
       <span class="cloud-sync-icon" id="cloud-sync-icon"></span>
     </div>
     <div class="top-bar-right">
@@ -255,6 +255,11 @@
     </div>
     <div class="name-prompt-error" id="name-prompt-error"></div>
     <button class="btn-start name-prompt-btn" id="name-prompt-submit">Begin</button>
+    <div class="name-prompt-backup" id="name-prompt-backup" style="display:none;">
+      <div style="margin-top:1rem;padding-top:0.75rem;border-top:1px solid rgba(139,69,19,0.15);">
+        <button class="btn-save-code" onclick="downloadSaveBackup()" style="width:100%;font-size:0.8rem;">Download Save Backup</button>
+      </div>
+    </div>
   </div>
 </div>
 
