@@ -16,10 +16,14 @@ let state = {
   seenEvents: [],
   discoveries: [],
   glossary: [],
-  wordChallengesWon: 0
+  wordChallengesWon: 0,
+  studentName: '',
+  period: ''
 };
 
 function resetState() {
+  var savedName = state.studentName;
+  var savedPeriod = state.period;
   state = {
     level: state.level,
     currentStation: 0,
@@ -32,7 +36,9 @@ function resetState() {
     seenEvents: [],
     discoveries: [],
     glossary: [],
-    wordChallengesWon: 0
+    wordChallengesWon: 0,
+    studentName: savedName,
+    period: savedPeriod
   };
   clearSave();
 }
@@ -66,6 +72,8 @@ function _buildSaveData() {
     discoveries: state.discoveries || [],
     glossary: state.glossary || [],
     wordChallengesWon: state.wordChallengesWon || 0,
+    studentName: state.studentName || '',
+    period: state.period || '',
     savedAt: new Date().toISOString()
   };
 }
@@ -84,6 +92,8 @@ function _parseSaveData(data) {
     discoveries: data.discoveries || [],
     glossary: data.glossary || [],
     wordChallengesWon: data.wordChallengesWon || 0,
+    studentName: data.studentName || '',
+    period: data.period || '',
     savedAt: data.savedAt
   };
 }
