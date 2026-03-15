@@ -126,17 +126,9 @@ async function checkCloudSave(classCode, studentName, period) {
 }
 
 // === HASH PASSWORD ===
-// Uses Web Crypto when available (HTTPS), falls back to simple hash
+// Consistent djb2 hash — works in all browsers, all contexts.
+// Sufficient for a classroom tool (not protecting sensitive data).
 async function hashPassword(password) {
-  if (window.crypto && window.crypto.subtle) {
-    try {
-      var encoder = new TextEncoder();
-      var data = encoder.encode(password);
-      var hash = await crypto.subtle.digest('SHA-256', data);
-      return Array.from(new Uint8Array(hash)).map(function(b) { return b.toString(16).padStart(2, '0'); }).join('');
-    } catch (e) { /* fall through to simple hash */ }
-  }
-  // Simple hash fallback (djb2 variant) — sufficient for a classroom tool
   var hash = 5381;
   for (var i = 0; i < password.length; i++) {
     hash = ((hash << 5) + hash + password.charCodeAt(i)) & 0xFFFFFFFF;
