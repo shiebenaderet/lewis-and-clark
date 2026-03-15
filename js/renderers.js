@@ -12,15 +12,15 @@ function escapeHtml(str) {
 // These terms get tooltip spans injected into context paragraphs at ALL reading levels.
 // Beginner already has them inline in JSON; this adds them to standard and advanced too.
 const VOCAB_TERMS = [
-  { term: 'keelboat', def: 'A large, flat-bottomed boat used on rivers' },
-  { term: 'pirogues', def: 'Long, narrow boats, like big canoes' },
-  { term: 'pirogue', def: 'A long, narrow boat, like a big canoe' },
+  { term: 'keelboat', def: '(KEEL-boht) A large, flat-bottomed boat used on rivers' },
+  { term: 'pirogues', def: '(PEE-rohgz) Long, narrow boats, like big canoes' },
+  { term: 'pirogue', def: '(PEE-rohg) A long, narrow boat, like a big canoe' },
   { term: 'Oregon Trail', def: 'A famous path settlers followed to get to the western United States' },
   { term: 'Continental Divide', def: 'The line of mountain peaks that separates rivers flowing east from rivers flowing west' },
-  { term: 'Fort Mandan', def: 'A wooden fort the explorers built to stay in during the cold winter of 1804-1805' },
-  { term: 'Sacagawea', def: 'A Lemhi Shoshone woman who became one of the most important members of the expedition' },
-  { term: 'Shoshone', def: 'A Native American people who lived near the Rocky Mountains' },
-  { term: 'Nez Perce', def: 'A Native American people from the Pacific Northwest who helped the expedition survive' },
+  { term: 'Fort Mandan', def: '(MAN-dan) A wooden fort the explorers built to stay in during the cold winter of 1804-1805' },
+  { term: 'Sacagawea', def: '(sah-KAH-gah-wee-ah) A Lemhi Shoshone woman who became one of the most important members of the expedition' },
+  { term: 'Shoshone', def: '(shoh-SHOH-nee) A Native American people who lived near the Rocky Mountains' },
+  { term: 'Nez Perce', def: '(nez PURS) A Native American people from the Pacific Northwest who helped the expedition survive' },
   { term: 'specimens', def: 'Samples of plants, animals, or minerals collected for scientific study' },
   { term: 'grizzly bears', def: 'Very large, dangerous bears found in western North America' },
   { term: 'grizzly bear', def: 'A very large, dangerous bear found in western North America' },
@@ -29,8 +29,85 @@ const VOCAB_TERMS = [
   { term: 'Louisiana Purchase', def: 'The 1803 purchase of 828,000 square miles from France, doubling the size of the United States' },
   { term: 'Northwest Passage', def: 'A hoped-for water route connecting the Atlantic and Pacific Oceans through North America' },
   { term: 'earth lodge', def: 'A dome-shaped dwelling made of wooden frames covered with earth, built by Plains peoples' },
-  { term: 'peace medals', def: 'Silver medals given to Native American leaders as a symbol of American friendship and authority' }
+  { term: 'peace medals', def: 'Silver medals given to Native American leaders as a symbol of American friendship and authority' },
+  { term: 'Charbonneau', def: '(shar-buh-NO) French-Canadian fur trader and interpreter' },
+  { term: 'Toussaint', def: '(too-SANT) First name of Charbonneau, the French-Canadian interpreter' },
+  { term: 'Hidatsa', def: '(hee-DOT-sah) A Native American people who lived alongside the Mandan' },
+  { term: 'Mandan', def: '(MAN-dan) A Native American people who lived along the Missouri River' },
+  { term: 'Lemhi', def: '(LEM-hi) A band of the Shoshone people from the mountains of present-day Idaho' },
+  { term: 'Cameahwait', def: '(kah-MEE-ah-wait) Chief of the Lemhi Shoshone and brother of Sacagawea' },
+  { term: 'Oto', def: '(OH-toh) A Native American people of the Great Plains' },
+  { term: 'Chinook', def: '(shih-NOOK) A Native American people of the Pacific Northwest coast' },
+  { term: 'Clatsop', def: '(KLAT-sup) A Native American people who lived near the mouth of the Columbia River' },
+  { term: 'Bitterroot', def: '(BIT-er-root) A mountain range on the border of present-day Idaho and Montana' }
 ];
+
+const KEY_QUOTES = [
+  { text: 'We set out from Camp at the mouth of Wood River, and proceeded up the Missouri.', author: 'Captain Clark', station: 0 },
+  { text: 'The Plains of this country are covered with a Leek Green Grass, well calculated for the sweetest and most nourishing hay.', author: 'Captain Clark', station: 1 },
+  { text: 'We made up a small present for those people, and delivered a Speech to them.', author: 'Captain Clark', station: 2 },
+  { text: 'The country on both sides of the river is fine, level, fertile land.', author: 'Captain Clark', station: 3 },
+  { text: 'About five o\u2019clock this evening, one of the wives of Charbonneau was delivered of a fine boy.', author: 'Captain Lewis', station: 4 },
+  { text: 'We were now about to penetrate a country on which the foot of civilized man had never trodden.', author: 'Captain Lewis', station: 5 },
+  { text: 'I hurried down the hill to gaze on this sublimely grand spectacle.', author: 'Captain Lewis', station: 6 },
+  { text: 'Sacagawea was reunited with her brother. She jumped up, ran, and embraced him.', author: 'Captain Lewis', station: 7 },
+  { text: 'I have been wet and as cold in every part as I ever was in my life.', author: 'Captain Lewis', station: 8 },
+  { text: 'Ocian in view! O! the joy!', author: 'Captain Clark', station: 9 }
+];
+
+const SPELLING_MODERNIZATIONS = [
+  [/\bbrakes\b/g, 'breaks'],
+  [/\btho'\b/gi, 'though'],
+  [/\bthro'\b/gi, 'through'],
+  [/\brecieved\b/gi, 'received'],
+  [/\bpercieve\b/gi, 'perceive'],
+  [/\bbeleived\b/gi, 'believed'],
+  [/\bverey\b/gi, 'very'],
+  [/\bprarie\b/gi, 'prairie'],
+  [/\bprairie\b/gi, 'prairie'],
+  [/\bmusquitoes\b/gi, 'mosquitoes'],
+  [/\bmusquetoes\b/gi, 'mosquitoes'],
+  [/\bmuskeetors\b/gi, 'mosquitoes'],
+  [/\bsavages\b/gi, 'Native peoples'],
+  [/\bindians\b/gi, 'Native Americans'],
+  [/\bIndians\b/g, 'Native Americans'],
+  [/\bsquaw\b/gi, 'woman'],
+  [/\bsquar\b/gi, 'woman'],
+  [/\bhollered\b/gi, 'hollered'],
+  [/\bcanoo\b/gi, 'canoe'],
+  [/\bperogue\b/gi, 'pirogue'],
+  [/\bportage\b/gi, 'portage'],
+  [/\bbehold\b/gi, 'see'],
+  [/\bbeheld\b/gi, 'seen'],
+  [/\bsublimely grand spectacle\b/gi, 'incredibly grand sight'],
+  [/\bsaluted\b/gi, 'greeted'],
+  [/\bagreeable\b/gi, 'pleasant'],
+  [/\bI presume\b/gi, 'I assume'],
+  [/\bdificult of access\b/gi, 'difficult to reach'],
+  [/\btremendous\b/gi, 'enormous'],
+  [/\bascertained\b/gi, 'determined'],
+  [/\bproceeded\b/gi, 'traveled'],
+  [/\bencamped\b/gi, 'set up camp'],
+  [/\bfatigued\b/gi, 'exhausted'],
+  [/\bvisage\b/gi, 'face'],
+  [/\bsupplycated\b/gi, 'begged'],
+  [/\babundence\b/gi, 'abundance']
+];
+
+function modernizeText(text) {
+  var result = text;
+  SPELLING_MODERNIZATIONS.forEach(function(pair) {
+    result = result.replace(pair[0], pair[1]);
+  });
+  return result;
+}
+
+function setJournalMode(mode) {
+  var buttons = document.querySelectorAll('.journal-mode-btn');
+  buttons.forEach(function(btn) { btn.classList.toggle('active', btn.dataset.mode === mode); });
+  document.querySelectorAll('.journal-text-original').forEach(function(el) { el.style.display = mode === 'original' ? '' : 'none'; });
+  document.querySelectorAll('.journal-text-modern').forEach(function(el) { el.style.display = mode === 'modern' ? '' : 'none'; });
+}
 
 // Inject vocab tooltips into a context HTML string.
 // Skips terms that are already wrapped in vocab-word spans (beginner level).
@@ -380,6 +457,12 @@ function renderStation(index) {
   html += `<div class="station-number">Station ${index + 1}</div>`;
   html += `<h2 class="station-title">${data.title}</h2>`;
   html += `<div class="station-date">${data.dates}</div>`;
+  // Reading time estimate
+  var wordCount = 0;
+  data.context.forEach(function(p) { wordCount += p.replace(/<[^>]+>/g, '').split(/\s+/).length; });
+  if (data.journals) data.journals.forEach(function(j) { j.text.forEach(function(p) { wordCount += p.replace(/<[^>]+>/g, '').split(/\s+/).length; }); });
+  var readingMins = Math.max(1, Math.ceil(wordCount / 150));
+  html += '<div class="reading-time">\u{1F4D6} ~' + readingMins + ' min read</div>';
   html += '</div>';
 
   // Seasonal banner for Fort Mandan stations
@@ -396,6 +479,30 @@ function renderStation(index) {
     html += `<p>${injectVocabTooltips(p)}</p>`;
   });
   html += '</div>';
+
+  // Station vocab glossary (collapsible)
+  var stationVocab = [];
+  var contextText = data.context.join(' ');
+  VOCAB_TERMS.forEach(function(v) {
+    if (contextText.toLowerCase().indexOf(v.term.toLowerCase()) !== -1) {
+      // Avoid duplicate terms (e.g. pirogue/pirogues)
+      if (!stationVocab.some(function(sv) { return sv.term.toLowerCase() === v.term.toLowerCase(); })) {
+        stationVocab.push(v);
+      }
+    }
+  });
+  if (stationVocab.length > 0) {
+    html += '<details class="station-glossary">';
+    html += '<summary class="station-glossary-toggle">\u{1F4D6} Station Vocabulary (' + stationVocab.length + ' terms)</summary>';
+    html += '<div class="station-glossary-list">';
+    stationVocab.forEach(function(v) {
+      html += '<div class="station-glossary-item">';
+      html += '<span class="station-glossary-term">' + escapeHtml(v.term) + '</span>';
+      html += '<span class="station-glossary-def">' + escapeHtml(v.def) + '</span>';
+      html += '</div>';
+    });
+    html += '</div></details>';
+  }
 
   // Narrative variation banner for special stations
   const narrative = STATION_NARRATIVE[index];
@@ -441,6 +548,20 @@ function renderStation(index) {
       if (challengeCompleted && !isFillBlank) {
         html += '<div class="journal-recovered-banner"><span class="journal-recovered-icon">&#x1F4DC;</span> Journal Page Recovered</div>';
       }
+      // Key quote pullquote
+      if (KEY_QUOTES[index]) {
+        var kq = KEY_QUOTES[index];
+        html += '<div class="key-quote">';
+        html += '<div class="key-quote-text">&ldquo;' + kq.text + '&rdquo;</div>';
+        html += '<div class="key-quote-author">&mdash; ' + kq.author + '</div>';
+        html += '</div>';
+      }
+      // Journal text mode toggle (original vs modernized)
+      html += '<div class="journal-mode-toggle">';
+      html += '<button class="journal-mode-btn active" data-mode="original" onclick="setJournalMode(\'original\')"><span class="journal-mode-icon">\u{1F4DC}</span> Original Text <span class="journal-mode-note">written in 1805</span></button>';
+      html += '<button class="journal-mode-btn" data-mode="modern" onclick="setJournalMode(\'modern\')"><span class="journal-mode-icon">\u{270D}\uFE0F</span> Modern Spelling</button>';
+      html += '</div>';
+
       data.journals.forEach(j => {
         const safeDate = j.date.replace(/'/g, "\\'");
         const safeAuthor = j.author.replace(/'/g, "\\'");
@@ -448,10 +569,13 @@ function renderStation(index) {
         html += '<div class="journal-entry">';
         if (figKey) html += renderPortraitChip(figKey);
         html += `<div class="journal-date clickable-fill" onclick="autoFillJournal(${index}, 'date', '${safeDate}', this)" title="Tap to add to your journal">${j.date} <span class="fill-hint">tap to add</span></div>`;
-        html += '<div class="journal-text">';
-        j.text.forEach(p => {
-          html += `<p>${p}</p>`;
-        });
+        // Original text
+        html += '<div class="journal-text journal-text-original">';
+        j.text.forEach(p => { html += '<p>' + p + '</p>'; });
+        html += '</div>';
+        // Modernized text
+        html += '<div class="journal-text journal-text-modern" style="display:none;">';
+        j.text.forEach(p => { html += '<p>' + modernizeText(p) + '</p>'; });
         html += '</div>';
         html += `<div class="journal-author clickable-fill" onclick="autoFillJournal(${index}, 'author', '${safeAuthor}', this)" title="Tap to add to your journal">&mdash; ${j.author} <span class="fill-hint">tap to add</span></div>`;
         html += '</div>';
@@ -1301,6 +1425,19 @@ function completeChallengeResult(stationIndex, isCorrect, challenge) {
       const data = station[state.level] || station.standard;
       if (data.journals && data.journals.length > 0) {
         let jhtml = '<div class="journal-recovered-banner fade-in"><span class="journal-recovered-icon">&#x1F4DC;</span> Journal Page Recovered!</div>';
+        // Key quote pullquote
+        if (KEY_QUOTES[stationIndex]) {
+          var kq = KEY_QUOTES[stationIndex];
+          jhtml += '<div class="key-quote fade-in">';
+          jhtml += '<div class="key-quote-text">&ldquo;' + kq.text + '&rdquo;</div>';
+          jhtml += '<div class="key-quote-author">&mdash; ' + kq.author + '</div>';
+          jhtml += '</div>';
+        }
+        // Journal text mode toggle
+        jhtml += '<div class="journal-mode-toggle fade-in">';
+        jhtml += '<button class="journal-mode-btn active" data-mode="original" onclick="setJournalMode(\'original\')"><span class="journal-mode-icon">\u{1F4DC}</span> Original Text <span class="journal-mode-note">written in 1805</span></button>';
+        jhtml += '<button class="journal-mode-btn" data-mode="modern" onclick="setJournalMode(\'modern\')"><span class="journal-mode-icon">\u{270D}\uFE0F</span> Modern Spelling</button>';
+        jhtml += '</div>';
         data.journals.forEach(j => {
           const sd = j.date.replace(/'/g, "\\'");
           const sa = j.author.replace(/'/g, "\\'");
@@ -1308,8 +1445,13 @@ function completeChallengeResult(stationIndex, isCorrect, challenge) {
           jhtml += '<div class="journal-entry fade-in">';
           if (fk) jhtml += renderPortraitChip(fk);
           jhtml += '<div class="journal-date clickable-fill" onclick="autoFillJournal(' + stationIndex + ', \'date\', \'' + sd + '\', this)" title="Tap to add to your journal">' + j.date + ' <span class="fill-hint">tap to add</span></div>';
-          jhtml += '<div class="journal-text">';
+          // Original text
+          jhtml += '<div class="journal-text journal-text-original">';
           j.text.forEach(p => { jhtml += '<p>' + p + '</p>'; });
+          jhtml += '</div>';
+          // Modernized text
+          jhtml += '<div class="journal-text journal-text-modern" style="display:none;">';
+          j.text.forEach(p => { jhtml += '<p>' + modernizeText(p) + '</p>'; });
           jhtml += '</div>';
           jhtml += '<div class="journal-author clickable-fill" onclick="autoFillJournal(' + stationIndex + ', \'author\', \'' + sa + '\', this)" title="Tap to add to your journal">&mdash; ' + j.author + ' <span class="fill-hint">tap to add</span></div>';
           jhtml += '</div>';

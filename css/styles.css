@@ -791,6 +791,121 @@ body {
 
 .journal-text p { margin-bottom: 0.5rem; }
 
+/* Reading time estimate */
+.reading-time {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  color: var(--ink-light);
+  opacity: 0.7;
+  margin-top: 0.25rem;
+}
+
+/* Key quote pullquote */
+.key-quote {
+  margin: 1rem 0 1.5rem;
+  padding: 1.25rem 1.5rem;
+  border-left: 4px solid var(--campfire);
+  background: rgba(212,118,10,0.06);
+  border-radius: 0 8px 8px 0;
+  position: relative;
+}
+.key-quote-text {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: var(--ink);
+  font-style: italic;
+}
+.key-quote-author {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  color: var(--leather);
+  margin-top: 0.5rem;
+}
+
+/* Station vocabulary glossary */
+.station-glossary {
+  margin: 0.75rem 0 1rem;
+  border: 1px solid rgba(139,69,19,0.15);
+  border-radius: 6px;
+  background: rgba(139,69,19,0.03);
+}
+.station-glossary-toggle {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--leather);
+  padding: 0.6rem 0.75rem;
+  cursor: pointer;
+  list-style: none;
+}
+.station-glossary-toggle::-webkit-details-marker { display: none; }
+.station-glossary-toggle::marker { display: none; content: ''; }
+.station-glossary-toggle::after { content: ' \u25BE'; font-size: 0.7rem; }
+.station-glossary[open] .station-glossary-toggle::after { content: ' \u25B4'; }
+.station-glossary-list {
+  padding: 0 0.75rem 0.75rem;
+  border-top: 1px solid rgba(139,69,19,0.1);
+}
+.station-glossary-item {
+  padding: 0.4rem 0;
+  border-bottom: 1px solid rgba(139,69,19,0.06);
+  font-size: 0.85rem;
+}
+.station-glossary-item:last-child { border-bottom: none; }
+.station-glossary-term {
+  font-weight: 700;
+  color: var(--leather-dark);
+  margin-right: 0.4rem;
+}
+.station-glossary-def {
+  color: var(--ink-light);
+}
+
+/* --- Journal text mode toggle --- */
+.journal-mode-toggle {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0.75rem 0;
+  flex-wrap: wrap;
+}
+.journal-mode-btn {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid rgba(139,69,19,0.2);
+  border-radius: 20px;
+  background: transparent;
+  color: var(--ink-light);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.journal-mode-btn:hover {
+  background: rgba(139,69,19,0.06);
+}
+.journal-mode-btn.active {
+  background: rgba(139,69,19,0.1);
+  border-color: var(--leather);
+  color: var(--leather-dark);
+  font-weight: 600;
+}
+.journal-mode-icon {
+  font-size: 0.9rem;
+}
+.journal-mode-note {
+  font-size: 0.7rem;
+  opacity: 0.7;
+  font-weight: 400;
+}
+.journal-text-modern {
+  border-left: 3px solid var(--river-light);
+  padding-left: 0.75rem;
+  margin-left: 0.25rem;
+}
+
 .journal-author {
   font-family: var(--font-heading);
   font-weight: bold;
