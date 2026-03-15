@@ -1058,6 +1058,7 @@ const TrailGame = (() => {
   }
 
   function renderGameOver(reason) {
+    clearTrailGameSave();
     gs.phase = 'gameover';
     const messages = {
       starvation: { title: 'Starvation Claims the Expedition', subtitle: 'The Corps ran out of food in the wilderness.' },
@@ -1124,6 +1125,7 @@ const TrailGame = (() => {
   }
 
   function renderVictory() {
+    clearTrailGameSave();
     gs.phase = 'victory';
     const totalMiles = LEGS.reduce((s, l) => s + l.miles, 0);
     const alive = gs.party.filter(m => m.health > 0);
@@ -1295,6 +1297,7 @@ const TrailGame = (() => {
       }
     }
     renderStop();
+    saveTrailGame();
   }
 
   // --- Fort Mandan Winter Camp ---
@@ -1423,6 +1426,7 @@ const TrailGame = (() => {
       }
     }
     renderWinterCamp();
+    saveTrailGame();
   }
 
   function advanceWinter() {
@@ -1458,6 +1462,7 @@ const TrailGame = (() => {
       // Normal arrival at next stop
       arriveAtStop();
     }
+    saveTrailGame();
   }
 
   function startTravel() {
@@ -1478,15 +1483,18 @@ const TrailGame = (() => {
       gs.totalDays += 50; // ~first third of winter
       addJournal('Winter sets in at Fort Mandan. The temperature drops to 40 below zero. The expedition hunkers down.');
       renderWinterCamp();
+      saveTrailGame();
       return;
     }
     gs.phase = 'traveling';
     renderTraveling();
+    saveTrailGame();
   }
 
   function chooseEvent(choiceIndex) {
     gs.phase = 'event-result';
     renderEventResult(choiceIndex);
+    saveTrailGame();
   }
 
   function advanceAfterEvent() {
@@ -1500,6 +1508,7 @@ const TrailGame = (() => {
     } else {
       arriveAtStop();
     }
+    saveTrailGame();
   }
 
   function arriveAtStop() {
@@ -1558,6 +1567,33 @@ const TrailGame = (() => {
     renderStop();
   }
 
+  // --- Save/Load Persistence ---
+  const TG_SAVE_KEY = 'lost-expedition-trail-game';
+
+  function saveTrailGame() {
+    if (!gs) return;
+    try {
+      localStorage.setItem(TG_SAVE_KEY, JSON.stringify({
+        difficulty: gs.difficulty, currentLeg: gs.currentLeg,
+        food: gs.food, health: gs.health, supplies: gs.supplies, morale: gs.morale,
+        party: gs.party, journal: gs.journal, totalDays: gs.totalDays,
+        phase: gs.phase, eventIndex: gs.eventIndex,
+        pace: gs.pace, actionsThisStop: gs.actionsThisStop, maxActionsPerStop: gs.maxActionsPerStop
+      }));
+    } catch (e) {}
+  }
+
+  function loadTrailGame() {
+    try {
+      var raw = localStorage.getItem(TG_SAVE_KEY);
+      return raw ? JSON.parse(raw) : null;
+    } catch (e) { return null; }
+  }
+
+  function clearTrailGameSave() {
+    try { localStorage.removeItem(TG_SAVE_KEY); } catch (e) {}
+  }
+
   // --- Public API ---
   return {
     init() {
@@ -1606,11 +1642,51 @@ const TrailGame = (() => {
       updateTitleContinueButton();
     },
 
+    resumeGame() {
+      var saved = loadTrailGame();
+      if (!saved) { this.init(); return; }
+      gs = newGameState(saved.difficulty || 'explorer');
+      gs.currentLeg = saved.currentLeg || 0;
+      gs.food = saved.food != null ? saved.food : gs.food;
+      gs.health = saved.health != null ? saved.health : gs.health;
+      gs.supplies = saved.supplies != null ? saved.supplies : gs.supplies;
+      gs.morale = saved.morale != null ? saved.morale : gs.morale;
+      gs.party = saved.party || gs.party;
+      gs.journal = saved.journal || [];
+      gs.totalDays = saved.totalDays || 1;
+      gs.phase = saved.phase || 'stop';
+      gs.eventIndex = saved.eventIndex || 0;
+      gs.pace = saved.pace || 'steady';
+      gs.actionsThisStop = saved.actionsThisStop || 0;
+      gs.maxActionsPerStop = saved.maxActionsPerStop || 3;
+      renderStop();
+    },
+
+    startFresh() {
+      clearTrailGameSave();
+      this.init();
+    },
+
     launch() {
-      // Hide other screens, show trail game
       document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
       document.getElementById('trail-game-screen').classList.add('active');
-      this.init();
+      var saved = loadTrailGame();
+      if (saved && saved.phase && saved.phase !== 'start') {
+        var el = document.getElementById('trail-game-content');
+        if (el) {
+          el.innerHTML =
+            '<div class="tg-card tg-fade-in">' +
+            '<div class="tg-card-header"><h2>Welcome Back, Captain</h2></div>' +
+            '<div class="tg-card-body" style="text-align:center;">' +
+            '<p class="tg-stop-desc">You have a saved expedition in progress (Day ' + (saved.totalDays || 1) + ', Leg ' + ((saved.currentLeg || 0) + 1) + '/10).</p>' +
+            '<div style="display:flex;gap:0.75rem;justify-content:center;margin-top:1.5rem;flex-wrap:wrap;">' +
+            '<button class="tg-btn tg-btn-primary" onclick="TrailGame.resumeGame()">Resume Expedition</button>' +
+            '<button class="tg-btn tg-btn-leather" onclick="TrailGame.startFresh()">Start Fresh</button>' +
+            '</div></div></div>';
+        }
+      } else {
+        this.init();
+      }
     }
   };
 })();
