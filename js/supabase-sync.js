@@ -187,7 +187,7 @@ function generateClassCode() {
   return code;
 }
 
-// === TEACHER: LOGIN ===
+// === TEACHER: LOGIN (by class code or email) ===
 async function teacherLogin(classCode, password) {
   var sb = getSupabase();
   if (!sb) return { error: 'Supabase not available' };
@@ -208,6 +208,29 @@ async function teacherLogin(classCode, password) {
     classCode: resp.data.class_code,
     teacherName: resp.data.teacher_name,
     teacherEmail: resp.data.teacher_email
+  };
+}
+
+async function teacherLoginByEmail(email, password) {
+  var sb = getSupabase();
+  if (!sb) return { error: 'Supabase not available' };
+
+  var resp = await sb.from('lc_classes')
+    .select('class_code, teacher_name, teacher_email, teacher_password_hash')
+    .eq('teacher_email', email.toLowerCase());
+
+  if (!resp.data || resp.data.length === 0) return { error: 'No classes found for this email' };
+
+  var passwordHash = await hashPassword(password);
+  // Check password against the first class (all classes for same teacher use same password)
+  if (passwordHash !== resp.data[0].teacher_password_hash) {
+    return { error: 'Incorrect password' };
+  }
+
+  return {
+    teacherName: resp.data[0].teacher_name,
+    teacherEmail: resp.data[0].teacher_email,
+    classes: resp.data.map(function(c) { return c.class_code; })
   };
 }
 

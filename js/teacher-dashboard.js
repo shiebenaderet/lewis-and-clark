@@ -61,13 +61,22 @@ var TeacherDashboard = (function() {
     h += '<h2 class="dash-title">Teacher Dashboard</h2>';
     h += '<p class="dash-subtitle">Sign in with your class code, or create a new class.</p>';
     h += '<div class="dash-section">';
-    h += '<h3>Sign In</h3>';
+    h += '<h3>Sign In with Email</h3>';
+    h += '<div class="dash-field"><label>School Email</label>';
+    h += '<input type="text" id="dash-login-email" placeholder="you@edmonds.wednet.edu"></div>';
+    h += '<div class="dash-field"><label>Password</label>';
+    h += '<input type="password" id="dash-login-pass-email" placeholder="Your teacher password"></div>';
+    h += '<div class="dash-error" id="dash-login-error-email"></div>';
+    h += '<button class="btn-start" onclick="TeacherDashboard.loginByEmail()" style="width:100%;margin-top:0.5rem;">Sign In</button>';
+    h += '</div>';
+    h += '<div style="text-align:center;margin:0.75rem 0;font-size:0.8rem;color:var(--ink-light);">or sign in with a class code</div>';
+    h += '<div class="dash-section">';
     h += '<div class="dash-field"><label>Class Code</label>';
     h += '<input type="text" id="dash-login-code" placeholder="e.g. CLARK3" maxlength="6" style="text-transform:uppercase;"></div>';
     h += '<div class="dash-field"><label>Password</label>';
     h += '<input type="password" id="dash-login-pass" placeholder="Your teacher password"></div>';
     h += '<div class="dash-error" id="dash-login-error"></div>';
-    h += '<button class="btn-start" onclick="TeacherDashboard.login()" style="width:100%;margin-top:0.5rem;">Sign In</button>';
+    h += '<button class="btn-start" onclick="TeacherDashboard.login()" style="width:100%;margin-top:0.5rem;">Sign In with Code</button>';
     h += '</div>';
     h += '<div class="dash-divider"></div>';
     h += '<div class="dash-section">';
@@ -354,6 +363,25 @@ var TeacherDashboard = (function() {
       document.querySelectorAll('.screen').forEach(function(s) { s.classList.remove('active'); });
       document.getElementById('dashboard-screen').classList.add('active');
       renderLogin();
+    },
+
+    loginByEmail: function() {
+      var email = (document.getElementById('dash-login-email').value || '').trim().toLowerCase();
+      var pass = (document.getElementById('dash-login-pass-email').value || '').trim();
+      var errEl = document.getElementById('dash-login-error-email');
+      if (!email || !pass) { errEl.textContent = 'Please enter email and password.'; return; }
+      errEl.textContent = 'Signing in...';
+      teacherLoginByEmail(email, pass).then(function(result) {
+        if (result.error) { errEl.textContent = result.error; return; }
+        _session = { teacherName: result.teacherName, teacherEmail: result.teacherEmail, classCode: result.classes[0] };
+        if (result.classes.length > 1) {
+          fetchTeacherClasses(result.teacherEmail).then(function(classes) {
+            renderClassPicker(classes, result.teacherName, result.teacherEmail);
+          });
+        } else {
+          TeacherDashboard.refresh();
+        }
+      });
     },
 
     login: function() {
