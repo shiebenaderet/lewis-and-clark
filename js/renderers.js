@@ -1277,6 +1277,12 @@ function completeChallengeResult(stationIndex, isCorrect, challenge) {
       }
     }
   }
+
+  // Scroll the continue button into view so students can find it
+  setTimeout(function() {
+    var nav = document.querySelector('.station-nav');
+    if (nav) nav.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, 1200);
 }
 
 // --- Journal gating helpers ---
@@ -1296,6 +1302,8 @@ function checkJournalGate(stationIndex) {
         btn.textContent = 'Complete the Expedition \u2192';
         btn.onclick = function() { completeExpedition(); };
       }
+      // Scroll button into view so students can find it
+      setTimeout(function() { btn.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 300);
     }
   }
 }
