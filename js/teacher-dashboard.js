@@ -321,12 +321,17 @@ var TeacherDashboard = (function() {
     classes.forEach(function(c) {
       var created = c.created_at ? new Date(c.created_at).toLocaleDateString() : '';
       var label = c.class_label || '';
-      h += '<div class="dash-class-item" onclick="TeacherDashboard.selectClass(\'' + escapeHtml(c.class_code) + '\')" style="cursor:pointer;">';
-      h += '<div style="display:flex;flex-direction:column;">';
+      var code = c.class_code;
+      h += '<div class="dash-class-item">';
+      h += '<div style="display:flex;flex-direction:column;cursor:pointer;flex:1;" onclick="TeacherDashboard.selectClass(\'' + escapeHtml(code) + '\')">';
       if (label) h += '<div class="dash-class-item-label">' + escapeHtml(label) + '</div>';
-      h += '<div class="dash-class-item-code">' + escapeHtml(c.class_code) + '</div>';
-      h += '</div>';
+      h += '<div class="dash-class-item-code">' + escapeHtml(code) + '</div>';
       h += '<div class="dash-class-item-info">Created ' + created + '</div>';
+      h += '</div>';
+      h += '<div class="dash-class-actions">';
+      h += '<button class="dash-class-action-btn" onclick="event.stopPropagation();TeacherDashboard.editClass(\'' + escapeHtml(code) + '\')" title="Rename">&#x270F;&#xFE0F;</button>';
+      h += '<button class="dash-class-action-btn dash-class-delete" onclick="event.stopPropagation();TeacherDashboard.deleteClass(\'' + escapeHtml(code) + '\')" title="Delete">&#x1F5D1;&#xFE0F;</button>';
+      h += '</div>';
       h += '</div>';
     });
     h += '</div>';
@@ -478,6 +483,29 @@ var TeacherDashboard = (function() {
     expandRow: function(idx) {
       var row = document.getElementById('dash-expand-' + idx);
       if (row) row.style.display = row.style.display === 'none' ? '' : 'none';
+    },
+
+    editClass: function(classCode) {
+      var newLabel = prompt('Enter a new name for class ' + classCode + ':');
+      if (newLabel === null) return;
+      updateClassLabel(classCode, newLabel.trim()).then(function(result) {
+        if (result.error) { alert('Error: ' + result.error); }
+        else { TeacherDashboard.myClasses(); }
+      });
+    },
+
+    deleteClass: function(classCode) {
+      if (!confirm('Delete class ' + classCode + '? This will permanently delete all student saves for this class. This cannot be undone.')) return;
+      if (!confirm('Are you sure? Type the class code to confirm.')) return;
+      var typed = prompt('Type the class code to confirm deletion:');
+      if (typed !== classCode) { alert('Class code did not match. Deletion cancelled.'); return; }
+      deleteClass(classCode).then(function(result) {
+        if (result.error) { alert('Error: ' + result.error); }
+        else {
+          alert('Class ' + classCode + ' has been deleted.');
+          TeacherDashboard.myClasses();
+        }
+      });
     },
 
     exportCSV: function() {

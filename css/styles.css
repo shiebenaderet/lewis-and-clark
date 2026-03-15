@@ -1547,6 +1547,30 @@ body {
   font-size: 0.75rem;
   color: var(--ink-light);
 }
+.dash-class-actions {
+  display: flex;
+  gap: 0.3rem;
+  align-items: center;
+  flex-shrink: 0;
+}
+.dash-class-action-btn {
+  background: none;
+  border: 1px solid rgba(139,69,19,0.15);
+  border-radius: 4px;
+  padding: 0.3rem 0.4rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  line-height: 1;
+}
+.dash-class-action-btn:hover {
+  background: rgba(139,69,19,0.1);
+  border-color: var(--leather);
+}
+.dash-class-delete:hover {
+  background: rgba(139,26,26,0.1);
+  border-color: var(--danger);
+}
 @media (max-width: 600px) {
   .dash-stats { grid-template-columns: repeat(2, 1fr); }
   .dash-header { flex-direction: column; align-items: flex-start; }

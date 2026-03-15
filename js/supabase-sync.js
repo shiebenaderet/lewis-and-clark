@@ -222,6 +222,26 @@ async function fetchTeacherClasses(teacherEmail) {
   return resp.data || [];
 }
 
+// === TEACHER: UPDATE CLASS LABEL ===
+async function updateClassLabel(classCode, newLabel) {
+  var sb = getSupabase();
+  if (!sb) return { error: 'Supabase not available' };
+  var resp = await sb.from('lc_classes').update({ class_label: newLabel }).eq('class_code', classCode);
+  if (resp.error) return { error: resp.error.message };
+  return { success: true };
+}
+
+// === TEACHER: DELETE CLASS ===
+async function deleteClass(classCode) {
+  var sb = getSupabase();
+  if (!sb) return { error: 'Supabase not available' };
+  // Delete saves first (foreign key constraint)
+  await sb.from('lc_saves').delete().eq('class_code', classCode);
+  var resp = await sb.from('lc_classes').delete().eq('class_code', classCode);
+  if (resp.error) return { error: resp.error.message };
+  return { success: true };
+}
+
 // === TEACHER: FETCH ALL SAVES FOR DASHBOARD ===
 async function fetchClassSaves(classCode) {
   var sb = getSupabase();
