@@ -303,7 +303,7 @@ function renderStation(index) {
       images.forEach((img, imgIdx) => {
         html += `<div class="gallery-slide ${imgIdx === 0 ? 'active' : ''}" data-slide="${imgIdx}">`;
         html += `<div class="gallery-img-wrap">`;
-        html += `<img src="${img.url}" alt="${escapeHtml(img.alt)}" loading="${imgIdx === 0 ? 'eager' : 'lazy'}" onerror="galleryImgError(this, ${index})">`;
+        html += `<img src="${img.url}" alt="${escapeHtml(img.alt)}" loading="${imgIdx === 0 ? 'eager' : 'lazy'}" onload="this.closest('.gallery-img-wrap').classList.add('img-loaded')" onerror="galleryImgError(this, ${index})">`;
         html += `</div>`;
         if (img.caption) {
           html += `<div class="gallery-caption">${escapeHtml(img.caption)}</div>`;
@@ -1368,6 +1368,12 @@ function updateScoreDisplay() {
   const el = document.getElementById('score-display');
   if (el) {
     el.textContent = `${state.score} pts`;
+    el.classList.remove('score-updated');
+    void el.offsetWidth;
+    el.classList.add('score-updated');
+    el.addEventListener('animationend', function() {
+      el.classList.remove('score-updated');
+    }, { once: true });
   }
 }
 
