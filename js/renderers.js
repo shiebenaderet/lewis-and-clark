@@ -8,6 +8,47 @@ function escapeHtml(str) {
   return div.innerHTML;
 }
 
+// === VOCABULARY TOOLTIP AUTO-INJECTION ===
+// These terms get tooltip spans injected into context paragraphs at ALL reading levels.
+// Beginner already has them inline in JSON; this adds them to standard and advanced too.
+const VOCAB_TERMS = [
+  { term: 'keelboat', def: 'A large, flat-bottomed boat used on rivers' },
+  { term: 'pirogues', def: 'Long, narrow boats, like big canoes' },
+  { term: 'pirogue', def: 'A long, narrow boat, like a big canoe' },
+  { term: 'Oregon Trail', def: 'A famous path settlers followed to get to the western United States' },
+  { term: 'Continental Divide', def: 'The line of mountain peaks that separates rivers flowing east from rivers flowing west' },
+  { term: 'Fort Mandan', def: 'A wooden fort the explorers built to stay in during the cold winter of 1804-1805' },
+  { term: 'Sacagawea', def: 'A Lemhi Shoshone woman who became one of the most important members of the expedition' },
+  { term: 'Shoshone', def: 'A Native American people who lived near the Rocky Mountains' },
+  { term: 'Nez Perce', def: 'A Native American people from the Pacific Northwest who helped the expedition survive' },
+  { term: 'specimens', def: 'Samples of plants, animals, or minerals collected for scientific study' },
+  { term: 'grizzly bears', def: 'Very large, dangerous bears found in western North America' },
+  { term: 'grizzly bear', def: 'A very large, dangerous bear found in western North America' },
+  { term: 'Corps of Discovery', def: 'The official name of the Lewis and Clark expedition team' },
+  { term: 'portage', def: 'Carrying boats and supplies overland around an obstacle like a waterfall' },
+  { term: 'Louisiana Purchase', def: 'The 1803 purchase of 828,000 square miles from France, doubling the size of the United States' },
+  { term: 'Northwest Passage', def: 'A hoped-for water route connecting the Atlantic and Pacific Oceans through North America' },
+  { term: 'earth lodge', def: 'A dome-shaped dwelling made of wooden frames covered with earth, built by Plains peoples' },
+  { term: 'peace medals', def: 'Silver medals given to Native American leaders as a symbol of American friendship and authority' }
+];
+
+// Inject vocab tooltips into a context HTML string.
+// Skips terms that are already wrapped in vocab-word spans (beginner level).
+function injectVocabTooltips(html) {
+  VOCAB_TERMS.forEach(function(v) {
+    // Skip if this term is already wrapped in a vocab-word span
+    if (html.indexOf('>' + v.term + '<') !== -1 && html.indexOf('vocab-word') !== -1) return;
+    // Case-insensitive search, but preserve original case in output
+    var regex = new RegExp('(?<!<[^>]*)\\b(' + v.term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')\\b(?![^<]*>)', 'i');
+    var match = html.match(regex);
+    if (match) {
+      var replacement = "<span class='vocab-word' tabindex='0'>" + match[1] + "<span class='vocab-tooltip'>" + escapeHtml(v.def) + "</span></span>";
+      html = html.replace(match[0], replacement);
+    }
+  });
+  return html;
+}
+
 // === DISCOVERY NARRATIVE CONSTANTS (per reading level) ===
 const DISCOVERY_INTROS = {
   beginner: [
@@ -349,10 +390,10 @@ function renderStation(index) {
   // Body
   html += '<div class="station-body">';
 
-  // Context paragraphs
+  // Context paragraphs (with vocab tooltip injection for all reading levels)
   html += '<div class="station-context">';
   data.context.forEach(p => {
-    html += `<p>${p}</p>`;
+    html += `<p>${injectVocabTooltips(p)}</p>`;
   });
   html += '</div>';
 
