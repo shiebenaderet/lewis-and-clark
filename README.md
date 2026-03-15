@@ -8,7 +8,7 @@ An interactive website that turns 10 classroom stations on the Lewis & Clark exp
 
 ## Version
 
-**v0.24.0** — Cloud Saves & Teacher Dashboard
+**v0.25.0** — Reading Comprehension & Student Tools
 
 ## What This Is
 
@@ -36,8 +36,14 @@ This project replaces a paper-based station activity (where students walk around
 - **Expedition Field Guide** — accumulating vocabulary reference in the Journal view, showing definitions and fun facts for terms discovered during word challenges
 - **Jefferson's Cipher** — final crossword puzzle on the completion screen where highlighted letters spell a secret message, earning 50 bonus points
 - **Interactive travel events** — 29 content-based encounters between stations covering weather, wildlife, navigation, health, Native encounters, and camp life — each with educational questions and detailed feedback
+- **Original / Modern Spelling toggle** — journal entries can be viewed in original 1805 spelling or modernized text, with a clear visual indicator for modified text
+- **Pronunciation guides** — vocab tooltips include phonetic pronunciation for names like Sacagawea, Charbonneau, Nez Perce
+- **Key quote pullquotes** — one impactful quote highlighted per station before the full journal text
+- **Station vocabulary panel** — collapsible glossary of key terms relevant to each station, auto-detected from context text
+- **Reading time estimates** — "~2 min read" shown at each station header
+- **Vocabulary tooltips at all levels** — key terms auto-injected with definitions across beginner, standard, and advanced reading levels
 - **OpenDyslexic font toggle** — dyslexia-friendly font available on title screen and in-game top bar, with self-hosted font files and localStorage persistence
-- **Save/resume** — localStorage persistence so students can pick up where they left off; portable save codes for cross-device transfer
+- **Save/resume** — localStorage persistence, cloud sync via Supabase, portable save codes, and downloadable JSON backup files
 - **Discoveries with clue fragments** — 10 collectible items unlocked by answering Knowledge Checks correctly, each with a narrative clue connecting to the expedition's bigger story. Progress tracker on every station with milestone achievements and synthesis messages at 5/10 (Junior Naturalist) and 10/10 (Master Explorer)
 - **Journal recovery mechanic** — journal entries are locked behind challenges, revealed with animation on completion, creating a genuine "discovery" moment
 - **Narrative variation** — key emotional stations (Sacagawea's baby, Shoshone reunion, Pacific arrival) get special visual framing and historical callouts
@@ -101,6 +107,29 @@ Then open `http://localhost:8000` in your browser.
 **Note:** Opening `index.html` directly as a file (`file://`) will not work because browsers block `fetch()` requests from local files. You need a web server.
 
 ## Changelog
+
+### v0.25.0 — Reading Comprehension & Student Tools
+
+**Reading enhancements:**
+- **"In Their Words / In Our Words" toggle** — journal entries show original 1805 text by default ("Original Text — written in 1805"). Students can switch to "Modern Spelling" which cleans up archaic spelling (brakes→breaks, musquitoes→mosquitoes, etc.). Modern text gets a blue left border so students know it's been modified.
+- **Pronunciation guides** — all vocab tooltips now include phonetic pronunciation in parentheses: "(sah-KAH-gah-wee-ah) A Lemhi Shoshone woman..." Added 10 new terms with pronunciations (Charbonneau, Hidatsa, Mandan, Cameahwait, etc.)
+- **Key quote pullquotes** — one hand-picked impactful quote per station displayed as a styled pullquote before the full journal text (e.g. "Ocian in view! O! the joy!" at Station 10)
+- **Station vocabulary panel** — collapsible glossary at each station showing all vocab terms found in that station's context text, with definitions and pronunciations
+- **Reading time estimates** — "~2 min read" shown below the station date, calculated from context + journal word count at 150 WPM
+- **Vocab tooltips across all reading levels** — 28 key terms auto-injected into standard and advanced text (previously only in beginner). Existing beginner tooltips preserved.
+
+**Student tools:**
+- **Clickable name in top bar** — students click their name to update name, period, or class code at any time (fixes wrong class code, skipped class code, etc.)
+- **Download Save Backup** — when editing student info, a "Download Save Backup" button saves a JSON file to the student's device as a last-resort backup
+
+**Teacher dashboard:**
+- **Email sign-in** — teachers sign in with email + password (no class code needed)
+- **Multi-class picker** — teachers with multiple classes see all their classes after login, click to switch
+- **Quick-create classes** — create new classes from the picker without re-entering credentials
+- **Class labels** — name classes (e.g. "Period 3") for easy identification
+- **Edit/delete classes** — rename or permanently remove classes from the picker
+- **Move/remove students** — transfer students between classes or remove them from the table view
+- **Change password** — accessible from the class picker
 
 ### v0.24.0 — Cloud Saves & Teacher Dashboard
 - **Supabase cloud sync** — student progress automatically syncs to the cloud when a class code is entered. Works silently in the background; localStorage remains the primary save. Cloud sync status icon in the top bar.
