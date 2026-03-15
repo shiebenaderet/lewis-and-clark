@@ -841,8 +841,8 @@ body {
 }
 .station-glossary-toggle::-webkit-details-marker { display: none; }
 .station-glossary-toggle::marker { display: none; content: ''; }
-.station-glossary-toggle::after { content: ' \u25BE'; font-size: 0.7rem; }
-.station-glossary[open] .station-glossary-toggle::after { content: ' \u25B4'; }
+.station-glossary-toggle::after { content: ' \25BE'; font-size: 0.7rem; }
+.station-glossary[open] .station-glossary-toggle::after { content: ' \25B4'; }
 .station-glossary-list {
   padding: 0 0.75rem 0.75rem;
   border-top: 1px solid rgba(139,69,19,0.1);
