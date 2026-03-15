@@ -8,7 +8,7 @@ An interactive website that turns 10 classroom stations on the Lewis & Clark exp
 
 ## Version
 
-**v0.23.0** — Student Identity
+**v0.24.0** — Cloud Saves & Teacher Dashboard
 
 ## What This Is
 
@@ -101,6 +101,19 @@ Then open `http://localhost:8000` in your browser.
 **Note:** Opening `index.html` directly as a file (`file://`) will not work because browsers block `fetch()` requests from local files. You need a web server.
 
 ## Changelog
+
+### v0.24.0 — Cloud Saves & Teacher Dashboard
+- **Supabase cloud sync** — student progress automatically syncs to the cloud when a class code is entered. Works silently in the background; localStorage remains the primary save. Cloud sync status icon in the top bar.
+- **Class codes** — teachers create classes and get a shareable code (e.g. "CLARK3"). Students enter the code on the name prompt to enable cloud saving.
+- **Cross-device resume** — students on a different Chromebook enter their name + period + class code and get their save loaded from the cloud
+- **Teacher registration** — create a class with an `@edmonds.wednet.edu` email and password
+- **Teacher dashboard** — sign in with class code + password to see:
+  - **Map view** — SVG trail map with student dots colored by period, clustered at stations, with hover tooltips
+  - **Table view** — sortable student list with expandable journal preview (click a row to read their writing)
+  - **Stats bar** — total students, completed count, average score, periods
+  - **Period filter** — filter both views by period
+  - **CSV export** — download class data for gradebook import
+- **Multi-class support** — teachers with multiple classes see a class picker after login. "My Classes" button to switch. Quick-create new classes without re-entering credentials.
 
 ### v0.23.0 — Student Identity
 - **Student name prompt** — on first launch, students enter their name (first name, last initial) and period. Stored in localStorage and save codes. Identity preserved across game restarts.

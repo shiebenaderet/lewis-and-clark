@@ -650,6 +650,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (loaded) {
     updateTitleContinueButton();
     updateIdentityDisplay();
-    console.log('The Lost Expedition v0.23.0: Ready');
+    console.log('The Lost Expedition v0.24.0: Ready');
   }
 });
