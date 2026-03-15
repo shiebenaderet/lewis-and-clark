@@ -70,6 +70,7 @@ function showNamePrompt(callback) {
     state.studentName = name;
     state.period = period;
     saveGame();
+    updateIdentityDisplay();
     overlay.classList.remove('active');
     submitBtn.removeEventListener('click', submit);
     nameInput.removeEventListener('keydown', keyHandler);
@@ -84,6 +85,29 @@ function showNamePrompt(callback) {
   submitBtn.addEventListener('click', submit);
   nameInput.addEventListener('keydown', keyHandler);
   periodInput.addEventListener('keydown', keyHandler);
+}
+
+function updateIdentityDisplay() {
+  var el = document.getElementById('student-identity-display');
+  if (!el) return;
+  if (state.studentName) {
+    el.textContent = '';
+    el.appendChild(document.createTextNode('Signed in as: ' + state.studentName + (state.period ? ' \u2014 Period ' + state.period + ' ' : ' ')));
+    var link = document.createElement('a');
+    link.href = '#';
+    link.textContent = '(change)';
+    link.style.color = '#5a9bbc';
+    link.onclick = function(e) {
+      e.preventDefault();
+      showNamePrompt(function() {
+        updateIdentityDisplay();
+        updateScoreDisplay();
+      });
+    };
+    el.appendChild(link);
+  } else {
+    el.textContent = '';
+  }
 }
 
 // === START GAME ===
@@ -570,6 +594,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const loaded = await loadAllData();
   if (loaded) {
     updateTitleContinueButton();
+    updateIdentityDisplay();
     console.log('The Lost Expedition v0.22.0: Ready');
   }
 });
