@@ -69,29 +69,9 @@ var TeacherDashboard = (function() {
     h += '<div class="dash-error" id="dash-login-error-email"></div>';
     h += '<button class="btn-start" onclick="TeacherDashboard.loginByEmail()" style="width:100%;margin-top:0.5rem;">Sign In</button>';
     h += '</div>';
-    h += '<div style="text-align:center;margin:0.75rem 0;font-size:0.8rem;color:var(--ink-light);">or sign in with a class code</div>';
-    h += '<div class="dash-section">';
-    h += '<div class="dash-field"><label>Class Code</label>';
-    h += '<input type="text" id="dash-login-code" placeholder="e.g. CLARK3" maxlength="6" style="text-transform:uppercase;"></div>';
-    h += '<div class="dash-field"><label>Password</label>';
-    h += '<input type="password" id="dash-login-pass" placeholder="Your teacher password"></div>';
-    h += '<div class="dash-error" id="dash-login-error"></div>';
-    h += '<button class="btn-start" onclick="TeacherDashboard.login()" style="width:100%;margin-top:0.5rem;">Sign In with Code</button>';
-    h += '</div>';
     h += '<div class="dash-divider"></div>';
-    h += '<div class="dash-section">';
-    h += '<h3>Create a New Class</h3>';
-    h += '<div class="dash-field"><label>Your Name</label>';
-    h += '<input type="text" id="dash-reg-name" placeholder="e.g. Mr. B"></div>';
-    h += '<div class="dash-field"><label>School Email</label>';
-    h += '<input type="text" id="dash-reg-email" placeholder="Must end with @edmonds.wednet.edu"></div>';
-    h += '<div class="dash-field"><label>Class Name</label>';
-    h += '<input type="text" id="dash-reg-label" placeholder="e.g. Period 3, Block A"></div>';
-    h += '<div class="dash-field"><label>Choose a Password</label>';
-    h += '<input type="password" id="dash-reg-pass" placeholder="For accessing your dashboard"></div>';
-    h += '<div class="dash-error" id="dash-reg-error"></div>';
-    h += '<button class="btn-start" onclick="TeacherDashboard.register()" style="width:100%;margin-top:0.5rem;">Create Class</button>';
-    h += '</div>';
+    h += '<p style="text-align:center;font-size:0.85rem;color:var(--ink-light);margin-bottom:0.75rem;">New here? Create your first class to get started.</p>';
+    h += '<button class="btn-start" onclick="TeacherDashboard.showRegister()" style="width:100%;background:linear-gradient(135deg,var(--leather-dark),var(--leather));">Create a New Class</button>';
     h += '</div>';
     el.textContent = '';
     el.insertAdjacentHTML('afterbegin', h);
@@ -324,6 +304,56 @@ var TeacherDashboard = (function() {
     return h;
   }
 
+  // === RENDER: Registration Form ===
+  function renderRegisterForm() {
+    var el = getEl();
+    var h = '';
+    h += '<div class="dash-card">';
+    h += '<h2 class="dash-title">Create a New Class</h2>';
+    h += '<p class="dash-subtitle">Set up a class for your students to join.</p>';
+    h += '<div class="dash-section">';
+    h += '<div class="dash-field"><label>Your Name</label>';
+    h += '<input type="text" id="dash-reg-name" placeholder="e.g. Mr. B"></div>';
+    h += '<div class="dash-field"><label>School Email</label>';
+    h += '<input type="text" id="dash-reg-email" placeholder="Must end with @edmonds.wednet.edu"></div>';
+    h += '<div class="dash-field"><label>Class Name</label>';
+    h += '<input type="text" id="dash-reg-label" placeholder="e.g. Period 3, Block A"></div>';
+    h += '<div class="dash-field"><label>Choose a Password</label>';
+    h += '<input type="password" id="dash-reg-pass" placeholder="For accessing your dashboard"></div>';
+    h += '<div class="dash-error" id="dash-reg-error"></div>';
+    h += '<button class="btn-start" onclick="TeacherDashboard.register()" style="width:100%;margin-top:0.5rem;">Create Class</button>';
+    h += '</div>';
+    h += '<div class="dash-divider"></div>';
+    h += '<p style="text-align:center;"><a href="#" onclick="event.preventDefault();TeacherDashboard.show();" style="color:var(--leather);font-size:0.85rem;">Back to Sign In</a></p>';
+    h += '</div>';
+    el.textContent = '';
+    el.insertAdjacentHTML('afterbegin', h);
+  }
+
+  // === RENDER: Change Password ===
+  function renderChangePassword() {
+    var el = getEl();
+    var h = '';
+    h += '<div class="dash-card">';
+    h += '<h2 class="dash-title">Change Password</h2>';
+    h += '<p class="dash-subtitle">This will update the password for all your classes.</p>';
+    h += '<div class="dash-section">';
+    h += '<div class="dash-field"><label>Current Password</label>';
+    h += '<input type="password" id="dash-old-pass" placeholder="Your current password"></div>';
+    h += '<div class="dash-field"><label>New Password</label>';
+    h += '<input type="password" id="dash-new-pass" placeholder="Choose a new password"></div>';
+    h += '<div class="dash-field"><label>Confirm New Password</label>';
+    h += '<input type="password" id="dash-confirm-pass" placeholder="Type it again"></div>';
+    h += '<div class="dash-error" id="dash-pass-error"></div>';
+    h += '<button class="btn-start" onclick="TeacherDashboard.submitPasswordChange()" style="width:100%;margin-top:0.5rem;">Update Password</button>';
+    h += '</div>';
+    h += '<div class="dash-divider"></div>';
+    h += '<p style="text-align:center;"><a href="#" onclick="event.preventDefault();TeacherDashboard.myClasses();" style="color:var(--leather);font-size:0.85rem;">Back to My Classes</a></p>';
+    h += '</div>';
+    el.textContent = '';
+    el.insertAdjacentHTML('afterbegin', h);
+  }
+
   // === RENDER: Class Picker (multi-class teachers) ===
   function renderClassPicker(classes, teacherName, teacherEmail, password) {
     var el = getEl();
@@ -352,6 +382,7 @@ var TeacherDashboard = (function() {
     h += '<div class="dash-divider"></div>';
     h += '<button class="btn-start" onclick="TeacherDashboard.quickCreateClass()" style="width:100%;">Create Another Class</button>';
     h += '<div id="quick-create-status" style="text-align:center;margin-top:0.5rem;font-size:0.8rem;color:var(--ink-light);"></div>';
+    h += '<p style="text-align:center;margin-top:1rem;"><a href="#" onclick="event.preventDefault();TeacherDashboard.showChangePassword();" style="color:var(--leather);font-size:0.8rem;">Change Password</a></p>';
     h += '</div>';
     el.textContent = '';
     el.insertAdjacentHTML('afterbegin', h);
@@ -363,6 +394,33 @@ var TeacherDashboard = (function() {
       document.querySelectorAll('.screen').forEach(function(s) { s.classList.remove('active'); });
       document.getElementById('dashboard-screen').classList.add('active');
       renderLogin();
+    },
+
+    showRegister: function() {
+      renderRegisterForm();
+    },
+
+    showChangePassword: function() {
+      renderChangePassword();
+    },
+
+    submitPasswordChange: function() {
+      if (!_session || !_session.teacherEmail) return;
+      var oldPass = (document.getElementById('dash-old-pass').value || '').trim();
+      var newPass = (document.getElementById('dash-new-pass').value || '').trim();
+      var confirmPass = (document.getElementById('dash-confirm-pass').value || '').trim();
+      var errEl = document.getElementById('dash-pass-error');
+      if (!oldPass || !newPass || !confirmPass) { errEl.textContent = 'Please fill in all fields.'; return; }
+      if (newPass.length < 4) { errEl.textContent = 'New password must be at least 4 characters.'; return; }
+      if (newPass !== confirmPass) { errEl.textContent = 'New passwords do not match.'; return; }
+      errEl.textContent = 'Updating...';
+      changeTeacherPassword(_session.teacherEmail, oldPass, newPass).then(function(result) {
+        if (result.error) { errEl.textContent = result.error; }
+        else {
+          alert('Password updated successfully!');
+          TeacherDashboard.myClasses();
+        }
+      });
     },
 
     loginByEmail: function() {

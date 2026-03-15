@@ -245,6 +245,34 @@ async function fetchTeacherClasses(teacherEmail) {
   return resp.data || [];
 }
 
+// === TEACHER: CHANGE PASSWORD ===
+async function changeTeacherPassword(teacherEmail, oldPassword, newPassword) {
+  var sb = getSupabase();
+  if (!sb) return { error: 'Supabase not available' };
+
+  // Verify old password
+  var resp = await sb.from('lc_classes')
+    .select('teacher_password_hash')
+    .eq('teacher_email', teacherEmail.toLowerCase())
+    .limit(1)
+    .single();
+
+  if (!resp.data) return { error: 'Account not found' };
+
+  var oldHash = await hashPassword(oldPassword);
+  if (oldHash !== resp.data.teacher_password_hash) {
+    return { error: 'Current password is incorrect' };
+  }
+
+  var newHash = await hashPassword(newPassword);
+  var updateResp = await sb.from('lc_classes')
+    .update({ teacher_password_hash: newHash })
+    .eq('teacher_email', teacherEmail.toLowerCase());
+
+  if (updateResp.error) return { error: updateResp.error.message };
+  return { success: true };
+}
+
 // === TEACHER: UPDATE CLASS LABEL ===
 async function updateClassLabel(classCode, newLabel) {
   var sb = getSupabase();
