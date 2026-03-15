@@ -1202,6 +1202,42 @@ body {
   padding: 2rem;
 }
 
+#completion-screen::before {
+  content: '';
+  position: fixed;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 400px; height: 150px;
+  background: radial-gradient(ellipse at center, rgba(212,118,10,0.25) 0%, transparent 70%);
+  animation: campfireGlow 3s ease-in-out infinite;
+  pointer-events: none; z-index: 0;
+}
+
+@keyframes campfireGlow {
+  0%, 100% { opacity: 0.6; transform: translateX(-50%) scale(1); }
+  50% { opacity: 1; transform: translateX(-50%) scale(1.08); }
+}
+
+#completion-screen::after {
+  content: '';
+  position: fixed;
+  bottom: 40px; left: 50%;
+  width: 4px; height: 4px;
+  background: var(--campfire-glow);
+  border-radius: 50%;
+  animation: ember 3s ease-out infinite;
+  pointer-events: none; z-index: 0;
+  box-shadow:
+    -30px 10px 0 0 var(--campfire),
+    40px -5px 0 0 var(--campfire-glow),
+    -60px 15px 0 -1px var(--campfire);
+}
+
+@keyframes ember {
+  0% { transform: translateY(0) translateX(0); opacity: 1; }
+  100% { transform: translateY(-140px) translateX(15px); opacity: 0; }
+}
+
 .completion-content {
   max-width: 600px;
 }
