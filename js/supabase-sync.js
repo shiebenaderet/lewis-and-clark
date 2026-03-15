@@ -242,13 +242,31 @@ async function deleteClass(classCode) {
   return { success: true };
 }
 
+// === TEACHER: MOVE STUDENT TO ANOTHER CLASS ===
+async function moveStudent(saveId, newClassCode) {
+  var sb = getSupabase();
+  if (!sb) return { error: 'Supabase not available' };
+  var resp = await sb.from('lc_saves').update({ class_code: newClassCode }).eq('id', saveId);
+  if (resp.error) return { error: resp.error.message };
+  return { success: true };
+}
+
+// === TEACHER: DELETE STUDENT SAVE ===
+async function deleteStudentSave(saveId) {
+  var sb = getSupabase();
+  if (!sb) return { error: 'Supabase not available' };
+  var resp = await sb.from('lc_saves').delete().eq('id', saveId);
+  if (resp.error) return { error: resp.error.message };
+  return { success: true };
+}
+
 // === TEACHER: FETCH ALL SAVES FOR DASHBOARD ===
 async function fetchClassSaves(classCode) {
   var sb = getSupabase();
   if (!sb) return [];
 
   var resp = await sb.from('lc_saves')
-    .select('student_name, period, current_station, score, completed, save_data, updated_at')
+    .select('id, student_name, period, current_station, score, completed, save_data, updated_at')
     .eq('class_code', classCode)
     .order('period')
     .order('student_name');

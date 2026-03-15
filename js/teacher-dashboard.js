@@ -254,27 +254,32 @@ var TeacherDashboard = (function() {
     var h = '<div class="dash-table-wrap">';
     h += '<div style="text-align:right;margin-bottom:0.5rem;"><button class="btn-save-code" onclick="TeacherDashboard.exportCSV()">Export CSV</button></div>';
     h += '<table class="dash-table"><thead><tr>';
-    h += '<th>Name</th><th>Period</th><th>Station</th><th>Score</th><th>Status</th><th>Last Active</th>';
+    h += '<th>Name</th><th>Period</th><th>Station</th><th>Score</th><th>Status</th><th>Last Active</th><th></th>';
     h += '</tr></thead><tbody>';
 
     filtered.forEach(function(s, i) {
       var statusText = s.completed ? '\u2705 Complete' : 'Station ' + ((s.current_station||0)+1) + '/10';
       var lastActive = s.updated_at ? new Date(s.updated_at).toLocaleDateString() : '\u2014';
-      h += '<tr class="dash-row" onclick="TeacherDashboard.expandRow(' + i + ')">';
-      h += '<td>' + escapeHtml(s.student_name) + '</td>';
+      var saveId = s.id || '';
+      h += '<tr class="dash-row">';
+      h += '<td onclick="TeacherDashboard.expandRow(' + i + ')" style="cursor:pointer;">' + escapeHtml(s.student_name) + '</td>';
       h += '<td>' + escapeHtml(s.period) + '</td>';
       h += '<td>' + ((s.current_station||0)+1) + '</td>';
       h += '<td>' + (s.score||0) + '</td>';
       h += '<td>' + statusText + '</td>';
       h += '<td>' + lastActive + '</td>';
+      h += '<td class="dash-student-actions">';
+      h += '<button class="dash-class-action-btn" onclick="TeacherDashboard.moveStudent(\'' + saveId + '\', \'' + escapeHtml(s.student_name) + '\')" title="Move to another class">\u27A1\uFE0F</button>';
+      h += '<button class="dash-class-action-btn dash-class-delete" onclick="TeacherDashboard.removeStudent(\'' + saveId + '\', \'' + escapeHtml(s.student_name) + '\')" title="Remove student">\u1F5D1\uFE0F</button>';
+      h += '</td>';
       h += '</tr>';
-      h += '<tr class="dash-expand" id="dash-expand-' + i + '" style="display:none;"><td colspan="6">';
+      h += '<tr class="dash-expand" id="dash-expand-' + i + '" style="display:none;"><td colspan="7">';
       h += buildJournalPreview(s);
       h += '</td></tr>';
     });
 
     if (filtered.length === 0) {
-      h += '<tr><td colspan="6" style="text-align:center;padding:2rem;color:#8b7355;font-style:italic;">No students have joined this class yet.</td></tr>';
+      h += '<tr><td colspan="7" style="text-align:center;padding:2rem;color:#8b7355;font-style:italic;">No students have joined this class yet.</td></tr>';
     }
 
     h += '</tbody></table></div>';
@@ -483,6 +488,39 @@ var TeacherDashboard = (function() {
     expandRow: function(idx) {
       var row = document.getElementById('dash-expand-' + idx);
       if (row) row.style.display = row.style.display === 'none' ? '' : 'none';
+    },
+
+    moveStudent: function(saveId, studentName) {
+      if (!_session || !_session.teacherEmail) return;
+      fetchTeacherClasses(_session.teacherEmail).then(function(classes) {
+        var otherClasses = classes.filter(function(c) { return c.class_code !== _session.classCode; });
+        if (otherClasses.length === 0) {
+          alert('You only have one class. Create another class first to move students.');
+          return;
+        }
+        var options = otherClasses.map(function(c, i) {
+          return (i + 1) + '. ' + (c.class_label || c.class_code) + ' (' + c.class_code + ')';
+        }).join('\n');
+        var choice = prompt('Move ' + studentName + ' to which class?\n\n' + options + '\n\nEnter the number:');
+        if (!choice) return;
+        var idx = parseInt(choice) - 1;
+        if (idx < 0 || idx >= otherClasses.length) { alert('Invalid choice.'); return; }
+        var targetCode = otherClasses[idx].class_code;
+        var targetLabel = otherClasses[idx].class_label || targetCode;
+        if (!confirm('Move ' + studentName + ' to ' + targetLabel + '?')) return;
+        moveStudent(saveId, targetCode).then(function(result) {
+          if (result.error) { alert('Error: ' + result.error); }
+          else { alert(studentName + ' moved to ' + targetLabel); TeacherDashboard.refresh(); }
+        });
+      });
+    },
+
+    removeStudent: function(saveId, studentName) {
+      if (!confirm('Remove ' + studentName + ' from this class? Their save data will be permanently deleted.')) return;
+      deleteStudentSave(saveId).then(function(result) {
+        if (result.error) { alert('Error: ' + result.error); }
+        else { alert(studentName + ' has been removed.'); TeacherDashboard.refresh(); }
+      });
     },
 
     editClass: function(classCode) {
