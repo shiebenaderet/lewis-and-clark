@@ -8,7 +8,7 @@ An interactive website that turns 10 classroom stations on the Lewis & Clark exp
 
 ## Version
 
-**v0.22.0** — Pre-Launch Polish: Accessibility, Mobile & UX Improvements
+**v0.23.0** — Student Identity
 
 ## What This Is
 
@@ -101,6 +101,13 @@ Then open `http://localhost:8000` in your browser.
 **Note:** Opening `index.html` directly as a file (`file://`) will not work because browsers block `fetch()` requests from local files. You need a web server.
 
 ## Changelog
+
+### v0.23.0 — Student Identity
+- **Student name prompt** — on first launch, students enter their name (first name, last initial) and period. Stored in localStorage and save codes. Identity preserved across game restarts.
+- **PDF auto-fill** — journal export cover page now shows "Recorded by: Sarah T. — Period 3" instead of a blank line. Student name also appears in the header of each entry page.
+- **In-game display** — student name shown in the top bar alongside the score
+- **Edit link** — students can change their name/period in the Save & Load panel on the title screen
+- **Pre-v0.23 save migration** — students with existing saves are prompted for their name once on next continue
 
 ### v0.22.0 — Pre-Launch Polish: Accessibility, Mobile & UX Improvements
 
