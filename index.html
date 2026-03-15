@@ -56,7 +56,8 @@
         <a href="https://www.gilderlehrman.org/history-resources/online-exhibitions/lewis-and-clark-expedition-interactive-map" target="_blank" rel="noopener">Interactive Expedition Map <span>Timeline &amp; route explorer &mdash; Gilder Lehrman Institute</span></a>
       </div>
     </details>
-    <div style="margin-top:2rem;font-size:0.7rem;color:rgba(244,232,193,0.3);font-family:var(--font-ui);">v0.23.0</div>
+    <div style="margin-top:1.5rem;"><button class="btn-save-code" onclick="TeacherDashboard.show()" style="opacity:0.6;font-size:0.75rem;">Teacher Dashboard</button></div>
+    <div style="margin-top:1rem;font-size:0.7rem;color:rgba(244,232,193,0.3);font-family:var(--font-ui);">v0.24.0</div>
   </div>
 </div>
 
@@ -85,6 +86,7 @@
       <span class="station-indicator" id="station-indicator">Station 1 of 10</span>
       <span class="score-display" id="score-display">0 pts</span>
       <span class="student-name-display" id="student-name-display"></span>
+      <span class="cloud-sync-icon" id="cloud-sync-icon"></span>
     </div>
     <div class="top-bar-right">
       <button class="btn-dyslexic-small" id="btn-dyslexic-game" onclick="toggleDyslexicFont()" aria-pressed="false" title="Toggle dyslexia-friendly font">Aa</button>
@@ -223,6 +225,16 @@
 </div>
 
 <!-- ============================================================
+     TEACHER DASHBOARD SCREEN
+     ============================================================ -->
+<div id="dashboard-screen" class="screen">
+  <div class="dashboard-container">
+    <button class="tg-back-btn" onclick="TeacherDashboard.exitDashboard()">&larr; Back to Home</button>
+    <div id="dashboard-content"></div>
+  </div>
+</div>
+
+<!-- ============================================================
      STUDENT NAME PROMPT
      ============================================================ -->
 <div class="name-prompt-overlay" id="name-prompt-overlay">
@@ -237,6 +249,10 @@
       <label for="student-period-input">Period</label>
       <input type="text" id="student-period-input" class="name-prompt-input" placeholder="e.g. 3" autocomplete="off" maxlength="10">
     </div>
+    <div class="name-prompt-field">
+      <label for="student-class-code-input">Class code <span style="font-weight:normal;opacity:0.7;">(ask your teacher)</span></label>
+      <input type="text" id="student-class-code-input" class="name-prompt-input" placeholder="e.g. CLARK3 (optional)" autocomplete="off" maxlength="6" style="text-transform:uppercase;">
+    </div>
     <div class="name-prompt-error" id="name-prompt-error"></div>
     <button class="btn-start name-prompt-btn" id="name-prompt-submit">Begin</button>
   </div>
@@ -245,6 +261,7 @@
 <!-- ============================================================
      JAVASCRIPT (loaded in dependency order)
      ============================================================ -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/accessibility.js"></script>
 <script src="js/data-loader.js"></script>
 <script src="js/game-state.js"></script>
@@ -252,6 +269,8 @@
 <script src="js/trail-events.js"></script>
 <script src="js/game-engine.js"></script>
 <script src="js/trail-game.js"></script>
+<script src="js/supabase-sync.js"></script>
+<script src="js/teacher-dashboard.js"></script>
 
 </body>
 </html>

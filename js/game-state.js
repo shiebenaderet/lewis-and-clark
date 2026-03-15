@@ -18,12 +18,14 @@ let state = {
   glossary: [],
   wordChallengesWon: 0,
   studentName: '',
-  period: ''
+  period: '',
+  classCode: ''
 };
 
 function resetState() {
   var savedName = state.studentName;
   var savedPeriod = state.period;
+  var savedClassCode = state.classCode;
   state = {
     level: state.level,
     currentStation: 0,
@@ -38,7 +40,8 @@ function resetState() {
     glossary: [],
     wordChallengesWon: 0,
     studentName: savedName,
-    period: savedPeriod
+    period: savedPeriod,
+    classCode: savedClassCode
   };
   clearSave();
 }
@@ -74,6 +77,7 @@ function _buildSaveData() {
     wordChallengesWon: state.wordChallengesWon || 0,
     studentName: state.studentName || '',
     period: state.period || '',
+    classCode: state.classCode || '',
     savedAt: new Date().toISOString()
   };
 }
@@ -94,6 +98,7 @@ function _parseSaveData(data) {
     wordChallengesWon: data.wordChallengesWon || 0,
     studentName: data.studentName || '',
     period: data.period || '',
+    classCode: data.classCode || '',
     savedAt: data.savedAt
   };
 }
@@ -111,6 +116,10 @@ function saveGame() {
         indicator.style.outline = '2px solid #c44';
       }
     }
+  }
+  // Cloud sync (async, non-blocking)
+  if (state.classCode && typeof syncToCloud === 'function') {
+    syncToCloud();
   }
 }
 

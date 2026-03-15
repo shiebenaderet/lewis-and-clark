@@ -47,8 +47,11 @@ function showNamePrompt(callback) {
   var errorEl = document.getElementById('name-prompt-error');
   var submitBtn = document.getElementById('name-prompt-submit');
 
+  var classCodeInput = document.getElementById('student-class-code-input');
+
   if (state.studentName) nameInput.value = state.studentName;
   if (state.period) periodInput.value = state.period;
+  if (state.classCode && classCodeInput) classCodeInput.value = state.classCode;
 
   overlay.classList.add('active');
   nameInput.focus();
@@ -56,6 +59,7 @@ function showNamePrompt(callback) {
   function submit() {
     var name = nameInput.value.trim();
     var period = periodInput.value.trim();
+    var classCode = classCodeInput ? classCodeInput.value.trim().toUpperCase() : '';
     if (!name) {
       errorEl.textContent = 'Please enter your name.';
       nameInput.focus();
@@ -69,6 +73,56 @@ function showNamePrompt(callback) {
     errorEl.textContent = '';
     state.studentName = name;
     state.period = period;
+    state.classCode = classCode;
+
+    if (classCode && typeof validateClassCode === 'function') {
+      errorEl.textContent = 'Checking class code...';
+      validateClassCode(classCode).then(function(valid) {
+        if (!valid) {
+          errorEl.textContent = 'Class code not found. Check with your teacher or leave blank to continue without cloud save.';
+          state.classCode = '';
+          return;
+        }
+        errorEl.textContent = '';
+        // Check for existing cloud save
+        if (typeof checkCloudSave === 'function') {
+          checkCloudSave(classCode, name, period).then(function(exists) {
+            if (exists) {
+              errorEl.textContent = '';
+              if (confirm('Welcome back! A saved expedition was found for ' + name + '. Load it?')) {
+                loadFromCloud(classCode, name, period).then(function(cloudData) {
+                  if (cloudData) {
+                    var parsed = _parseSaveData(cloudData);
+                    state.level = parsed.level;
+                    state.currentStation = parsed.currentStation;
+                    state.visitedStations = parsed.visitedStations;
+                    state.journalEntries = parsed.journalEntries;
+                    state.score = parsed.score;
+                    state.challengesCompleted = parsed.challengesCompleted;
+                    state.seenEvents = parsed.seenEvents;
+                    state.discoveries = parsed.discoveries;
+                    state.scenariosCompleted = parsed.scenariosCompleted;
+                    state.glossary = parsed.glossary;
+                    state.wordChallengesWon = parsed.wordChallengesWon;
+                  }
+                  finishSubmit();
+                });
+                return;
+              }
+            }
+            finishSubmit();
+          });
+        } else {
+          finishSubmit();
+        }
+      });
+      return;
+    }
+
+    finishSubmit();
+  }
+
+  function finishSubmit() {
     saveGame();
     updateIdentityDisplay();
     overlay.classList.remove('active');
@@ -209,6 +263,7 @@ function continueGame() {
   state.wordChallengesWon = saved.wordChallengesWon || 0;
   state.studentName = saved.studentName || '';
   state.period = saved.period || '';
+  state.classCode = saved.classCode || '';
 
   // Unlock bonus game if all stations have been visited
   if (state.visitedStations.size >= 10) unlockGame();
