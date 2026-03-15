@@ -1530,12 +1530,18 @@ body {
   background: rgba(139,69,19,0.12);
   border-color: var(--leather);
 }
+.dash-class-item-label {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--ink);
+}
 .dash-class-item-code {
   font-family: var(--font-ui);
-  font-size: 1.1rem;
-  font-weight: 700;
+  font-size: 0.8rem;
+  font-weight: 600;
   letter-spacing: 0.1em;
-  color: var(--leather-dark);
+  color: var(--leather);
 }
 .dash-class-item-info {
   font-size: 0.75rem;

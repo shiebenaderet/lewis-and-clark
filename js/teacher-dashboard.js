@@ -76,6 +76,8 @@ var TeacherDashboard = (function() {
     h += '<input type="text" id="dash-reg-name" placeholder="e.g. Mr. B"></div>';
     h += '<div class="dash-field"><label>School Email</label>';
     h += '<input type="text" id="dash-reg-email" placeholder="Must end with @edmonds.wednet.edu"></div>';
+    h += '<div class="dash-field"><label>Class Name</label>';
+    h += '<input type="text" id="dash-reg-label" placeholder="e.g. Period 3, Block A"></div>';
     h += '<div class="dash-field"><label>Choose a Password</label>';
     h += '<input type="password" id="dash-reg-pass" placeholder="For accessing your dashboard"></div>';
     h += '<div class="dash-error" id="dash-reg-error"></div>';
@@ -113,7 +115,8 @@ var TeacherDashboard = (function() {
     var h = '';
     h += '<div class="dash-header">';
     h += '<div class="dash-header-left">';
-    h += '<h2 class="dash-title" style="margin:0;">' + escapeHtml(_session.teacherName) + '\'s Class</h2>';
+    var dashLabel = _session.classLabel ? escapeHtml(_session.classLabel) : escapeHtml(_session.teacherName) + '\'s Class';
+    h += '<h2 class="dash-title" style="margin:0;">' + dashLabel + '</h2>';
     h += '<span class="dash-code-badge">Code: ' + escapeHtml(_session.classCode) + '</span>';
     h += '</div>';
     h += '<div class="dash-header-right">';
@@ -317,8 +320,12 @@ var TeacherDashboard = (function() {
     h += '<div class="dash-class-list">';
     classes.forEach(function(c) {
       var created = c.created_at ? new Date(c.created_at).toLocaleDateString() : '';
+      var label = c.class_label || '';
       h += '<div class="dash-class-item" onclick="TeacherDashboard.selectClass(\'' + escapeHtml(c.class_code) + '\')" style="cursor:pointer;">';
+      h += '<div style="display:flex;flex-direction:column;">';
+      if (label) h += '<div class="dash-class-item-label">' + escapeHtml(label) + '</div>';
       h += '<div class="dash-class-item-code">' + escapeHtml(c.class_code) + '</div>';
+      h += '</div>';
       h += '<div class="dash-class-item-info">Created ' + created + '</div>';
       h += '</div>';
     });
@@ -360,10 +367,14 @@ var TeacherDashboard = (function() {
     },
 
     selectClass: function(classCode) {
-      if (_session) {
-        _session.classCode = classCode;
+      if (!_session) return;
+      _session.classCode = classCode;
+      // Find the label for this class
+      fetchTeacherClasses(_session.teacherEmail).then(function(classes) {
+        var match = classes.find(function(c) { return c.class_code === classCode; });
+        _session.classLabel = match ? (match.class_label || '') : '';
         TeacherDashboard.refresh();
-      }
+      });
     },
 
     showCreateFromPicker: function() {
@@ -381,13 +392,14 @@ var TeacherDashboard = (function() {
     register: function() {
       var name = (document.getElementById('dash-reg-name').value || '').trim();
       var email = (document.getElementById('dash-reg-email').value || '').trim().toLowerCase();
+      var label = (document.getElementById('dash-reg-label').value || '').trim();
       var pass = (document.getElementById('dash-reg-pass').value || '').trim();
       var errEl = document.getElementById('dash-reg-error');
       if (!name || !email || !pass) { errEl.textContent = 'Please fill in all fields.'; return; }
       if (!email.endsWith('@edmonds.wednet.edu')) { errEl.textContent = 'Email must end with @edmonds.wednet.edu'; return; }
       if (pass.length < 4) { errEl.textContent = 'Password must be at least 4 characters.'; return; }
       errEl.textContent = 'Creating class...';
-      createClass(name, email, pass).then(function(result) {
+      createClass(name, email, pass, label).then(function(result) {
         if (result.error) { errEl.textContent = result.error; }
         else { _session = { classCode: result.classCode, teacherName: name, teacherEmail: email }; renderClassCreated(result.classCode); }
       });
@@ -407,18 +419,18 @@ var TeacherDashboard = (function() {
 
     quickCreateClass: function() {
       if (!_session) return;
-      var el = getEl();
+      var label = prompt('Class name (e.g. Period 3, Block A):');
+      if (label === null) return;
+      var pass = prompt('Enter your teacher password:');
+      if (!pass) return;
       var statusEl = document.getElementById('quick-create-status');
       if (statusEl) statusEl.textContent = 'Creating...';
-      // Reuse the teacher's stored password hash by creating with same credentials
-      // We need the password for hashing, so prompt for it
-      var pass = prompt('Enter your teacher password to create a new class:');
-      if (!pass) return;
-      createClass(_session.teacherName, _session.teacherEmail, pass).then(function(result) {
+      createClass(_session.teacherName, _session.teacherEmail, pass, label).then(function(result) {
         if (result.error) {
           alert('Error: ' + result.error);
+          if (statusEl) statusEl.textContent = '';
         } else {
-          alert('New class created! Code: ' + result.classCode);
+          alert('New class created! Code: ' + result.classCode + (label ? ' (' + label + ')' : ''));
           TeacherDashboard.myClasses();
         }
       });

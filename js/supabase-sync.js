@@ -145,7 +145,7 @@ async function hashPassword(password) {
 }
 
 // === TEACHER: CREATE CLASS ===
-async function createClass(teacherName, teacherEmail, password) {
+async function createClass(teacherName, teacherEmail, password, classLabel) {
   var sb = getSupabase();
   if (!sb) {
     console.error('Supabase client not initialized');
@@ -158,24 +158,21 @@ async function createClass(teacherName, teacherEmail, password) {
 
   var passwordHash = await hashPassword(password);
 
-  // Generate class code with retry
   for (var attempt = 0; attempt < 5; attempt++) {
     var code = generateClassCode();
-    // Use RPC or direct insert — but RLS blocks direct insert, so we need to bypass
-    // Since RLS blocks classes INSERT, we'll use a service approach
-    // For simplicity in a classroom tool, temporarily allow insert via RLS
     var resp = await sb.from('lc_classes').insert({
       class_code: code,
       teacher_name: teacherName,
       teacher_email: teacherEmail,
-      teacher_password_hash: passwordHash
+      teacher_password_hash: passwordHash,
+      class_label: classLabel || ''
     });
 
     if (!resp.error) {
       return { classCode: code };
     }
     console.warn('Class creation attempt failed:', resp.error);
-    if (resp.error.code === '23505') continue; // unique violation, retry
+    if (resp.error.code === '23505') continue;
     return { error: resp.error.message || 'Failed to create class. Check your email and try again.' };
   }
   return { error: 'Could not generate unique class code. Try again.' };
@@ -219,7 +216,7 @@ async function fetchTeacherClasses(teacherEmail) {
   var sb = getSupabase();
   if (!sb) return [];
   var resp = await sb.from('lc_classes')
-    .select('class_code, teacher_name, created_at')
+    .select('class_code, teacher_name, class_label, created_at')
     .eq('teacher_email', teacherEmail.toLowerCase())
     .order('created_at', { ascending: false });
   return resp.data || [];
