@@ -8,7 +8,7 @@ An interactive website that turns 10 classroom stations on the Lewis & Clark exp
 
 ## Version
 
-**v0.21.0** — Pre-Launch Bug Fixes, Accessibility & Journal Improvements
+**v0.22.0** — Pre-Launch Polish: Accessibility, Mobile & UX Improvements
 
 ## What This Is
 
@@ -101,6 +101,28 @@ Then open `http://localhost:8000` in your browser.
 **Note:** Opening `index.html` directly as a file (`file://`) will not work because browsers block `fetch()` requests from local files. You need a web server.
 
 ## Changelog
+
+### v0.22.0 — Pre-Launch Polish: Accessibility, Mobile & UX Improvements
+
+**Accessibility:**
+- **Focus indicators** — global `:focus-visible` ring using campfire-glow color for all interactive elements; journal inputs get a leather-toned ring with box-shadow
+- **Touch targets** — nav buttons, level toggles, gallery dots, and ordering arrows enlarged to 44px minimum on mobile
+- **Scenario keyboard handlers** — Enter and Space keys now trigger scenario choices (previously click-only)
+- **Color-blind feedback** — all correct/incorrect feedback now prefixed with checkmark/X icons in addition to color
+- **Vocab tooltip tap-to-toggle** — vocabulary tooltips now work on tap (mobile) via delegated click handler, not just hover
+
+**Mobile:**
+- **Journal tracker stacked cards** — below 600px, the journal table switches to a vertical card layout per station with labeled fields
+- **Top bar cleanup** — level toggle hidden below 500px (students set level on title screen)
+- **Map scroll hint** — "Scroll left and right to explore the full trail" hint shown on screens below 700px
+
+**Polish:**
+- **Completion celebration** — campfire glow radial gradient with floating ember particles (CSS-only) on the completion screen
+- **Score animation** — campfire glow pulse (scale + warm text-shadow) when points are earned
+- **Image loading skeleton** — shimmer animation on gallery images while loading, resolves on image load
+
+**Trail game:**
+- **Save persistence** — trail game state saved to localStorage after each action; resume prompt on re-launch with "Resume Expedition" and "Start Fresh" options; save cleared on victory/game over
 
 ### v0.21.0 — Pre-Launch Bug Fixes, Accessibility & Journal Improvements
 

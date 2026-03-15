@@ -505,6 +505,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   const loaded = await loadAllData();
   if (loaded) {
     updateTitleContinueButton();
-    console.log('The Lost Expedition v0.21.0: Ready');
+    console.log('The Lost Expedition v0.22.0: Ready');
   }
 });
