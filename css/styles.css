@@ -678,6 +678,10 @@ body {
   display: block;
 }
 
+.vocab-word.active .vocab-tooltip {
+  display: block;
+}
+
 /* ============================================================
    FORT MANDAN SEASONAL ATMOSPHERE (Stations 4-6)
    ============================================================ */

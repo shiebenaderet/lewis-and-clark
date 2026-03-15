@@ -2788,3 +2788,22 @@ function renderFinalCipher() {
 
   render();
 }
+
+// === VOCAB TOOLTIP TAP-TO-TOGGLE ===
+document.addEventListener('click', function(e) {
+  var vocabWord = e.target.closest('.vocab-word');
+  if (vocabWord) {
+    var wasActive = vocabWord.classList.contains('active');
+    document.querySelectorAll('.vocab-word.active').forEach(function(w) {
+      w.classList.remove('active');
+    });
+    if (!wasActive) {
+      vocabWord.classList.add('active');
+    }
+    e.stopPropagation();
+  } else {
+    document.querySelectorAll('.vocab-word.active').forEach(function(w) {
+      w.classList.remove('active');
+    });
+  }
+});
