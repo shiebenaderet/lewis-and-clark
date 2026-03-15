@@ -4104,6 +4104,20 @@ body {
   .cipher-clue-num { min-width: auto; }
 }
 
+.map-scroll-hint {
+  display: none;
+  text-align: center;
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  color: var(--ink-light);
+  font-style: italic;
+  margin: 0.5rem 0;
+  opacity: 0.7;
+}
+@media (max-width: 700px) {
+  .map-scroll-hint { display: block; }
+}
+
 /* Print styles for journal */
 @media print {
   .top-bar, .station-nav, .nav-btn, .level-toggle { display: none !important; }
