@@ -3996,6 +3996,32 @@ body {
   color: var(--forest-light);
 }
 
+/* --- Score update animation --- */
+@keyframes scoreGlow {
+  0% { transform: scale(1); text-shadow: none; }
+  30% { transform: scale(1.15); text-shadow: 0 0 12px rgba(245,166,35,0.8), 0 0 24px rgba(245,166,35,0.4); }
+  100% { transform: scale(1); text-shadow: none; }
+}
+.score-display.score-updated {
+  animation: scoreGlow 1.2s ease;
+}
+
+/* --- Image loading skeleton --- */
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+.gallery-img-wrap {
+  position: relative;
+  background: linear-gradient(90deg, #2c1810 25%, #3d2518 50%, #2c1810 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease infinite;
+}
+.gallery-img-wrap.img-loaded {
+  background: none;
+  animation: none;
+}
+
 /* --- Mobile touch targets (44px minimum) --- */
 @media (max-width: 600px) {
   .nav-btn { padding: 0.5rem 0.75rem; font-size: 0.8rem; }
