@@ -79,6 +79,11 @@ body {
   line-height: 1.6;
 }
 
+:focus-visible {
+  outline: 3px solid var(--campfire-glow);
+  outline-offset: 2px;
+}
+
 /* --- Screen containers --- */
 .screen {
   display: none !important;
@@ -928,9 +933,10 @@ body {
   line-height: 1.5;
 }
 
-.journal-field-input:focus,
-.journal-field-textarea:focus {
-  outline: none;
+.journal-field-input:focus-visible,
+.journal-field-textarea:focus-visible {
+  outline: 3px solid var(--leather);
+  outline-offset: 0;
   border-color: var(--leather);
   box-shadow: 0 0 0 2px rgba(139, 69, 19, 0.12);
 }
