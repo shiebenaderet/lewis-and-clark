@@ -3960,6 +3960,26 @@ body {
   color: var(--forest-light);
 }
 
+/* --- Mobile touch targets (44px minimum) --- */
+@media (max-width: 600px) {
+  .nav-btn { padding: 0.5rem 0.75rem; font-size: 0.8rem; }
+  .level-toggle button { padding: 0.4rem 0.7rem; font-size: 0.7rem; }
+  .gallery-dot {
+    width: 10px; height: 10px;
+    padding: 17px; margin: -17px 0;
+    background-clip: content-box;
+    border: none; box-sizing: content-box;
+  }
+  .gallery-dot.active { border: none; }
+  .ordering-arrow { padding: 0.4rem 0.6rem; font-size: 1rem; }
+}
+
+@media (max-width: 500px) {
+  #level-toggle { display: none; }
+  .home-link { font-size: 0.8rem; }
+  .station-indicator { font-size: 0.7rem; }
+}
+
 /* Responsive adjustments for word games */
 @media (max-width: 600px) {
   .cipher-cell { width: 26px; height: 32px; font-size: 0.95rem; }
