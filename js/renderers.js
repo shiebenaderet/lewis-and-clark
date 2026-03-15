@@ -1957,33 +1957,68 @@ function addSegmentToJournal(segIndex) {
 // === JOURNAL TRACKER RENDERING (only show visited stations) ===
 function renderJournalTracker() {
   const tbody = document.getElementById('tracker-body');
+  const isMobile = window.innerWidth <= 600;
   let html = '';
 
   for (let i = 0; i < STATIONS.length; i++) {
     const visited = state.visitedStations.has(i);
-
-    // Only show visited stations (progressive discovery)
     if (!visited) continue;
 
+    const s = STATIONS[i];
+    const d = s[state.level] || s.standard;
     const savedDate = state.journalEntries[`date_${i}`] || '';
     const savedAuthor = state.journalEntries[`author_${i}`] || '';
     const savedSummary = state.journalEntries[`summary_${i}`] || '';
     const savedReflection = state.journalEntries[`reflection_${i}`] || '';
 
-    html += '<tr>';
-    html += `<td class="tracker-station-num visited">${i + 1}</td>`;
-    html += `<td><input type="text" value="${escapeHtml(savedDate)}" placeholder="Date(s)..." onchange="saveJournalField(${i}, 'date', this.value)"/></td>`;
-    html += `<td><input type="text" value="${escapeHtml(savedAuthor)}" placeholder="Author(s)..." onchange="saveJournalField(${i}, 'author', this.value)"/></td>`;
-    html += `<td><textarea placeholder="Summary..." onchange="saveJournalField(${i}, 'summary', this.value)">${escapeHtml(savedSummary)}</textarea></td>`;
-    html += `<td><textarea placeholder="Analysis..." onchange="saveReflection(${i}, this.value)">${escapeHtml(savedReflection)}</textarea></td>`;
-    html += '</tr>';
+    if (isMobile) {
+      html += '<div class="tracker-card">';
+      html += `<div class="tracker-card-header">Station ${i + 1}: ${escapeHtml(d.title)}</div>`;
+      html += '<label class="tracker-card-label">Date(s)</label>';
+      html += `<input type="text" value="${escapeHtml(savedDate)}" placeholder="Date(s)..." onchange="saveJournalField(${i}, 'date', this.value)"/>`;
+      html += '<label class="tracker-card-label">Author(s)</label>';
+      html += `<input type="text" value="${escapeHtml(savedAuthor)}" placeholder="Author(s)..." onchange="saveJournalField(${i}, 'author', this.value)"/>`;
+      html += '<label class="tracker-card-label">Summary</label>';
+      html += `<textarea placeholder="Summary..." onchange="saveJournalField(${i}, 'summary', this.value)">${escapeHtml(savedSummary)}</textarea>`;
+      html += '<label class="tracker-card-label">Analysis</label>';
+      html += `<textarea placeholder="Analysis..." onchange="saveReflection(${i}, this.value)">${escapeHtml(savedReflection)}</textarea>`;
+      html += '</div>';
+    } else {
+      html += '<tr>';
+      html += `<td class="tracker-station-num visited">${i + 1}</td>`;
+      html += `<td><input type="text" value="${escapeHtml(savedDate)}" placeholder="Date(s)..." onchange="saveJournalField(${i}, 'date', this.value)"/></td>`;
+      html += `<td><input type="text" value="${escapeHtml(savedAuthor)}" placeholder="Author(s)..." onchange="saveJournalField(${i}, 'author', this.value)"/></td>`;
+      html += `<td><textarea placeholder="Summary..." onchange="saveJournalField(${i}, 'summary', this.value)">${escapeHtml(savedSummary)}</textarea></td>`;
+      html += `<td><textarea placeholder="Analysis..." onchange="saveReflection(${i}, this.value)">${escapeHtml(savedReflection)}</textarea></td>`;
+      html += '</tr>';
+    }
   }
 
   if (html === '') {
-    html = '<tr><td colspan="5" style="text-align:center;color:#8b7355;padding:2rem;font-style:italic;">Visit stations to add entries to your journal.</td></tr>';
+    if (isMobile) {
+      html = '<div class="tracker-card" style="text-align:center;color:#8b7355;padding:2rem;font-style:italic;">Visit stations to add entries to your journal.</div>';
+    } else {
+      html = '<tr><td colspan="5" style="text-align:center;color:#8b7355;padding:2rem;font-style:italic;">Visit stations to add entries to your journal.</td></tr>';
+    }
   }
 
-  tbody.innerHTML = html;
+  if (isMobile) {
+    const table = tbody.closest('table');
+    if (table) table.style.display = 'none';
+    let cardContainer = document.getElementById('tracker-cards');
+    if (!cardContainer) {
+      cardContainer = document.createElement('div');
+      cardContainer.id = 'tracker-cards';
+      table.parentElement.insertBefore(cardContainer, table);
+    }
+    cardContainer.innerHTML = html;
+  } else {
+    const table = tbody.closest('table');
+    if (table) table.style.display = '';
+    const cardContainer = document.getElementById('tracker-cards');
+    if (cardContainer) cardContainer.innerHTML = '';
+    tbody.innerHTML = html;
+  }
 
   // Render discoveries section below the journal table
   const discPanel = document.getElementById('discoveries-panel');
@@ -2003,7 +2038,6 @@ function renderJournalTracker() {
     }
   }
 
-  // Render Field Guide below discoveries
   renderFieldGuide();
 }
 
