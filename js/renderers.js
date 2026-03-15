@@ -239,10 +239,10 @@ function answerFinalTest(qIdx, choice) {
 
   if (isCorrect) {
     _ftScore++;
-    fb.textContent = 'Correct!';
+    fb.textContent = '\u2705 Correct!';
     fb.className = 'ft-feedback show correct';
   } else {
-    fb.textContent = 'Not quite \u2014 the correct answer is highlighted above.';
+    fb.textContent = '\u274C Not quite \u2014 the correct answer is highlighted above.';
     fb.className = 'ft-feedback show incorrect';
   }
 
@@ -587,7 +587,7 @@ function renderScenario(scenario, stationIndex, alreadyCompleted) {
   } else {
     html += '<div class="scenario-choices">';
     scenario.choices.forEach((choice, i) => {
-      html += `<div class="scenario-choice" onclick="answerScenario(${stationIndex}, ${i})" tabindex="0" role="button">`;
+      html += `<div class="scenario-choice" onclick="answerScenario(${stationIndex}, ${i})" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();answerScenario(${stationIndex}, ${i})}" tabindex="0" role="button">`;
       html += `<span class="scenario-choice-letter">${String.fromCharCode(65 + i)}</span>`;
       html += `<span class="scenario-choice-text">${choice.text}</span>`;
       html += '</div>';
@@ -633,7 +633,7 @@ function answerScenario(stationIndex, choiceIndex) {
 
   // Show feedback for the chosen option
   const feedback = document.getElementById(`scenariofb_${stationIndex}`);
-  feedback.innerHTML = `<strong>${isHistorical ? 'That matches history!' : 'Interesting choice!'}</strong> ${scenario.choices[choiceIndex].feedback}`;
+  feedback.innerHTML = `<strong>${isHistorical ? '\u2705 That matches history!' : '\u274C Interesting choice!'}</strong> ${scenario.choices[choiceIndex].feedback}`;
   feedback.className = `scenario-feedback show ${isHistorical ? 'historical' : 'alternate'}`;
 
   // Show the historical reveal
@@ -1152,7 +1152,7 @@ function completeChallengeResult(stationIndex, isCorrect, challenge) {
   const feedback = document.getElementById(`feedback_${stationIndex}`);
 
   if (isCorrect) {
-    feedback.textContent = challenge.feedback_correct;
+    feedback.textContent = '\u2705 ' + challenge.feedback_correct;
     feedback.className = 'challenge-feedback show correct';
     state.score += 10;
     // Unlock discovery
@@ -1197,7 +1197,7 @@ function completeChallengeResult(stationIndex, isCorrect, challenge) {
       }
     }
   } else {
-    feedback.textContent = challenge.feedback_incorrect;
+    feedback.textContent = '\u274C ' + challenge.feedback_incorrect;
     feedback.className = 'challenge-feedback show incorrect';
     state.score += 3; // partial credit for trying
   }
@@ -2156,7 +2156,7 @@ function handleTravelChoice(choiceIndex) {
   // Show result with Continue button (let students read the feedback)
   const resultDiv = document.createElement('div');
   resultDiv.className = 'travel-result ' + (choice.good ? 'result-good' : 'result-bad');
-  resultDiv.innerHTML = `<span class="result-points">${choice.good ? '+5' : '+1'}</span> ${choice.result}`;
+  resultDiv.innerHTML = `<span class="result-points">${choice.good ? '\u2705 +5' : '\u274C +1'}</span> ${choice.result}`;
   container.querySelector('.travel-event').appendChild(resultDiv);
 
   // Update score line
