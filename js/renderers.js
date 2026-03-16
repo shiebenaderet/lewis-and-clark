@@ -1200,7 +1200,8 @@ function renderFillInBlankChallenge(challenge, stationIndex, alreadyCompleted) {
     html += '</div>';
     html += `<div class="challenge-feedback show correct">${challenge.feedback_correct}</div>`;
   } else {
-    html += `<input type="text" class="fill-blank-input" id="blankinput_${stationIndex}" placeholder="fill in the blank…" autocomplete="off" onkeydown="if(event.key==='Enter')checkFillBlank(${stationIndex})">`;
+    var blankWidth = Math.max(150, challenge.blank_answer.length * 14 + 40);
+    html += `<input type="text" class="fill-blank-input" id="blankinput_${stationIndex}" placeholder="fill in the blank\u2026" autocomplete="off" style="width:${blankWidth}px;max-width:100%;" onkeydown="if(event.key==='Enter')checkFillBlank(${stationIndex})">`;
     html += `<span class="quote-text">${challenge.quote_after}"</span>`;
     html += '</div>';
     if (challenge.hint) {

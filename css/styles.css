@@ -2815,8 +2815,8 @@ body {
 .fill-blank-input {
   display: inline-block;
   width: auto;
-  min-width: 200px;
-  max-width: 320px;
+  min-width: 120px;
+  max-width: 100%;
   padding: 0.4rem 0.6rem;
   margin: 0.2rem 0.15rem;
   background: rgba(244, 232, 193, 0.35);
@@ -2940,8 +2940,8 @@ body {
     height: 120px;
   }
   .fill-blank-input {
-    min-width: 120px;
-    max-width: 200px;
+    min-width: 100px;
+    max-width: 100%;
   }
 }
 
