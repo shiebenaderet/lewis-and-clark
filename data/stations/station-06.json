@@ -72,11 +72,12 @@
       "question": "Lewis was deeply excited to leave Fort Mandan. Complete this quote from his journal about what lay ahead:",
       "quote_before": "We were now about to penetrate a country at least two thousand miles in width, on which the foot of",
       "blank_answer": "civilized man had never trod",
-      "quote_after": "— the good or evil it had in store for us was for experiment yet to determine.",
+      "quote_after": ". The good or evil it had in store for us was experiment yet to determine.",
       "hint": "Lewis is describing how no American or European had been where they were going.",
       "accepted_answers": [
         "civilized man had never trod",
         "civilised man had never trod",
+        "civilized man had never trodden",
         "civilized man had never tread",
         "civilized man never trod",
         "civilized man had never walked",
@@ -122,7 +123,7 @@
     "challenge": {
       "type": "fill_in_blank",
       "question": "Complete this passage from Lewis’s journal reflecting on the journey ahead:",
-      "quote_before": "The good or evil it had in store for us was for",
+      "quote_before": "The good or evil it had in store for us was",
       "blank_answer": "experiment yet to determine",
       "quote_after": ", and these little vessels contained every article by which we were to subsist or defend ourselves.",
       "hint": "Lewis is saying the outcome of the journey was still unknown.",
