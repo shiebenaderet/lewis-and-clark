@@ -423,12 +423,18 @@ function completeExpedition() {
 }
 
 function restartGame() {
+  if (hasSave()) {
+    downloadSaveBackup();
+  }
   resetState();
   updateTitleContinueButton();
   showScreen('title-screen');
 }
 
 function restartAtLevel(level) {
+  if (hasSave()) {
+    downloadSaveBackup();
+  }
   resetState();
   state.level = level;
   updateTitleContinueButton();
