@@ -2910,13 +2910,33 @@ function renderFinalCipher() {
   if (!area) return;
   var data = FINAL_CIPHER_DATA;
   var solved = [];
-  for (var i = 0; i < data.words.length; i++) solved[i] = false;
   var totalSolved = 0;
+  var glossary = state.glossary || [];
+
+  // Auto-solve cipher words the student already discovered on the trail
+  for (var i = 0; i < data.words.length; i++) {
+    var wordKey = data.words[i].word.toLowerCase();
+    if (glossary.includes(wordKey)) {
+      solved[i] = true;
+      totalSolved++;
+    } else {
+      solved[i] = false;
+    }
+  }
+
+  var bonusAwarded = false;
+  // Award bonus immediately if all words were auto-filled from trail
+  if (totalSolved === data.words.length && !bonusAwarded) {
+    bonusAwarded = true;
+    state.score += 50;
+    updateScoreDisplay();
+    saveGame();
+  }
 
   function render() {
     var h = '<div class="final-cipher">';
     h += '<h3 class="final-cipher-title">\uD83D\uDD10 Jefferson\'s Cipher</h3>';
-    h += '<p class="final-cipher-intro">Solve each clue to reveal the secret message! The <span class="highlight-hint">highlighted letter</span> from each word spells a final message for President Jefferson.</p>';
+    h += '<p class="final-cipher-intro">Solve each clue to reveal the secret message! The <span class="highlight-hint">highlighted letter</span> from each word spells a final message for President Jefferson.' + (totalSolved > 0 ? ' Words you discovered on the trail have been filled in for you!' : '') + '</p>';
     // Secret message display
     h += '<div class="cipher-message">';
     for (var i = 0; i < data.words.length; i++) {
@@ -2970,7 +2990,8 @@ function renderFinalCipher() {
     if (guess === data.words[idx].word) {
       solved[idx] = true;
       totalSolved++;
-      if (totalSolved === data.words.length) {
+      if (totalSolved === data.words.length && !bonusAwarded) {
+        bonusAwarded = true;
         state.score += 50;
         updateScoreDisplay();
         saveGame();
