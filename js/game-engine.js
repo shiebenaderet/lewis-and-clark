@@ -607,41 +607,48 @@ function renderReviewStation() {
   stTitle.textContent = d.title;
   frag.appendChild(stTitle);
 
-  // Summary section
+  // Summary section — editable textarea
   const sumSec = document.createElement('div');
   sumSec.className = 'review-entry-section';
   const sumLabel = document.createElement('div');
   sumLabel.className = 'review-section-label';
   sumLabel.textContent = 'Your Summary';
   sumSec.appendChild(sumLabel);
-  const sumText = document.createElement('p');
-  if (summary) {
-    sumText.className = 'review-entry-text';
-    sumText.textContent = summary;
-  } else {
-    sumText.className = 'review-empty';
-    sumText.textContent = '[No summary written]';
-  }
-  sumSec.appendChild(sumText);
+  const sumArea = document.createElement('textarea');
+  sumArea.className = 'review-textarea';
+  sumArea.value = summary;
+  sumArea.placeholder = 'Describe the key events at this station\u2026';
+  sumArea.addEventListener('input', function() {
+    state.journalEntries['summary_' + idx] = sumArea.value;
+    saveGame();
+    updateReviewChecklist(idx, checkItems);
+  });
+  sumSec.appendChild(sumArea);
   frag.appendChild(sumSec);
 
-  // Reflection section
+  // Reflection section — editable textarea (if station has a prompt)
+  let refArea = null;
   if (d.reflection) {
     const refSec = document.createElement('div');
     refSec.className = 'review-entry-section';
     const refLabel = document.createElement('div');
     refLabel.className = 'review-section-label';
-    refLabel.textContent = 'Your Historian\u2019s Analysis';
+    refLabel.textContent = 'Historian\u2019s Analysis';
     refSec.appendChild(refLabel);
-    const refText = document.createElement('p');
-    if (reflection) {
-      refText.className = 'review-entry-text';
-      refText.textContent = reflection;
-    } else {
-      refText.className = 'review-empty';
-      refText.textContent = '[No analysis written]';
-    }
-    refSec.appendChild(refText);
+    const refPrompt = document.createElement('p');
+    refPrompt.className = 'review-reflection-prompt';
+    refPrompt.textContent = d.reflection;
+    refSec.appendChild(refPrompt);
+    refArea = document.createElement('textarea');
+    refArea.className = 'review-textarea';
+    refArea.value = reflection;
+    refArea.placeholder = 'Think critically and write your analysis\u2026';
+    refArea.addEventListener('input', function() {
+      state.journalEntries['reflection_' + idx] = refArea.value;
+      saveGame();
+      updateReviewChecklist(idx, checkItems);
+    });
+    refSec.appendChild(refArea);
     frag.appendChild(refSec);
   }
 
@@ -649,20 +656,24 @@ function renderReviewStation() {
   if (checkItems.length > 0) {
     const checkDiv = document.createElement('div');
     checkDiv.className = 'review-checklist';
+    checkDiv.id = 'review-checklist-container';
     const checkTitle = document.createElement('div');
     checkTitle.className = 'review-checklist-title';
     checkTitle.textContent = 'Did you mention\u2026?';
     checkDiv.appendChild(checkTitle);
 
     const combined = (summary + ' ' + reflection).toLowerCase();
-    checkItems.forEach(item => {
+    checkItems.forEach((item, ci) => {
       const termWords = item.key.replace(/_/g, ' ').toLowerCase();
       const found = combined.includes(termWords) || combined.includes(item.label.toLowerCase());
       const lbl = document.createElement('label');
       lbl.className = 'review-check-item' + (found ? ' auto-found' : '');
+      lbl.dataset.key = item.key;
+      lbl.dataset.label = item.label.toLowerCase();
       const cb = document.createElement('input');
       cb.type = 'checkbox';
       if (found) cb.checked = true;
+      cb.readOnly = true;
       lbl.appendChild(cb);
       const termSpan = document.createElement('span');
       termSpan.className = 'review-check-term';
@@ -680,15 +691,20 @@ function renderReviewStation() {
   contentEl.textContent = '';
   contentEl.appendChild(frag);
 
+  // Auto-size textareas to fit content
+  [sumArea, refArea].forEach(ta => {
+    if (!ta) return;
+    ta.style.height = 'auto';
+    ta.style.height = Math.max(ta.scrollHeight, 60) + 'px';
+    ta.addEventListener('input', function() {
+      ta.style.height = 'auto';
+      ta.style.height = ta.scrollHeight + 'px';
+    });
+  });
+
   // Actions
   const actionsEl = document.getElementById('review-actions');
   actionsEl.textContent = '';
-
-  const editBtn = document.createElement('button');
-  editBtn.className = 'btn-review btn-review-edit';
-  editBtn.textContent = 'Go Back & Edit This Entry';
-  editBtn.addEventListener('click', function() { editFromReview(idx); });
-  actionsEl.appendChild(editBtn);
 
   if (_reviewIndex > 0) {
     const prevBtn = document.createElement('button');
@@ -730,12 +746,20 @@ function prevReviewStation() {
   }
 }
 
-function editFromReview(stationIndex) {
-  document.getElementById('journal-review-modal').style.display = 'none';
-  state.currentStation = stationIndex;
-  showView('station');
-  showScreen('game-screen');
-  renderStation(stationIndex);
+function updateReviewChecklist(stationIdx, checkItems) {
+  const container = document.getElementById('review-checklist-container');
+  if (!container) return;
+  const summary = state.journalEntries['summary_' + stationIdx] || '';
+  const reflection = state.journalEntries['reflection_' + stationIdx] || '';
+  const combined = (summary + ' ' + reflection).toLowerCase();
+  container.querySelectorAll('.review-check-item').forEach(lbl => {
+    const termWords = (lbl.dataset.key || '').replace(/_/g, ' ').toLowerCase();
+    const labelText = (lbl.dataset.label || '').toLowerCase();
+    const found = combined.includes(termWords) || combined.includes(labelText);
+    const cb = lbl.querySelector('input[type="checkbox"]');
+    if (cb) cb.checked = found;
+    lbl.classList.toggle('auto-found', found);
+  });
 }
 
 function finishReview() {
@@ -984,40 +1008,5 @@ document.addEventListener('DOMContentLoaded', async () => {
     updateTitleContinueButton();
     updateIdentityDisplay();
     console.log('The Lost Expedition v0.25.0: Ready');
-
-    // Dev/test hook: load mock data and jump to completion
-    if (sessionStorage.getItem('test-review')) {
-      sessionStorage.removeItem('test-review');
-      state.studentName = 'Ahmad';
-      state.period = '1';
-      state.level = 'standard';
-      state.score = 870;
-      state.visitedStations = new Set([0,1,2,3,4,5,6,7,8,9]);
-      state.challengesCompleted = new Set(['c0','c1','c2','c3','c4','c5','c6','c7','c8','c9']);
-      state.discoveries = [0,1,2,3,4,7,9];
-      state.journalEntries = {
-        summary_0: 'The Corps of Discovery set off from Camp Dubois. They used a keelboat and pirogues to travel up the Missouri.',
-        reflection_0: 'The corps included soldiers, boatmen, and York. Different skills were needed.',
-        summary_1: 'They crossed the Great Plains and saw buffalo and prairie dogs. Lewis collected specimen for Jefferson.',
-        reflection_1: 'Lewis wrote like a scientist while Clark tracked distances and practical details.',
-        summary_2: 'Lewis and Clark held a council with the Oto nation and gave out peace medals.',
-        reflection_2: 'The tribes had their own leaders. American diplomacy assumed authority they did not have.',
-        summary_3: 'They spent the winter at the Mandan villages and built Fort Mandan.',
-        reflection_3: 'The Mandan had traded with Europeans for decades already.',
-        summary_4: 'Sacagawea gave birth to Jean Baptiste at Fort Mandan.',
-        reflection_4: 'Lewis recorded the rattlesnake rattle remedy without judging it.',
-        summary_5: 'They departed into terra incognita west of Fort Mandan.',
-        reflection_5: 'Lewis compared himself to Columbus, showing his sense of importance.',
-        summary_6: 'They reached the Great Falls and had to portage 18 miles around them.',
-        reflection_6: '',
-        summary_7: 'They met the Shoshone and Cameahwait turned out to be Sacagawea\'s brother. They got horses at Camp Fortunate.',
-        reflection_7: 'Lewis called the Shoshone poor but they had what they needed.',
-        summary_8: 'They crossed the Continental Divide and nearly starved on the Lolo Trail. The Nez Perce helped them build canoes.',
-        reflection_8: 'They crossed into Oregon Country which the US did not own.',
-        summary_9: 'They reached the Columbia River and the Pacific. They held a vote to decide where to build Fort Clatsop.',
-        reflection_9: 'York and Sacagawea voted equally, which was remarkable for the time.'
-      };
-      completeExpedition();
-    }
   }
 });
