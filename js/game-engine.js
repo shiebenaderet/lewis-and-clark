@@ -536,138 +536,440 @@ function updateTitleContinueButton() {
   container.style.display = html ? 'block' : 'none';
 }
 
-// === JOURNAL PDF EXPORT ===
-function exportJournalPDF() {
-  const stationNames = [];
+// === JOURNAL REVIEW (pre-export station check) ===
+let _reviewStations = [];
+let _reviewIndex = 0;
+
+function startJournalReview() {
+  _reviewStations = [];
   for (let i = 0; i < STATIONS.length; i++) {
-    const s = STATIONS[i];
-    const d = s[state.level] || s.standard;
-    stationNames.push(d.title);
+    if (state.visitedStations.has(i)) _reviewStations.push(i);
+  }
+  _reviewIndex = 0;
+  document.getElementById('journal-review-modal').style.display = 'flex';
+  renderReviewStation();
+}
+
+function getStationCheckItems(stationIndex) {
+  const items = [];
+  if (typeof WORD_BANK !== 'undefined') {
+    const stNum = stationIndex + 1;
+    (WORD_BANK.terms || []).forEach(t => {
+      if (t.station === stNum) {
+        const lvl = t[state.level] || t.standard || {};
+        items.push({ label: t.word, hint: t.definition || lvl.clue || '', key: t.key });
+      }
+    });
+    (WORD_BANK.phrases || []).forEach(p => {
+      if (p.station === stNum) {
+        const lvl = p[state.level] || p.standard || {};
+        items.push({ label: p.phrase, hint: lvl.clue || '', key: p.key || p.phrase.toLowerCase() });
+      }
+    });
+  }
+  return items;
+}
+
+function renderReviewStation() {
+  const idx = _reviewStations[_reviewIndex];
+  const s = STATIONS[idx];
+  const d = s[state.level] || s.standard;
+  const summary = state.journalEntries['summary_' + idx] || '';
+  const reflection = state.journalEntries['reflection_' + idx] || '';
+  const checkItems = getStationCheckItems(idx);
+
+  // Progress bar
+  const progressEl = document.getElementById('review-progress');
+  const progText = document.createElement('span');
+  progText.className = 'review-progress-text';
+  progText.textContent = 'Station ' + (_reviewIndex + 1) + ' of ' + _reviewStations.length;
+  const progBarOuter = document.createElement('div');
+  progBarOuter.className = 'review-progress-bar';
+  const progBarFill = document.createElement('div');
+  progBarFill.className = 'review-progress-fill';
+  progBarFill.style.width = ((_reviewIndex + 1) / _reviewStations.length * 100) + '%';
+  progBarOuter.appendChild(progBarFill);
+  progressEl.textContent = '';
+  progressEl.appendChild(progText);
+  progressEl.appendChild(progBarOuter);
+
+  // Content
+  const contentEl = document.getElementById('review-content');
+  const frag = document.createDocumentFragment();
+
+  const stLabel = document.createElement('div');
+  stLabel.className = 'review-station-label';
+  stLabel.textContent = 'Station ' + (idx + 1);
+  frag.appendChild(stLabel);
+
+  const stTitle = document.createElement('h3');
+  stTitle.className = 'review-station-title';
+  stTitle.textContent = d.title;
+  frag.appendChild(stTitle);
+
+  // Summary section
+  const sumSec = document.createElement('div');
+  sumSec.className = 'review-entry-section';
+  const sumLabel = document.createElement('div');
+  sumLabel.className = 'review-section-label';
+  sumLabel.textContent = 'Your Summary';
+  sumSec.appendChild(sumLabel);
+  const sumText = document.createElement('p');
+  if (summary) {
+    sumText.className = 'review-entry-text';
+    sumText.textContent = summary;
+  } else {
+    sumText.className = 'review-empty';
+    sumText.textContent = '[No summary written]';
+  }
+  sumSec.appendChild(sumText);
+  frag.appendChild(sumSec);
+
+  // Reflection section
+  if (d.reflection) {
+    const refSec = document.createElement('div');
+    refSec.className = 'review-entry-section';
+    const refLabel = document.createElement('div');
+    refLabel.className = 'review-section-label';
+    refLabel.textContent = 'Your Historian\u2019s Analysis';
+    refSec.appendChild(refLabel);
+    const refText = document.createElement('p');
+    if (reflection) {
+      refText.className = 'review-entry-text';
+      refText.textContent = reflection;
+    } else {
+      refText.className = 'review-empty';
+      refText.textContent = '[No analysis written]';
+    }
+    refSec.appendChild(refText);
+    frag.appendChild(refSec);
   }
 
+  // Checklist
+  if (checkItems.length > 0) {
+    const checkDiv = document.createElement('div');
+    checkDiv.className = 'review-checklist';
+    const checkTitle = document.createElement('div');
+    checkTitle.className = 'review-checklist-title';
+    checkTitle.textContent = 'Did you mention\u2026?';
+    checkDiv.appendChild(checkTitle);
+
+    const combined = (summary + ' ' + reflection).toLowerCase();
+    checkItems.forEach(item => {
+      const termWords = item.key.replace(/_/g, ' ').toLowerCase();
+      const found = combined.includes(termWords) || combined.includes(item.label.toLowerCase());
+      const lbl = document.createElement('label');
+      lbl.className = 'review-check-item' + (found ? ' auto-found' : '');
+      const cb = document.createElement('input');
+      cb.type = 'checkbox';
+      if (found) cb.checked = true;
+      lbl.appendChild(cb);
+      const termSpan = document.createElement('span');
+      termSpan.className = 'review-check-term';
+      termSpan.textContent = item.label;
+      lbl.appendChild(termSpan);
+      const hintSpan = document.createElement('span');
+      hintSpan.className = 'review-check-hint';
+      hintSpan.textContent = ' \u2014 ' + item.hint;
+      lbl.appendChild(hintSpan);
+      checkDiv.appendChild(lbl);
+    });
+    frag.appendChild(checkDiv);
+  }
+
+  contentEl.textContent = '';
+  contentEl.appendChild(frag);
+
+  // Actions
+  const actionsEl = document.getElementById('review-actions');
+  actionsEl.textContent = '';
+
+  const editBtn = document.createElement('button');
+  editBtn.className = 'btn-review btn-review-edit';
+  editBtn.textContent = 'Go Back & Edit This Entry';
+  editBtn.addEventListener('click', function() { editFromReview(idx); });
+  actionsEl.appendChild(editBtn);
+
+  if (_reviewIndex > 0) {
+    const prevBtn = document.createElement('button');
+    prevBtn.className = 'btn-review btn-review-prev';
+    prevBtn.textContent = '\u2190 Previous';
+    prevBtn.addEventListener('click', prevReviewStation);
+    actionsEl.appendChild(prevBtn);
+  }
+
+  if (_reviewIndex < _reviewStations.length - 1) {
+    const nextBtn = document.createElement('button');
+    nextBtn.className = 'btn-review btn-review-next';
+    nextBtn.textContent = 'Next Station \u2192';
+    nextBtn.addEventListener('click', nextReviewStation);
+    actionsEl.appendChild(nextBtn);
+  } else {
+    const doneBtn = document.createElement('button');
+    doneBtn.className = 'btn-review btn-review-done';
+    doneBtn.textContent = 'Looks Good \u2014 Ready to Export!';
+    doneBtn.addEventListener('click', finishReview);
+    actionsEl.appendChild(doneBtn);
+  }
+
+  // Scroll to top of panel
+  document.querySelector('.journal-review-panel').scrollTop = 0;
+}
+
+function nextReviewStation() {
+  if (_reviewIndex < _reviewStations.length - 1) {
+    _reviewIndex++;
+    renderReviewStation();
+  }
+}
+
+function prevReviewStation() {
+  if (_reviewIndex > 0) {
+    _reviewIndex--;
+    renderReviewStation();
+  }
+}
+
+function editFromReview(stationIndex) {
+  document.getElementById('journal-review-modal').style.display = 'none';
+  state.currentStation = stationIndex;
+  showView('station');
+  showScreen('game-screen');
+  renderStation(stationIndex);
+}
+
+function finishReview() {
+  document.getElementById('journal-review-modal').style.display = 'none';
+  var exportBtn = document.getElementById('btn-export-pdf');
+  if (exportBtn) exportBtn.style.display = '';
+}
+
+// === JOURNAL PDF EXPORT ===
+function exportJournalPDF() {
+  // Build discoveries list
+  const discList = (state.discoveries || []).sort((a, b) => a - b);
+  const discTotal = (typeof DISCOVERIES !== 'undefined') ? DISCOVERIES.length : 10;
+
+  // Build milestone badges
+  const milestones = [];
+  if (discList.length >= 5) milestones.push('Junior Naturalist');
+  if (discList.length >= 10) milestones.push('Master Explorer');
+
+  // Build expedition summary table
+  let discoveryNames = '';
+  if (discList.length > 0 && typeof DISCOVERIES !== 'undefined') {
+    discoveryNames = discList
+      .filter(idx => DISCOVERIES[idx])
+      .map(idx => DISCOVERIES[idx].icon + ' ' + DISCOVERIES[idx].name)
+      .join(' &bull; ');
+  }
+
+  const summaryTable = `
+    <table class="summary-table">
+      <tr>
+        <td class="summary-cell">
+          <div class="summary-label">Stations</div>
+          <div class="summary-value">${state.visitedStations.size} / ${STATIONS.length}</div>
+        </td>
+        <td class="summary-cell">
+          <div class="summary-label">Knowledge Checks</div>
+          <div class="summary-value">${state.challengesCompleted.size} / ${STATIONS.length}</div>
+        </td>
+        <td class="summary-cell">
+          <div class="summary-label">Discoveries</div>
+          <div class="summary-value">${discList.length} / ${discTotal}</div>
+        </td>
+        <td class="summary-cell">
+          <div class="summary-label">Points</div>
+          <div class="summary-value">${state.score}</div>
+        </td>
+      </tr>
+      ${discoveryNames ? `<tr><td colspan="4" class="summary-discoveries">${discoveryNames}</td></tr>` : ''}
+      ${milestones.length ? `<tr><td colspan="4" class="summary-milestones">${milestones.join(' &bull; ')}</td></tr>` : ''}
+    </table>`;
+
+  // Build journal entries
+  let entryCount = 0;
   let entries = '';
   for (let i = 0; i < STATIONS.length; i++) {
+    const visited = state.visitedStations.has(i);
+    if (!visited) continue;
+
+    const s = STATIONS[i];
+    const d = s[state.level] || s.standard;
+    const title = d.title;
+    const reflectionPrompt = d.reflection || '';
     const date = state.journalEntries[`date_${i}`] || '';
     const author = state.journalEntries[`author_${i}`] || '';
     const summary = state.journalEntries[`summary_${i}`] || '';
     const reflection = state.journalEntries[`reflection_${i}`] || '';
-    const visited = state.visitedStations.has(i);
 
-    if (!visited) continue;
+    const separator = entryCount > 0
+      ? '<div class="entry-separator">&mdash; &#x2736; &mdash;</div>'
+      : '';
 
     entries += `
-      <div class="entry ${i > 0 ? 'page-break' : ''}">
+      ${separator}
+      <div class="entry">
         <div class="entry-header">
-          <div class="entry-station">Station ${i + 1}</div>
-          <div style="font-size:9pt;color:#8b4513;text-align:right;float:right;">${state.studentName || ''}${state.period ? ' — Period ' + state.period : ''}</div>
-          <h2 class="entry-title">${stationNames[i]}</h2>
-          ${date ? `<div class="entry-date">${date}</div>` : ''}
+          <span class="entry-station">Station ${i + 1}</span>
+          <span class="entry-title">${title}</span>
+          ${date ? `<span class="entry-date"> &mdash; ${date}</span>` : ''}
+          ${author ? `<span class="entry-author"> &mdash; ${author}</span>` : ''}
         </div>
-        ${author ? `<div class="entry-field"><span class="field-label">Journal Author(s):</span> ${author}</div>` : ''}
-        ${(state.discoveries || []).includes(i) && typeof DISCOVERIES !== 'undefined' && DISCOVERIES[i] ? `<div class="entry-field" style="color:#8b4513;"><span class="field-label">Discovery:</span> ${DISCOVERIES[i].name} &mdash; ${DISCOVERIES[i].desc}</div>` : ''}
-        ${summary ? `
-          <div class="entry-section">
-            <div class="section-label">Summary of Events</div>
-            <p>${summary}</p>
-          </div>
-        ` : '<div class="entry-section"><div class="section-label">Summary of Events</div><p class="empty-field">[No entry recorded]</p></div>'}
-        ${reflection ? `
+        <div class="entry-section">
+          <div class="section-label">Summary of Events</div>
+          ${summary
+            ? `<p>${summary}</p>`
+            : '<p class="empty-field">[No entry recorded]</p>'}
+        </div>
+        ${reflectionPrompt ? `
           <div class="entry-section">
             <div class="section-label">Historian&rsquo;s Analysis</div>
-            <p>${reflection}</p>
+            <p class="reflection-prompt">${reflectionPrompt}</p>
+            ${reflection
+              ? `<p>${reflection}</p>`
+              : '<p class="empty-field">[No entry recorded]</p>'}
           </div>
         ` : ''}
-        <div class="entry-ornament">&mdash; &#x2736; &mdash;</div>
       </div>
     `;
+    entryCount++;
   }
 
-  const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Expedition Journal - The Lost Expedition</title>
+  const printHTML = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Expedition Journal - The Lost Expedition</title>
 <style>
-  @page { size: letter; margin: 0.75in 1in; }
+  @page { size: letter; margin: 1in; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     font-family: 'Georgia', 'Times New Roman', serif;
     color: #2c1810;
     background: #f4e8c1;
-    line-height: 1.7;
-    font-size: 12pt;
+    line-height: 1.5;
+    font-size: 11pt;
+    padding: 0.5in;
   }
-  .cover {
+  .header {
     text-align: center;
-    padding: 2.5in 0.5in 1in;
-    page-break-after: always;
-  }
-  .cover-border {
-    border: 3px double #8b4513;
-    padding: 2rem;
-  }
-  .cover-year { font-size: 14pt; color: #8b4513; letter-spacing: 0.3em; margin-bottom: 0.5rem; }
-  .cover h1 { font-size: 28pt; color: #2c1810; margin-bottom: 0.3rem; }
-  .cover-sub { font-size: 14pt; font-style: italic; color: #5c4033; margin-bottom: 1.5rem; }
-  .cover-divider { width: 120px; height: 2px; background: #8b4513; margin: 1rem auto; }
-  .cover-by { font-size: 11pt; color: #5c4033; margin-top: 1rem; }
-  .cover-name { font-size: 16pt; font-weight: bold; color: #2c1810; margin-top: 0.25rem; border-bottom: 1px solid #8b4513; display: inline-block; min-width: 250px; padding-bottom: 2px; }
-  .cover-stats { font-size: 10pt; color: #8b4513; margin-top: 2rem; }
-  .page-break { page-break-before: always; }
-  .entry { margin-bottom: 2rem; }
-  .entry-header {
     border-bottom: 2px solid #8b4513;
-    padding-bottom: 0.5rem;
-    margin-bottom: 1rem;
+    padding-bottom: 0.4rem;
+    margin-bottom: 0.6rem;
   }
-  .entry-station {
+  .header-title {
+    font-size: 18pt;
+    color: #2c1810;
+    margin-bottom: 0.1rem;
+  }
+  .header-sub {
     font-size: 9pt;
-    text-transform: uppercase;
+    font-style: italic;
+    color: #5c4033;
     letter-spacing: 0.15em;
-    color: #8b4513;
   }
-  .entry-title { font-size: 18pt; color: #2c1810; margin: 0.2rem 0; }
-  .entry-date { font-style: italic; color: #5c4033; font-size: 11pt; }
-  .entry-field { font-size: 11pt; color: #5c4033; margin-bottom: 0.75rem; }
-  .field-label { font-weight: bold; color: #2c1810; }
-  .entry-section { margin-bottom: 1rem; }
-  .section-label {
+  .header-info {
     font-size: 9pt;
+    color: #8b4513;
+    margin-top: 0.25rem;
+  }
+  .summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 0.8rem;
+    border: 1px solid #c9a96e;
+  }
+  .summary-cell {
+    width: 25%;
+    text-align: center;
+    padding: 0.3rem 0.2rem;
+    border-right: 1px solid #c9a96e;
+  }
+  .summary-cell:last-child { border-right: none; }
+  .summary-label {
+    font-size: 7pt;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: #8b4513;
     font-weight: bold;
+  }
+  .summary-value {
+    font-size: 14pt;
+    font-weight: bold;
+    color: #2c1810;
+  }
+  .summary-discoveries {
+    font-size: 8pt;
+    color: #5c4033;
+    text-align: center;
+    padding: 0.25rem 0.3rem;
+    border-top: 1px solid #c9a96e;
+    line-height: 1.6;
+  }
+  .summary-milestones {
+    font-size: 8pt;
+    font-weight: bold;
+    color: #8b4513;
+    text-align: center;
+    padding: 0.2rem;
+    border-top: 1px solid #c9a96e;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .entry { margin-bottom: 0.8rem; }
+  .entry-header {
     margin-bottom: 0.3rem;
   }
+  .entry-station {
+    font-size: 8pt;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #8b4513;
+    font-weight: bold;
+  }
+  .entry-title { font-size: 13pt; color: #2c1810; font-weight: bold; }
+  .entry-date { font-style: italic; color: #5c4033; font-size: 9pt; }
+  .entry-author { color: #5c4033; font-size: 9pt; }
+  .entry-section { margin-bottom: 0.5rem; }
+  .section-label {
+    font-size: 8pt;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #8b4513;
+    font-weight: bold;
+    margin-bottom: 0.15rem;
+  }
   .entry-section p {
-    text-indent: 1.5em;
     text-align: justify;
   }
+  .reflection-prompt {
+    font-style: italic;
+    color: #5c4033;
+    font-size: 10pt;
+    margin-bottom: 0.2rem;
+  }
   .empty-field { color: #999; font-style: italic; }
-  .entry-ornament {
+  .entry-separator {
     text-align: center;
     color: #8b4513;
-    font-size: 14pt;
-    margin-top: 1rem;
-    letter-spacing: 0.5em;
+    font-size: 10pt;
+    margin: 0.6rem 0;
+    letter-spacing: 0.3em;
   }
   @media print {
     body { background: white; }
   }
 </style></head><body>
-  <div class="cover">
-    <div class="cover-border">
-      <div class="cover-year">1804 &ndash; 1806</div>
-      <h1>Expedition Journal</h1>
-      <div class="cover-sub">Retracing the Journey of Lewis &amp; Clark</div>
-      <div class="cover-divider"></div>
-      <div class="cover-by">Recorded by</div>
-      <div class="cover-name">${state.studentName || ''}${state.period ? ' &mdash; Period ' + state.period : ''}</div>
-      <div class="cover-stats">${state.visitedStations.size} stations visited &bull; ${state.challengesCompleted.size} knowledge checks completed &bull; ${(state.discoveries || []).length} discoveries &bull; ${state.score} points earned</div>
-    </div>
+  <div class="header">
+    <div class="header-title">Expedition Journal</div>
+    <div class="header-sub">Retracing the Journey of Lewis &amp; Clark, 1804&ndash;1806</div>
+    <div class="header-info">${state.studentName || ''}${state.period ? ' &mdash; Period ' + state.period : ''}</div>
   </div>
+  ${summaryTable}
   ${entries}
 </body></html>`;
 
   const win = window.open('', '_blank');
   if (win) {
-    win.document.write(html);
+    win.document.write(printHTML);
     win.document.close();
     setTimeout(() => win.print(), 500);
   } else {
