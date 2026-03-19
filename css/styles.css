@@ -4243,6 +4243,11 @@ body {
   animation: cipherReveal 0.3s ease;
 }
 .cipher-punct { border: none; background: none; color: rgba(244,232,193,0.5); width: 16px; }
+.cipher-word {
+  display: inline-flex;
+  gap: 4px;
+  flex-wrap: nowrap;
+}
 .cipher-space { width: 16px; height: 38px; }
 @keyframes cipherReveal { from { transform: rotateY(90deg); } to { transform: rotateY(0); } }
 

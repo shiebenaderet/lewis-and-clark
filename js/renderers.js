@@ -2535,13 +2535,18 @@ function renderTrailCipher(evt, container, wager) {
   var showingSolve = false;
 
   function buildBoard() {
+    var words = phrase.split(' ');
     var h = '<div class="cipher-board">';
-    for (var i = 0; i < phrase.length; i++) {
-      var c = phrase[i];
-      if (c === ' ') { h += '<span class="cipher-space"></span>'; }
-      else if (!(c >= 'A' && c <= 'Z')) { h += '<span class="cipher-cell cipher-punct">' + c + '</span>'; }
-      else if (guessed[c]) { h += '<span class="cipher-cell cipher-revealed">' + c + '</span>'; }
-      else { h += '<span class="cipher-cell cipher-blank">_</span>'; }
+    for (var w = 0; w < words.length; w++) {
+      if (w > 0) h += '<span class="cipher-space"></span>';
+      h += '<span class="cipher-word">';
+      for (var i = 0; i < words[w].length; i++) {
+        var c = words[w][i];
+        if (!(c >= 'A' && c <= 'Z')) { h += '<span class="cipher-cell cipher-punct">' + c + '</span>'; }
+        else if (guessed[c]) { h += '<span class="cipher-cell cipher-revealed">' + c + '</span>'; }
+        else { h += '<span class="cipher-cell cipher-blank">_</span>'; }
+      }
+      h += '</span>';
     }
     h += '</div>';
     return h;
