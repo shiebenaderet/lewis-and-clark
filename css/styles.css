@@ -4442,10 +4442,13 @@ body {
 .wordle-row {
   display: flex;
   gap: 4px;
+  flex-wrap: nowrap;
 }
 .wordle-cell {
   width: 36px;
+  min-width: 20px;
   height: 40px;
+  flex-shrink: 1;
   display: flex;
   align-items: center;
   justify-content: center;
