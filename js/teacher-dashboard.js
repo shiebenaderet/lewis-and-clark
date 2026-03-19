@@ -55,6 +55,7 @@ var TeacherDashboard = (function() {
 
   // === RENDER: Login / Registration ===
   function renderLogin() {
+    if (typeof unsubscribeClassActivity === 'function') unsubscribeClassActivity();
     var el = getEl();
     var h = '';
     h += '<div class="dash-card">';
@@ -134,6 +135,13 @@ var TeacherDashboard = (function() {
 
     h += '<div id="dash-map-view"></div>';
     h += '<div id="dash-table-view" style="display:none;"></div>';
+    h += '<div class="dash-feed-section">';
+    h += '<div class="dash-feed-header">';
+    h += '<span class="dash-feed-title">Class Activity</span>';
+    h += '<span class="dash-feed-live" id="dash-feed-live-dot">LIVE</span>';
+    h += '</div>';
+    h += '<div class="dash-feed" id="dash-feed"><div class="dash-feed-empty">Waiting for student activity\u2026</div></div>';
+    h += '</div>';
 
     el.textContent = '';
     el.insertAdjacentHTML('afterbegin', h);
@@ -142,6 +150,71 @@ var TeacherDashboard = (function() {
 
     // Render map into its container
     document.getElementById('dash-map-view').insertAdjacentHTML('afterbegin', buildMapView(saves, periods));
+
+    // Start realtime activity feed
+    if (typeof snapshotSaves === 'function') snapshotSaves(saves);
+    if (typeof subscribeToClassActivity === 'function') {
+      subscribeToClassActivity(_session.classCode, function(activities) {
+        var feed = document.getElementById('dash-feed');
+        if (!feed) return;
+        // Remove "waiting" message on first activity
+        var emptyMsg = feed.querySelector('.dash-feed-empty');
+        if (emptyMsg) emptyMsg.remove();
+        activities.forEach(function(a) {
+          var item = document.createElement('div');
+          item.className = 'dash-feed-item dash-feed-item-new';
+          var now = new Date();
+          var timeStr = now.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+          var icon = document.createElement('span');
+          icon.className = 'dash-feed-icon';
+          icon.textContent = a.icon;
+          item.appendChild(icon);
+          var text = document.createElement('span');
+          text.className = 'dash-feed-text';
+          text.textContent = a.text;
+          item.appendChild(text);
+          var time = document.createElement('span');
+          time.className = 'dash-feed-time';
+          time.textContent = timeStr;
+          item.appendChild(time);
+          feed.insertBefore(item, feed.firstChild);
+          // Remove entrance animation class after it plays
+          setTimeout(function() { item.classList.remove('dash-feed-item-new'); }, 600);
+          // Cap feed at 50 items
+          while (feed.children.length > 50) feed.removeChild(feed.lastChild);
+        });
+        // Pulse the live dot
+        var dot = document.getElementById('dash-feed-live-dot');
+        if (dot) { dot.classList.add('pulse'); setTimeout(function() { dot.classList.remove('pulse'); }, 1000); }
+        // Refresh dashboard stats + map with fresh data
+        if (typeof fetchClassSaves === 'function') {
+          fetchClassSaves(_session.classCode).then(function(freshSaves) {
+            _dashSaves = freshSaves;
+            if (typeof snapshotSaves === 'function') snapshotSaves(freshSaves);
+            // Update stats
+            var statsEl = document.querySelector('.dash-stats');
+            if (statsEl) {
+              var total = freshSaves.length;
+              var completed = freshSaves.filter(function(s) { return s.completed; }).length;
+              var avg = total > 0 ? Math.round(freshSaves.reduce(function(sum, s) { return sum + (s.score || 0); }, 0) / total) : 0;
+              var nums = statsEl.querySelectorAll('.dash-stat-num');
+              if (nums[0]) nums[0].textContent = total;
+              if (nums[1]) nums[1].textContent = completed;
+              if (nums[2]) nums[2].textContent = avg;
+            }
+            // Refresh map if visible
+            var mapEl = document.getElementById('dash-map-view');
+            if (mapEl && mapEl.style.display !== 'none') {
+              var periods = [];
+              freshSaves.forEach(function(s) { if (periods.indexOf(s.period) === -1) periods.push(s.period); });
+              periods.sort();
+              mapEl.textContent = '';
+              mapEl.insertAdjacentHTML('afterbegin', buildMapView(freshSaves, periods));
+            }
+          });
+        }
+      });
+    }
   }
 
   // === BUILD MAP VIEW ===
@@ -356,6 +429,7 @@ var TeacherDashboard = (function() {
 
   // === RENDER: Class Picker (multi-class teachers) ===
   function renderClassPicker(classes, teacherName, teacherEmail, password) {
+    if (typeof unsubscribeClassActivity === 'function') unsubscribeClassActivity();
     var el = getEl();
     var h = '';
     h += '<div class="dash-card">';

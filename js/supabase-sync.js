@@ -316,3 +316,139 @@ async function fetchClassSaves(classCode) {
 
   return resp.data || [];
 }
+
+// === TEACHER: REALTIME ACTIVITY FEED ===
+var _realtimeChannel = null;
+var _realtimeSnapshots = {}; // keyed by save id, stores last-known state for diffing
+
+function subscribeToClassActivity(classCode, onActivity) {
+  var sb = getSupabase();
+  if (!sb) return;
+
+  // Unsubscribe from any previous subscription
+  unsubscribeClassActivity();
+
+  // Build snapshots from current dashboard data for diffing
+  // (caller should call snapshotSaves() after initial fetch)
+
+  _realtimeChannel = sb
+    .channel('class-activity-' + classCode)
+    .on('postgres_changes',
+      { event: '*', schema: 'public', table: 'lc_saves', filter: 'class_code=eq.' + classCode },
+      function(payload) {
+        var row = payload.new;
+        if (!row) return;
+        var prev = _realtimeSnapshots[row.id] || null;
+        var activities = diffSaveActivity(prev, row);
+        // Update snapshot
+        _realtimeSnapshots[row.id] = {
+          student_name: row.student_name,
+          period: row.period,
+          current_station: row.current_station,
+          score: row.score,
+          completed: row.completed,
+          save_data: row.save_data
+        };
+        if (activities.length > 0 && typeof onActivity === 'function') {
+          onActivity(activities);
+        }
+      }
+    )
+    .subscribe();
+}
+
+function unsubscribeClassActivity() {
+  if (_realtimeChannel) {
+    var sb = getSupabase();
+    if (sb) sb.removeChannel(_realtimeChannel);
+    _realtimeChannel = null;
+  }
+}
+
+function snapshotSaves(saves) {
+  _realtimeSnapshots = {};
+  saves.forEach(function(s) {
+    _realtimeSnapshots[s.id] = {
+      student_name: s.student_name,
+      period: s.period,
+      current_station: s.current_station,
+      score: s.score,
+      completed: s.completed,
+      save_data: s.save_data
+    };
+  });
+}
+
+function diffSaveActivity(prev, curr) {
+  var activities = [];
+  var name = curr.student_name || 'A student';
+  var period = curr.period ? ' (P' + curr.period + ')' : '';
+  var label = name + period;
+  var sd = curr.save_data || {};
+  var prevSd = prev ? (prev.save_data || {}) : {};
+
+  if (!prev) {
+    // New student joined
+    activities.push({ icon: '\uD83D\uDCDD', text: label + ' joined the expedition' });
+    return activities;
+  }
+
+  // Station progress
+  if (curr.current_station > prev.current_station) {
+    activities.push({ icon: '\uD83D\uDCCD', text: label + ' reached Station ' + (curr.current_station + 1) });
+  }
+
+  // Completed expedition
+  if (curr.completed && !prev.completed) {
+    activities.push({ icon: '\uD83C\uDFC1', text: label + ' completed the expedition!' });
+  }
+
+  // Journal entries — check for new or updated summaries
+  var prevEntries = prevSd.journalEntries || {};
+  var currEntries = sd.journalEntries || {};
+  for (var i = 0; i < 10; i++) {
+    var sumKey = 'summary_' + i;
+    var refKey = 'reflection_' + i;
+    if (currEntries[sumKey] && !prevEntries[sumKey]) {
+      activities.push({ icon: '\u270D\uFE0F', text: label + ' wrote a journal entry for Station ' + (i + 1) });
+    }
+    if (currEntries[refKey] && !prevEntries[refKey]) {
+      activities.push({ icon: '\uD83D\uDD0D', text: label + ' completed a Historian\'s Analysis for Station ' + (i + 1) });
+    }
+  }
+
+  // Challenges completed
+  var prevChallenges = prevSd.challengesCompleted || [];
+  var currChallenges = sd.challengesCompleted || [];
+  if (currChallenges.length > prevChallenges.length) {
+    activities.push({ icon: '\u2705', text: label + ' passed a Knowledge Check' });
+  }
+
+  // Discoveries
+  var prevDisc = prevSd.discoveries || [];
+  var currDisc = sd.discoveries || [];
+  if (currDisc.length > prevDisc.length) {
+    var newDisc = currDisc.filter(function(d) { return prevDisc.indexOf(d) === -1; });
+    newDisc.forEach(function(idx) {
+      if (typeof DISCOVERIES !== 'undefined' && DISCOVERIES[idx]) {
+        activities.push({ icon: DISCOVERIES[idx].icon, text: label + ' unlocked ' + DISCOVERIES[idx].name });
+      } else {
+        activities.push({ icon: '\u2B50', text: label + ' made a discovery' });
+      }
+    });
+  }
+
+  // Glossary / word puzzles
+  var prevGlossary = prevSd.glossary || [];
+  var currGlossary = sd.glossary || [];
+  if (currGlossary.length > prevGlossary.length) {
+    activities.push({ icon: '\uD83D\uDCD6', text: label + ' solved a word puzzle' });
+  }
+
+  // Score change (only if significant, to avoid noise)
+  if (curr.score - prev.score >= 10 && activities.length === 0) {
+    activities.push({ icon: '\uD83D\uDCC8', text: label + ' earned ' + (curr.score - prev.score) + ' points' });
+  }
+
+  return activities;
+}
