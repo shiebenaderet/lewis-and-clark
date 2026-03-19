@@ -419,24 +419,35 @@ function completeExpedition() {
   }
 
   unlockGame();
-  clearSave();
+  window._journalExported = false;
+  window.addEventListener('beforeunload', _warnUnsavedJournal);
 }
 
 function restartGame() {
-  if (hasSave()) {
+  if (window._journalExported === false) {
+    if (!confirm('You haven\'t saved your journal as a PDF yet!\n\nAre you sure you want to start over?\nA backup of your save data will download automatically.')) return;
+    downloadSaveBackup();
+  } else if (hasSave()) {
     if (!confirm('This will erase your current expedition!\n\nHave you exported your journal as a PDF?\nA backup of your save data will download automatically.')) return;
     downloadSaveBackup();
   }
+  window.removeEventListener('beforeunload', _warnUnsavedJournal);
+  clearSave();
   resetState();
   updateTitleContinueButton();
   showScreen('title-screen');
 }
 
 function restartAtLevel(level) {
-  if (hasSave()) {
+  if (window._journalExported === false) {
+    if (!confirm('You haven\'t saved your journal as a PDF yet!\n\nAre you sure you want to start a new expedition?\nA backup of your save data will download automatically.')) return;
+    downloadSaveBackup();
+  } else if (hasSave()) {
     if (!confirm('This will erase your current expedition and start a new one!\n\nA backup of your save data will download automatically.')) return;
     downloadSaveBackup();
   }
+  window.removeEventListener('beforeunload', _warnUnsavedJournal);
+  clearSave();
   resetState();
   state.level = level;
   updateTitleContinueButton();
@@ -1004,8 +1015,18 @@ function exportJournalPDF() {
     win.document.write(printHTML);
     win.document.close();
     setTimeout(() => win.print(), 500);
+    window._journalExported = true;
+    window.removeEventListener('beforeunload', _warnUnsavedJournal);
+    clearSave();
   } else {
     alert('Your browser blocked the PDF window. Please allow pop-ups for this site and try again.');
+  }
+}
+
+function _warnUnsavedJournal(e) {
+  if (!window._journalExported) {
+    e.preventDefault();
+    e.returnValue = '';
   }
 }
 
