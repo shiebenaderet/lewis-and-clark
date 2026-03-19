@@ -424,6 +424,7 @@ function completeExpedition() {
 
 function restartGame() {
   if (hasSave()) {
+    if (!confirm('This will erase your current expedition!\n\nHave you exported your journal as a PDF?\nA backup of your save data will download automatically.')) return;
     downloadSaveBackup();
   }
   resetState();
@@ -433,6 +434,7 @@ function restartGame() {
 
 function restartAtLevel(level) {
   if (hasSave()) {
+    if (!confirm('This will erase your current expedition and start a new one!\n\nA backup of your save data will download automatically.')) return;
     downloadSaveBackup();
   }
   resetState();
