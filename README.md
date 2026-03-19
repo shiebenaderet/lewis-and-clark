@@ -8,7 +8,7 @@ An interactive website that turns 10 classroom stations on the Lewis & Clark exp
 
 ## Version
 
-**v0.25.0** — Reading Comprehension & Student Tools
+**v0.26.0** — Journal Review & Live Dashboard
 
 ## What This Is
 
@@ -27,7 +27,7 @@ This project replaces a paper-based station activity (where students walk around
 - **Geographically accurate trail map** (SVG) with real lat/long projection, terrain features, rivers, mountains, coastline, and progress tracking
 - **Journey segment details** — hover between stations to see distance, travel time, health toll, and supply status for each leg
 - **Guided journal entry prompts** at each station (date, author, summary, analysis) that auto-populate the journal tracker
-- **PDF journal export** — antique-styled journal with cover page, printable/saveable for Canvas submission
+- **PDF journal export** — condensed antique-styled journal with summary stats table, reflection questions shown alongside answers, printable/saveable for Canvas submission
 - **Image galleries** at each station with 2–3 images (scene paintings, portraits, artifacts) from Wikimedia Commons, with carousel navigation
 - **Diverse knowledge checks** — 5 challenge types across 10 stations: map click, chronological ordering (drag-and-drop), fill-in-the-blank journal quotes, image matching, and multiple choice
 - **"What Would You Do?" scenarios** — 5 stations present a historical dilemma before revealing the journals; students choose what they'd do, then read what Lewis & Clark actually did, with journals fading in after the reveal
@@ -107,6 +107,30 @@ Then open `http://localhost:8000` in your browser.
 **Note:** Opening `index.html` directly as a file (`file://`) will not work because browsers block `fetch()` requests from local files. You need a web server.
 
 ## Changelog
+
+### v0.26.0 — Journal Review & Live Dashboard
+
+**PDF export overhaul:**
+- **Condensed layout** — replaced full cover page with compact inline header, entries flow continuously instead of one-per-page (~11 pages down to ~5)
+- **Summary stats table** — 4-column table showing stations visited, knowledge checks, discoveries, and points earned, with discovery names and milestone badges
+- **Reflection questions shown** — Historian's Analysis now displays the question prompt alongside the student's answer so teachers can see what was asked
+
+**Pre-export journal review:**
+- **Station-by-station self-check** — modal walks students through each station before exporting, showing their summary and reflection with editable textareas
+- **"Did you mention...?" checklist** — auto-detects key terms from the word bank in student writing, checkboxes update live as they type
+- **Inline editing** — students can revise entries directly in the review modal, changes auto-save
+- **Reflection prompts shown** — the Historian's Analysis question is displayed above the answer textarea
+
+**Jefferson's Cipher integration:**
+- **Auto-fill from trail** — cipher words the student already solved during travel (word puzzles and trail ciphers) are pre-filled, rewarding their exploration work
+
+**Student safety:**
+- **Reset confirmation** — warning dialog before "Start a New Expedition" asks if they've exported their journal
+- **Auto-backup on reset** — save data automatically downloads as JSON before erasing
+
+**Teacher dashboard:**
+- **Live activity feed** — real-time class activity feed below the map using Supabase Realtime subscriptions. Shows timestamped messages as students progress: station arrivals, journal entries, knowledge checks, discoveries, word puzzles, and expedition completion
+- **Auto-refreshing stats** — student count, completion count, average score, and map dots update automatically when activity arrives
 
 ### v0.25.0 — Reading Comprehension & Student Tools
 

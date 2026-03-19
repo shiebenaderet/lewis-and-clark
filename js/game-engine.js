@@ -1015,6 +1015,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (loaded) {
     updateTitleContinueButton();
     updateIdentityDisplay();
-    console.log('The Lost Expedition v0.25.0: Ready');
+    console.log('The Lost Expedition v0.26.0: Ready');
   }
 });
