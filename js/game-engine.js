@@ -984,5 +984,40 @@ document.addEventListener('DOMContentLoaded', async () => {
     updateTitleContinueButton();
     updateIdentityDisplay();
     console.log('The Lost Expedition v0.25.0: Ready');
+
+    // Dev/test hook: load mock data and jump to completion
+    if (sessionStorage.getItem('test-review')) {
+      sessionStorage.removeItem('test-review');
+      state.studentName = 'Ahmad';
+      state.period = '1';
+      state.level = 'standard';
+      state.score = 870;
+      state.visitedStations = new Set([0,1,2,3,4,5,6,7,8,9]);
+      state.challengesCompleted = new Set(['c0','c1','c2','c3','c4','c5','c6','c7','c8','c9']);
+      state.discoveries = [0,1,2,3,4,7,9];
+      state.journalEntries = {
+        summary_0: 'The Corps of Discovery set off from Camp Dubois. They used a keelboat and pirogues to travel up the Missouri.',
+        reflection_0: 'The corps included soldiers, boatmen, and York. Different skills were needed.',
+        summary_1: 'They crossed the Great Plains and saw buffalo and prairie dogs. Lewis collected specimen for Jefferson.',
+        reflection_1: 'Lewis wrote like a scientist while Clark tracked distances and practical details.',
+        summary_2: 'Lewis and Clark held a council with the Oto nation and gave out peace medals.',
+        reflection_2: 'The tribes had their own leaders. American diplomacy assumed authority they did not have.',
+        summary_3: 'They spent the winter at the Mandan villages and built Fort Mandan.',
+        reflection_3: 'The Mandan had traded with Europeans for decades already.',
+        summary_4: 'Sacagawea gave birth to Jean Baptiste at Fort Mandan.',
+        reflection_4: 'Lewis recorded the rattlesnake rattle remedy without judging it.',
+        summary_5: 'They departed into terra incognita west of Fort Mandan.',
+        reflection_5: 'Lewis compared himself to Columbus, showing his sense of importance.',
+        summary_6: 'They reached the Great Falls and had to portage 18 miles around them.',
+        reflection_6: '',
+        summary_7: 'They met the Shoshone and Cameahwait turned out to be Sacagawea\'s brother. They got horses at Camp Fortunate.',
+        reflection_7: 'Lewis called the Shoshone poor but they had what they needed.',
+        summary_8: 'They crossed the Continental Divide and nearly starved on the Lolo Trail. The Nez Perce helped them build canoes.',
+        reflection_8: 'They crossed into Oregon Country which the US did not own.',
+        summary_9: 'They reached the Columbia River and the Pacific. They held a vote to decide where to build Fort Clatsop.',
+        reflection_9: 'York and Sacagawea voted equally, which was remarkable for the time.'
+      };
+      completeExpedition();
+    }
   }
 });
