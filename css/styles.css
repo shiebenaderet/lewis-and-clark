@@ -3669,6 +3669,58 @@ body {
   box-shadow: 0 4px 12px rgba(212, 118, 10, 0.3);
 }
 
+/* --- Skip travel prompt (repeat runs) --- */
+.skip-travel-prompt {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.skip-travel-prompt p {
+  color: var(--parchment);
+  font-size: 1.1rem;
+  margin-bottom: 1.2rem;
+  font-style: italic;
+}
+
+.skip-travel-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-skip-travel,
+.btn-play-travel {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  padding: 0.7rem 2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: 2px solid var(--campfire);
+}
+
+.btn-skip-travel {
+  background: var(--campfire);
+  color: var(--parchment);
+}
+
+.btn-skip-travel:hover {
+  background: #e8850b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(212, 118, 10, 0.3);
+}
+
+.btn-play-travel {
+  background: transparent;
+  color: var(--parchment);
+}
+
+.btn-play-travel:hover {
+  background: var(--leather);
+  transform: translateY(-2px);
+}
+
 /* ============================================================
    CONTINUE / SAVE INDICATOR ON TITLE
    ============================================================ */

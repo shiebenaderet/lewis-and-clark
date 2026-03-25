@@ -110,6 +110,7 @@ function showNamePrompt(callback) {
                     state.scenariosCompleted = parsed.scenariosCompleted;
                     state.glossary = parsed.glossary;
                     state.wordChallengesWon = parsed.wordChallengesWon;
+                    state.completedRuns = parsed.completedRuns || 0;
                   }
                   finishSubmit();
                 });
@@ -295,6 +296,7 @@ function continueGame() {
   state.studentName = saved.studentName || '';
   state.period = saved.period || '';
   state.classCode = saved.classCode || '';
+  state.completedRuns = saved.completedRuns || 0;
 
   // Unlock bonus game if all stations have been visited
   if (state.visitedStations.size >= 10) unlockGame();
@@ -334,11 +336,71 @@ function travelToStation(index) {
   const challengeId = `challenge_${state.currentStation}`;
   if (!state.challengesCompleted.has(challengeId)) return;
 
-  if (TRAIL_EVENTS.length > 0) {
+  // On repeat runs, let students skip trail activities
+  if (state.completedRuns > 0 && TRAIL_EVENTS.length > 0) {
+    showSkipTravelPrompt(state.currentStation, index, () => renderStation(index));
+  } else if (TRAIL_EVENTS.length > 0) {
     renderTravelTransition(state.currentStation, index, () => renderStation(index));
   } else {
     renderStation(index);
   }
+}
+
+function showSkipTravelPrompt(fromIndex, toIndex, callback) {
+  const overlay = document.getElementById('travel-overlay');
+  const scene = document.getElementById('travel-scene');
+
+  const stationNames = [
+    "Camp Dubois", "Platte River", "Council Bluff", "Fort Mandan", "Fort Mandan",
+    "Fort Mandan", "Great Falls", "Camp Fortunate", "Lolo Trail", "Fort Clatsop"
+  ];
+
+  const distances = [0, 600, 25, 400, 0, 0, 350, 200, 150, 300, 250];
+  const miles = distances[toIndex] || 200;
+
+  // All content is static/hardcoded — no user input in this HTML
+  scene.textContent = '';
+  var titleDiv = document.createElement('div');
+  titleDiv.className = 'travel-title';
+  titleDiv.textContent = 'Traveling to ' + stationNames[toIndex] + '...';
+  scene.appendChild(titleDiv);
+
+  var distDiv = document.createElement('div');
+  distDiv.className = 'travel-distance';
+  distDiv.textContent = miles + ' miles to the next station';
+  scene.appendChild(distDiv);
+
+  var promptDiv = document.createElement('div');
+  promptDiv.className = 'skip-travel-prompt';
+
+  var msgP = document.createElement('p');
+  msgP.textContent = 'You\u2019ve traveled this trail before! Would you like to skip the trail activities?';
+  promptDiv.appendChild(msgP);
+
+  var buttonsDiv = document.createElement('div');
+  buttonsDiv.className = 'skip-travel-buttons';
+
+  var skipBtn = document.createElement('button');
+  skipBtn.className = 'btn-skip-travel';
+  skipBtn.textContent = 'Skip to Station \u2192';
+  skipBtn.onclick = function() {
+    overlay.classList.remove('active');
+    callback();
+  };
+  buttonsDiv.appendChild(skipBtn);
+
+  var playBtn = document.createElement('button');
+  playBtn.className = 'btn-play-travel';
+  playBtn.textContent = 'Play Trail Activities';
+  playBtn.onclick = function() {
+    overlay.classList.remove('active');
+    renderTravelTransition(fromIndex, toIndex, callback);
+  };
+  buttonsDiv.appendChild(playBtn);
+
+  promptDiv.appendChild(buttonsDiv);
+  scene.appendChild(promptDiv);
+  overlay.classList.add('active');
 }
 
 function updateStationIndicator() {
@@ -418,7 +480,9 @@ function completeExpedition() {
     }
   }
 
+  state.completedRuns = (state.completedRuns || 0) + 1;
   unlockGame();
+  saveGame();
   window._journalExported = false;
   window.addEventListener('beforeunload', _warnUnsavedJournal);
 }
@@ -523,6 +587,7 @@ function applySaveCode() {
   state.scenariosCompleted = saved.scenariosCompleted || new Set();
   state.glossary = saved.glossary || [];
   state.wordChallengesWon = saved.wordChallengesWon || 0;
+  state.completedRuns = saved.completedRuns || 0;
   saveGame(); // persist to localStorage
   // If all 10 stations visited, unlock the game
   if (state.visitedStations.size >= 10) unlockGame();

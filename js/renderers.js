@@ -12,34 +12,34 @@ function escapeHtml(str) {
 // These terms get tooltip spans injected into context paragraphs at ALL reading levels.
 // Beginner already has them inline in JSON; this adds them to standard and advanced too.
 const VOCAB_TERMS = [
-  { term: 'keelboat', def: '(KEEL-boht) A large, flat-bottomed boat used on rivers' },
-  { term: 'pirogues', def: '(PEE-rohgz) Long, narrow boats, like big canoes' },
-  { term: 'pirogue', def: '(PEE-rohg) A long, narrow boat, like a big canoe' },
-  { term: 'Oregon Trail', def: 'A famous path settlers followed to get to the western United States' },
-  { term: 'Continental Divide', def: 'The line of mountain peaks that separates rivers flowing east from rivers flowing west' },
-  { term: 'Fort Mandan', def: '(MAN-dan) A wooden fort the explorers built to stay in during the cold winter of 1804-1805' },
-  { term: 'Sacagawea', def: '(sah-KAH-gah-wee-ah) A Lemhi Shoshone woman who became one of the most important members of the expedition' },
-  { term: 'Shoshone', def: '(shoh-SHOH-nee) A Native American people who lived near the Rocky Mountains' },
-  { term: 'Nez Perce', def: '(nez PURS) A Native American people from the Pacific Northwest who helped the expedition survive' },
-  { term: 'specimens', def: 'Samples of plants, animals, or minerals collected for scientific study' },
-  { term: 'grizzly bears', def: 'Very large, dangerous bears found in western North America' },
-  { term: 'grizzly bear', def: 'A very large, dangerous bear found in western North America' },
-  { term: 'Corps of Discovery', def: 'The official name of the Lewis and Clark expedition team' },
-  { term: 'portage', def: 'Carrying boats and supplies overland around an obstacle like a waterfall' },
-  { term: 'Louisiana Purchase', def: 'The 1803 purchase of 828,000 square miles from France, doubling the size of the United States' },
-  { term: 'Northwest Passage', def: 'A hoped-for water route connecting the Atlantic and Pacific Oceans through North America' },
-  { term: 'earth lodge', def: 'A dome-shaped dwelling made of wooden frames covered with earth, built by Plains peoples' },
-  { term: 'peace medals', def: 'Silver medals given to Native American leaders as a symbol of American friendship and authority' },
-  { term: 'Charbonneau', def: '(shar-buh-NO) French-Canadian fur trader and interpreter' },
-  { term: 'Toussaint', def: '(too-SANT) First name of Charbonneau, the French-Canadian interpreter' },
-  { term: 'Hidatsa', def: '(hee-DOT-sah) A Native American people who lived alongside the Mandan' },
-  { term: 'Mandan', def: '(MAN-dan) A Native American people who lived along the Missouri River' },
-  { term: 'Lemhi', def: '(LEM-hi) A band of the Shoshone people from the mountains of present-day Idaho' },
-  { term: 'Cameahwait', def: '(kah-MEE-ah-wait) Chief of the Lemhi Shoshone and brother of Sacagawea' },
-  { term: 'Oto', def: '(OH-toh) A Native American people of the Great Plains' },
-  { term: 'Chinook', def: '(shih-NOOK) A Native American people of the Pacific Northwest coast' },
-  { term: 'Clatsop', def: '(KLAT-sup) A Native American people who lived near the mouth of the Columbia River' },
-  { term: 'Bitterroot', def: '(BIT-er-root) A mountain range on the border of present-day Idaho and Montana' }
+  { term: 'keelboat', def: '(KEEL-boht) A large, flat-bottomed boat used on rivers', station: 0 },
+  { term: 'pirogues', def: '(PEE-rohgz) Long, narrow boats, like big canoes', station: 0 },
+  { term: 'pirogue', def: '(PEE-rohg) A long, narrow boat, like a big canoe', station: 0 },
+  { term: 'Corps of Discovery', def: 'The official name of the Lewis and Clark expedition team', station: 0 },
+  { term: 'Oregon Trail', def: 'A famous path settlers followed to get to the western United States', station: 1 },
+  { term: 'specimens', def: 'Samples of plants, animals, or minerals collected for scientific study', station: 1 },
+  { term: 'peace medals', def: 'Silver medals given to Native American leaders as a symbol of American friendship and authority', station: 2 },
+  { term: 'Oto', def: '(OH-toh) A Native American people of the Great Plains', station: 2 },
+  { term: 'Fort Mandan', def: '(MAN-dan) A wooden fort the explorers built to stay in during the cold winter of 1804-1805', station: 3 },
+  { term: 'Hidatsa', def: '(hee-DOT-sah) A Native American people who lived alongside the Mandan', station: 3 },
+  { term: 'Mandan', def: '(MAN-dan) A Native American people who lived along the Missouri River', station: 3 },
+  { term: 'earth lodge', def: 'A dome-shaped dwelling made of wooden frames covered with earth, built by Plains peoples', station: 3 },
+  { term: 'Charbonneau', def: '(shar-buh-NO) French-Canadian fur trader and interpreter', station: 4 },
+  { term: 'Toussaint', def: '(too-SANT) First name of Charbonneau, the French-Canadian interpreter', station: 4 },
+  { term: 'Sacagawea', def: '(sah-KAH-gah-wee-ah) A Lemhi Shoshone woman who became one of the most important members of the expedition', station: 4 },
+  { term: 'Louisiana Purchase', def: 'The 1803 purchase of 828,000 square miles from France, doubling the size of the United States', station: 5 },
+  { term: 'Northwest Passage', def: 'A hoped-for water route connecting the Atlantic and Pacific Oceans through North America', station: 5 },
+  { term: 'grizzly bears', def: 'Very large, dangerous bears found in western North America', station: 6 },
+  { term: 'grizzly bear', def: 'A very large, dangerous bear found in western North America', station: 6 },
+  { term: 'portage', def: 'Carrying boats and supplies overland around an obstacle like a waterfall', station: 6 },
+  { term: 'Shoshone', def: '(shoh-SHOH-nee) A Native American people who lived near the Rocky Mountains', station: 7 },
+  { term: 'Lemhi', def: '(LEM-hi) A band of the Shoshone people from the mountains of present-day Idaho', station: 7 },
+  { term: 'Cameahwait', def: '(kah-MEE-ah-wait) Chief of the Lemhi Shoshone and brother of Sacagawea', station: 7 },
+  { term: 'Continental Divide', def: 'The line of mountain peaks that separates rivers flowing east from rivers flowing west', station: 8 },
+  { term: 'Nez Perce', def: '(nez PURS) A Native American people from the Pacific Northwest who helped the expedition survive', station: 8 },
+  { term: 'Bitterroot', def: '(BIT-er-root) A mountain range on the border of present-day Idaho and Montana', station: 8 },
+  { term: 'Chinook', def: '(shih-NOOK) A Native American people of the Pacific Northwest coast', station: 9 },
+  { term: 'Clatsop', def: '(KLAT-sup) A Native American people who lived near the mouth of the Columbia River', station: 9 }
 ];
 
 const KEY_QUOTES = [
@@ -111,8 +111,11 @@ function setJournalMode(mode) {
 
 // Inject vocab tooltips into a context HTML string.
 // Skips terms that are already wrapped in vocab-word spans (beginner level).
-function injectVocabTooltips(html) {
+// Only injects terms from the current station or earlier (stationIndex is 0-based).
+function injectVocabTooltips(html, stationIndex) {
   VOCAB_TERMS.forEach(function(v) {
+    // Only show tooltips for terms from stations the student has already visited
+    if (typeof stationIndex === 'number' && v.station > stationIndex) return;
     // Skip if this term is already wrapped in a vocab-word span
     if (html.indexOf('>' + v.term + '<') !== -1 && html.indexOf('vocab-word') !== -1) return;
     // Case-insensitive search, but preserve original case in output
@@ -476,14 +479,15 @@ function renderStation(index) {
   // Context paragraphs (with vocab tooltip injection for all reading levels)
   html += '<div class="station-context">';
   data.context.forEach(p => {
-    html += `<p>${injectVocabTooltips(p)}</p>`;
+    html += `<p>${injectVocabTooltips(p, state.currentStation)}</p>`;
   });
   html += '</div>';
 
-  // Station vocab glossary (collapsible)
+  // Station vocab glossary (collapsible) — only terms from current or earlier stations
   var stationVocab = [];
   var contextText = data.context.join(' ');
   VOCAB_TERMS.forEach(function(v) {
+    if (v.station > state.currentStation) return;
     if (contextText.toLowerCase().indexOf(v.term.toLowerCase()) !== -1) {
       // Avoid duplicate terms (e.g. pirogue/pirogues)
       if (!stationVocab.some(function(sv) { return sv.term.toLowerCase() === v.term.toLowerCase(); })) {
@@ -1259,10 +1263,12 @@ function renderImageMatchChallenge(challenge, stationIndex, alreadyCompleted) {
   html += `<p class="challenge-question">${challenge.question}</p>`;
 
   if (alreadyCompleted) {
+    const alsoCorrect = challenge.also_correct || [];
+    const correctIndices = [challenge.correct].concat(alsoCorrect);
     html += '<div class="image-match-grid">';
     challenge.options.forEach((opt, i) => {
-      const isCorrect = i === challenge.correct;
-      html += `<div class="image-match-option ${isCorrect ? 'correct' : ''}" ${!isCorrect ? 'style="opacity:0.4"' : ''}>`;
+      const isAccepted = correctIndices.includes(i);
+      html += `<div class="image-match-option ${isAccepted ? 'correct' : ''}" ${!isAccepted ? 'style="opacity:0.4"' : ''}>`;
       html += `<img src="${opt.image}" alt="${opt.caption}" loading="lazy">`;
       html += `<div class="image-match-caption">${opt.caption}</div>`;
       html += '</div>';
@@ -1290,7 +1296,10 @@ function answerImageMatch(stationIndex, choiceIndex) {
   const data = station[state.level] || station.standard;
   const challenge = data.challenge;
   const challengeId = `challenge_${stationIndex}`;
-  const isCorrect = choiceIndex === challenge.correct;
+  const alsoCorrect = challenge.also_correct || [];
+  const isCorrect = choiceIndex === challenge.correct || alsoCorrect.includes(choiceIndex);
+  const isBestAnswer = choiceIndex === challenge.correct;
+  const correctIndices = [challenge.correct].concat(alsoCorrect);
 
   // Mark all options
   const box = document.getElementById(challengeId);
@@ -1301,15 +1310,25 @@ function answerImageMatch(stationIndex, choiceIndex) {
     opt.removeAttribute('tabindex');
     if (i === challenge.correct) {
       opt.classList.add('correct');
+    } else if (isCorrect && i === choiceIndex) {
+      opt.classList.add('correct');
     } else if (i === choiceIndex && !isCorrect) {
       opt.classList.add('incorrect');
     }
-    if (i !== challenge.correct) {
+    if (!correctIndices.includes(i) && i !== choiceIndex) {
       opt.style.opacity = '0.4';
     }
   });
 
-  completeChallengeResult(stationIndex, isCorrect, challenge);
+  // Use alternate feedback if they picked an also_correct answer
+  var feedbackChallenge = challenge;
+  if (isCorrect && !isBestAnswer && challenge.feedback_also_correct) {
+    feedbackChallenge = {
+      feedback_correct: challenge.feedback_also_correct,
+      feedback_incorrect: challenge.feedback_incorrect
+    };
+  }
+  completeChallengeResult(stationIndex, isCorrect, feedbackChallenge);
 }
 
 // --- SHARED: Complete challenge result (all types) ---
@@ -2482,10 +2501,11 @@ function buildTrailNotes() {
   return h;
 }
 
-// Pick a word challenge appropriate for this travel leg
+// Pick a word challenge appropriate for this travel leg.
+// Only uses terms from stations the student has already visited (station is 1-indexed, toIndex is 0-indexed).
 function pickWordChallenge(toIndex) {
   const allEntries = [...WORD_BANK.terms, ...WORD_BANK.phrases];
-  let candidates = allEntries.filter(e => e.legs && e.legs.includes(toIndex));
+  let candidates = allEntries.filter(e => e.legs && e.legs.includes(toIndex) && e.station <= toIndex);
   // Prefer terms not yet in glossary
   const unseen = candidates.filter(e => !state.glossary.includes(e.key));
   if (unseen.length > 0) candidates = unseen;

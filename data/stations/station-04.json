@@ -39,7 +39,9 @@
         }
       ],
       "correct": 1,
+      "also_correct": [0],
       "feedback_correct": "That’s right! The Mandan earth lodge village sits elevated above the river on flat ground — exactly as Clark described: ‘about 50 feet above the water in a handsome plain.’ You had to read his journal to identify the right scene.",
+      "feedback_also_correct": "Good thinking! The context does describe building Fort Mandan during winter with snow on the ground. That’s an acceptable answer! The best match for Clark’s journal entry is the earth lodge village — he described arriving at ‘a village about 50 feet above the water’ — but Fort Mandan is closely connected to this station too.",
       "feedback_incorrect": "Read Clark’s journal entry carefully — he describes the village as ‘situated about 50 feet above the water in a handsome plain.’ Look for the image showing a village on elevated, flat ground above a river."
     },
     "images": [
@@ -61,7 +63,7 @@
       {
         "url": "data/images/station-04-d-fort-mandan-winter.jpg",
         "alt": "Fort Mandan during the harsh winter",
-        "caption": "Fort Mandan — the expedition's winter quarters, 1804–1805"
+        "caption": "Fort Mandan — the expedition’s winter quarters, 1804–1805"
       },
       {
         "url": "data/images/station-04-e-village-arrival.jpg",
@@ -110,7 +112,9 @@
         }
       ],
       "correct": 1,
+      "also_correct": [0],
       "feedback_correct": "That’s right! The Mandan earth lodge village sits elevated above the river on flat ground — exactly as Clark described: ‘about 50 feet above the water in a handsome plain.’ You had to read his journal to identify the right scene.",
+      "feedback_also_correct": "Good reasoning! The context describes building Fort Mandan in the winter with snow on the ground, so this is an understandable choice. The best match for Clark’s journal is the earth lodge village — he wrote about arriving at ‘a village situated about 50 feet above the water in a handsome plain’ — but Fort Mandan is closely tied to this station too.",
       "feedback_incorrect": "Read Clark’s journal entry carefully — he describes the village as ‘situated about 50 feet above the water in a handsome plain.’ Look for the image showing a village on elevated, flat ground above a river."
     },
     "images": [
@@ -132,7 +136,7 @@
       {
         "url": "data/images/station-04-d-fort-mandan-winter.jpg",
         "alt": "Fort Mandan during the harsh winter",
-        "caption": "Fort Mandan — the expedition's winter quarters, 1804–1805"
+        "caption": "Fort Mandan — the expedition’s winter quarters, 1804–1805"
       },
       {
         "url": "data/images/station-04-e-village-arrival.jpg",
@@ -181,7 +185,9 @@
         }
       ],
       "correct": 1,
+      "also_correct": [0],
       "feedback_correct": "Correct. Clark wrote about a village ‘situated about 50 feet above the water in a handsome plain’ — the earth lodge village on elevated ground matches this description precisely. Note how he emphasized both the elevation and the flat terrain.",
+      "feedback_also_correct": "Reasonable choice — the context describes the construction of Fort Mandan during a snowy winter, so this image is connected to the station. However, Clark’s journal specifically describes arriving at ‘a village situated about 50 feet above the water in a handsome plain’ — the Mandan earth lodge settlement is the more precise match for his written description.",
       "feedback_incorrect": "Read Clark’s journal entry carefully — he describes the village as ‘situated about 50 feet above the water in a handsome plain.’ Look for the image showing a village on elevated, flat ground above a river."
     },
     "images": [

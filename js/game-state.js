@@ -19,13 +19,15 @@ let state = {
   wordChallengesWon: 0,
   studentName: '',
   period: '',
-  classCode: ''
+  classCode: '',
+  completedRuns: 0
 };
 
 function resetState() {
   var savedName = state.studentName;
   var savedPeriod = state.period;
   var savedClassCode = state.classCode;
+  var savedRuns = state.completedRuns || 0;
   state = {
     level: state.level,
     currentStation: 0,
@@ -41,7 +43,8 @@ function resetState() {
     wordChallengesWon: 0,
     studentName: savedName,
     period: savedPeriod,
-    classCode: savedClassCode
+    classCode: savedClassCode,
+    completedRuns: savedRuns
   };
   clearSave();
 }
@@ -78,6 +81,7 @@ function _buildSaveData() {
     studentName: state.studentName || '',
     period: state.period || '',
     classCode: state.classCode || '',
+    completedRuns: state.completedRuns || 0,
     savedAt: new Date().toISOString()
   };
 }
@@ -99,6 +103,7 @@ function _parseSaveData(data) {
     studentName: data.studentName || '',
     period: data.period || '',
     classCode: data.classCode || '',
+    completedRuns: data.completedRuns || 0,
     savedAt: data.savedAt
   };
 }
